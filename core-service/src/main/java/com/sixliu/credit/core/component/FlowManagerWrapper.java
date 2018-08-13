@@ -3,9 +3,9 @@ package com.sixliu.credit.core.component;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
-import com.sixliu.flow.FlowManager;
 import com.sixliu.flow.FlowManagerBuilder;
 import com.sixliu.flow.component.FlowStorage;
+import com.sixliu.flow.service.FlowManager;
 /**
 *@author:MG01867
 *@date:2018年8月6日

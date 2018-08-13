@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sixliu.credit.common.exception.IllegalArgumentAppException;
-import com.sixliu.credit.product.ProductInnerDTO;
 import com.sixliu.credit.product.dao.ProductConfigDao;
 import com.sixliu.credit.product.dao.ProductConfigSnapshotDao;
+import com.sixliu.credit.product.dto.ProductInnerDTO;
 import com.sixliu.credit.product.entity.ProductConfig;
 import com.sixliu.credit.product.entity.snapshot.ProductConfigSnapshot;
 import com.sixliu.credit.product.service.ProductConfigService;

@@ -31,7 +31,7 @@
 
 		<dependency>
 			<groupId>com.sixliu</groupId>
-			<artifactId>flow</artifactId>
+			<artifactId>flow-manager-service</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 

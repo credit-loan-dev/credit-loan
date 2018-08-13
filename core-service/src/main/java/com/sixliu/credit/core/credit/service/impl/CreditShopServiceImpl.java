@@ -12,8 +12,8 @@ import com.sixliu.credit.core.credit.service.CreditShopService;
 import com.sixliu.credit.customer.CustomerDTO;
 import com.sixliu.credit.order.CreateCreditOrderDTO;
 import com.sixliu.credit.order.api.OrderManagerClient;
-import com.sixliu.credit.product.ProductInnerDTO;
 import com.sixliu.credit.product.api.ProductManagerInnerClient;
+import com.sixliu.credit.product.dto.ProductInnerDTO;
 
 /**
  * @author:MG01867

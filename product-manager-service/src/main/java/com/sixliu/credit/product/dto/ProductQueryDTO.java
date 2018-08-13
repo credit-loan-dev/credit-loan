@@ -3,7 +3,6 @@ package com.sixliu.credit.product.dto;
 import java.util.Date;
 
 import com.sixliu.credit.common.dto.PageQueryRequest;
-import com.sixliu.credit.product.ProductInnerDTO;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
