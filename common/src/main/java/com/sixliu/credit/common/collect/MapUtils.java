@@ -6,6 +6,8 @@ package com.sixliu.credit.common.collect;
 
 
 import com.sixliu.credit.common.lang.StringUtils;
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.beanutils.PropertyUtils;
 
 
 import java.beans.*;
@@ -162,9 +164,8 @@ public class MapUtils extends org.apache.commons.collections.MapUtils {
 			}
 			return map;
 		}catch(Exception e){
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
-
 	}
 
 	/**
@@ -184,12 +185,12 @@ public class MapUtils extends org.apache.commons.collections.MapUtils {
 	 * @throws InvocationTargetException
 	 * @throws NoSuchMethodException
 	 */
-	public static <T> Collection<Map<String, String>> toMapList(Collection<T> collection) throws IllegalAccessException, InvocationTargetException,
+	public static <T> Collection<Map<String, Object>> toMapList(Collection<T> collection) throws IllegalAccessException, InvocationTargetException,
 			NoSuchMethodException {
-		List<Map<String, String>> retList = new ArrayList<Map<String, String>>();
+		List<Map<String, Object>> retList = new ArrayList<>();
 		if (collection != null && !collection.isEmpty()) {
 			for (Object object : collection) {
-				Map<String, String> map = toMap(object);
+				Map<String, Object> map = toMap(object);
 				retList.add(map);
 			}
 		}
@@ -204,12 +205,12 @@ public class MapUtils extends org.apache.commons.collections.MapUtils {
 	 * @throws InvocationTargetException
 	 * @throws NoSuchMethodException
 	 */
-	public static <T> Collection<Map<String, String>> toMapListForFlat(Collection<T> collection) throws IllegalAccessException,
+	public static <T> Collection<Map<String, Object>> toMapListForFlat(Collection<T> collection) throws IllegalAccessException,
 			InvocationTargetException, NoSuchMethodException {
-		List<Map<String, String>> retList = new ArrayList<Map<String, String>>();
+		List<Map<String, Object>> retList = new ArrayList<>();
 		if (collection != null && !collection.isEmpty()) {
 			for (Object object : collection) {
-				Map<String, String> map = toMapForFlat(object);
+				Map<String, Object> map = toMapForFlat(object);
 				retList.add(map);
 			}
 		}
@@ -218,15 +219,13 @@ public class MapUtils extends org.apache.commons.collections.MapUtils {
 
 	/**
 	 * 转换成Map并提供字段命名驼峰转平行
-	 * @param clazz 目标对象所在类
 	 * @param object 目标对象
-	 * @param map 待转换Map
 	 * @throws NoSuchMethodException
 	 * @throws InvocationTargetException
 	 * @throws IllegalAccessException
 	 */
-	public static Map<String, String> toMapForFlat(Object object) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
-		Map<String, String> map = toMap(object);
+	public static Map<String, Object> toMapForFlat(Object object) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+		Map<String, Object> map = toMap(object);
 		return toUnderlineStringMap(map);
 	}
 
