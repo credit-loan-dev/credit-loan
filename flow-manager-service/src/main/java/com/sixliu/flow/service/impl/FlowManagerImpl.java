@@ -6,7 +6,7 @@ import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.sixliu.credit.user.UserDTO;
+import com.sixliu.credit.user.dto.UserDTO;
 import com.sixliu.credit.user.api.UserManagerClient;
 import com.sixliu.flow.ApprovalResult;
 import com.sixliu.flow.TaskStatus;
