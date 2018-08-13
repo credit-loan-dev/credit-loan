@@ -44,7 +44,7 @@ public class FlowTask {
 	private String flowTaskAfterSubmitAopClass;
 	
 	/**流程作业任务所处状态**/
-	private TaskStatus status=TaskStatus.NONE;
+	private TaskStatus status=TaskStatus.PENDING;
 	
 	/**流程作业任务内部意见**/
 	private String innerOpinion;

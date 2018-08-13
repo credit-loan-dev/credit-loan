@@ -6,18 +6,16 @@ import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.sixliu.credit.user.dto.UserDTO;
 import com.sixliu.credit.user.api.UserManagerClient;
 import com.sixliu.flow.ApprovalResult;
 import com.sixliu.flow.TaskStatus;
-import com.sixliu.flow.TaskStatus.FlowTaskModelGetter;
 import com.sixliu.flow.approval.AutoApprovalHandler;
 import com.sixliu.flow.approval.AutoApprovalHandlerManager;
 import com.sixliu.flow.component.FlowStorage;
 import com.sixliu.flow.component.FlowTaskSubmitAop;
 import com.sixliu.flow.component.FlowTaskSubmitAopManager;
-import com.sixliu.flow.component.IdGenerator;
-import com.sixliu.flow.dao.FlowJobModelDao;
+import com.sixliu.flow.dao.FlowJobClassDao;
+import com.sixliu.flow.dao.FlowTaskClassDao;
 import com.sixliu.flow.entity.FlowInputData;
 import com.sixliu.flow.entity.FlowInputDataModel;
 import com.sixliu.flow.entity.FlowJob;
@@ -26,7 +24,8 @@ import com.sixliu.flow.entity.FlowTask;
 import com.sixliu.flow.entity.FlowTaskModel;
 import com.sixliu.flow.entity.TaskType;
 import com.sixliu.flow.service.FlowManager;
-import com.sixliu.flow.service.FlowUtils;
+import com.sixliu.flow.status.TaskStatusMachine;
+import com.sixliu.flow.status.TaskStatusMachineFactory;
 
 /**
  * @author:MG01867
@@ -38,7 +37,7 @@ import com.sixliu.flow.service.FlowUtils;
 public class FlowManagerImpl implements FlowManager {
 
 	private FlowStorage flowStorage;
-	private IdGenerator idGenerator;
+
 	private FlowTaskSubmitAopManager flowTaskSubmitAopManager;
 	private AutoApprovalHandlerManager autoApprovalHandlerManager;
 	
@@ -46,12 +45,17 @@ public class FlowManagerImpl implements FlowManager {
 	private UserManagerClient userManagerClient;
 	
 	@Autowired
-	private FlowJobModelDao flowJobModelDao;
+	private FlowJobClassDao flowJobClassDao;
+	
+	@Autowired
+	private FlowTaskClassDao flowTaskClassDao;
+	
+	@Autowired
+	private TaskStatusMachineFactory taskStatusMachineFactory;
 
-	public FlowManagerImpl(FlowStorage flowStorage, IdGenerator idGenerator,
+	public FlowManagerImpl(FlowStorage flowStorage,
 			FlowTaskSubmitAopManager flowTaskSubmitAopManager, AutoApprovalHandlerManager autoApprovalHandlerManager) {
 		this.flowStorage=flowStorage;
-		this.idGenerator=idGenerator;
 		this.flowTaskSubmitAopManager=flowTaskSubmitAopManager;
 		this.autoApprovalHandlerManager=autoApprovalHandlerManager;
 	}
@@ -69,26 +73,27 @@ public class FlowManagerImpl implements FlowManager {
 	}
 
 	@Override
-	public String createFlowJob(String flowModelId, String userId, String channel) {
-		FlowJobModel flowJobModel = flowJobModelDao.get(flowModelId);
-		if (null == flowJobModel) {
-			throw new IllegalArgumentException(String.format("This flowModel[%s] is non-existent", flowModelId));
-		}
-		UserDTO user = userManagerClient.get(userId);
-		if (null == user) {
-			throw new IllegalArgumentException(String.format("This user[%s] is non-existent", userId));
-		}
-		String flowJobId = idGenerator.generateFlowJobId();
-		FlowJob flowJob = FlowUtils.newFlowJob(flowJobModel, flowJobId);
-		FlowTaskModel flowTaskModel = flowStorage.getFirstFlowTaskModel(flowModelId);
-		if (null == flowTaskModel) {
-			throw new IllegalArgumentException(
-					String.format("This flowTaskModel[%s] configure empty flowTaskModel", flowModelId));
-		}
-		FlowTask flowTask = FlowUtils.newFlowTask(flowTaskModel, flowJobId, idGenerator.generateFlowTaskId(), channel,
-				userId);
-		flowStorage.insertFlowJob(flowJob, flowTask);
-		return flowJobId;
+	public String createFlowJob(String flowJobClassId, String userId, String channel) {
+//		FlowJobClass flowJobClass = flowJobClassDao.get(flowJobClassId);
+//		if (null == flowJobClass) {
+//			throw new IllegalArgumentException(String.format("This flowJobClass[%s] is non-existent", flowJobClassId));
+//		}
+//		UserDTO user = userManagerClient.get(userId);
+//		if (null == user) {
+//			throw new IllegalArgumentException(String.format("This user[%s] is non-existent", userId));
+//		}
+//		String flowJobId = idGenerator.generateFlowJobId();
+//		FlowJob flowJob = FlowUtils.newFlowJob(flowJobClass, flowJobId);
+//		FlowTaskModel flowTaskModel = flowTaskClassDao.get(flowModelId);
+//		if (null == flowTaskModel) {
+//			throw new IllegalArgumentException(
+//					String.format("This flowTaskModel[%s] configure empty flowTaskModel", flowModelId));
+//		}
+//		FlowTask flowTask = FlowUtils.newFlowTask(flowTaskModel, flowJobId, idGenerator.generateFlowTaskId(), channel,
+//				userId);
+//		flowStorage.insertFlowJob(flowJob, flowTask);
+//		return flowJobId;
+		return null;
 	}
 
 	@Override
@@ -143,7 +148,8 @@ public class FlowManagerImpl implements FlowManager {
 		flowTaskBeforeSubmitAop.intercept(flowTask, approvalResult);
 
 		TaskStatus taskStatus = flowTask.getStatus();
-		FlowTask nextFlowTask = taskStatus.process(flowJob, flowTask, approvalResult, new InnerFlowTaskModelGetter());
+		TaskStatusMachine taskStatusMachine=taskStatusMachineFactory.get(taskStatus);
+		FlowTask nextFlowTask = taskStatusMachine.process(flowJob, flowTask, approvalResult);
 		flowStorage.updateFlowTask(flowTask);
 
 		FlowTaskSubmitAop flowTaskAfterSubmitAop = flowTaskSubmitAopManager
@@ -183,30 +189,5 @@ public class FlowManagerImpl implements FlowManager {
 					String.format("This flowTask[%s] of flowJob[%s] is non-existent", flowTaskId, flowJobId));
 		}
 		return flowTask;
-	}
-
-	private class InnerFlowTaskModelGetter implements FlowTaskModelGetter {
-
-		@Override
-		public String generateFlowTaskId() {
-			return idGenerator.generateFlowTaskId();
-		}
-
-		@Override
-		public FlowTaskModel getNext(String flowJobModelId, String flowTaskModelId) {
-			FlowTaskModel nextFlowTaskModel = flowStorage.getNextFlowTaskModel(flowJobModelId, flowTaskModelId);
-			return nextFlowTaskModel;
-		}
-
-		@Override
-		public FlowTaskModel get(String flowJobModelId, int phase) {
-			FlowTaskModel nextFlowTaskModel = flowStorage.getFlowTaskModel(flowJobModelId, phase);
-			return nextFlowTaskModel;
-		}
-	}
-
-	@Override
-	public void shutdown() {
-		
 	}
 }

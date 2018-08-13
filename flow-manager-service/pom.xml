@@ -22,6 +22,12 @@
 			<artifactId>user-manager-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.sixliu</groupId>
+			<artifactId>flow-manager-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

@@ -3,6 +3,7 @@ package com.sixliu.flow.config;
 import javax.sql.DataSource;
 
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.type.TypeHandler;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
@@ -17,6 +18,8 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.TransactionManagementConfigurer;
+
+import com.sixliu.flow.entity.TaskType;
 
 
 
@@ -52,6 +55,7 @@ public class MybatisBaseConfig implements TransactionManagementConfigurer {
 			bean.setMapperLocations(mapperResources);
 			Resource configLocationResource = new DefaultResourceLoader().getResource(configLocation);
 			bean.setConfigLocation(configLocationResource);
+			bean.setTypeHandlers(new TypeHandler[] { new TaskType.TaskTypeHandler()});
 			sqlSessionFactory = bean.getObject();
 		} catch (Exception e) {
 			throw new RuntimeException("init mybatis exception", e);

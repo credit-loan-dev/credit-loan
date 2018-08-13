@@ -36,7 +36,7 @@ public interface FlowManager {
 	 * @param channel
 	 * @return
 	 */
-	String createFlowJob(String flowModelId,String userId,String channel);
+	String createFlowJob(String flowJobClassId,String userId,String channel);
 	
 	/**
 	 * 通过流程任务审批用户id从任务池中获取任务
@@ -73,5 +73,4 @@ public interface FlowManager {
 	
 	void cancelFlowJob(String jobId);
 	
-	void shutdown();
 }
