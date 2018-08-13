@@ -2,10 +2,10 @@ package com.sixliu.flow;
 
 import java.util.Date;
 
-import com.sixliu.flow.core.FlowUtils;
 import com.sixliu.flow.entity.FlowJob;
 import com.sixliu.flow.entity.FlowTask;
 import com.sixliu.flow.entity.FlowTaskModel;
+import com.sixliu.flow.service.FlowUtils;
 
 import lombok.NonNull;
 

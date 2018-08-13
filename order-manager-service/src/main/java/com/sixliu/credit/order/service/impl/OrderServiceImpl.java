@@ -12,7 +12,7 @@ import com.sixliu.credit.order.entity.CreditOrder;
 import com.sixliu.credit.order.service.OrderService;
 import com.sixliu.credit.product.api.ProductManagerInnerClient;
 import com.sixliu.credit.product.dto.ProductInnerDTO;
-import com.sixliu.flow.FlowManager;
+import com.sixliu.flow.service.FlowManager;
 
 /**
  * @author:MG01867

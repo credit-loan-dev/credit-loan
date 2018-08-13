@@ -1,11 +1,10 @@
-package com.sixliu.flow.core;
+package com.sixliu.flow.service.impl;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
 import com.sixliu.flow.ApprovalResult;
-import com.sixliu.flow.FlowManager;
 import com.sixliu.flow.TaskStatus;
 import com.sixliu.flow.TaskStatus.FlowTaskModelGetter;
 import com.sixliu.flow.approval.AutoApprovalHandler;
@@ -22,6 +21,8 @@ import com.sixliu.flow.entity.FlowTask;
 import com.sixliu.flow.entity.FlowTaskModel;
 import com.sixliu.flow.entity.TaskType;
 import com.sixliu.flow.entity.User;
+import com.sixliu.flow.service.FlowManager;
+import com.sixliu.flow.service.FlowUtils;
 
 /**
  * @author:MG01867

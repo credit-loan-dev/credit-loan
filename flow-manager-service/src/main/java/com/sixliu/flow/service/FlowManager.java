@@ -1,8 +1,9 @@
-package com.sixliu.flow;
+package com.sixliu.flow.service;
 
 import java.util.List;
 import java.util.Map;
 
+import com.sixliu.flow.ApprovalResult;
 import com.sixliu.flow.entity.FlowInputData;
 import com.sixliu.flow.entity.FlowJobModel;
 import com.sixliu.flow.entity.FlowTask;

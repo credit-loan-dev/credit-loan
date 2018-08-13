@@ -4,7 +4,8 @@ import com.sixliu.flow.approval.AutoApprovalHandlerManager;
 import com.sixliu.flow.component.FlowStorage;
 import com.sixliu.flow.component.FlowTaskSubmitAopManager;
 import com.sixliu.flow.component.IdGenerator;
-import com.sixliu.flow.core.FlowManagerImpl;
+import com.sixliu.flow.service.FlowManager;
+import com.sixliu.flow.service.impl.FlowManagerImpl;
 
 /**
  * @author:MG01867
