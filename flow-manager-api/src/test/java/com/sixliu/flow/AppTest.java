@@ -1,4 +1,4 @@
-package com.sixliu.credit.user;
+package com.sixliu.flow;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
