@@ -28,17 +28,14 @@ public class FlowTask {
 	/**流程作业任务所处阶段**/
 	private int phase;
 	
-	/**流程作业任务所属角色**/
-	private String ownerRoleId;
-	
-	/**流程作业任务所属用户**/
-	private String ownerUserId;
-	
 	/**流程作业任务处理类型**/
 	private TaskType type;
 	
-	/**流程作业任务自动处理class**/
-	private String autoHandlerClass;
+	/** 流程作业任务处理worker或者流程作业任务所属角色 **/
+	private String worker;
+	
+	/**流程作业任务所属用户**/
+	private String ownerUserId;
 	
 	/**流程作业任务提交前切面handler class**/
 	private String flowTaskBeforeSubmitAopClass;

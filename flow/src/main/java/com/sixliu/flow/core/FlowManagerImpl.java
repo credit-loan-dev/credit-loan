@@ -146,7 +146,7 @@ public class FlowManagerImpl implements FlowManager {
 			flowStorage.insertFlowJob(flowJob, nextFlowTask);
 			if (TaskType.AUTO == nextFlowTask.getType()) {
 				AutoApprovalHandler autoApprovalHandler = autoApprovalHandlerManager
-						.get(nextFlowTask.getAutoHandlerClass());
+						.get(nextFlowTask.getWorker());
 				autoApprovalHandler.process(nextFlowTask);
 			}
 		}

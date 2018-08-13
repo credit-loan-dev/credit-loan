@@ -37,8 +37,7 @@ public class FlowUtils{
 		flowTask.setPhase(flowTaskModel.getPhase());
 		flowTask.setStatus(TaskStatus.POOLING);
 		flowTask.setType(flowTaskModel.getType());
-		flowTask.setOwnerRoleId(flowTaskModel.getOwnerRoleId());
-		flowTask.setAutoHandlerClass(flowTaskModel.getAutoHandlerClass());
+		flowTask.setWorker(flowTaskModel.getWorker());
 		Date nowDate = new Date();
 		flowTask.setStartDate(nowDate);
 		flowTask.setEndDate(nowDate);

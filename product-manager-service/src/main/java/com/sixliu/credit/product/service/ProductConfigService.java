@@ -2,7 +2,7 @@ package com.sixliu.credit.product.service;
 
 import java.util.List;
 
-import com.sixliu.credit.product.ProductInnerDTO;
+import com.sixliu.credit.product.dto.ProductInnerDTO;
 import com.sixliu.credit.product.entity.ProductConfig;
 
 /**

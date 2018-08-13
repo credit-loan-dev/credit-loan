@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sixliu.credit.product.ProductInnerDTO;
 import com.sixliu.credit.product.api.ProductManagerInnerClient;
+import com.sixliu.credit.product.dto.ProductInnerDTO;
 import com.sixliu.credit.product.entity.ProductConfig;
 import com.sixliu.credit.product.service.ProductConfigService;
 

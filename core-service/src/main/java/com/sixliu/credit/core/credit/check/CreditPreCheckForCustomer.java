@@ -9,7 +9,7 @@ import com.sixliu.credit.core.base.credit.check.CreditPreCheck;
 import com.sixliu.credit.core.base.credit.check.CreditPreCheckException;
 import com.sixliu.credit.customer.CustomerDTO;
 import com.sixliu.credit.customer.api.CustomerManagerClient;
-import com.sixliu.credit.product.ProductInnerDTO;
+import com.sixliu.credit.product.dto.ProductInnerDTO;
 import com.sixliu.credit.quota.CreditlimitDTO;
 import com.sixliu.credit.quota.api.QuotaManagerClient;
 

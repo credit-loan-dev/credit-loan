@@ -11,7 +11,7 @@ import com.sixliu.credit.customer.CustomerDTO;
 import com.sixliu.credit.order.OrderMutexDTO;
 import com.sixliu.credit.order.api.OrderManagerClient;
 import com.sixliu.credit.product.CreditApplyMutexType;
-import com.sixliu.credit.product.ProductInnerDTO;
+import com.sixliu.credit.product.dto.ProductInnerDTO;
 
 /**
  * @author:MG01867

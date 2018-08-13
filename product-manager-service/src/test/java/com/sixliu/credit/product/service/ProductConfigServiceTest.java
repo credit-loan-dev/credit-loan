@@ -8,7 +8,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sixliu.credit.product.BaseTest;
-import com.sixliu.credit.product.ProductInnerDTO;
+import com.sixliu.credit.product.dto.ProductInnerDTO;
 
 /**
 *@author:MG01867

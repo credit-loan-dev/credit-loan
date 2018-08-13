@@ -10,8 +10,8 @@ import com.sixliu.credit.order.CreateCreditOrderDTO;
 import com.sixliu.credit.order.dao.OrderDao;
 import com.sixliu.credit.order.entity.CreditOrder;
 import com.sixliu.credit.order.service.OrderService;
-import com.sixliu.credit.product.ProductInnerDTO;
 import com.sixliu.credit.product.api.ProductManagerInnerClient;
+import com.sixliu.credit.product.dto.ProductInnerDTO;
 import com.sixliu.flow.FlowManager;
 
 /**
