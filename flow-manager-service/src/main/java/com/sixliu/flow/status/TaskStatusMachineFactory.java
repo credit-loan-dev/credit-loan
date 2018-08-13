@@ -78,11 +78,11 @@ public class TaskStatusMachineFactory {
 							approvalResult.getChannel(), approvalResult.getUserId());
 				} else {
 					flowJob.setStatus(JobStatus.PASS_ENDED);
-					flowJob.setEndDate(new Date());
+					flowJob.setUpdateDate(new Date());
 				}
 			} else if (TaskStatus.REJECT == next) {
 				flowJob.setStatus(JobStatus.REJECT_ENDED);
-				flowJob.setEndDate(new Date());
+				flowJob.setUpdateDate(new Date());
 			} else if (TaskStatus.HANG_UP == next) {
 
 			} else if (TaskStatus.OVERRULE == next) {

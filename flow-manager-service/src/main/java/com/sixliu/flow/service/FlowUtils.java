@@ -18,17 +18,17 @@ import com.sixliu.flow.entity.FlowTaskClass;
  */
 public class FlowUtils{
 	
-	public static FlowJob newFlowJob(FlowJobClass flowJobClass, String flowJobId) {
+	public static FlowJob newFlowJob(FlowJobClass flowJobClass,String createUserId) {
 		FlowJob flowJob = new FlowJob();
-		flowJob.setId(flowJobId);
+		flowJob.setCreateUserId(createUserId);
 		flowJob.setStatus(JobStatus.STARTED);
 		Date nowDate = new Date();
-		flowJob.setStartDate(nowDate);
-		flowJob.setEndDate(nowDate);
+		flowJob.setCreateDate(nowDate);
+		flowJob.setUpdateDate(nowDate);
 		return flowJob;
 	}
 
-	public static FlowTask newFlowTask(FlowTaskClass flowTaskClass, String flowJobId,String channel,
+	public static FlowTask newFlowTask(FlowTaskClass flowTaskClass, String flowJobId,String channelId,
 			String userId) {
 		FlowTask flowTask = new FlowTask();
 		flowTask.setFlowTaskModelId(flowTaskClass.getId());
@@ -40,7 +40,7 @@ public class FlowUtils{
 		Date nowDate = new Date();
 		flowTask.setStartDate(nowDate);
 		flowTask.setEndDate(nowDate);
-		flowTask.setChannel(channel);
+		flowTask.setChannelId(channelId);
 		flowTask.setCreateUserId(userId);
 		return flowTask;
 	}

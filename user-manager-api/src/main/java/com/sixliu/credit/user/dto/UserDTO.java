@@ -13,6 +13,9 @@ import lombok.Data;
 @Data
 public class UserDTO {
 
-	/**流程作业用户id**/
+	/**用户id**/
 	private String id;
+	
+	/**用户角色id**/
+	private String roleId;
 }

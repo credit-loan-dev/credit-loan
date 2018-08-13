@@ -16,5 +16,8 @@ public class FlowJobClass extends FlowJobModel{
 
 	/**流程作业模型id**/
 	private String flowJobModelId;
-
+	
+	
+	/**允许创建该流程作业角色id**/
+	private String createRoleId;
 }

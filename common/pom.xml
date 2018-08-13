@@ -39,13 +39,13 @@
 			<artifactId>spring-web</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-aop</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
@@ -57,7 +57,7 @@
 			<artifactId>hibernate-validator</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.apache.curator</groupId>
 			<artifactId>curator-framework</artifactId>
@@ -69,7 +69,7 @@
 			</exclusions>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.apache.curator</groupId>
 			<artifactId>curator-recipes</artifactId>
@@ -92,11 +92,19 @@
 			<artifactId>commons-beanutils</artifactId>
 		</dependency>
 
-        <!--<dependency>-->
-            <!--<groupId>de.ruedigermoeller</groupId>-->
-            <!--<artifactId>fst</artifactId>-->
-            <!--<version>2.56</version>-->
-        <!--</dependency>-->
+		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+
+		<!--<dependency> -->
+		<!--<groupId>de.ruedigermoeller</groupId> -->
+		<!--<artifactId>fst</artifactId> -->
+		<!--<version>2.56</version> -->
+		<!--</dependency> -->
 
 	</dependencies>
 </project>

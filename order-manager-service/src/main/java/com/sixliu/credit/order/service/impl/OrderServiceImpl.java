@@ -12,7 +12,7 @@ import com.sixliu.credit.order.entity.CreditOrder;
 import com.sixliu.credit.order.service.OrderService;
 import com.sixliu.credit.product.api.ProductManagerInnerClient;
 import com.sixliu.credit.product.dto.ProductInnerDTO;
-import com.sixliu.flow.service.FlowManager;
+import com.sixliu.flow.service.FlowService;
 
 /**
  * @author:MG01867
@@ -29,7 +29,7 @@ public class OrderServiceImpl implements OrderService {
 	@Autowired
 	private ProductManagerInnerClient productManagerClient;
 
-	private FlowManager flowManager;
+	private FlowService flowManager;
 
 	@Override
 	public CreditOrder getOrderById(String orderId) {

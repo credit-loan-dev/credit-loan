@@ -16,7 +16,7 @@ import org.apache.ibatis.type.MappedTypes;
  * @date:2018年7月6日
  * @E-mail:359852326@qq.com
  * @version:
- * @describe 流程作业任务状态机
+ * @describe 流程作业任务状态
  */
 public enum TaskStatus {
 

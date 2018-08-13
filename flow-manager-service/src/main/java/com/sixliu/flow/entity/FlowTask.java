@@ -5,6 +5,8 @@ import java.util.Date;
 import com.sixliu.flow.TaskStatus;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
 *@author:MG01867
@@ -14,7 +16,9 @@ import lombok.Data;
 *@describe 流程任务
 */
 @Data
-public class FlowTask {
+@EqualsAndHashCode(callSuper = false)
+@ToString(callSuper =true)
+public class FlowTask extends BaseEntity{
 	
 	/**流程作业任务id**/
 	private String id;
@@ -53,7 +57,7 @@ public class FlowTask {
 	private String outerOpinion;
 	
 	/**流程作业任务审批渠道**/
-	private String channel;
+	private String channelId;
 	
 	/**流程作业任务开始日期**/
 	private Date startDate;
