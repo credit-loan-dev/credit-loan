@@ -62,7 +62,7 @@ public class CreateCreditOrderDTO {
 	private String inputUserId;
 	
 	/**申请渠道**/
-	private String channel;
+	private String channelId;
 	
 	/**扩展表单**/
 	private Map<String,Object> extendForm;
