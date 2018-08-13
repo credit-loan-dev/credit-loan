@@ -4,6 +4,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.sixliu.credit.user.UserDTO;
+import com.sixliu.credit.user.api.UserManagerClient;
 import com.sixliu.flow.ApprovalResult;
 import com.sixliu.flow.TaskStatus;
 import com.sixliu.flow.TaskStatus.FlowTaskModelGetter;
@@ -13,6 +17,7 @@ import com.sixliu.flow.component.FlowStorage;
 import com.sixliu.flow.component.FlowTaskSubmitAop;
 import com.sixliu.flow.component.FlowTaskSubmitAopManager;
 import com.sixliu.flow.component.IdGenerator;
+import com.sixliu.flow.dao.FlowJobModelDao;
 import com.sixliu.flow.entity.FlowInputData;
 import com.sixliu.flow.entity.FlowInputDataModel;
 import com.sixliu.flow.entity.FlowJob;
@@ -20,7 +25,6 @@ import com.sixliu.flow.entity.FlowJobModel;
 import com.sixliu.flow.entity.FlowTask;
 import com.sixliu.flow.entity.FlowTaskModel;
 import com.sixliu.flow.entity.TaskType;
-import com.sixliu.flow.entity.User;
 import com.sixliu.flow.service.FlowManager;
 import com.sixliu.flow.service.FlowUtils;
 
@@ -37,6 +41,12 @@ public class FlowManagerImpl implements FlowManager {
 	private IdGenerator idGenerator;
 	private FlowTaskSubmitAopManager flowTaskSubmitAopManager;
 	private AutoApprovalHandlerManager autoApprovalHandlerManager;
+	
+	@Autowired
+	private UserManagerClient userManagerClient;
+	
+	@Autowired
+	private FlowJobModelDao flowJobModelDao;
 
 	public FlowManagerImpl(FlowStorage flowStorage, IdGenerator idGenerator,
 			FlowTaskSubmitAopManager flowTaskSubmitAopManager, AutoApprovalHandlerManager autoApprovalHandlerManager) {
@@ -60,11 +70,11 @@ public class FlowManagerImpl implements FlowManager {
 
 	@Override
 	public String createFlowJob(String flowModelId, String userId, String channel) {
-		FlowJobModel flowJobModel = flowStorage.getFlowJobModel(flowModelId);
+		FlowJobModel flowJobModel = flowJobModelDao.get(flowModelId);
 		if (null == flowJobModel) {
 			throw new IllegalArgumentException(String.format("This flowModel[%s] is non-existent", flowModelId));
 		}
-		User user = flowStorage.getUser(userId);
+		UserDTO user = userManagerClient.get(userId);
 		if (null == user) {
 			throw new IllegalArgumentException(String.format("This user[%s] is non-existent", userId));
 		}
