@@ -1,4 +1,4 @@
-package com.sixliu.credit.user.rbac;
+package com.sixliu.credit.rbac;
 
 import org.springframework.util.StringUtils;
 

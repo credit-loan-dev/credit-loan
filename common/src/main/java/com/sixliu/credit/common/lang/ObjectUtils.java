@@ -6,6 +6,7 @@ package com.sixliu.credit.common.lang;
 
 import com.sixliu.credit.common.io.IOUtils;
 import org.apache.commons.lang3.BooleanUtils;
+import org.nustaq.serialization.FSTConfiguration;
 import org.springframework.beans.BeanUtils;
 
 import java.io.ByteArrayInputStream;
@@ -274,55 +275,55 @@ public class ObjectUtils extends org.apache.commons.lang3.ObjectUtils {
 //	}
 	
 	// FST序列化配置对象
-//	private static FSTConfiguration fst = FSTConfiguration.createDefaultConfiguration();
-//
-//	/**
-//	 * FST 序列化对象
-//	 * @param object
-//	 * @return
-//	 */
-//	public static byte[] serializeFst(Object object) {
-//		if (object == null){
-//			return null;
-//		}
-//		long beginTime = System.currentTimeMillis();
-//		byte[] bytes = fst.asByteArray(object);
-//		long totalTime = System.currentTimeMillis() - beginTime;
-//		if (totalTime > 3000){
-//			System.out.println("Fst serialize time: " + TimeUtils.formatDateAgo(totalTime));
-//		}
-//		return bytes;
-//	}
-//
-//	/**
-//	 * FST 反序列化对象
-//	 * @param bytes
-//	 * @return
-//	 */
-//	public static Object unserializeFst(byte[] bytes) {
-//		if (bytes == null){
-//			return null;
-//		}
-//		long beginTime = System.currentTimeMillis();
-//		Object object = fst.asObject(bytes);
-//		long totalTime = System.currentTimeMillis() - beginTime;
-//		if (totalTime > 3000){
-//			System.out.println("Fst unserialize time: " + TimeUtils.formatDateAgo(totalTime));
-//		}
-//		return object;
-//	}
+	private static FSTConfiguration fst = FSTConfiguration.createDefaultConfiguration();
+
+	/**
+	 * FST 序列化对象
+	 * @param object
+	 * @return
+	 */
+	public static byte[] serializeFst(Object object) {
+		if (object == null){
+			return null;
+		}
+		long beginTime = System.currentTimeMillis();
+		byte[] bytes = fst.asByteArray(object);
+		long totalTime = System.currentTimeMillis() - beginTime;
+		if (totalTime > 3000){
+			System.out.println("Fst serialize time: " + TimeUtils.formatDateAgo(totalTime));
+		}
+		return bytes;
+	}
+
+	/**
+	 * FST 反序列化对象
+	 * @param bytes
+	 * @return
+	 */
+	public static Object unserializeFst(byte[] bytes) {
+		if (bytes == null){
+			return null;
+		}
+		long beginTime = System.currentTimeMillis();
+		Object object = fst.asObject(bytes);
+		long totalTime = System.currentTimeMillis() - beginTime;
+		if (totalTime > 3000){
+			System.out.println("Fst unserialize time: " + TimeUtils.formatDateAgo(totalTime));
+		}
+		return object;
+	}
 	
 	/**
 	 * 克隆一个对象（完全拷贝）
 	 * @param source
 	 */
-//	public static Object cloneBean(Object source){
-//		if (source == null){
-//			return null;
-//		}
-//    	byte[] bytes = ObjectUtils.serializeFst(source);
-//    	Object target = ObjectUtils.unserializeFst(bytes);
-//	    return target;
-//	}
+	public static Object cloneBean(Object source){
+		if (source == null){
+			return null;
+		}
+    	byte[] bytes = ObjectUtils.serializeFst(source);
+    	Object target = ObjectUtils.unserializeFst(bytes);
+	    return target;
+	}
 	
 }

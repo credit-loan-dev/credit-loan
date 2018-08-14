@@ -1,6 +1,6 @@
 package com.sixliu.credit.user.config;
 
-import com.sixliu.credit.user.dao.BaseDao;
+import com.sixliu.credit.user.mapper.BaseDao;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.context.annotation.Bean;

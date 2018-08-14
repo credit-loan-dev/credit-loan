@@ -1,4 +1,4 @@
-package com.sixliu.credit.user.dao;
+package com.sixliu.credit.user.mapper;
 /**
 *@author:MG01867
 *@date:2018年6月28日

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sixliu.credit.user.mapper.SysUserDataScopeMapper">
+  <resultMap id="BaseResultMap" type="com.sixliu.credit.user.entity.SysUserDataScopeKey">
+    <id column="user_code" jdbcType="VARCHAR" property="userCode" />
+    <id column="ctrl_type" jdbcType="VARCHAR" property="ctrlType" />
+    <id column="ctrl_data" jdbcType="VARCHAR" property="ctrlData" />
+    <id column="ctrl_permi" jdbcType="VARCHAR" property="ctrlPermi" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    user_code, ctrl_type, ctrl_data, ctrl_permi
+  </sql>
+  <select id="selectByExample" parameterType="com.sixliu.credit.user.entity.SysUserDataScopeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_user_data_scope
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.sixliu.credit.user.entity.SysUserDataScopeKey">
+    delete from sys_user_data_scope
+    where user_code = #{userCode,jdbcType=VARCHAR}
+      and ctrl_type = #{ctrlType,jdbcType=VARCHAR}
+      and ctrl_data = #{ctrlData,jdbcType=VARCHAR}
+      and ctrl_permi = #{ctrlPermi,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sixliu.credit.user.entity.SysUserDataScopeExample">
+    delete from sys_user_data_scope
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sixliu.credit.user.entity.SysUserDataScopeKey">
+    insert into sys_user_data_scope (user_code, ctrl_type, ctrl_data, 
+      ctrl_permi)
+    values (#{userCode,jdbcType=VARCHAR}, #{ctrlType,jdbcType=VARCHAR}, #{ctrlData,jdbcType=VARCHAR}, 
+      #{ctrlPermi,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sixliu.credit.user.entity.SysUserDataScopeKey">
+    insert into sys_user_data_scope
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userCode != null">
+        user_code,
+      </if>
+      <if test="ctrlType != null">
+        ctrl_type,
+      </if>
+      <if test="ctrlData != null">
+        ctrl_data,
+      </if>
+      <if test="ctrlPermi != null">
+        ctrl_permi,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userCode != null">
+        #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="ctrlType != null">
+        #{ctrlType,jdbcType=VARCHAR},
+      </if>
+      <if test="ctrlData != null">
+        #{ctrlData,jdbcType=VARCHAR},
+      </if>
+      <if test="ctrlPermi != null">
+        #{ctrlPermi,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sixliu.credit.user.entity.SysUserDataScopeExample" resultType="java.lang.Long">
+    select count(*) from sys_user_data_scope
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sys_user_data_scope
+    <set>
+      <if test="record.userCode != null">
+        user_code = #{record.userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctrlType != null">
+        ctrl_type = #{record.ctrlType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctrlData != null">
+        ctrl_data = #{record.ctrlData,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctrlPermi != null">
+        ctrl_permi = #{record.ctrlPermi,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sys_user_data_scope
+    set user_code = #{record.userCode,jdbcType=VARCHAR},
+      ctrl_type = #{record.ctrlType,jdbcType=VARCHAR},
+      ctrl_data = #{record.ctrlData,jdbcType=VARCHAR},
+      ctrl_permi = #{record.ctrlPermi,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

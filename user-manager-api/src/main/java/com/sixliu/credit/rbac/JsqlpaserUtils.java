@@ -1,4 +1,4 @@
-package com.sixliu.credit.user.rbac;
+package com.sixliu.credit.rbac;
 
 import net.sf.jsqlparser.schema.Table;
 import net.sf.jsqlparser.statement.select.Join;

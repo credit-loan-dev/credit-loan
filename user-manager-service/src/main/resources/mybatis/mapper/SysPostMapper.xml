@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sixliu.credit.user.mapper.SysPostMapper">
+  <resultMap id="BaseResultMap" type="com.sixliu.credit.user.entity.SysPost">
+    <id column="post_code" jdbcType="VARCHAR" property="postCode" />
+    <result column="post_name" jdbcType="VARCHAR" property="postName" />
+    <result column="post_type" jdbcType="VARCHAR" property="postType" />
+    <result column="post_sort" jdbcType="DECIMAL" property="postSort" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="corp_code" jdbcType="VARCHAR" property="corpCode" />
+    <result column="corp_name" jdbcType="VARCHAR" property="corpName" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    post_code, post_name, post_type, post_sort, status, create_by, create_date, update_by, 
+    update_date, remarks, corp_code, corp_name
+  </sql>
+  <select id="selectByExample" parameterType="com.sixliu.credit.user.entity.SysPostExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_post
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_post
+    where post_code = #{postCode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sys_post
+    where post_code = #{postCode,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sixliu.credit.user.entity.SysPostExample">
+    delete from sys_post
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sixliu.credit.user.entity.SysPost">
+    insert into sys_post (post_code, post_name, post_type, 
+      post_sort, status, create_by, 
+      create_date, update_by, update_date, 
+      remarks, corp_code, corp_name
+      )
+    values (#{postCode,jdbcType=VARCHAR}, #{postName,jdbcType=VARCHAR}, #{postType,jdbcType=VARCHAR}, 
+      #{postSort,jdbcType=DECIMAL}, #{status,jdbcType=CHAR}, #{createBy,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{remarks,jdbcType=VARCHAR}, #{corpCode,jdbcType=VARCHAR}, #{corpName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sixliu.credit.user.entity.SysPost">
+    insert into sys_post
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="postCode != null">
+        post_code,
+      </if>
+      <if test="postName != null">
+        post_name,
+      </if>
+      <if test="postType != null">
+        post_type,
+      </if>
+      <if test="postSort != null">
+        post_sort,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="corpCode != null">
+        corp_code,
+      </if>
+      <if test="corpName != null">
+        corp_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="postCode != null">
+        #{postCode,jdbcType=VARCHAR},
+      </if>
+      <if test="postName != null">
+        #{postName,jdbcType=VARCHAR},
+      </if>
+      <if test="postType != null">
+        #{postType,jdbcType=VARCHAR},
+      </if>
+      <if test="postSort != null">
+        #{postSort,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="corpCode != null">
+        #{corpCode,jdbcType=VARCHAR},
+      </if>
+      <if test="corpName != null">
+        #{corpName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sixliu.credit.user.entity.SysPostExample" resultType="java.lang.Long">
+    select count(*) from sys_post
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sys_post
+    <set>
+      <if test="record.postCode != null">
+        post_code = #{record.postCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postName != null">
+        post_name = #{record.postName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postType != null">
+        post_type = #{record.postType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postSort != null">
+        post_sort = #{record.postSort,jdbcType=DECIMAL},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=CHAR},
+      </if>
+      <if test="record.createBy != null">
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateBy != null">
+        update_by = #{record.updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateDate != null">
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remarks != null">
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.corpCode != null">
+        corp_code = #{record.corpCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.corpName != null">
+        corp_name = #{record.corpName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sys_post
+    set post_code = #{record.postCode,jdbcType=VARCHAR},
+      post_name = #{record.postName,jdbcType=VARCHAR},
+      post_type = #{record.postType,jdbcType=VARCHAR},
+      post_sort = #{record.postSort,jdbcType=DECIMAL},
+      status = #{record.status,jdbcType=CHAR},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_by = #{record.updateBy,jdbcType=VARCHAR},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      remarks = #{record.remarks,jdbcType=VARCHAR},
+      corp_code = #{record.corpCode,jdbcType=VARCHAR},
+      corp_name = #{record.corpName,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sixliu.credit.user.entity.SysPost">
+    update sys_post
+    <set>
+      <if test="postName != null">
+        post_name = #{postName,jdbcType=VARCHAR},
+      </if>
+      <if test="postType != null">
+        post_type = #{postType,jdbcType=VARCHAR},
+      </if>
+      <if test="postSort != null">
+        post_sort = #{postSort,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="corpCode != null">
+        corp_code = #{corpCode,jdbcType=VARCHAR},
+      </if>
+      <if test="corpName != null">
+        corp_name = #{corpName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where post_code = #{postCode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sixliu.credit.user.entity.SysPost">
+    update sys_post
+    set post_name = #{postName,jdbcType=VARCHAR},
+      post_type = #{postType,jdbcType=VARCHAR},
+      post_sort = #{postSort,jdbcType=DECIMAL},
+      status = #{status,jdbcType=CHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      corp_code = #{corpCode,jdbcType=VARCHAR},
+      corp_name = #{corpName,jdbcType=VARCHAR}
+    where post_code = #{postCode,jdbcType=VARCHAR}
+  </update>
+</mapper>
