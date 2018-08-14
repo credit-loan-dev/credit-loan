@@ -2,6 +2,7 @@ package com.sixliu.flow.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
  * @author:MG01867
@@ -10,17 +11,14 @@ import lombok.EqualsAndHashCode;
  * @version:
  * @describe 流程作业任务模型
  */
-
 @Data
 @EqualsAndHashCode(callSuper = false)
+@ToString(callSuper =true)
 public class FlowTaskModel extends BaseEntity {
 
 	/** 流程作业任务名称 **/
 	private String name;
 	
-	/** 流程作业任务所处阶段 **/
-	private Integer phase;
-
 	/** 流程作业任务处理类型 **/
 	private TaskType type;
 	

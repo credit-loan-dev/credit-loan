@@ -55,7 +55,7 @@ public class CreditShopServiceImpl implements CreditShopService {
 		createCreditOrder.setApplyLoanTermType(creditApply.getApplyLoanTermType());
 		createCreditOrder.setApplyLoanTerm(creditApply.getApplyLoanTerm());
 		createCreditOrder.setReferenceId(creditApply.getReferenceId());
-		createCreditOrder.setChannel(creditApply.getChannel());
+		createCreditOrder.setChannelId(creditApply.getChannelId());
 		createCreditOrder.setActivityId(creditApply.getActivityId());
 		createCreditOrder.setExtendForm(creditApply.getExtendForm());
 		createCreditOrder.setInputUserId(creditApply.getInputUserId());

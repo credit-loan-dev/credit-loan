@@ -11,12 +11,12 @@ import com.sixliu.flow.entity.FlowJobModel;
 */
 public interface FlowJobModelDao {
 
+	int insert(FlowJobModel flowJobModel);
+	
 	/**
 	 * 通过流程作业模型id获取流程作业模型
 	 * @param id
 	 * @return
 	 */
 	FlowJobModel get(String id);
-	
-	int insert(FlowJobModel flowJobModel);
 }

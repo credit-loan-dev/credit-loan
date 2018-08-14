@@ -12,7 +12,8 @@ import com.sixliu.credit.order.entity.CreditOrder;
 import com.sixliu.credit.order.service.OrderService;
 import com.sixliu.credit.product.api.ProductManagerInnerClient;
 import com.sixliu.credit.product.dto.ProductInnerDTO;
-import com.sixliu.flow.service.FlowManager;
+import com.sixliu.flow.cto.CreateFlowJobDTO;
+import com.sixliu.flow.service.FlowService;
 
 /**
  * @author:MG01867
@@ -29,7 +30,7 @@ public class OrderServiceImpl implements OrderService {
 	@Autowired
 	private ProductManagerInnerClient productManagerClient;
 
-	private FlowManager flowManager;
+	private FlowService flowManager;
 
 	@Override
 	public CreditOrder getOrderById(String orderId) {
@@ -39,8 +40,11 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public String createOrder(CreateCreditOrderDTO createCreditOrder) {
 		ProductInnerDTO product = productManagerClient.get(createCreditOrder.getProductId());
-		String flowJobId = flowManager.createFlowJob(product.getCreditApplyFlowModleId(),
-				createCreditOrder.getInputUserId(), createCreditOrder.getChannel());
+		CreateFlowJobDTO createFlowJob=new CreateFlowJobDTO();
+		createFlowJob.setFlowJobClassId(product.getCreditApplyFlowModleId());
+		createFlowJob.setUserId(createCreditOrder.getInputUserId());
+		createFlowJob.setChannelId(createCreditOrder.getChannelId());
+		String flowJobId = flowManager.createFlowJob(createFlowJob);
 		CreditOrder creditOrder = new CreditOrder();
 		creditOrder.setId(createCreditOrder.getId());
 		creditOrder.setCustomerId(createCreditOrder.getCustomerId());
@@ -52,7 +56,7 @@ public class OrderServiceImpl implements OrderService {
 		creditOrder.setApplyLoanTermType(createCreditOrder.getApplyLoanTermType());
 		creditOrder.setApplyLoanTerm(createCreditOrder.getApplyLoanTerm());
 		creditOrder.setActivityId(createCreditOrder.getActivityId());
-		creditOrder.setChannel(createCreditOrder.getChannel());
+		creditOrder.setChannel(createCreditOrder.getChannelId());
 		creditOrder.setReferenceId(createCreditOrder.getReferenceId());
 		creditOrder.setCreateUserId(createCreditOrder.getInputUserId());
 		creditOrder.setCreateDate(new Date());

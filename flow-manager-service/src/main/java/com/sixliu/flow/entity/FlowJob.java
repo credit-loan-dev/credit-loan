@@ -1,11 +1,11 @@
 package com.sixliu.flow.entity;
 
 
-import java.util.Date;
-
 import com.sixliu.flow.JobStatus;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
 *@author:MG01867
@@ -15,7 +15,9 @@ import lombok.Data;
 *@describe 流程作业
 */
 @Data
-public class FlowJob {
+@EqualsAndHashCode(callSuper = false)
+@ToString(callSuper =true)
+public class FlowJob extends BaseEntity{
 
 	/**流程作业id**/
 	private String id;
@@ -28,14 +30,4 @@ public class FlowJob {
 	
 	/**流程作业状态**/
 	private JobStatus status;
-	
-	/**流程作业创建用户**/
-	private String createUserId;
-	
-	/**流程作业开始时间**/
-	private Date startDate;
-	
-	/**流程作业结束时间**/
-	private Date endDate;
-	
 }
