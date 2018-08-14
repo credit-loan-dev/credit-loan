@@ -5,10 +5,10 @@ package com.sixliu.credit.common.mapper;
 
 import com.fasterxml.jackson.databind.JavaType;
 import org.apache.commons.lang3.StringUtils;
+import org.dom4j.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.dom4j.*;
 import java.io.IOException;
 import java.util.*;
 
@@ -52,7 +52,6 @@ public class XmlMapper extends com.fasterxml.jackson.dataformat.xml.XmlMapper{
 	
 	/**
 	 * 反序列化POJO或简单Collection如List<String>.
-	 * @see #fromJson(String, JavaType)
 	 */
 	public <T> T fromXmlString(String xmlString, Class<T> clazz) {
 		if (StringUtils.isEmpty(xmlString) || "<CLOB>".equals(xmlString)) {
@@ -172,7 +171,7 @@ public class XmlMapper extends com.fasterxml.jackson.dataformat.xml.XmlMapper{
 			Set<String> keySet = tempMap.keySet();
 			for (String string : keySet) {
 				Namespace namespace = tempMap.get(string).getNamespace();
-				List<Element> elements2 = element.elements(new org.dom4j.QName(string, namespace));
+				List<Element> elements2 = element.elements(new QName(string, namespace));
 				// 如果同名的数目大于1则表示要构建list
 				if (elements2.size() > 1) {
 					List<Object> list = new ArrayList<Object>();
@@ -234,7 +233,7 @@ public class XmlMapper extends com.fasterxml.jackson.dataformat.xml.XmlMapper{
 			Set<String> keySet = tempMap.keySet();
 			for (String string : keySet) {
 				Namespace namespace = tempMap.get(string).getNamespace();
-				List<Element> elements2 = element.elements(new org.dom4j.QName(string, namespace));
+				List<Element> elements2 = element.elements(new QName(string, namespace));
 				// 如果同名的数目大于1则表示要构建list
 				if (elements2.size() > 1) {
 					List<Object> list = new ArrayList<Object>();

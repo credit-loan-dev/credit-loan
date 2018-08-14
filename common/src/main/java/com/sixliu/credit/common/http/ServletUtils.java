@@ -146,7 +146,7 @@ public class ServletUtils {
 	public static String renderResult(String result, String message) {
 		return renderResult(result, message, null);
 	}
-	
+
 	/**
 	 * 返回结果JSON字符串（支持JsonP，请求参数加：__callback=回调函数名）
 	 * @param result Global.TRUE or Globle.False
@@ -178,9 +178,9 @@ public class ServletUtils {
 				return JsonMapper.toJson(resultMap);
 			}
 		}
-		
+
 	}
-	
+
 	/**
 	 * 直接将结果JSON字符串渲染到客户端（支持JsonP，请求参数加：__callback=回调函数名）
 	 * @param response 渲染对象：{result:'true',message:'',data:{}}
@@ -191,7 +191,7 @@ public class ServletUtils {
 	public static String renderResult(HttpServletResponse response, String result, String message) {
 		return renderString(response, renderResult(result, message), null);
 	}
-	
+
 	/**
 	 * 直接将结果JSON字符串渲染到客户端（支持JsonP，请求参数加：__callback=回调函数名）
 	 * @param response 渲染对象：{result:'true',message:'',data:{}}
@@ -203,7 +203,7 @@ public class ServletUtils {
 	public static String renderResult(HttpServletResponse response, String result, String message, Object data) {
 		return renderString(response, renderResult(result, message, data), null);
 	}
-	
+
 	/**
 	 * 将对象转换为JSON字符串渲染到客户端（支持JsonP，请求参数加：__callback=回调函数名）
 	 * @param response 渲染对象
