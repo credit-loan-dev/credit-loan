@@ -33,6 +33,7 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<servlet-api.version>3.1.0</servlet-api.version>
 		<slf4j.version>1.7.21</slf4j.version>
 		<logback.version>1.2.2</logback.version>
 		<javax.servlet-api.version>4.0.0</javax.servlet-api.version>
@@ -40,6 +41,7 @@
 		<commons-collections.version>3.2.2</commons-collections.version>
 		<commons-codec.version>1.11</commons-codec.version>
 		<commons-io.version>2.6</commons-io.version>
+		<commons-beanutils>1.9.1</commons-beanutils>
 		<json.version>20180130</json.version>
 		<guava.version>24.0-jre</guava.version>
 		<gson.version>2.8.2</gson.version>
@@ -55,6 +57,9 @@
 		<druid.version>1.1.10</druid.version>
 
 		<shiro.version>1.4.0</shiro.version>
+		<dozer.version>5.5.1</dozer.version>
+		<dom4j.version>1.6.1</dom4j.version>
+		<fst.version>2.56</fst.version>
 	</properties>
 
 	<dependencies>
@@ -171,7 +176,7 @@
 			<dependency>
 				<groupId>commons-beanutils</groupId>
 				<artifactId>commons-beanutils</artifactId>
-				<version>1.9.1</version>
+				<version>${commons-beanutils}</version>
 				<exclusions>
 					<exclusion>
 						<groupId>commons-logging</groupId>
@@ -187,9 +192,45 @@
 			</dependency>
 
 			<dependency>
+				<groupId>org.apache.shiro</groupId>
+				<artifactId>shiro-core</artifactId>
+				<version>${shiro.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.shiro</groupId>
+				<artifactId>shiro-spring</artifactId>
+				<version>${shiro.version}</version>
+			</dependency>
+
+			<dependency>
 				<groupId>com.fasterxml.jackson.dataformat</groupId>
 				<artifactId>jackson-dataformat-xml</artifactId>
 				<version>${jackson.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>javax.servlet-api</artifactId>
+				<version>${servlet-api.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>de.ruedigermoeller</groupId>
+				<artifactId>fst</artifactId>
+				<version>${fst.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>net.sf.dozer</groupId>
+				<artifactId>dozer</artifactId>
+				<version>${dozer.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>dom4j</groupId>
+				<artifactId>dom4j</artifactId>
+				<version>${dom4j.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
