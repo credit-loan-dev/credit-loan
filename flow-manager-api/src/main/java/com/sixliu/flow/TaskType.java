@@ -1,4 +1,4 @@
-package com.sixliu.flow.entity;
+package com.sixliu.flow;
 
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;

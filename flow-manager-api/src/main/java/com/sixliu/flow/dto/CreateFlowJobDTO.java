@@ -1,4 +1,4 @@
-package com.sixliu.flow.cto;
+package com.sixliu.flow.dto;
 
 import javax.validation.constraints.NotBlank;
 

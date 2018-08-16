@@ -8,10 +8,10 @@ import org.springframework.stereotype.Component;
 import com.sixliu.flow.ApprovalResult;
 import com.sixliu.flow.JobStatus;
 import com.sixliu.flow.TaskStatus;
-import com.sixliu.flow.dao.FlowTaskClassDao;
+import com.sixliu.flow.dao.FlowTaskModelDao;
 import com.sixliu.flow.entity.FlowJob;
 import com.sixliu.flow.entity.FlowTask;
-import com.sixliu.flow.entity.FlowTaskClass;
+import com.sixliu.flow.entity.FlowTaskModel;
 import com.sixliu.flow.service.FlowUtils;
 
 import lombok.NonNull;
@@ -27,7 +27,7 @@ import lombok.NonNull;
 public class TaskStatusMachineFactory {
 
 	@Autowired
-	private FlowTaskClassDao flowTaskClassDao;
+	private FlowTaskModelDao flowTaskModelDao;
 
 	public TaskStatusMachine get(TaskStatus taskStatus) {
 		if (TaskStatus.POOLING == taskStatus) {
@@ -71,10 +71,10 @@ public class TaskStatusMachineFactory {
 			TaskStatus next = approvalResult.getStatus();
 			FlowTask nextFlowTask = null;
 			if (TaskStatus.PASS == next) {
-				FlowTaskClass nextFlowTaskClass = flowTaskClassDao
-						.getByflowJobClassAndPhase(flowJob.getFlowJobModelId(), flowTask.getPhase() + 1);
-				if (null != nextFlowTaskClass) {
-					nextFlowTask = FlowUtils.newFlowTask(nextFlowTaskClass, flowTask.getFlowJobId(),
+				FlowTaskModel nextFlowTaskModel = flowTaskModelDao
+						.getByflowJobModelAndPhase(flowJob.getFlowJobModelId(), flowTask.getPhase() + 1);
+				if (null != nextFlowTaskModel) {
+					nextFlowTask = FlowUtils.newFlowTask(nextFlowTaskModel, flowTask.getFlowJobId(),
 							approvalResult.getChannel(), approvalResult.getUserId());
 				} else {
 					flowJob.setStatus(JobStatus.PASS_ENDED);
@@ -86,15 +86,15 @@ public class TaskStatusMachineFactory {
 			} else if (TaskStatus.HANG_UP == next) {
 
 			} else if (TaskStatus.OVERRULE == next) {
-				FlowTaskClass overruleFlowTaskClass = flowTaskClassDao
-						.getByflowJobClassAndPhase(flowJob.getFlowJobModelId(), approvalResult.getOverrulePhase());
-				if (null == overruleFlowTaskClass) {
+				FlowTaskModel overruleFlowTaskModel = flowTaskModelDao
+						.getByflowJobModelAndPhase(flowJob.getFlowJobModelId(), approvalResult.getOverrulePhase());
+				if (null == overruleFlowTaskModel) {
 					throw new IllegalArgumentException("the ");
 				}
-				if (overruleFlowTaskClass.getPhase() > flowTask.getPhase()) {
+				if (overruleFlowTaskModel.getPhase() > flowTask.getPhase()) {
 					throw new IllegalArgumentException("the ");
 				}
-				nextFlowTask = FlowUtils.newFlowTask(overruleFlowTaskClass, flowTask.getFlowJobId(),
+				nextFlowTask = FlowUtils.newFlowTask(overruleFlowTaskModel, flowTask.getFlowJobId(),
 						approvalResult.getChannel(), approvalResult.getUserId());
 			} else {
 				throw new IllegalStateException(String.format(

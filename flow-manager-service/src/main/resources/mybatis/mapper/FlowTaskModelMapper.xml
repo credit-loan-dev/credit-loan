@@ -6,7 +6,6 @@
     <resultMap id="FlowTaskModelResult" type="com.sixliu.flow.entity.FlowTaskModel" >
         <id column="id" property="id" jdbcType="VARCHAR" />
         <result column="name" property="name" jdbcType="VARCHAR" />     
-        <result column="phase" property="phase" jdbcType="INTEGER" />  
         <result column="type" property="type" jdbcType="INTEGER" />    
         <result column="worker" property="worker" jdbcType="VARCHAR" />   
         <result column="remarks" property="remarks" jdbcType="VARCHAR" />
@@ -31,7 +30,6 @@
     	select 
     		`id`,
 	        `name`,
-	        `phase`,
 	        `type`,
 	        `worker`,
 	        `remarks`,
@@ -46,7 +44,6 @@
     <sql id="insert_common_table">
     	insert into flow_task_model(`id`,
     								`name`,
-    								`phase`,
     								`type`,
     								`worker`,
     	 							`remarks`,
@@ -57,7 +54,6 @@
     	 							)
     	 					 values(#{id},
     	 							#{name},
-    	 							#{phase},
     	 							#{type},
     	 							#{worker},
     		   						#{remarks},

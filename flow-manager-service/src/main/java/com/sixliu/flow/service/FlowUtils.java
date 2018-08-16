@@ -5,9 +5,9 @@ import java.util.Date;
 import com.sixliu.flow.JobStatus;
 import com.sixliu.flow.TaskStatus;
 import com.sixliu.flow.entity.FlowJob;
-import com.sixliu.flow.entity.FlowJobClass;
+import com.sixliu.flow.entity.FlowJobModel;
 import com.sixliu.flow.entity.FlowTask;
-import com.sixliu.flow.entity.FlowTaskClass;
+import com.sixliu.flow.entity.FlowTaskModel;
 
 /**
  * @author:MG01867
@@ -18,25 +18,23 @@ import com.sixliu.flow.entity.FlowTaskClass;
  */
 public class FlowUtils{
 	
-	public static FlowJob newFlowJob(FlowJobClass flowJobClass,String createUserId) {
+	public static FlowJob newFlowJob(FlowJobModel flowJobModel,String createUserId) {
 		FlowJob flowJob = new FlowJob();
 		flowJob.setCreateUserId(createUserId);
 		flowJob.setStatus(JobStatus.STARTED);
-		Date nowDate = new Date();
-		flowJob.setCreateDate(nowDate);
-		flowJob.setUpdateDate(nowDate);
+		flowJob.setUpdateDate(new Date());
 		return flowJob;
 	}
 
-	public static FlowTask newFlowTask(FlowTaskClass flowTaskClass, String flowJobId,String channelId,
+	public static FlowTask newFlowTask(FlowTaskModel flowTaskModel, String flowJobId,String channelId,
 			String userId) {
 		FlowTask flowTask = new FlowTask();
-		flowTask.setFlowTaskModelId(flowTaskClass.getId());
+		flowTask.setFlowTaskModelId(flowTaskModel.getId());
 		flowTask.setFlowJobId(flowJobId);
-		flowTask.setPhase(flowTaskClass.getPhase());
+		flowTask.setPhase(flowTaskModel.getPhase());
 		flowTask.setStatus(TaskStatus.POOLING);
-		flowTask.setType(flowTaskClass.getType());
-		flowTask.setWorker(flowTaskClass.getWorker());
+		flowTask.setType(flowTaskModel.getType());
+		flowTask.setWorker(flowTaskModel.getWorker());
 		Date nowDate = new Date();
 		flowTask.setStartDate(nowDate);
 		flowTask.setEndDate(nowDate);

@@ -27,8 +27,6 @@ public class FlowJobModelDaoTest extends BaseTest{
 		FlowJobModel flowJobModel=new FlowJobModel();
 		flowJobModel.setName("test");
 		flowJobModel.setCreateUserId("sixliu");
-		flowJobModel.setCreateDate(new Date());
-		flowJobModel.setUpdateUserId("sixliu");
 		flowJobModel.setUpdateDate(new Date());
 		flowJobModelDao.insert(flowJobModel);
 	}

@@ -19,7 +19,7 @@ public interface FlowTaskDao {
 
 	FlowTask get(String id);
 
-	List<FlowTask> listManualFlowTaskByRole(String roleId);
+	List<FlowTask> listByRoleAndStatus(String roleId,TaskStatus status);
 
 	int updateWorkerForManual(String id, String worker, Date updateDate, Integer currentVersion);
 

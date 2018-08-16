@@ -1,5 +1,7 @@
 package com.sixliu.flow.dao;
 
+import java.util.List;
+
 import com.sixliu.flow.entity.FlowTaskModel;
 
 /**
@@ -14,4 +16,8 @@ public interface FlowTaskModelDao {
 	int insert(FlowTaskModel flowTaskModel);
 	
 	FlowTaskModel get(String id);
+	
+	FlowTaskModel getByflowJobModelAndPhase(String flowJobModelId, int phase);
+
+	List<FlowTaskModel> listByflowJobModel(String flowJobModelId);
 }

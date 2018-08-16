@@ -3,6 +3,7 @@ package com.sixliu.flow.entity;
 import java.util.Date;
 
 import com.sixliu.flow.TaskStatus;
+import com.sixliu.flow.TaskType;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

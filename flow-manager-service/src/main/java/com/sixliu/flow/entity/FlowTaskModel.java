@@ -1,5 +1,7 @@
 package com.sixliu.flow.entity;
 
+import com.sixliu.flow.TaskType;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -19,6 +21,12 @@ public class FlowTaskModel extends BaseEntity {
 	/** 流程作业任务名称 **/
 	private String name;
 	
+	/** 流程作业 id **/
+	private String flowJobModelId;
+	
+	/** 流程作业任务所处阶段 **/
+	private Integer phase;
+
 	/** 流程作业任务处理类型 **/
 	private TaskType type;
 	

@@ -8,8 +8,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sixliu.flow.BaseTest;
+import com.sixliu.flow.TaskType;
 import com.sixliu.flow.entity.FlowTaskModel;
-import com.sixliu.flow.entity.TaskType;
 
 /**
 *@author:MG01867
@@ -30,8 +30,6 @@ public class FlowTaskModelDaoTest extends BaseTest{
 		flowTaskModel.setType(TaskType.AUTO);
 		flowTaskModel.setWorker("worker");
 		flowTaskModel.setCreateUserId("sixliu");
-		flowTaskModel.setCreateDate(new Date());
-		flowTaskModel.setUpdateUserId("sixliu");
 		flowTaskModel.setUpdateDate(new Date());
 		flowTaskModelDao.insert(flowTaskModel);
 	}

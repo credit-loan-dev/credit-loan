@@ -17,4 +17,6 @@ public class FlowJobModel extends BaseEntity{
 	/**流程作业模型name**/
 	private String name;
 
+	/**允许创建该流程作业角色id**/
+	private String createRoleId;
 }
