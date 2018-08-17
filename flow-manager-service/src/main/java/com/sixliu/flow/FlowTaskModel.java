@@ -1,10 +1,8 @@
-package com.sixliu.flow.entity;
+package com.sixliu.flow;
 
-import com.sixliu.flow.TaskType;
+import java.util.Date;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 /**
  * @author:MG01867
@@ -14,10 +12,11 @@ import lombok.ToString;
  * @describe 流程作业任务模型
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
-@ToString(callSuper =true)
-public class FlowTaskModel extends BaseEntity {
+public class FlowTaskModel{
 
+	/**数据id**/
+	private String id;
+	
 	/** 流程作业任务名称 **/
 	private String name;
 	
@@ -32,5 +31,17 @@ public class FlowTaskModel extends BaseEntity {
 	
 	/** 流程作业任务处理worker **/
 	private String worker;
+	
+	/**数据更新用户id:VARCHAR(36)**/
+	private String updateUserId;
+	
+	/**数据更新日期(每次写操作时赋值)**/
+	private Date updateDate;
+	
+	/**数据创建用户id:VARCHAR(36)**/
+	private String createUserId;
+	
+	/**数据创建日期(只在创建时赋值):TIMESTAMP**/
+	private Date createDate;
 	
 }

@@ -12,7 +12,6 @@ import com.sixliu.credit.order.entity.CreditOrder;
 import com.sixliu.credit.order.service.OrderService;
 import com.sixliu.credit.product.api.ProductManagerInnerClient;
 import com.sixliu.credit.product.dto.ProductInnerDTO;
-import com.sixliu.flow.dto.CreateFlowJobDTO;
 import com.sixliu.flow.service.FlowService;
 
 /**
@@ -40,11 +39,8 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public String createOrder(CreateCreditOrderDTO createCreditOrder) {
 		ProductInnerDTO product = productManagerClient.get(createCreditOrder.getProductId());
-		CreateFlowJobDTO createFlowJob=new CreateFlowJobDTO();
-		createFlowJob.setFlowJobClassId(product.getCreditApplyFlowModleId());
-		createFlowJob.setUserId(createCreditOrder.getInputUserId());
-		createFlowJob.setChannelId(createCreditOrder.getChannelId());
-		String flowJobId = flowManager.createFlowJob(createFlowJob);
+		String flowJobId = flowManager.createFlowJob(product.getCreditApplyFlowModleId(),
+				createCreditOrder.getInputUserId());
 		CreditOrder creditOrder = new CreditOrder();
 		creditOrder.setId(createCreditOrder.getId());
 		creditOrder.setCustomerId(createCreditOrder.getCustomerId());
@@ -56,7 +52,7 @@ public class OrderServiceImpl implements OrderService {
 		creditOrder.setApplyLoanTermType(createCreditOrder.getApplyLoanTermType());
 		creditOrder.setApplyLoanTerm(createCreditOrder.getApplyLoanTerm());
 		creditOrder.setActivityId(createCreditOrder.getActivityId());
-		creditOrder.setChannel(createCreditOrder.getChannelId());
+		creditOrder.setChannelId(createCreditOrder.getChannelId());
 		creditOrder.setReferenceId(createCreditOrder.getReferenceId());
 		creditOrder.setCreateUserId(createCreditOrder.getInputUserId());
 		creditOrder.setCreateDate(new Date());
@@ -66,7 +62,6 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public List<CreditOrder> listOrderByCustomerId(String customerId) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

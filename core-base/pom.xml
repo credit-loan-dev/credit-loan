@@ -25,12 +25,6 @@
 
 		<dependency>
 			<groupId>com.sixliu</groupId>
-			<artifactId>flow-manager-service</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.sixliu</groupId>
 			<artifactId>creditlimit-manager-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>

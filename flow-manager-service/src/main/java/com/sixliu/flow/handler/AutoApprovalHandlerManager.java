@@ -1,4 +1,4 @@
-package com.sixliu.flow.approval;
+package com.sixliu.flow.handler;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,8 +13,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.sixliu.flow.FlowTask;
 import com.sixliu.flow.FlowTaskResult;
-import com.sixliu.flow.entity.FlowTask;
 
 /**
  * @author:MG01867

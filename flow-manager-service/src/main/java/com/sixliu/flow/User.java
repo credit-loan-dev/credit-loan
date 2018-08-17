@@ -1,4 +1,4 @@
-package com.sixliu.flow.entity;
+package com.sixliu.flow;
 
 
 import lombok.Data;
@@ -13,6 +13,9 @@ import lombok.Data;
 @Data
 public class User {
 
-	/**流程作业用户id**/
+	/**用户id**/
 	private String id;
+	
+	/**用户角色id**/
+	private String roleId;
 }

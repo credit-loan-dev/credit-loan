@@ -1,7 +1,7 @@
-package com.sixliu.flow.approval;
+package com.sixliu.flow.handler;
 
+import com.sixliu.flow.FlowTask;
 import com.sixliu.flow.FlowTaskResult;
-import com.sixliu.flow.entity.FlowTask;
 
 /**
  * @author:MG01867

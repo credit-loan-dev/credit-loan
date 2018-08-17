@@ -1,7 +1,5 @@
-package com.sixliu.flow.entity;
+package com.sixliu.flow;
 
-
-import com.sixliu.flow.InputType;
 
 import lombok.Data;
 

@@ -48,6 +48,6 @@ public class CreditOrder extends BaseEntity{
 	private String activityId;
 	
 	/**申请渠道**/
-	private String channel;
+	private String channelId;
 	
 }

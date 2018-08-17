@@ -1,8 +1,9 @@
 package com.sixliu.flow.status;
 
+import com.sixliu.flow.FlowJob;
+import com.sixliu.flow.FlowTask;
 import com.sixliu.flow.FlowTaskResult;
-import com.sixliu.flow.entity.FlowJob;
-import com.sixliu.flow.entity.FlowTask;
+
 import lombok.NonNull;
 
 /**

@@ -2,8 +2,8 @@ package com.sixliu.flow.dao;
 
 import java.util.List;
 
+import com.sixliu.flow.FlowTask;
 import com.sixliu.flow.TaskStatus;
-import com.sixliu.flow.entity.FlowTask;
 
 /**
  * @author:MG01867

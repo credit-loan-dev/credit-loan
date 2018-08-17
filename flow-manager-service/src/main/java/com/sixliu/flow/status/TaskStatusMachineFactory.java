@@ -5,13 +5,13 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.sixliu.flow.FlowJob;
+import com.sixliu.flow.FlowTask;
+import com.sixliu.flow.FlowTaskModel;
 import com.sixliu.flow.FlowTaskResult;
 import com.sixliu.flow.JobStatus;
 import com.sixliu.flow.TaskStatus;
 import com.sixliu.flow.dao.FlowTaskModelDao;
-import com.sixliu.flow.entity.FlowJob;
-import com.sixliu.flow.entity.FlowTask;
-import com.sixliu.flow.entity.FlowTaskModel;
 import com.sixliu.flow.service.FlowUtils;
 
 import lombok.NonNull;
@@ -77,7 +77,7 @@ public class TaskStatusMachineFactory {
 						.getByflowJobModelAndPhase(flowJob.getFlowJobModelId(), flowTask.getPhase() + 1);
 				if (null != nextFlowTaskModel) {
 					nextFlowTask = FlowUtils.newFlowTask(nextFlowTaskModel, flowTask.getFlowJobId(),
-							approvalResult.getChannel(), approvalResult.getUserId());
+							approvalResult.getUserId());
 				} else {
 					flowJob.setStatus(JobStatus.PASS_ENDED);
 					flowJob.setUpdateDate(new Date());
@@ -97,7 +97,7 @@ public class TaskStatusMachineFactory {
 					throw new IllegalArgumentException("the ");
 				}
 				nextFlowTask = FlowUtils.newFlowTask(overruleFlowTaskModel, flowTask.getFlowJobId(),
-						approvalResult.getChannel(), approvalResult.getUserId());
+						approvalResult.getUserId());
 			} else {
 				throw new IllegalStateException(String.format(
 						"This approvalResult's status[%s] of flowTask[%s][%s] is illegal", approvalResult.getStatus(),
@@ -121,25 +121,25 @@ public class TaskStatusMachineFactory {
 							flowTask.getId(), PASS, flowJob.getId()));
 		}
 	};
-	
+
 	/** 转移 **/
 	private TaskStatusMachine TRANSFER = new TaskStatusMachine() {
 		@Override
 		public FlowTask process(@NonNull FlowJob flowJob, @NonNull FlowTask flowTask,
 				@NonNull FlowTaskResult approvalResult) {
-			if(JobStatus.STARTED!=flowJob.getStatus()) {
+			if (JobStatus.STARTED != flowJob.getStatus()) {
 				throw new UnsupportedOperationException(
 						String.format("No operation is supported when the flowTask[%s]'s status[%s] of flowJob[%s]",
 								flowTask.getId(), PASS, flowJob.getId()));
 			}
-			if(TaskStatus.PENDING!=flowTask.getStatus()) {
+			if (TaskStatus.PENDING != flowTask.getStatus()) {
 				throw new UnsupportedOperationException(
 						String.format("No operation is supported when the flowTask[%s]'s status[%s] of flowJob[%s]",
 								flowTask.getId(), PASS, flowJob.getId()));
 			}
 			flowTask.setStatus(TaskStatus.TRANSFER);
 			flowTask.setUpdateDate(new Date());
-			return FlowUtils.copyFlowTask(flowTask,approvalResult.getChannel(),approvalResult.getUserId());
+			return FlowUtils.copyFlowTask(flowTask, approvalResult.getUserId());
 		}
 	};
 

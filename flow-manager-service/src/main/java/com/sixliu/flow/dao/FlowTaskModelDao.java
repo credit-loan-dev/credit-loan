@@ -2,7 +2,7 @@ package com.sixliu.flow.dao;
 
 import java.util.List;
 
-import com.sixliu.flow.entity.FlowTaskModel;
+import com.sixliu.flow.FlowTaskModel;
 
 /**
 *@author:MG01867

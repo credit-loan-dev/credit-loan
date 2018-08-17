@@ -11,25 +11,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 import com.sixliu.credit.common.exception.IllegalArgumentAppException;
-import com.sixliu.credit.user.api.UserManagerClient;
-import com.sixliu.credit.user.dto.UserDTO;
+import com.sixliu.flow.FlowJob;
+import com.sixliu.flow.FlowJobModel;
+import com.sixliu.flow.FlowTask;
+import com.sixliu.flow.FlowTaskModel;
 import com.sixliu.flow.FlowTaskResult;
 import com.sixliu.flow.JobStatus;
 import com.sixliu.flow.TaskStatus;
 import com.sixliu.flow.TaskType;
-import com.sixliu.flow.approval.AutoApprovalHandler;
-import com.sixliu.flow.approval.AutoApprovalHandlerManager;
+import com.sixliu.flow.User;
 import com.sixliu.flow.component.FlowTaskSubmitAop;
 import com.sixliu.flow.component.FlowTaskSubmitAopManager;
 import com.sixliu.flow.dao.FlowJobDao;
 import com.sixliu.flow.dao.FlowJobModelDao;
 import com.sixliu.flow.dao.FlowTaskDao;
 import com.sixliu.flow.dao.FlowTaskModelDao;
-import com.sixliu.flow.dto.CreateFlowJobDTO;
-import com.sixliu.flow.entity.FlowJob;
-import com.sixliu.flow.entity.FlowJobModel;
-import com.sixliu.flow.entity.FlowTask;
-import com.sixliu.flow.entity.FlowTaskModel;
+import com.sixliu.flow.dao.UserDao;
+import com.sixliu.flow.handler.AutoApprovalHandler;
+import com.sixliu.flow.handler.AutoApprovalHandlerManager;
 import com.sixliu.flow.service.FlowService;
 import com.sixliu.flow.service.FlowUtils;
 import com.sixliu.flow.status.TaskStatusMachine;
@@ -45,7 +44,7 @@ import com.sixliu.flow.status.TaskStatusMachineFactory;
 public class FlowServiceImpl implements FlowService {
 
 	@Autowired
-	private UserManagerClient userManagerClient;
+	private UserDao userDao;
 
 	@Autowired
 	private FlowJobModelDao flowJobModelDao;
@@ -79,21 +78,21 @@ public class FlowServiceImpl implements FlowService {
 	}
 
 	@Override
-	public String createFlowJob(CreateFlowJobDTO createFlowJob) {
-		FlowJobModel flowJobModel = flowJobModelDao.get(createFlowJob.getFlowJobClassId());
+	public String createFlowJob(String flowJobModelId,String userId) {
+		FlowJobModel flowJobModel = flowJobModelDao.get(flowJobModelId);
 		if (null == flowJobModel) {
 			throw new IllegalArgumentAppException(
-					String.format("The flowJobClass[%s] is non-existent", createFlowJob.getFlowJobClassId()));
+					String.format("The flowJobClass[%s] is non-existent", flowJobModelId));
 		}
-		UserDTO user = userManagerClient.get(createFlowJob.getUserId());
+		User user = userDao.get(flowJobModelId);
 		if (null == user) {
 			throw new IllegalArgumentAppException(
-					String.format("The user[%s] is non-existent", createFlowJob.getUserId()));
+					String.format("The user[%s] is non-existent", userId));
 		}
 		if (!StringUtils.equals(user.getRoleId(), flowJobModel.getCreateRoleId())) {
 			throw new IllegalArgumentAppException(
 					String.format("The user[%s] create flowJob of flowJobClass[%s] Permission denied",
-							createFlowJob.getUserId(), createFlowJob.getFlowJobClassId()));
+							userId, flowJobModel));
 		}
 		FlowJob flowJob = FlowUtils.newFlowJob(flowJobModel, user.getId());
 		flowJobDao.insert(flowJob);
@@ -102,7 +101,7 @@ public class FlowServiceImpl implements FlowService {
 			throw new IllegalArgumentException(
 					String.format("The flowJobClass[%s] configure empty flowTaskModel", flowJobModel.getId()));
 		}
-		FlowTask flowTask = FlowUtils.newFlowTask(flowTaskClass, flowJob.getId(), createFlowJob.getChannelId(),
+		FlowTask flowTask = FlowUtils.newFlowTask(flowTaskClass, flowJob.getId(),
 				user.getId());
 		flowTaskDao.insert(flowTask);
 		return flowJob.getId();
@@ -110,29 +109,28 @@ public class FlowServiceImpl implements FlowService {
 
 	@Override
 	public List<FlowTask> listFlowTask(String userId){
-		UserDTO user = getAndCheckUser(userId);
+		User user = getAndCheckUser(userId);
 		List<FlowTask> result = flowTaskDao.listByRoleId(user.getRoleId());
 		return result;
 	}
 	
 	@Override
 	public List<FlowTask> listFlowTask(String userId,TaskStatus status){
-		UserDTO user = getAndCheckUser(userId);
+		User user = getAndCheckUser(userId);
 		List<FlowTask> result = flowTaskDao.listByRoleIdAndStatus(user.getRoleId(),status);
 		return result;
 	}
 
 
 	@Override
-	public String autoClaimFlowTask(String userId,String channelId) {
-		UserDTO user = getAndCheckUser(userId);
+	public String autoClaimFlowTask(String userId) {
+		User user = getAndCheckUser(userId);
 		FlowTask claimFlowTask = randomFlowTaskId(user.getId());
 		FlowTaskResult flowTaskResult=new FlowTaskResult();
 		flowTaskResult.setFlowJobId(claimFlowTask.getFlowJobId());
 		flowTaskResult.setFlowTaskId(claimFlowTask.getId());
 		flowTaskResult.setStatus(TaskStatus.PENDING);
 		flowTaskResult.setUserId(userId);
-		flowTaskResult.setChannel(channelId);
 		submitFlowTask(flowTaskResult);
 		return claimFlowTask.getId();
 	}
@@ -186,8 +184,8 @@ public class FlowServiceImpl implements FlowService {
 		return null;
 	}
 
-	private UserDTO getAndCheckUser(String userId) {
-		UserDTO user = userManagerClient.get(userId);
+	private User getAndCheckUser(String userId) {
+		User user = userDao.get(userId);
 		if (null == user) {
 			throw new IllegalArgumentAppException(String.format("The user[%s] is non-existent", userId));
 		}

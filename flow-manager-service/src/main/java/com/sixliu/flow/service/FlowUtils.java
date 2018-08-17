@@ -2,12 +2,12 @@ package com.sixliu.flow.service;
 
 import java.util.Date;
 
+import com.sixliu.flow.FlowJob;
+import com.sixliu.flow.FlowJobModel;
+import com.sixliu.flow.FlowTask;
+import com.sixliu.flow.FlowTaskModel;
 import com.sixliu.flow.JobStatus;
 import com.sixliu.flow.TaskStatus;
-import com.sixliu.flow.entity.FlowJob;
-import com.sixliu.flow.entity.FlowJobModel;
-import com.sixliu.flow.entity.FlowTask;
-import com.sixliu.flow.entity.FlowTaskModel;
 
 /**
  * @author:MG01867
@@ -26,7 +26,7 @@ public class FlowUtils{
 		return flowJob;
 	}
 
-	public static FlowTask newFlowTask(FlowTaskModel flowTaskModel, String flowJobId,String channelId,
+	public static FlowTask newFlowTask(FlowTaskModel flowTaskModel, String flowJobId,
 			String userId) {
 		FlowTask flowTask = new FlowTask();
 		flowTask.setFlowTaskModelId(flowTaskModel.getId());
@@ -38,12 +38,11 @@ public class FlowUtils{
 		Date nowDate = new Date();
 		flowTask.setCreateDate(nowDate);
 		flowTask.setUpdateDate(nowDate);
-		flowTask.setChannelId(channelId);
 		flowTask.setCreateUserId(userId);
 		return flowTask;
 	}
 	
-	public static FlowTask copyFlowTask(FlowTask flowTask,String channelId,String userId) {
+	public static FlowTask copyFlowTask(FlowTask flowTask,String userId) {
 		FlowTask newFlowTask = new FlowTask();
 		newFlowTask.setFlowTaskModelId(flowTask.getFlowTaskModelId());
 		newFlowTask.setFlowJobId(flowTask.getFlowJobId());
@@ -54,7 +53,6 @@ public class FlowUtils{
 		Date nowDate = new Date();
 		newFlowTask.setCreateDate(nowDate);
 		newFlowTask.setUpdateDate(nowDate);
-		newFlowTask.setChannelId(channelId);
 		newFlowTask.setCreateUserId(userId);
 		return newFlowTask;
 	}

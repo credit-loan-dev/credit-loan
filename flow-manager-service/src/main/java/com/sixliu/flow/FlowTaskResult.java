@@ -33,6 +33,4 @@ public class FlowTaskResult {
 	/**流程作业任务外部意见**/
 	private String outerOpinion;
 	
-	/**流程作业任务操作渠道**/
-	private String channel;
 }

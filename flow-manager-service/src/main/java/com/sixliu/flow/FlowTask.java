@@ -1,11 +1,8 @@
-package com.sixliu.flow.entity;
+package com.sixliu.flow;
 
-import com.sixliu.flow.TaskStatus;
-import com.sixliu.flow.TaskType;
+import java.util.Date;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 /**
 *@author:MG01867
@@ -15,9 +12,7 @@ import lombok.ToString;
 *@describe 流程任务
 */
 @Data
-@EqualsAndHashCode(callSuper = false)
-@ToString(callSuper =true)
-public class FlowTask extends BaseEntity{
+public class FlowTask{
 	
 	/**流程作业任务id**/
 	private String id;
@@ -55,7 +50,16 @@ public class FlowTask extends BaseEntity{
 	/**流程作业任务外部意见**/
 	private String outerOpinion;
 	
-	/**流程作业任务审批渠道**/
-	private String channelId;
+	/**数据更新用户id:VARCHAR(36)**/
+	private String updateUserId;
+	
+	/**数据更新日期(每次写操作时赋值)**/
+	private Date updateDate;
+	
+	/**数据创建用户id:VARCHAR(36)**/
+	private String createUserId;
+	
+	/**数据创建日期(只在创建时赋值):TIMESTAMP**/
+	private Date createDate;
 	
 }

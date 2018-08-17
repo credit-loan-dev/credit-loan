@@ -5,7 +5,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.sixliu.flow.BaseTest;
 import com.sixliu.flow.TaskStatus;
 
 /**
@@ -15,7 +14,7 @@ import com.sixliu.flow.TaskStatus;
 *@version:
 *@describe //TODO
 */
-public class TaskStatusMachineFactoryTest extends BaseTest{
+public class TaskStatusMachineFactoryTest{
 
 	@Autowired
 	private TaskStatusMachineFactory taskStatusMachineFactory;
