@@ -13,7 +13,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.sixliu.flow.ApprovalResult;
+import com.sixliu.flow.FlowTaskResult;
 import com.sixliu.flow.entity.FlowTask;
 
 /**
@@ -135,7 +135,7 @@ public class AutoApprovalHandlerManager {
 		}
 
 		@Override
-		public ApprovalResult process(FlowTask flowTask) {
+		public FlowTaskResult process(FlowTask flowTask) {
 			workerThreadPool.submit(() -> {
 				Thread currentThread = Thread.currentThread();
 				String originalThreadName = currentThread.getName();

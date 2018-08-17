@@ -34,4 +34,8 @@ public interface UserManagerClient {
 	 */
 	@RequestMapping(value = "/user-manager/listUserByRoleId", method = RequestMethod.POST)
 	List<UserDTO> listUserByRoleId(String roleId);
+	
+	
+	@RequestMapping(value = "/user-manager/get", method = RequestMethod.POST)
+	UserDTO confirmAndgetUser(String userId,String subordinateRoleId);
 }

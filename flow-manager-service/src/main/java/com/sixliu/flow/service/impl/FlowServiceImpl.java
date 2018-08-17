@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import com.sixliu.credit.common.exception.IllegalArgumentAppException;
 import com.sixliu.credit.user.api.UserManagerClient;
 import com.sixliu.credit.user.dto.UserDTO;
-import com.sixliu.flow.ApprovalResult;
+import com.sixliu.flow.FlowTaskResult;
 import com.sixliu.flow.JobStatus;
 import com.sixliu.flow.TaskStatus;
 import com.sixliu.flow.TaskType;
@@ -109,76 +109,58 @@ public class FlowServiceImpl implements FlowService {
 	}
 
 	@Override
-	public List<FlowTask> listByUserAndStatus(String userId,TaskStatus status){
+	public List<FlowTask> listFlowTask(String userId){
 		UserDTO user = getAndCheckUser(userId);
-		List<FlowTask> result = flowTaskDao.listByRoleAndStatus(user.getRoleId(),status);
+		List<FlowTask> result = flowTaskDao.listByRoleId(user.getRoleId());
+		return result;
+	}
+	
+	@Override
+	public List<FlowTask> listFlowTask(String userId,TaskStatus status){
+		UserDTO user = getAndCheckUser(userId);
+		List<FlowTask> result = flowTaskDao.listByRoleIdAndStatus(user.getRoleId(),status);
 		return result;
 	}
 
-	@Override
-	public void claimFlowTask(String taskId, String userId) {
-		FlowTask flowTask = getAndCheckFlowTask(taskId);
-		if (TaskStatus.PENDING != flowTask.getStatus()) {
-			throw new IllegalArgumentAppException(String.format("The flowTask[%s] has been claimed", taskId));
-		}
-		UserDTO user = userManagerClient.get(userId);
-		if (!StringUtils.equals(user.getRoleId(), flowTask.getWorker())) {
-			throw new IllegalArgumentAppException(
-					String.format("The user[%s] claim flowTask[%s] of flowJob[%s] Permission denied", userId,
-							flowTask.getId(), flowTask.getFlowJobId()));
-		}
-		flowTaskDao.updateWorkerForManual(flowTask.getId(), userId, new Date(), flowTask.getVersion());
-	}
 
 	@Override
-	public String autoClaimFlowTask(String userId) {
+	public String autoClaimFlowTask(String userId,String channelId) {
 		UserDTO user = getAndCheckUser(userId);
-		String claimFlowTaskId = null;
-		while (true) {
-			List<FlowTask> flowTasks = flowTaskDao.listByRoleAndStatus(user.getRoleId(),TaskStatus.PENDING);
-			if (null == flowTasks || flowTasks.isEmpty()) {
-				break;
-			}
-			for (int i = 0, size = flowTasks.size(); i < size; i++) {
-				FlowTask flowTask = flowTasks.get(i);
-				int updateCount = flowTaskDao.updateWorkerForManual(flowTask.getId(), userId, new Date(),
-						flowTask.getVersion());
-				if (1 == updateCount) {
-					claimFlowTaskId = flowTask.getId();
-					break;
-				}
-			}
-			if (null != claimFlowTaskId) {
-				break;
-			}
-		}
-		return claimFlowTaskId;
+		FlowTask claimFlowTask = randomFlowTaskId(user.getId());
+		FlowTaskResult flowTaskResult=new FlowTaskResult();
+		flowTaskResult.setFlowJobId(claimFlowTask.getFlowJobId());
+		flowTaskResult.setFlowTaskId(claimFlowTask.getId());
+		flowTaskResult.setStatus(TaskStatus.PENDING);
+		flowTaskResult.setUserId(userId);
+		flowTaskResult.setChannel(channelId);
+		submitFlowTask(flowTaskResult);
+		return claimFlowTask.getId();
 	}
-
+	
+	
 	@Override
-	public void submitApprovalResult(ApprovalResult approvalResult) {
-		FlowJob flowJob = getAndCheckFlowJob(approvalResult.getFlowJobId());
-		FlowTask flowTask = getAndCheckFlowTask(approvalResult.getFlowJobId());
+	public void submitFlowTask(FlowTaskResult flowTaskResult) {
+		FlowJob flowJob = getAndCheckFlowJob(flowTaskResult.getFlowJobId());
+		FlowTask flowTask = getAndCheckFlowTask(flowTaskResult.getFlowJobId());
 
 		FlowTaskSubmitAop flowTaskBeforeSubmitAop = flowTaskSubmitAopManager
 				.get(flowTask.getFlowTaskBeforeSubmitAopClass());
 		Objects.requireNonNull(flowTaskBeforeSubmitAop,
 				String.format("The flowTask[%s] of flowJob[%s] didn't configure flowTaskBeforeSubmitAop",
 						flowTask.getId(), flowJob.getId()));
-		flowTaskBeforeSubmitAop.intercept(flowTask, approvalResult);
+		flowTaskBeforeSubmitAop.intercept(flowTask, flowTaskResult);
 
 		TaskStatus taskStatus = flowTask.getStatus();
 		TaskStatusMachine taskStatusMachine = taskStatusMachineFactory.get(taskStatus);
-		FlowTask nextFlowTask = taskStatusMachine.process(flowJob, flowTask, approvalResult);
-		flowTaskDao.updateApprovalResult(flowTask.getId(), flowTask.getStatus(), flowTask.getInnerOpinion(),
-				flowTask.getOuterOpinion(), flowTask.getChannelId(), new Date(), flowTask.getVersion());
+		FlowTask nextFlowTask = taskStatusMachine.process(flowJob, flowTask, flowTaskResult);
+		flowTaskDao.update(flowTask);
 
 		FlowTaskSubmitAop flowTaskAfterSubmitAop = flowTaskSubmitAopManager
 				.get(flowTask.getFlowTaskAfterSubmitAopClass());
 		Objects.requireNonNull(flowTaskAfterSubmitAop,
 				String.format("The flowTask[%s] of flowJob[%s] didn't configure flowTaskAfterSubmitAop",
 						flowTask.getId(), flowJob.getId()));
-		flowTaskAfterSubmitAop.intercept(flowTask, approvalResult);
+		flowTaskAfterSubmitAop.intercept(flowTask, flowTaskResult);
 
 		if (null != nextFlowTask) {
 			flowTaskDao.insert(nextFlowTask);
@@ -198,6 +180,10 @@ public class FlowServiceImpl implements FlowService {
 		}
 		flowJob.setStatus(JobStatus.CANCEL_ENDED);
 		flowJob.setUpdateDate(new Date());
+	}
+	
+	private FlowTask randomFlowTaskId(String userId) {
+		return null;
 	}
 
 	private UserDTO getAndCheckUser(String userId) {
@@ -223,4 +209,5 @@ public class FlowServiceImpl implements FlowService {
 		}
 		return flowTask;
 	}
+
 }

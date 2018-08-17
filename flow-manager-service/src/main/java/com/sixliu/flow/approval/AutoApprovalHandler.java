@@ -1,6 +1,6 @@
 package com.sixliu.flow.approval;
 
-import com.sixliu.flow.ApprovalResult;
+import com.sixliu.flow.FlowTaskResult;
 import com.sixliu.flow.entity.FlowTask;
 
 /**
@@ -38,5 +38,5 @@ public interface AutoApprovalHandler {
 	 * 
 	 * @param arg
 	 */
-	ApprovalResult process(FlowTask flowTask);
+	FlowTaskResult process(FlowTask flowTask);
 }

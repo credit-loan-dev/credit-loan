@@ -1,6 +1,6 @@
 package com.sixliu.flow.status;
 
-import com.sixliu.flow.ApprovalResult;
+import com.sixliu.flow.FlowTaskResult;
 import com.sixliu.flow.entity.FlowJob;
 import com.sixliu.flow.entity.FlowTask;
 import lombok.NonNull;
@@ -14,5 +14,5 @@ import lombok.NonNull;
  */
 public interface TaskStatusMachine {
 
-	FlowTask process(@NonNull FlowJob flowJob, @NonNull FlowTask flowTask, @NonNull ApprovalResult approvalResult);
+	FlowTask process(@NonNull FlowJob flowJob, @NonNull FlowTask flowTask, @NonNull FlowTaskResult approvalResult);
 }

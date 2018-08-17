@@ -2,7 +2,7 @@ package com.sixliu.flow.service;
 
 import java.util.List;
 
-import com.sixliu.flow.ApprovalResult;
+import com.sixliu.flow.FlowTaskResult;
 import com.sixliu.flow.TaskStatus;
 import com.sixliu.flow.dto.CreateFlowJobDTO;
 import com.sixliu.flow.entity.FlowTask;
@@ -25,6 +25,12 @@ public interface FlowService {
 	String createFlowJob(CreateFlowJobDTO createFlowJob);
 
 	/**
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	List<FlowTask> listFlowTask(String userId);
+	/**
 	 * 通过用户id和流程任务状态 查询出流程任务集合
 	 * 
 	 * @param userId
@@ -33,15 +39,7 @@ public interface FlowService {
 	 *            流程任务状态
 	 * @return
 	 */
-	List<FlowTask> listByUserAndStatus(String userId, TaskStatus status);
-
-	/**
-	 * 认领待处理订单审核流程任务
-	 * 
-	 * @param userId
-	 * @param taskId
-	 */
-	void claimFlowTask(String taskId, String userId);
+	List<FlowTask> listFlowTask(String userId, TaskStatus status);
 
 	/**
 	 * 自动认领待处理订单审核流程任务
@@ -50,7 +48,7 @@ public interface FlowService {
 	 *            用户id
 	 * @return 返回认领到的流程任务id
 	 */
-	String autoClaimFlowTask(String userId);
+	String autoClaimFlowTask(String userId,String channelId);
 
 	/**
 	 * 提交订单审核流程任务处理结果
@@ -58,7 +56,7 @@ public interface FlowService {
 	 * @param result
 	 *            订单审核流程任务处理结果
 	 */
-	void submitApprovalResult(ApprovalResult approvalResult);
+	void submitFlowTask(FlowTaskResult approvalResult);
 
 	/**
 	 * 取消流程job

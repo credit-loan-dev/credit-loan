@@ -26,17 +26,20 @@ public enum TaskStatus {
 	/** 待处理 **/
 	PENDING(1),
 	
+	/** 转移 **/
+	TRANSFER(2),
+	
 	/** 通过 **/
-	PASS(2),
+	PASS(3),
 	
 	/** 拒绝 **/
-	REJECT(3),
+	REJECT(4),
 	
 	/** 驳回 **/
-	OVERRULE(4),
+	OVERRULE(5),
 	
 	/** 挂起 **/
-	HANG_UP(5);
+	HANG_UP(6);
 	
 	private final int value;
 
@@ -54,12 +57,14 @@ public enum TaskStatus {
 		} else if (1 == value) {
 			return PENDING;
 		} else if (2 == value) {
-			return PASS;
+			return TRANSFER;
 		} else if (3 == value) {
+			return PASS;
+		} else if (4 == value) {
 			return REJECT;
-		}else if (4 == value) {
-			return OVERRULE;
 		}else if (5 == value) {
+			return OVERRULE;
+		}else if (6 == value) {
 			return HANG_UP;
 		} else {
 			throw new IllegalArgumentException();

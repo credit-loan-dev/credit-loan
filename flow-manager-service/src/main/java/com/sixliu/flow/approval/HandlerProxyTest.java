@@ -1,6 +1,6 @@
 package com.sixliu.flow.approval;
 
-import com.sixliu.flow.ApprovalResult;
+import com.sixliu.flow.FlowTaskResult;
 import com.sixliu.flow.entity.FlowTask;
 
 /**
@@ -28,7 +28,7 @@ public class HandlerProxyTest implements AutoApprovalHandler {
 	}
 
 	@Override
-	public ApprovalResult process(FlowTask flowTask){
+	public FlowTaskResult process(FlowTask flowTask){
 		System.out.println(flowTask);
 		return  null;
 	}

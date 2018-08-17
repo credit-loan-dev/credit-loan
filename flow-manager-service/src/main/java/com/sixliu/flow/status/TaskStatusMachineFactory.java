@@ -5,7 +5,7 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.sixliu.flow.ApprovalResult;
+import com.sixliu.flow.FlowTaskResult;
 import com.sixliu.flow.JobStatus;
 import com.sixliu.flow.TaskStatus;
 import com.sixliu.flow.dao.FlowTaskModelDao;
@@ -34,6 +34,8 @@ public class TaskStatusMachineFactory {
 			return POOLING;
 		} else if (TaskStatus.PENDING == taskStatus) {
 			return PENDING;
+		} else if (TaskStatus.TRANSFER == taskStatus) {
+			return TRANSFER;
 		} else if (TaskStatus.PASS == taskStatus) {
 			return PASS;
 		} else if (TaskStatus.REJECT == taskStatus) {
@@ -51,7 +53,7 @@ public class TaskStatusMachineFactory {
 	private TaskStatusMachine POOLING = new TaskStatusMachine() {
 		@Override
 		public FlowTask process(@NonNull FlowJob flowJob, @NonNull FlowTask flowTask,
-				@NonNull ApprovalResult approvalResult) {
+				@NonNull FlowTaskResult approvalResult) {
 			if (TaskStatus.PENDING != approvalResult.getStatus()) {
 				throw new IllegalStateException(String.format(
 						"This approvalResult's status[%s] of flowTask[%s][%s] is illegal", approvalResult.getStatus(),
@@ -67,7 +69,7 @@ public class TaskStatusMachineFactory {
 	private TaskStatusMachine PENDING = new TaskStatusMachine() {
 		@Override
 		public FlowTask process(@NonNull FlowJob flowJob, @NonNull FlowTask flowTask,
-				@NonNull ApprovalResult approvalResult) {
+				@NonNull FlowTaskResult approvalResult) {
 			TaskStatus next = approvalResult.getStatus();
 			FlowTask nextFlowTask = null;
 			if (TaskStatus.PASS == next) {
@@ -104,7 +106,7 @@ public class TaskStatusMachineFactory {
 			flowTask.setStatus(approvalResult.getStatus());
 			flowTask.setInnerOpinion(approvalResult.getInnerOpinion());
 			flowTask.setOuterOpinion(approvalResult.getOuterOpinion());
-			flowTask.setEndDate(new Date());
+			flowTask.setUpdateDate(new Date());
 			return nextFlowTask;
 		}
 	};
@@ -113,10 +115,31 @@ public class TaskStatusMachineFactory {
 	private TaskStatusMachine PASS = new TaskStatusMachine() {
 		@Override
 		public FlowTask process(@NonNull FlowJob flowJob, @NonNull FlowTask flowTask,
-				@NonNull ApprovalResult approvalResult) {
+				@NonNull FlowTaskResult approvalResult) {
 			throw new UnsupportedOperationException(
 					String.format("No operation is supported when the flowTask[%s]'s status[%s] of flowJob[%s]",
 							flowTask.getId(), PASS, flowJob.getId()));
+		}
+	};
+	
+	/** 转移 **/
+	private TaskStatusMachine TRANSFER = new TaskStatusMachine() {
+		@Override
+		public FlowTask process(@NonNull FlowJob flowJob, @NonNull FlowTask flowTask,
+				@NonNull FlowTaskResult approvalResult) {
+			if(JobStatus.STARTED!=flowJob.getStatus()) {
+				throw new UnsupportedOperationException(
+						String.format("No operation is supported when the flowTask[%s]'s status[%s] of flowJob[%s]",
+								flowTask.getId(), PASS, flowJob.getId()));
+			}
+			if(TaskStatus.PENDING!=flowTask.getStatus()) {
+				throw new UnsupportedOperationException(
+						String.format("No operation is supported when the flowTask[%s]'s status[%s] of flowJob[%s]",
+								flowTask.getId(), PASS, flowJob.getId()));
+			}
+			flowTask.setStatus(TaskStatus.TRANSFER);
+			flowTask.setUpdateDate(new Date());
+			return FlowUtils.copyFlowTask(flowTask,approvalResult.getChannel(),approvalResult.getUserId());
 		}
 	};
 
@@ -124,7 +147,7 @@ public class TaskStatusMachineFactory {
 	private TaskStatusMachine REJECT = new TaskStatusMachine() {
 		@Override
 		public FlowTask process(@NonNull FlowJob flowJob, @NonNull FlowTask flowTask,
-				@NonNull ApprovalResult approvalResult) {
+				@NonNull FlowTaskResult approvalResult) {
 			throw new UnsupportedOperationException(
 					String.format("No operation is supported when the flowTask[%s]'s status[%s] of flowJob[%s]",
 							flowTask.getId(), REJECT, flowJob.getId()));
@@ -135,7 +158,7 @@ public class TaskStatusMachineFactory {
 	private TaskStatusMachine OVERRULE = new TaskStatusMachine() {
 		@Override
 		public FlowTask process(@NonNull FlowJob flowJob, @NonNull FlowTask flowTask,
-				@NonNull ApprovalResult approvalResult) {
+				@NonNull FlowTaskResult approvalResult) {
 			throw new UnsupportedOperationException(
 					String.format("No operation is supported when the flowTask[%s]'s status[%s] of flowJob[%s]",
 							flowTask.getId(), OVERRULE, flowJob.getId()));
@@ -146,7 +169,7 @@ public class TaskStatusMachineFactory {
 	private TaskStatusMachine HANG_UP = new TaskStatusMachine() {
 		@Override
 		public FlowTask process(@NonNull FlowJob flowJob, @NonNull FlowTask flowTask,
-				@NonNull ApprovalResult approvalResult) {
+				@NonNull FlowTaskResult approvalResult) {
 			TaskStatus next = approvalResult.getStatus();
 			if (TaskStatus.POOLING == next || TaskStatus.PENDING == next) {
 				flowTask.setStatus(next);

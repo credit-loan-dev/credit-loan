@@ -10,7 +10,7 @@ import lombok.Data;
 *@describe //TODO
 */
 @Data
-public class ApprovalResult {
+public class FlowTaskResult {
 
 	/**流程作业id**/
 	private String flowJobId;

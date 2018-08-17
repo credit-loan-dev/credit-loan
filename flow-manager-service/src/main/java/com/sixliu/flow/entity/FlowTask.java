@@ -1,7 +1,5 @@
 package com.sixliu.flow.entity;
 
-import java.util.Date;
-
 import com.sixliu.flow.TaskStatus;
 import com.sixliu.flow.TaskType;
 
@@ -59,14 +57,5 @@ public class FlowTask extends BaseEntity{
 	
 	/**流程作业任务审批渠道**/
 	private String channelId;
-	
-	/**流程作业任务开始日期**/
-	private Date startDate;
-	
-	/**流程作业任务结束日期**/
-	private Date endDate;
-	
-	/**流程作业创建用户**/
-	private String createUserId;
 	
 }

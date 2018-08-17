@@ -1,6 +1,5 @@
 package com.sixliu.flow.dao;
 
-import java.util.Date;
 import java.util.List;
 
 import com.sixliu.flow.TaskStatus;
@@ -19,10 +18,9 @@ public interface FlowTaskDao {
 
 	FlowTask get(String id);
 
-	List<FlowTask> listByRoleAndStatus(String roleId,TaskStatus status);
+	List<FlowTask> listByRoleId(String roleId);
+	
+	List<FlowTask> listByRoleIdAndStatus(String roleId,TaskStatus status);
 
-	int updateWorkerForManual(String id, String worker, Date updateDate, Integer currentVersion);
-
-	int updateApprovalResult(String id, TaskStatus status, String innerOpinion, String outerOpinion, String channelId,
-			Date updateDate, Integer currentVersion);
+	int update(FlowTask flowTask);
 }

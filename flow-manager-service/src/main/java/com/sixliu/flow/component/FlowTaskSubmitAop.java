@@ -1,6 +1,6 @@
 package com.sixliu.flow.component;
 
-import com.sixliu.flow.ApprovalResult;
+import com.sixliu.flow.FlowTaskResult;
 import com.sixliu.flow.entity.FlowTask;
 
 /**
@@ -19,12 +19,12 @@ public interface FlowTaskSubmitAop {
 	/** 流程作业任务提交后aop class **/
 	String AFTER_AOP_CLASS = After.class.getName();
 
-	void intercept(FlowTask flowTask, ApprovalResult approvalResult);
+	void intercept(FlowTask flowTask, FlowTaskResult approvalResult);
 
 	public class Before implements FlowTaskSubmitAop {
 
 		@Override
-		public void intercept(FlowTask flowTask, ApprovalResult approvalResult) {
+		public void intercept(FlowTask flowTask, FlowTaskResult approvalResult) {
 
 		}
 
@@ -33,7 +33,7 @@ public interface FlowTaskSubmitAop {
 	public class After implements FlowTaskSubmitAop {
 
 		@Override
-		public void intercept(FlowTask flowTask, ApprovalResult approvalResult) {
+		public void intercept(FlowTask flowTask, FlowTaskResult approvalResult) {
 
 		}
 

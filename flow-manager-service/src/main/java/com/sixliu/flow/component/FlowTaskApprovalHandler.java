@@ -1,6 +1,6 @@
 package com.sixliu.flow.component;
 
-import com.sixliu.flow.ApprovalResult;
+import com.sixliu.flow.FlowTaskResult;
 
 /**
  * @author:MG01867
@@ -11,5 +11,5 @@ import com.sixliu.flow.ApprovalResult;
  */
 public interface FlowTaskApprovalHandler {
 
-	ApprovalResult process();
+	FlowTaskResult process();
 }

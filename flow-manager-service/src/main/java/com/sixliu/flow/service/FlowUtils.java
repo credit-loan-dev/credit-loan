@@ -36,10 +36,26 @@ public class FlowUtils{
 		flowTask.setType(flowTaskModel.getType());
 		flowTask.setWorker(flowTaskModel.getWorker());
 		Date nowDate = new Date();
-		flowTask.setStartDate(nowDate);
-		flowTask.setEndDate(nowDate);
+		flowTask.setCreateDate(nowDate);
+		flowTask.setUpdateDate(nowDate);
 		flowTask.setChannelId(channelId);
 		flowTask.setCreateUserId(userId);
 		return flowTask;
+	}
+	
+	public static FlowTask copyFlowTask(FlowTask flowTask,String channelId,String userId) {
+		FlowTask newFlowTask = new FlowTask();
+		newFlowTask.setFlowTaskModelId(flowTask.getFlowTaskModelId());
+		newFlowTask.setFlowJobId(flowTask.getFlowJobId());
+		newFlowTask.setPhase(flowTask.getPhase());
+		newFlowTask.setStatus(TaskStatus.POOLING);
+		newFlowTask.setType(flowTask.getType());
+		newFlowTask.setWorker(flowTask.getWorker());
+		Date nowDate = new Date();
+		newFlowTask.setCreateDate(nowDate);
+		newFlowTask.setUpdateDate(nowDate);
+		newFlowTask.setChannelId(channelId);
+		newFlowTask.setCreateUserId(userId);
+		return newFlowTask;
 	}
 }
