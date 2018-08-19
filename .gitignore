@@ -6,6 +6,7 @@
 *.log
 .classpath
 .project
+*.gitignore
 # BlueJ files
 *.ctxt
 
