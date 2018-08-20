@@ -9,14 +9,14 @@
 		<artifactId>credit-loan-credit</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>credit-base</artifactId>
-	<name>credit-base</name>
+	<artifactId>credit-api</artifactId>
+	<name>credit-api</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
-
+	
 		<dependency>
 			<groupId>com.sixliu</groupId>
 			<artifactId>common-sdk</artifactId>
@@ -24,37 +24,13 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.sixliu</groupId>
-			<artifactId>creditlimit-manager-api</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>com.sixliu</groupId>
-			<artifactId>customer-manager-api</artifactId>
-			<version>${project.version}</version>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>com.sixliu</groupId>
-			<artifactId>product-manager-api</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.sixliu</groupId>
-			<artifactId>order-manager-api</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>javax.validation</groupId>
-			<artifactId>validation-api</artifactId>
 		</dependency>
 
 		<dependency>

@@ -16,6 +16,50 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
+
+		<dependency>
+			<groupId>com.sixliu</groupId>
+			<artifactId>common-sdk</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>com.sixliu</groupId>
+			<artifactId>customer-manager-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sixliu</groupId>
+			<artifactId>product-manager-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sixliu</groupId>
+			<artifactId>order-manager-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sixliu</groupId>
+			<artifactId>credit-base</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.sixliu</groupId>
+			<artifactId>credit-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sixliu</groupId>
+			<artifactId>credit-base</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -63,37 +107,5 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jetty</artifactId>
 		</dependency>
-
-		<dependency>
-			<groupId>com.sixliu</groupId>
-			<artifactId>common-sdk</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-
-
-		<dependency>
-			<groupId>com.sixliu</groupId>
-			<artifactId>customer-manager-api</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.sixliu</groupId>
-			<artifactId>product-manager-api</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.sixliu</groupId>
-			<artifactId>order-manager-api</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.sixliu</groupId>
-			<artifactId>credit-base</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-
 	</dependencies>
 </project>
