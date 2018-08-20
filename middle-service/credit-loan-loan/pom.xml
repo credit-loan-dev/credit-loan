@@ -2,16 +2,16 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>com.sixliu</groupId>
-    <artifactId>credit-loan</artifactId>
+    <artifactId>middle-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>credit-loan-config</artifactId>
+  <artifactId>credit-loan-loan</artifactId>
   <packaging>pom</packaging>
-  <name>credit-loan-config</name>
-  <description>credit-loan-config</description>
+  <name>credit-loan-loan</name>
+  <description>credit-loan-loan</description>
   
-    	<modules>
-    	<module>config-base</module>
-   		<module>config-service</module>
+  	<modules>
+    	<module>loan-base</module>
+    	<module>loan-service</module>
 	</modules>
 </project>

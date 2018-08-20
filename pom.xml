@@ -12,9 +12,7 @@
 		<module>common-component</module>
 		<module>common-service</module>
 		<module>base-service</module>
-   	 	<module>credit-loan-config</module>
-		<module>credit-loan-credit</module>
-		<module>credit-loan-loan</module>
+   	 	<module>middle-service</module>
 	</modules>
 
 	<properties>
