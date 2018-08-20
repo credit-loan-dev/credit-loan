@@ -1,0 +1,22 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.sixliu</groupId>
+    <artifactId>credit-loan</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>base-service</artifactId>
+  <packaging>pom</packaging>
+  	<name>base-service</name>
+	<description>base-service</description>
+
+	<modules>
+		<module>creditlimit-manager</module>
+		<module>account-manager</module>
+		<module>customer-manager</module>
+		<module>product-manager</module>
+		<module>order-manager</module>
+		<module>fund-manager</module>
+		<module>risk-manager</module>
+	</modules>
+</project>
