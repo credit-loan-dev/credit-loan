@@ -2,7 +2,7 @@ package com.sixliu.credit.order.config;
 
 import org.springframework.cloud.openfeign.FeignClient;
 
-import com.sixliu.credit.product.api.ProductManagerInnerClient;
+import com.sixliu.credit.product.api.ProductManagerClient;
 
 /**
  * @author:MG01867
@@ -12,6 +12,6 @@ import com.sixliu.credit.product.api.ProductManagerInnerClient;
  * @describe //TODO
  */
 @FeignClient("product-manager")
-public interface ProductManagerInnerClientConfig extends ProductManagerInnerClient{
+public interface ProductManagerInnerClientConfig extends ProductManagerClient{
 	
 }

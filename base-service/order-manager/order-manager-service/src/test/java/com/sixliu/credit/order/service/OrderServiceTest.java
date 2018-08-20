@@ -4,7 +4,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sixliu.credit.order.BaseTest;
-import com.sixliu.credit.product.api.ProductManagerInnerClient;
+import com.sixliu.credit.product.api.ProductManagerClient;
 import com.sixliu.credit.product.dto.ProductInnerDTO;
 
 
@@ -21,7 +21,7 @@ public class OrderServiceTest extends BaseTest {
 	OrderService orderService;
 	
 	@Autowired
-	ProductManagerInnerClient productManagerInnerClient;
+	ProductManagerClient productManagerInnerClient;
 
 	@Test
 	public void testApply() {

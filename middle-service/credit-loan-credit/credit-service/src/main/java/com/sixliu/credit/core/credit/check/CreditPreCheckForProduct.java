@@ -7,7 +7,7 @@ import com.sixliu.credit.core.base.credit.CreditApplyDTO;
 import com.sixliu.credit.core.base.credit.check.Context;
 import com.sixliu.credit.core.base.credit.check.CreditPreCheck;
 import com.sixliu.credit.core.base.credit.check.CreditPreCheckException;
-import com.sixliu.credit.product.api.ProductManagerInnerClient;
+import com.sixliu.credit.product.api.ProductManagerClient;
 import com.sixliu.credit.product.dto.ProductInnerDTO;
 import com.sixliu.credit.quota.CreditlimitDTO;
 import com.sixliu.credit.quota.api.QuotaManagerClient;
@@ -23,7 +23,7 @@ import com.sixliu.credit.quota.api.QuotaManagerClient;
 public class CreditPreCheckForProduct implements CreditPreCheck {
 
 	@Autowired
-	private ProductManagerInnerClient productManagerClient;
+	private ProductManagerClient productManagerClient;
 
 	@Autowired
 	private QuotaManagerClient quotaManagerClient;

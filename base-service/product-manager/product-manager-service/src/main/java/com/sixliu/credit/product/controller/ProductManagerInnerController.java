@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sixliu.credit.product.api.ProductManagerInnerClient;
+import com.sixliu.credit.product.api.ProductManagerClient;
 import com.sixliu.credit.product.dto.ProductInnerDTO;
 import com.sixliu.credit.product.entity.ProductConfig;
 import com.sixliu.credit.product.service.ProductConfigService;
@@ -23,7 +23,7 @@ import com.sixliu.credit.product.service.ProductConfigService;
  * @describe 产品查询 GraphQL Controller
  */
 @RestController
-public class ProductManagerInnerController implements ProductManagerInnerClient {
+public class ProductManagerInnerController implements ProductManagerClient {
 
 	@Autowired
 	private ProductConfigService productService;

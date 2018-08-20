@@ -17,7 +17,7 @@ import com.sixliu.credit.product.dto.ProductInnerDTO;
  * @describe //TODO
  */
 @FeignClient("product-manager")
-public interface ProductManagerInnerClient {
+public interface ProductManagerClient {
 
 	/**
 	 * 通过产品id获取产品
