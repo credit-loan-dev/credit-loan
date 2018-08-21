@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.sixliu.credit.common.dto.Response;
 import com.sixliu.credit.customer.CustomerDTO;
@@ -12,12 +12,12 @@ import com.sixliu.credit.order.CreateCreditOrderDTO;
 import com.sixliu.credit.order.api.OrderManagerClient;
 import com.sixliu.credit.product.api.ProductManagerClient;
 import com.sixliu.credit.product.dto.ProductInnerDTO;
+import com.sixliu.creditloan.credit.CreditApplyDTO;
 import com.sixliu.creditloan.credit.base.CreditOrderDTO;
 import com.sixliu.creditloan.credit.base.check.Context;
 import com.sixliu.creditloan.credit.base.check.CreditPreCheckPiping;
 import com.sixliu.creditloan.credit.base.component.CreditOrderIdGenerator;
-import com.sixliu.creditloan.dto.CreditApplyDTO;
-import com.sixliu.creditloan.service.CreditShopService;
+import com.sixliu.creditloan.credit.service.CreditShopService;
 
 /**
  * @author:MG01867
@@ -26,8 +26,8 @@ import com.sixliu.creditloan.service.CreditShopService;
  * @version:
  * @describe //TODO
  */
-@Service
-public class CreditShopServiceImpl implements CreditShopService {
+@RestController
+public class CreditShopServiceImpl implements CreditShopService{
 
 	@Autowired
 	private ProductManagerClient productManagerClient;

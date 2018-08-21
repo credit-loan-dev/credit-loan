@@ -1,4 +1,4 @@
-package com.sixliu.credit.core;
+package com.sixliu.creditloan.credit;
 
 import org.junit.Test;
 

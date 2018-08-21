@@ -1,5 +1,10 @@
 package com.sixliu.credit.order.api;
 
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.sixliu.credit.common.dto.Response;
 import com.sixliu.credit.order.CreateCreditOrderDTO;
 import com.sixliu.credit.order.OrderMutexDTO;
@@ -11,6 +16,7 @@ import com.sixliu.credit.order.OrderMutexDTO;
 *@version:
 *@describe 订单管理客户端
 */
+@FeignClient("order-manager")
 public interface OrderManagerClient {
 
 	/**
@@ -18,6 +24,7 @@ public interface OrderManagerClient {
 	 * @param order
 	 * @return	返回订单id
 	 */
+	@RequestMapping(value = "/order/getOrder", method = RequestMethod.POST)
 	Response<CreateCreditOrderDTO> getOrder(String orderId);
 	
 	/**
@@ -25,6 +32,7 @@ public interface OrderManagerClient {
 	 * @param order
 	 * @return	返回订单id
 	 */
+	@RequestMapping(value = "/order/createOrder", method = RequestMethod.POST)
 	Response<String> createOrder(CreateCreditOrderDTO order);
 	
 	/**
@@ -32,6 +40,7 @@ public interface OrderManagerClient {
 	 * @param orderMutex
 	 * @return
 	 */
+	@RequestMapping(value = "/order/hasMutexOrder", method = RequestMethod.POST)
 	Response<Boolean> hasMutexOrder(OrderMutexDTO orderMutex);
 	
 	/**
@@ -39,5 +48,6 @@ public interface OrderManagerClient {
 	 * @param order
 	 * @return	返回订单id
 	 */
-	Response<Boolean> cancelOrder(String customerId, String orderId);
+	@RequestMapping(value = "/order/cancelOrder", method = RequestMethod.POST)
+	Response<Boolean> cancelOrder(@RequestParam(name="customerId")String customerId,@RequestParam(name="orderId")String orderId);
 }

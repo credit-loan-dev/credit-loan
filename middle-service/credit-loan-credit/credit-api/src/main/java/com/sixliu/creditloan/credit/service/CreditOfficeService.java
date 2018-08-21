@@ -1,6 +1,9 @@
-package com.sixliu.creditloan.service;
+package com.sixliu.creditloan.credit.service;
 
 import java.util.List;
+
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
 *@author:MG01867
@@ -9,6 +12,8 @@ import java.util.List;
 *@version:
 *@describe 授信办公服务:面向工作用户
 */
+@FeignClient("credit")
+@RequestMapping("/credit/office")
 public interface CreditOfficeService {
 
 	/**
