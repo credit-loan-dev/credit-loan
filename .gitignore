@@ -1,6 +1,9 @@
 # Compiled class file
 */.settings/*
 */target/*
+*/*/target/*
+*/*/*/target/*
+*/*/*/*/target/*
 *.class
 # Log file
 *.log
