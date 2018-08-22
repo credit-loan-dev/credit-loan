@@ -3,13 +3,12 @@ package com.sixliu.creditloan.credit.impl.check;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.sixliu.credit.common.dto.Response;
-import com.sixliu.credit.customer.CustomerDTO;
-import com.sixliu.credit.order.OrderMutexDTO;
-import com.sixliu.credit.order.api.OrderManagerClient;
 import com.sixliu.creditloan.credit.base.check.Context;
 import com.sixliu.creditloan.credit.base.check.CreditPreCheck;
 import com.sixliu.creditloan.credit.base.check.CreditPreCheckException;
+import com.sixliu.creditloan.customer.dto.CustomerDTO;
+import com.sixliu.creditloan.order.dto.OrderMutexDTO;
+import com.sixliu.creditloan.order.service.OrderManagerService;
 import com.sixliu.creditloan.product.CreditApplyMutexType;
 import com.sixliu.creditloan.product.dto.ProductDTO;
 
@@ -24,7 +23,7 @@ import com.sixliu.creditloan.product.dto.ProductDTO;
 public class CreditPreCheckForMutex implements CreditPreCheck {
 
 	@Autowired
-	private OrderManagerClient orderManagerClient;
+	private OrderManagerService orderManagerService;
 
 	@Override
 	public void check(Context context) {
@@ -36,8 +35,7 @@ public class CreditPreCheckForMutex implements CreditPreCheck {
 			orderMutex.setCustomerId(customer.getId());
 			orderMutex.setProductTypeId(product.getTypeId());
 			orderMutex.setProductId(product.getId());
-			Response<Boolean> result = orderManagerClient.hasMutexOrder(orderMutex);
-			pass=result.getResult();
+			pass = orderManagerService.hasMutexOrder(orderMutex);
 		}
 		if (!pass) {
 			throw new CreditPreCheckException(String.format("The customer[%s] has already credit order of product[%s]",

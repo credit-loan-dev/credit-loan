@@ -1,8 +1,8 @@
 package com.sixliu.creditloan.credit.base.check;
 
-import com.sixliu.credit.customer.CustomerDTO;
 import com.sixliu.credit.quota.CreditlimitDTO;
 import com.sixliu.creditloan.credit.base.CreditOrderDTO;
+import com.sixliu.creditloan.customer.dto.CustomerDTO;
 import com.sixliu.creditloan.product.dto.ProductDTO;
 
 import lombok.Data;

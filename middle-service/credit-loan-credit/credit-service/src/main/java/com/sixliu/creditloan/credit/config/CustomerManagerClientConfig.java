@@ -2,7 +2,7 @@ package com.sixliu.creditloan.credit.config;
 
 import org.springframework.cloud.openfeign.FeignClient;
 
-import com.sixliu.credit.customer.api.CustomerManagerClient;
+import com.sixliu.creditloan.customer.service.CustomerManagerService;
 
 /**
 *@author:MG01867
@@ -12,6 +12,6 @@ import com.sixliu.credit.customer.api.CustomerManagerClient;
 *@describe //TODO
 */
 @FeignClient("customer-manager")
-public interface CustomerManagerClientConfig extends CustomerManagerClient{
+public interface CustomerManagerClientConfig extends CustomerManagerService{
 
 }

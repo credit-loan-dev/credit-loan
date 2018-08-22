@@ -2,7 +2,7 @@ package com.sixliu.creditloan.credit.config;
 
 import org.springframework.cloud.openfeign.FeignClient;
 
-import com.sixliu.credit.order.api.OrderManagerClient;
+import com.sixliu.creditloan.order.service.OrderManagerService;
 
 /**
 *@author:MG01867
@@ -12,6 +12,6 @@ import com.sixliu.credit.order.api.OrderManagerClient;
 *@describe //TODO
 */
 @FeignClient("order-manager")
-public interface OrderManagerClientConfig extends OrderManagerClient{
+public interface OrderManagerClientConfig extends OrderManagerService{
 
 }

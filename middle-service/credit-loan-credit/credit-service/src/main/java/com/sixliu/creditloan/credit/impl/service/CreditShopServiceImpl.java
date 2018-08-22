@@ -6,16 +6,15 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sixliu.credit.common.dto.Response;
-import com.sixliu.credit.customer.CustomerDTO;
-import com.sixliu.credit.order.CreateCreditOrderDTO;
-import com.sixliu.credit.order.api.OrderManagerClient;
 import com.sixliu.creditloan.credit.CreditApplyDTO;
 import com.sixliu.creditloan.credit.base.CreditOrderDTO;
 import com.sixliu.creditloan.credit.base.check.Context;
 import com.sixliu.creditloan.credit.base.check.CreditPreCheckPiping;
 import com.sixliu.creditloan.credit.base.component.CreditOrderIdGenerator;
 import com.sixliu.creditloan.credit.service.CreditShopService;
+import com.sixliu.creditloan.customer.dto.CustomerDTO;
+import com.sixliu.creditloan.order.dto.CreateCreditOrderDTO;
+import com.sixliu.creditloan.order.service.OrderManagerService;
 import com.sixliu.creditloan.product.dto.ProductDTO;
 import com.sixliu.creditloan.product.service.ProductManagerService;
 
@@ -33,7 +32,7 @@ public class CreditShopServiceImpl implements CreditShopService{
 	private ProductManagerService productManagerClient;
 
 	@Autowired
-	private OrderManagerClient orderManagerClient;
+	private OrderManagerService orderManagerService;
 
 	private CreditPreCheckPiping creditPreCheckPiping;
 	
@@ -65,8 +64,8 @@ public class CreditShopServiceImpl implements CreditShopService{
 		createCreditOrder.setActivityId(creditApply.getActivityId());
 		createCreditOrder.setExtendForm(creditApply.getExtendForm());
 		createCreditOrder.setInputUserId(creditApply.getInputUserId());
-		Response<String> createOrderResult=orderManagerClient.createOrder(createCreditOrder);
-		return createOrderResult.getResult();
+		String createOrderId=orderManagerService.createOrder(createCreditOrder);
+		return createOrderId;
 	}
 
 	@Override
