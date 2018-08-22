@@ -1,9 +1,9 @@
 package com.sixliu.creditloan.credit.base.check;
 
 import com.sixliu.credit.customer.CustomerDTO;
-import com.sixliu.credit.product.dto.ProductInnerDTO;
 import com.sixliu.credit.quota.CreditlimitDTO;
 import com.sixliu.creditloan.credit.base.CreditOrderDTO;
+import com.sixliu.creditloan.product.dto.ProductDTO;
 
 import lombok.Data;
 
@@ -19,7 +19,7 @@ public class Context {
 
 	private CreditOrderDTO creditOrder;
 	
-	private ProductInnerDTO product;
+	private ProductDTO product;
 	
 	private CreditlimitDTO productCreditlimit;
 	

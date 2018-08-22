@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.sixliu.credit.product.dao.ProductTypeConfigDao" >
+<mapper namespace="com.sixliu.creditloan.product.dao.ProductTypeConfigDao" >
     <!-- 产品(product)属性和表字段映射 -->
-    <resultMap id="ProductTypeConfigResult" type="com.sixliu.credit.product.entity.ProductTypeConfig" >
+    <resultMap id="ProductTypeConfigResult" type="com.sixliu.creditloan.product.entity.ProductTypeConfig" >
         <id column="id" property="id" jdbcType="VARCHAR" />
         <result column="remarks" property="remarks" jdbcType="VARCHAR" />
         <result column="version" property="version" jdbcType="INTEGER" />
@@ -14,7 +14,7 @@
         <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
     </resultMap>
     
-    <parameterMap id="ProductTypeConfigParameter" type="com.sixliu.credit.product.entity.ProductTypeConfig"/>
+    <parameterMap id="ProductTypeConfigParameter" type="com.sixliu.creditloan.product.entity.ProductTypeConfig"/>
     
     <!-- 查询通用列 -->
     <sql id="select_common_column">

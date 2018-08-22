@@ -5,13 +5,13 @@ import org.springframework.stereotype.Component;
 
 import com.sixliu.credit.customer.CustomerDTO;
 import com.sixliu.credit.customer.api.CustomerManagerClient;
-import com.sixliu.credit.product.dto.ProductInnerDTO;
 import com.sixliu.credit.quota.CreditlimitDTO;
 import com.sixliu.credit.quota.api.QuotaManagerClient;
 import com.sixliu.creditloan.credit.base.CreditOrderDTO;
 import com.sixliu.creditloan.credit.base.check.Context;
 import com.sixliu.creditloan.credit.base.check.CreditPreCheck;
 import com.sixliu.creditloan.credit.base.check.CreditPreCheckException;
+import com.sixliu.creditloan.product.dto.ProductDTO;
 
 /**
  * @author:MG01867
@@ -32,7 +32,7 @@ public class CreditPreCheckForCustomer implements CreditPreCheck {
 	@Override
 	public void check(Context context) {
 		CreditOrderDTO creditOrder= context.getCreditOrder();
-		ProductInnerDTO product = context.getProduct();
+		ProductDTO product = context.getProduct();
 		CustomerDTO customer = customerManagerClient.getAndHitBlacklist(creditOrder.getCustomerId(),
 				product.getBlacklistGroupId());
 		if (null == customer) {

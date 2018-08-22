@@ -4,8 +4,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sixliu.credit.order.BaseTest;
-import com.sixliu.credit.product.api.ProductManagerClient;
-import com.sixliu.credit.product.dto.ProductInnerDTO;
+import com.sixliu.creditloan.product.dto.ProductDTO;
+import com.sixliu.creditloan.product.service.ProductManagerService;
 
 
 /**
@@ -21,11 +21,11 @@ public class OrderServiceTest extends BaseTest {
 	OrderService orderService;
 	
 	@Autowired
-	ProductManagerClient productManagerInnerClient;
+	ProductManagerService productManagerInnerClient;
 
 	@Test
 	public void testApply() {
-		ProductInnerDTO productInnerDTO=productManagerInnerClient.get("c43d00de-9d29-11e8-9e01-005056986f0b");
+		ProductDTO productInnerDTO=productManagerInnerClient.get("c43d00de-9d29-11e8-9e01-005056986f0b");
 		System.out.println(productInnerDTO);
 	}
 }

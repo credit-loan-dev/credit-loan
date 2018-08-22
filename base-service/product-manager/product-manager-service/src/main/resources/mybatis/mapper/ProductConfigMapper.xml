@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.sixliu.credit.product.dao.ProductConfigDao" >
+<mapper namespace="com.sixliu.creditloan.product.dao.ProductConfigDao" >
     <!-- 产品(product)属性和表字段映射 -->
     
-    <resultMap id="ProductConfigResult" type="com.sixliu.credit.product.entity.ProductConfig" >
+    <resultMap id="ProductConfigResult" type="com.sixliu.creditloan.product.entity.ProductConfig" >
         <id column="id" property="id" jdbcType="VARCHAR" />
         <result column="code" property="code" jdbcType="VARCHAR" />
         <result column="name" property="name" jdbcType="VARCHAR" />
@@ -40,7 +40,7 @@
         <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
     </resultMap>
     
-    <parameterMap id="ProductConfigParameter" type="com.sixliu.credit.product.entity.ProductConfig"/>
+    <parameterMap id="ProductConfigParameter" type="com.sixliu.creditloan.product.entity.ProductConfig"/>
     
     <!-- from 表 -->
     <sql id="from_table">

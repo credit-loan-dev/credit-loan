@@ -10,14 +10,14 @@ import com.sixliu.credit.common.dto.Response;
 import com.sixliu.credit.customer.CustomerDTO;
 import com.sixliu.credit.order.CreateCreditOrderDTO;
 import com.sixliu.credit.order.api.OrderManagerClient;
-import com.sixliu.credit.product.api.ProductManagerClient;
-import com.sixliu.credit.product.dto.ProductInnerDTO;
 import com.sixliu.creditloan.credit.CreditApplyDTO;
 import com.sixliu.creditloan.credit.base.CreditOrderDTO;
 import com.sixliu.creditloan.credit.base.check.Context;
 import com.sixliu.creditloan.credit.base.check.CreditPreCheckPiping;
 import com.sixliu.creditloan.credit.base.component.CreditOrderIdGenerator;
 import com.sixliu.creditloan.credit.service.CreditShopService;
+import com.sixliu.creditloan.product.dto.ProductDTO;
+import com.sixliu.creditloan.product.service.ProductManagerService;
 
 /**
  * @author:MG01867
@@ -30,7 +30,7 @@ import com.sixliu.creditloan.credit.service.CreditShopService;
 public class CreditShopServiceImpl implements CreditShopService{
 
 	@Autowired
-	private ProductManagerClient productManagerClient;
+	private ProductManagerService productManagerClient;
 
 	@Autowired
 	private OrderManagerClient orderManagerClient;
@@ -48,7 +48,7 @@ public class CreditShopServiceImpl implements CreditShopService{
 		CreditOrderDTO creditOrder=new CreditOrderDTO();
 		BeanUtils.copyProperties(creditApply, creditOrder);
 		Context context =creditPreCheckPiping.check(creditOrder);
-		ProductInnerDTO product = context.getProduct();
+		ProductDTO product = context.getProduct();
 		CustomerDTO customer = context.getCustomer();
 		String productSnapshotId = productManagerClient.generateProductSnapshot(product.getId());
 		String id=creditOrderIdGenerator.generator(product.getId());

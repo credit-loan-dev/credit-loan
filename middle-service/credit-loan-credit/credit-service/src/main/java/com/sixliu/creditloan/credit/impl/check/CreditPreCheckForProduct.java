@@ -3,14 +3,14 @@ package com.sixliu.creditloan.credit.impl.check;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.sixliu.credit.product.api.ProductManagerClient;
-import com.sixliu.credit.product.dto.ProductInnerDTO;
 import com.sixliu.credit.quota.CreditlimitDTO;
 import com.sixliu.credit.quota.api.QuotaManagerClient;
 import com.sixliu.creditloan.credit.base.CreditOrderDTO;
 import com.sixliu.creditloan.credit.base.check.Context;
 import com.sixliu.creditloan.credit.base.check.CreditPreCheck;
 import com.sixliu.creditloan.credit.base.check.CreditPreCheckException;
+import com.sixliu.creditloan.product.dto.ProductDTO;
+import com.sixliu.creditloan.product.service.ProductManagerService;
 
 /**
  * @author:MG01867
@@ -23,7 +23,7 @@ import com.sixliu.creditloan.credit.base.check.CreditPreCheckException;
 public class CreditPreCheckForProduct implements CreditPreCheck {
 
 	@Autowired
-	private ProductManagerClient productManagerClient;
+	private ProductManagerService productManagerClient;
 
 	@Autowired
 	private QuotaManagerClient quotaManagerClient;
@@ -31,7 +31,7 @@ public class CreditPreCheckForProduct implements CreditPreCheck {
 	@Override
 	public void check(Context context) {
 		CreditOrderDTO creditOrder= context.getCreditOrder();
-		ProductInnerDTO productDTO = productManagerClient.get(creditOrder.getProductId());
+		ProductDTO productDTO = productManagerClient.get(creditOrder.getProductId());
 		if (null == productDTO) {
 			throw new CreditPreCheckException(
 					String.format("The product[%s] is non-existent", creditOrder.getProductId()));
