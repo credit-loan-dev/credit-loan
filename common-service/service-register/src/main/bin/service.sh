@@ -51,7 +51,7 @@ function start_program(){
     fi
     echo -n "starting program ... "
 	  #nohup  $JAVA -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=8000,suspend=n  -classpath $CLASSPATH $MAIN_CLASS --spider.home=${APP_HOME} >/dev/null 2>&1 &
-	  nohup  $JAVA -Djava.security.egd=file:/dev/./urandom -classpath $CLASSPATH $MAIN_CLASS >/dev/null 2>&1 &
+	  nohup  $JAVA -classpath $CLASSPATH $MAIN_CLASS >/dev/null 2>&1 &
     if [ $? -eq 0 ]
     then
       if /bin/echo -n $! > "$PID_FILE"
