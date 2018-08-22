@@ -35,7 +35,7 @@ public @interface LoanAmountValidation {
 
 	boolean inclusive() default true;
 
-	public class LoanAmountChecker implements ConstraintValidator<LoanTermTypeValidation, Double> {
+	public class LoanAmountChecker implements ConstraintValidator<LoanAmountValidation, Double> {
 
 		@Override
 		public boolean isValid(Double value, ConstraintValidatorContext context) {

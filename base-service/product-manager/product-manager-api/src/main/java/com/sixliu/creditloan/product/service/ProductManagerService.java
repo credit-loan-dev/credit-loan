@@ -1,12 +1,13 @@
 package com.sixliu.creditloan.product.service;
 
-
 import javax.validation.constraints.NotBlank;
 
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sixliu.creditloan.product.dto.ProductDTO;
 
@@ -18,6 +19,7 @@ import com.sixliu.creditloan.product.dto.ProductDTO;
  * @describe //TODO
  */
 @FeignClient("product-manager")
+@Validated
 public interface ProductManagerService {
 
 	/**
@@ -27,16 +29,19 @@ public interface ProductManagerService {
 	 * @return
 	 */
 	@RequestMapping(value = "/product/get", method = RequestMethod.POST)
-	ProductDTO get(@NotBlank(message = "The product's Id must be non blank") @RequestParam(name="id") String id);
-	
+	@ResponseBody
+	ProductDTO get(@NotBlank(message = "The product's Id must be non blank") @RequestParam(name = "id") String id);
+
 	/**
 	 * 通过产品id获取产品
+	 * 
 	 * @param code
 	 * @return
 	 */
 	@RequestMapping(value = "/product/getByCode", method = RequestMethod.POST)
-	ProductDTO getByCode(@NotBlank(message = "The product's code must be non blank") @RequestParam(name="code")String code);
-	
+	@ResponseBody
+	ProductDTO getByCode(@RequestParam(name = "code") @NotBlank(message = "The product's code must be non blank") String code);
+
 	/**
 	 * 生成产品快照
 	 * 
@@ -45,5 +50,7 @@ public interface ProductManagerService {
 	 * @return 返回产品快照id
 	 */
 	@RequestMapping(value = "/product/generateProductSnapshot", method = RequestMethod.POST)
-	String generateProductSnapshot(@NotBlank(message = "The product's id must be non blank") @RequestParam(name="id")String id);
+	@ResponseBody
+	String generateProductSnapshot(
+			@NotBlank(message = "The product's id must be non blank") @RequestParam(name = "id") String id);
 }

@@ -1,7 +1,5 @@
 package com.sixliu.creditloan.product.service.impl;
 
-
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -9,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sixliu.credit.common.exception.IllegalArgumentAppException;
+import com.sixliu.creditloan.product.converter.ProductDTOConverter;
 import com.sixliu.creditloan.product.dao.ProductConfigDao;
 import com.sixliu.creditloan.product.dao.ProductConfigSnapshotDao;
 import com.sixliu.creditloan.product.dto.ProductDTO;
@@ -37,19 +36,15 @@ public class ProductManagerServiceImpl implements ProductManagerService{
 	@Override
 	public ProductDTO get(String id) {
 		ProductConfig productConfig=productConfigDao.get(id);
-		ProductDTO product=null;
-		if(null!=productConfig) {
-			product=new ProductDTO();
-			BeanUtils.copyProperties(productConfig, product);
-		}
-		return product;
+		return ProductDTOConverter.convert(productConfig);
 	}
 
 
 
 	@Override
 	public ProductDTO getByCode(String code) {
-		return null;
+		ProductConfig productConfig=productConfigDao.getByCode(code);
+		return ProductDTOConverter.convert(productConfig);
 	}
 
 	@Override

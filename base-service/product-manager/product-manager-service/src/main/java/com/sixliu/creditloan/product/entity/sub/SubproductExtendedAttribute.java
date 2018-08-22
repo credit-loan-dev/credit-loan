@@ -1,4 +1,4 @@
-package com.sixliu.creditloan.product.entity;
+package com.sixliu.creditloan.product.entity.sub;
 /**
 *@author:MG01867
 *@date:2018年7月30日

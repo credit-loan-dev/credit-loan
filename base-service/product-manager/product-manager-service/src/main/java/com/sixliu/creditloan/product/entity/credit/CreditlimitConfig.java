@@ -1,4 +1,4 @@
-package com.sixliu.creditloan.product.entity;
+package com.sixliu.creditloan.product.entity.credit;
 
 import com.sixliu.credit.common.entity.BaseEntity;
 import com.sixliu.creditloan.product.QuotaUseageType;
@@ -15,7 +15,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class QuotaConfig extends BaseEntity {
+public class CreditlimitConfig extends BaseEntity {
 	
 	/**名称**/
 	private String name;

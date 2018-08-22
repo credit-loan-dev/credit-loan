@@ -19,8 +19,8 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.TransactionManagementConfigurer;
 
-import com.sixliu.credit.common.constant.LoanTermType;
 import com.sixliu.creditloan.product.CreditApplyMutexType;
+import com.sixliu.creditloan.product.LoanTermType;
 
 /**
  * @author:MG01867

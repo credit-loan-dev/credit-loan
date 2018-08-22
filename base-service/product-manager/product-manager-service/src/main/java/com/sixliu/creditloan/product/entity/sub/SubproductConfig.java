@@ -1,5 +1,7 @@
-package com.sixliu.creditloan.product.entity;
+package com.sixliu.creditloan.product.entity.sub;
 
+
+import com.sixliu.creditloan.product.entity.ProductConfig;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

@@ -1,4 +1,4 @@
-package com.sixliu.creditloan.product.entity;
+package com.sixliu.creditloan.product.entity.loan;
 
 
 import com.sixliu.credit.common.entity.BaseEntity;

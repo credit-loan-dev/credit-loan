@@ -1,9 +1,8 @@
 package com.sixliu.creditloan.product;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.cloud.client.SpringCloudApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -12,12 +11,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @date:2018年6月15日
  * @E-mail:359852326@qq.com
  * @version:
- * @describe //TODO
+ * @describe 服务启动类
  */
 @SpringCloudApplication
+@EnableFeignClients
 public class StartUp implements WebMvcConfigurer {
-
-	final static Logger log = LoggerFactory.getLogger(StartUp.class);
 
 	static {
 		/** 设置jetty maxFormContentSize 默认为10M **/
@@ -25,7 +23,7 @@ public class StartUp implements WebMvcConfigurer {
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(StartUp.class);
+		SpringApplication.run(StartUp.class,args);
 	}
 
 	/**

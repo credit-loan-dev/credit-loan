@@ -22,7 +22,7 @@ import com.sixliu.credit.common.utils.ValidationUtils;
 */
 @Target({ ElementType.FIELD, ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = LoanTermTypeValidation.LoanTermTypeChecker.class)
+@Constraint(validatedBy = ChineseIdValidation.LoanAmountChecker.class)
 @Documented
 public @interface ChineseIdValidation{
 
@@ -36,7 +36,7 @@ public @interface ChineseIdValidation{
 
 	boolean inclusive() default true;
 
-	public class LoanAmountChecker implements ConstraintValidator<LoanTermTypeValidation, String> {
+	public class LoanAmountChecker implements ConstraintValidator<ChineseIdValidation, String> {
 
 		@Override
 		public boolean isValid(String value, ConstraintValidatorContext context) {
