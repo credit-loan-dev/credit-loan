@@ -40,8 +40,8 @@
 			<charset>${charset}</charset> 
 		</encoder>
 		
+		<!--日志文件切割配置 -->
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<!-- rollover daily 配置日志所生成的目录以及生成文件名的规则 -->
 			<fileNamePattern>${logFilePath}/%d{yyyyMMdd}.%i.log</fileNamePattern>
 			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
 				<maxFileSize>${logFileSize}</maxFileSize>
