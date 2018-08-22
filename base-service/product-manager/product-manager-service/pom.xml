@@ -12,7 +12,7 @@
 	<artifactId>product-manager-service</artifactId>
 
 	<dependencies>
-		<!--内部项目依赖-->
+		<!--内部项目依赖 -->
 		<dependency>
 			<groupId>com.sixliu</groupId>
 			<artifactId>common-sdk</artifactId>
@@ -24,20 +24,20 @@
 			<artifactId>product-manager-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		<!--内部项目依赖-->
-		
-		<!--基础工具依赖-->
+		<!--内部项目依赖 -->
+
+		<!--基础工具依赖 -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid</artifactId>
 		</dependency>
-		<!--基础工具依赖-->
+		<!--基础工具依赖 -->
 
 		<!--mybatis orm框架依赖 -->
 		<dependency>
@@ -49,8 +49,8 @@
 			<artifactId>mybatis-spring-boot-starter</artifactId>
 		</dependency>
 		<!--mybatis orm框架依赖 -->
-		
-		<!--spring-boot组件依赖-->
+
+		<!--spring-boot组件依赖 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -70,9 +70,9 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jetty</artifactId>
 		</dependency>
-		<!--spring-boot组件依赖-->
+		<!--spring-boot组件依赖 -->
 
-		<!--spring-cloud组件依赖-->
+		<!--spring-cloud组件依赖 -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-config</artifactId>
@@ -82,7 +82,7 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
@@ -92,18 +92,28 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-openfeign</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-zipkin</artifactId>
+		</dependency>
 		
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-sleuth</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!--spring-cloud组件依赖-->
+		<!--spring-cloud组件依赖 -->
 	</dependencies>
 
 	<profiles>
