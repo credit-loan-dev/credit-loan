@@ -1,10 +1,14 @@
 package com.sixliu.creditloan.product;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.cloud.client.SpringCloudApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import com.sixliu.creditloan.product.dao.ProductConfigDao;
 
 /**
  * @author:MG01867
@@ -15,12 +19,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @SpringCloudApplication
 @EnableFeignClients
+@EnableTransactionManagement 
+@MapperScan(basePackageClasses=ProductConfigDao.class)
 public class StartUp implements WebMvcConfigurer {
-
-	static {
-		/** 设置jetty maxFormContentSize 默认为10M **/
-		System.setProperty("org.eclipse.jetty.server.Request.maxFormContentSize", String.valueOf(1024 * 1024 * 10));
-	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(StartUp.class,args);
