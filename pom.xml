@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.sixliu</groupId>
 	<artifactId>credit-loan</artifactId>
@@ -12,7 +14,7 @@
 		<module>common-component</module>
 		<module>common-service</module>
 		<module>base-service</module>
-   	 	<module>middle-service</module>
+		<module>middle-service</module>
 	</modules>
 
 	<properties>
@@ -40,14 +42,21 @@
 		<mysql.driver.version>6.0.5</mysql.driver.version>
 		<mybatis.springboot.version>1.3.2</mybatis.springboot.version>
 		<druid.version>1.1.10</druid.version>
-
 		<shiro.version>1.4.0</shiro.version>
 		<dozer.version>5.5.1</dozer.version>
 		<dom4j.version>1.6.1</dom4j.version>
 		<fst.version>2.56</fst.version>
+		<!--jdk 模块化支持-->
+		<jaxb-api.version>2.3.0</jaxb-api.version>
+		<jaxb-core.version>2.3.0.1</jaxb-core.version>
+		<activation.version>1.1.1</activation.version>
+		<jaxb-impl.version>2.3.0.1</jaxb-impl.version>
+		<jaxb-runtime.version>2.3.0.1</jaxb-runtime.version>
+		<jersey-bundle.version>1.19.4</jersey-bundle.version>
 	</properties>
 
 	<dependencies>
+	
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -62,9 +71,47 @@
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
 		</dependency>
+		
 	</dependencies>
 	<dependencyManagement>
+	
 		<dependencies>
+			<dependency>
+				<groupId>javax.xml.bind</groupId>
+				<artifactId>jaxb-api</artifactId>
+				<version>${jaxb-api.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.sun.xml.bind</groupId>
+				<artifactId>jaxb-core</artifactId>
+				<version>${jaxb-core.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.activation</groupId>
+				<artifactId>activation</artifactId>
+				<version>${activation.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.sun.xml.bind</groupId>
+				<artifactId>jaxb-impl</artifactId>
+				<version>${jaxb-impl.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.glassfish.jaxb</groupId>
+				<artifactId>jaxb-runtime</artifactId>
+				<version>${jaxb-runtime.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.sun.jersey</groupId>
+				<artifactId>jersey-bundle</artifactId>
+				<version>${jersey-bundle.version}</version>
+			</dependency>
+
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-dependencies</artifactId>

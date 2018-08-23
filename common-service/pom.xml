@@ -14,7 +14,7 @@
 		<module>user-manager</module>
 		<module>payment-manager</module>
 		<module>notice-manager</module>
-    <module>zipkin-service</module>
-    <module>service-register</module>
+    	<module>zipkin-service</module>
+    	<module>service-register</module>
   </modules>
 </project>
