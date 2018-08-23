@@ -1,8 +1,8 @@
 package com.sixliu.creditloan.product.entity;
 
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
  * @author:MG01867
@@ -12,11 +12,16 @@ import lombok.EqualsAndHashCode;
  * @describe 产品类型
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 public class ProductTypeConfig extends BaseEntity {
 
-	/** 产品父类型数据id:VARCHAR(36)**/
+	/** 产品父类型数据id:VARCHAR(36) **/
 	private String parentId;
-	/** 产品类型名称:VARCHAR(20)**/
+
+	/** 产品类型名称:VARCHAR(20) **/
 	private String name;
+	
+	/** 产品类型深度:int(11) **/
+	private Integer depth;
 }

@@ -1,23 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.sixliu.creditloan.product.dao.ProductAttributeConfigDao" >
+<mapper namespace="com.sixliu.creditloan.product.dao.ProductAttributeConfigDao">
     <!-- 产品(product)属性和表字段映射 -->
-    
     <resultMap id="ProductAttributeConfigResult" type="com.sixliu.creditloan.product.entity.ProductAttributeConfig" >
         <id column="id" property="id" jdbcType="VARCHAR" />
         <result column="product_id" property="productId" jdbcType="VARCHAR" />
         <result column="group" property="group" jdbcType="VARCHAR" />
-        <result column="index" property="index" jdbcType="INTEGER" />
-        <result column="name" property="name" jdbcType="VARCHAR" />
-        <result column="value" property=""value"" jdbcType="VARCHAR" />       
-        <result column="remarks" property="remarks" jdbcType="VARCHAR" />
-        <result column="version" property="version" jdbcType="INTEGER" />
-        <result column="update_userId" property="updateUserId" jdbcType="VARCHAR" />
+        <result column="index" property="index" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="value" property="value" jdbcType="VARCHAR"/>       
+        <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+        <result column="version" property="version" jdbcType="INTEGER"/>
+        <result column="update_userId" property="updateUserId" jdbcType="VARCHAR"/>
         <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
         <result column="create_userId" property="createUserId" jdbcType="VARCHAR" />
         <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
     </resultMap>
-    
     <parameterMap id="ProductAttributeConfigParameter" type="com.sixliu.creditloan.product.entity.ProductAttributeConfig"/>
     
     <!-- from 表 -->
@@ -40,11 +38,12 @@
 	        update_date,
 	        create_user_id,
 	        create_date
-    </sql>
-    
+	</sql>
+	
     <!-- intsert to 表 -->
     <sql id="insert_common_table">
-    	insert into product_attribute_config(`id`,
+    	insert into product_attribute_config(
+    								`id`,
     								product_id,
     								`group`,
     								`index`,
@@ -88,7 +87,7 @@
     	<selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
               select uuid()
     	</selectKey>
-    	<include refid="insert_common_table"></include>
+    	<include refid="insert_common_table"/>
 	</insert>
 	
 	<delete id="delete">

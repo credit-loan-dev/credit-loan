@@ -22,7 +22,7 @@ public class AttributeConfig extends BaseEntity{
 	/** 扩展属性名称:VARCHAR(20)**/
 	private String group;
 	
-	/** 扩展属性index**/
+	/** 扩展属性index:int(11)**/
 	private Integer index;
 	
 	/** 扩展属性名称:VARCHAR(20)**/
