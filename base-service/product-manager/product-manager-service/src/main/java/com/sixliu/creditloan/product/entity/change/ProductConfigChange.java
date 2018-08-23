@@ -1,10 +1,11 @@
 package com.sixliu.creditloan.product.entity.change;
 
 
-import com.sixliu.creditloan.product.entity.BaseEntity;
+import com.sixliu.creditloan.product.entity.ProductConfig;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
  * @author:MG01867
@@ -14,12 +15,10 @@ import lombok.EqualsAndHashCode;
  * @describe 产品变更日志
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
-public class ProductConfigChange extends BaseEntity {
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
+public class ProductConfigChange extends ProductConfig {
 
 	/**原始产品编码**/
 	private String originalId;
-	
-	/**原始产品版本**/
-	private Integer originalVersion;
 }

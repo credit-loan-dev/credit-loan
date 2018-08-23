@@ -14,4 +14,6 @@ public interface ProductConfigSnapshotDao {
 	ProductConfigSnapshot get(String id);
 	
 	int insert(ProductConfigSnapshot productConfigSnapshot);
+	
+	int delete(String id);
 }

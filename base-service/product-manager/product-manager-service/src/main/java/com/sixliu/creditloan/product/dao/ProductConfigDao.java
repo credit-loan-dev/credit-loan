@@ -34,6 +34,9 @@ public interface ProductConfigDao {
 	 */
 	List<ProductConfig> listByType(Integer typeId);
 	
+	
+	List<ProductConfig> listAll();
+	
 	/**
 	 * 插入产品配置数据
 	 * @param product

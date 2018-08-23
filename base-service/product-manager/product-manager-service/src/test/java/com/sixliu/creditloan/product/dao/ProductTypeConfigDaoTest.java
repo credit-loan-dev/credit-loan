@@ -39,7 +39,7 @@ public class ProductTypeConfigDaoTest extends BaseTest {
 	}
 	
 	@Test
-	public void testGetById() {
+	public void testGet() {
 		List<ProductTypeConfig> result=productTypeDao.listAll();
 		ProductTypeConfig getByIdResult=null;
 		if(null!=result&&result.size()>0) {

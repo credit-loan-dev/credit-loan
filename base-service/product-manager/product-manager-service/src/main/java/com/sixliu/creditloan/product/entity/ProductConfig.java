@@ -4,6 +4,7 @@ import java.util.Date;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
  * @author:MG01867
@@ -21,7 +22,8 @@ import lombok.EqualsAndHashCode;
  *  已经贷款申请拒绝后策略:同类产品永久拒绝，同类产品拒绝后n天(黑名单管理)
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 public class ProductConfig extends BaseEntity {
 
 	/**产品编码:VARCHAR(20)**/

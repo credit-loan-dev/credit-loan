@@ -5,6 +5,7 @@ import com.sixliu.creditloan.product.entity.ProductConfig;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
  * @author:MG01867
@@ -14,7 +15,8 @@ import lombok.EqualsAndHashCode;
  * @describe 产品快照
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 public class ProductConfigSnapshot extends ProductConfig {
 
 	/**原始产品编码**/

@@ -41,7 +41,7 @@ public class ProductConfigDaoTest extends BaseTest {
 	}
 
 	@Test
-	public void testGetById() {
+	public void testGet() {
 		String id="f7d60464-8011-4c54-8ee1-218aac4bf535";
 		ProductConfig productConfig=productDao.get(id);
 		assertTrue(null==productConfig||null!=productConfig);

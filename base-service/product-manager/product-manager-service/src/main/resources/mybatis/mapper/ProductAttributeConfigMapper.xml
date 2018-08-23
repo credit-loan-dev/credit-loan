@@ -4,16 +4,16 @@
     <!-- 产品(product)属性和表字段映射 -->
     <resultMap id="ProductAttributeConfigResult" type="com.sixliu.creditloan.product.entity.ProductAttributeConfig" >
         <id column="id" property="id" jdbcType="VARCHAR" />
-        <result column="product_id" property="productId" jdbcType="VARCHAR" />
+        <result column="owner_id" property="ownerId" jdbcType="VARCHAR" />
         <result column="group" property="group" jdbcType="VARCHAR" />
         <result column="index" property="index" jdbcType="INTEGER"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="value" property="value" jdbcType="VARCHAR"/>       
         <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
         <result column="version" property="version" jdbcType="INTEGER"/>
-        <result column="update_userId" property="updateUserId" jdbcType="VARCHAR"/>
+        <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR"/>
         <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
-        <result column="create_userId" property="createUserId" jdbcType="VARCHAR" />
+        <result column="create_user_id" property="createUserId" jdbcType="VARCHAR" />
         <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
     </resultMap>
     <parameterMap id="ProductAttributeConfigParameter" type="com.sixliu.creditloan.product.entity.ProductAttributeConfig"/>
@@ -27,7 +27,7 @@
     <sql id="select_common_column">
     	select 
     		`id`,
-	        product_id,
+	        owner_id,
 	        `group`,
 	        `index`,
 	        `name`,
@@ -44,7 +44,7 @@
     <sql id="insert_common_table">
     	insert into product_attribute_config(
     								`id`,
-    								product_id,
+    								owner_id,
     								`group`,
     								`index`,
     								`name`,
@@ -54,7 +54,7 @@
     	 							create_user_id
     	 							)
     	 					 values(#{id},
-    	 							#{productId},
+    	 							#{ownerId},
     	 							#{group},
     	 							#{index},
     	 							#{name},   	 	
@@ -80,7 +80,7 @@
 		<include refid="select_common_column"/>
 		<include refid="from_table"/>
         where 1=1
-        and product_id =#{productId}
+        and owner_id =#{productId}
     </select>
     
     <insert id="insert" parameterMap="ProductAttributeConfigParameter">
@@ -97,6 +97,6 @@
 	
 	<delete id="deleteByProductId">
 		<include refid="delete_from_table"/>
-		where `product_id`=#{productId}
+		where `owner_id`=#{productId}
 	</delete>
 </mapper>

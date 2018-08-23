@@ -4,6 +4,7 @@ package com.sixliu.creditloan.product.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
  * @author:MG01867
@@ -13,7 +14,8 @@ import lombok.EqualsAndHashCode;
  * @describe 产品扩展属性
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 public class AttributeConfig extends BaseEntity{
 	
 	/** 所属者id:VARCHAR(36)**/

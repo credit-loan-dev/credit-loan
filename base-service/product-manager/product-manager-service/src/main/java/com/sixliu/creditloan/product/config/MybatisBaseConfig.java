@@ -34,7 +34,7 @@ public class MybatisBaseConfig implements TransactionManagementConfigurer {
 
 	private static Logger log = LoggerFactory.getLogger(MybatisBaseConfig.class);
 
-	private final static String mapperLocation = "classpath*:mybatis/mapper/*.xml";
+	private final static String mapperLocation = "classpath:mybatis/mapper/**/*.xml";
 	private final static String configLocation = "classpath:mybatis/mybatis-config.xml";
 
 	@Autowired
@@ -48,11 +48,8 @@ public class MybatisBaseConfig implements TransactionManagementConfigurer {
 		bean.setDataSource(dataSource);
 		SqlSessionFactory sqlSessionFactory = null;
 		try {
-			// mapperLocationn=classpath*:mybatis/mapper/modules/*.xml
-			// 这里必须以classpath*:开头，PathMatchingResourcePatternResolver才会做匹配
 			Resource[] mapperResources = new PathMatchingResourcePatternResolver().getResources(mapperLocation);
 			bean.setMapperLocations(mapperResources);
-			// configLocation=classpath:mybatis/mybatis-config.xml
 			Resource configLocationResource = new DefaultResourceLoader().getResource(configLocation);
 			bean.setConfigLocation(configLocationResource);
 			bean.setTypeHandlers(new TypeHandler[] { new CreditApplyMutexType.CreditApplyMutexTypeHandler(),
