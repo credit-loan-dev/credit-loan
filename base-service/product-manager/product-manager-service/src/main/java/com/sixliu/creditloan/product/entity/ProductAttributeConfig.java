@@ -1,7 +1,6 @@
 package com.sixliu.creditloan.product.entity;
 
 
-import com.sixliu.credit.common.entity.ExtendedAttribute;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -15,6 +14,6 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class ProductExtendedAttribute extends ExtendedAttribute{
+public class ProductAttributeConfig extends AttributeConfig{
 	
 }

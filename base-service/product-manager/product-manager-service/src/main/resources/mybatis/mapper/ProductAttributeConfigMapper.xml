@@ -1,62 +1,103 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sixliu.creditloan.product.dao.ProductAttributeConfigDao" >
-    <!-- 产品扩展属性配置和表字段映射 -->
-    <resultMap id="ProductAttributeConfig" type="com.sixliu.creditloan.product.entity.ProductExtendedAttribute" >
+    <!-- 产品(product)属性和表字段映射 -->
+    
+    <resultMap id="ProductAttributeConfigResult" type="com.sixliu.creditloan.product.entity.ProductAttributeConfig" >
         <id column="id" property="id" jdbcType="VARCHAR" />
-        <result column="owner_id" property="ownerEntityId" jdbcType="VARCHAR" />
-        <result column="takeEffect" property="takeEffect" jdbcType="INTEGER" />
-        <result column="attributeName" property="attributeName" jdbcType="VARCHAR" />
-        <result column="attributeValue" property="attributeValue" jdbcType="VARCHAR" />
+        <result column="product_id" property="productId" jdbcType="VARCHAR" />
+        <result column="group" property="group" jdbcType="VARCHAR" />
+        <result column="index" property="index" jdbcType="INTEGER" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="value" property=""value"" jdbcType="VARCHAR" />       
         <result column="remarks" property="remarks" jdbcType="VARCHAR" />
         <result column="version" property="version" jdbcType="INTEGER" />
-        <result column="owner_id" property="ownerId" jdbcType="VARCHAR" />
         <result column="update_userId" property="updateUserId" jdbcType="VARCHAR" />
         <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
         <result column="create_userId" property="createUserId" jdbcType="VARCHAR" />
         <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
     </resultMap>
     
+    <parameterMap id="ProductAttributeConfigParameter" type="com.sixliu.creditloan.product.entity.ProductAttributeConfig"/>
+    
     <!-- from 表 -->
     <sql id="from_table">
-    	form product_attribute_config
+    	from product_attribute_config
     </sql>
     
     <!-- 查询通用列 -->
     <sql id="select_common_column">
     	select 
-    		`id`				`id`,
-	        owner_id     		ownerId,
-	        take_effect			takeEffect,
-	        attribute_name		attributeName,
-	        attribute_value		attributeValue,
-	        `remarks`		    `remarks`,
-	        `version`           `version`,
-	        is_deleted          isDeleted,
-	        owner_id  	        ownerId,
-	        update_user_id	    updateUserId,
-	        update_date			`updateDate`,
-	        create_user_id	    createUserId,
-	        create_date			`createDate`
+    		`id`,
+	        product_id,
+	        `group`,
+	        `index`,
+	        `name`,
+	        `value`,
+	        `remarks`,
+	        `version`,
+	        update_user_id,
+	        update_date,
+	        create_user_id,
+	        create_date
     </sql>
     
-        <!-- intsert to 表 -->
-    <sql id="insert_common_column">
-    	<include refid="table"/>
-    	insert into product_attribute_config(`id`,`owner_id`,`take_effect`,attribute_name,`attribute_value`,
-    										 `remarks`,owner_id,update_user_id,create_user_id)
+    <!-- intsert to 表 -->
+    <sql id="insert_common_table">
+    	insert into product_attribute_config(`id`,
+    								product_id,
+    								`group`,
+    								`index`,
+    								`name`,
+  									`value`,
+    	 							`remarks`,
+    	 							update_user_id,
+    	 							create_user_id
+    	 							)
+    	 					 values(#{id},
+    	 							#{productId},
+    	 							#{group},
+    	 							#{index},
+    	 							#{name},   	 	
+    		   						#{value},
+    		   						#{remarks},
+    		   						#{updateUserId},
+    		   						#{createUserId}
+    		   						)
     </sql>
 
-    <!-- intsert to 表通用列取值 -->
-    <sql id="insert_common_column_value">
-    	values(#{id},#{ownerId},#{takeEffect},#{attributeName},#{attributeValue},
-    		   #{remarks},#{ownerId},#{updateUserId},#{createUserId})
+    <sql id="delete_from_table">
+    	delete from product_attribute_config
     </sql>
     
-	<select id="listByProductId" resultMap="ProductAttributeConfig" >
-		<include refid="select_common_column"></include>
-		<include refid="from_table"></include>
-        where owner_id =#{productId`}
+	<select id="get" resultMap="ProductAttributeConfigResult" >
+		<include refid="select_common_column"/>
+		<include refid="from_table"/>
+        where 1=1
+        and `id` =#{id}
     </select>
-   
+    
+    <select id="listByProductId" resultMap="ProductAttributeConfigResult" >
+		<include refid="select_common_column"/>
+		<include refid="from_table"/>
+        where 1=1
+        and product_id =#{productId}
+    </select>
+    
+    <insert id="insert" parameterMap="ProductAttributeConfigParameter">
+    	<selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
+              select uuid()
+    	</selectKey>
+    	<include refid="insert_common_table"></include>
+	</insert>
+	
+	<delete id="delete">
+		<include refid="delete_from_table"/>
+		where `id`=#{id}
+	</delete>
+	
+	<delete id="deleteByProductId">
+		<include refid="delete_from_table"/>
+		where `product_id`=#{productId}
+	</delete>
 </mapper>

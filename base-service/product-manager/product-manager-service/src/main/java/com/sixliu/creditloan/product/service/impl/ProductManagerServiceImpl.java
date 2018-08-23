@@ -6,13 +6,13 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sixliu.credit.common.exception.IllegalArgumentAppException;
 import com.sixliu.creditloan.product.converter.ProductDTOConverter;
 import com.sixliu.creditloan.product.dao.ProductConfigDao;
-import com.sixliu.creditloan.product.dao.ProductConfigSnapshotDao;
+import com.sixliu.creditloan.product.dao.snapshot.ProductConfigSnapshotDao;
 import com.sixliu.creditloan.product.dto.ProductDTO;
 import com.sixliu.creditloan.product.entity.ProductConfig;
 import com.sixliu.creditloan.product.entity.snapshot.ProductConfigSnapshot;
+import com.sixliu.creditloan.product.exception.AppException;
 import com.sixliu.creditloan.product.service.ProductManagerService;
 
 /**
@@ -51,7 +51,7 @@ public class ProductManagerServiceImpl implements ProductManagerService{
 	public String generateProductSnapshot(String productId) {
 		ProductConfig productConfig=productConfigDao.get(productId);
 		if(null==productConfig) {
-			throw new IllegalArgumentAppException(String.format("The product[%s] is illegal", productId));
+			throw new AppException(String.format("The product[%s] is illegal", productId));
 		}
 		ProductConfigSnapshot productConfigSnapshot=new ProductConfigSnapshot();
 		BeanUtils.copyProperties(productConfig, productConfigSnapshot);

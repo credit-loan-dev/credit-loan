@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.sixliu.credit.common.exception.AppException;
+import com.sixliu.creditloan.product.exception.AppException;
+
 
 /**
  * @author:MG01867

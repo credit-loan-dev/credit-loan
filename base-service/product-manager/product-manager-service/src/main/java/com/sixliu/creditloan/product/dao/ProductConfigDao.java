@@ -46,12 +46,12 @@ public interface ProductConfigDao {
 	 * @param id
 	 * @return
 	 */
-	int delById(String id);
+	int delete(String id);
 	
 	/**
 	 * 通过code删除
 	 * @param code
 	 * @return
 	 */
-	int delByCode(String code);
+	int deleteByCode(String code);
 }

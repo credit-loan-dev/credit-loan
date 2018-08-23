@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 
 import com.sixliu.credit.common.dto.BaseWriteDTO;
 import com.sixliu.credit.common.validation.LoanAmountValidation;
-import com.sixliu.credit.common.validation.LoanTermTypeValidation;
+import com.sixliu.creditloan.product.validation.LoanTermTypeValidation;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

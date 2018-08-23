@@ -22,6 +22,12 @@
 			<artifactId>common-sdk</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.sixliu</groupId>
+			<artifactId>product-manager-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.projectlombok</groupId>

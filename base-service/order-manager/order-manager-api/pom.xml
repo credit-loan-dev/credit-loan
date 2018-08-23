@@ -28,7 +28,13 @@
 			<version>${project.version}</version>
 		</dependency>
 		
-				<dependency>
+		<dependency>
+			<groupId>com.sixliu</groupId>
+			<artifactId>product-manager-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		
+		<dependency>
 			<groupId>org.mybatis.spring.boot</groupId>
 			<artifactId>mybatis-spring-boot-starter</artifactId>
 			<scope>provided</scope>

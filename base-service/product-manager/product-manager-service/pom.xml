@@ -12,13 +12,8 @@
 	<artifactId>product-manager-service</artifactId>
 
 	<dependencies>
+	
 		<!--内部项目依赖 -->
-		<dependency>
-			<groupId>com.sixliu</groupId>
-			<artifactId>common-sdk</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-
 		<dependency>
 			<groupId>com.sixliu</groupId>
 			<artifactId>product-manager-api</artifactId>
@@ -158,6 +153,7 @@
 		</profile>
 	</profiles>
 	<build>
+		<finalName>${name}-${version}</finalName>
 		<plugins>
 			<!-- 打包配置 -->
 			<plugin>

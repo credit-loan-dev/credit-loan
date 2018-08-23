@@ -2,7 +2,7 @@ package com.sixliu.creditloan.product.dao;
 
 import java.util.List;
 
-import com.sixliu.creditloan.product.entity.ProductExtendedAttribute;
+import com.sixliu.creditloan.product.entity.ProductAttributeConfig;
 
 /**
 *@author:MG01867
@@ -13,12 +13,13 @@ import com.sixliu.creditloan.product.entity.ProductExtendedAttribute;
 */
 public interface ProductAttributeConfigDao {
 
-	/**
-	 * 通过产品id查询其扩展属性配置集合
-	 * @param productId  产品id
-	 * @return
-	 */
-	List<ProductExtendedAttribute> listByProductId(String productId);
+	ProductAttributeConfig get(String id);
 	
-	int insert(ProductExtendedAttribute productAttributeConfig);
+	List<ProductAttributeConfig> listByProductId(String productId);
+	
+	int insert(ProductAttributeConfig productAttributeConfig);
+	
+	int delete(String id);
+	
+	int deleteByProductId(String productId);
 }

@@ -10,7 +10,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sixliu.creditloan.product.BaseTest;
-import com.sixliu.creditloan.product.dao.ProductTypeConfigDao;
+import com.sixliu.creditloan.product.dao.ProductTypeDao;
 import com.sixliu.creditloan.product.entity.ProductTypeConfig;
 
 /**
@@ -20,10 +20,10 @@ import com.sixliu.creditloan.product.entity.ProductTypeConfig;
  * @version:
  * @describe //TODO
  */
-public class ProductTypeConfigDaoTest extends BaseTest {
+public class ProductTypeDaoTest extends BaseTest {
 
 	@Autowired
-	ProductTypeConfigDao productTypeDao;
+	ProductTypeDao productTypeDao;
 
 	@Test
 	public void testInsert() {
@@ -31,7 +31,6 @@ public class ProductTypeConfigDaoTest extends BaseTest {
 		productType.setId(UUID.randomUUID().toString());
 		productType.setName("居乐贷"+System.currentTimeMillis());
 		productType.setParentId(null);
-		productType.setOwnerId("sixliu");
 		productType.setCreateUserId("sixliu");
 		productType.setUpdateUserId("sixliu");
 		int result=productTypeDao.insert(productType);

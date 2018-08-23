@@ -55,16 +55,16 @@ public class ProductConfigDaoTest extends BaseTest {
 	}
 	
 	@Test
-	public void testDelById() {
+	public void testDelete() {
 		String id="aec8c173-17d9-40c3-aebc-8f8d2b6d014a";
-		int result=productDao.delById(id);
+		int result=productDao.delete(id);
 		assertTrue(1==result||1!=result);
 	}
 	
 	@Test
-	public void testDelByCode() {
+	public void testDeleteByCode() {
 		String code="JLD";
-		int result=productDao.delByCode(code);
+		int result=productDao.deleteByCode(code);
 		assertTrue(1==result||1!=result);
 	}
 }

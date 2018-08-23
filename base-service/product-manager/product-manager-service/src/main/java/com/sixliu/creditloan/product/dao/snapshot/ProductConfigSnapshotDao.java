@@ -1,4 +1,4 @@
-package com.sixliu.creditloan.product.dao;
+package com.sixliu.creditloan.product.dao.snapshot;
 
 import com.sixliu.creditloan.product.entity.snapshot.ProductConfigSnapshot;
 

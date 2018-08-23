@@ -6,8 +6,6 @@
         <id column="id" property="id" jdbcType="VARCHAR" />
         <result column="remarks" property="remarks" jdbcType="VARCHAR" />
         <result column="version" property="version" jdbcType="INTEGER" />
-        <result column="is_deleted" property="deleted" jdbcType="INTEGER" />
-        <result column="owner_id" property="ownerId" jdbcType="VARCHAR" />
         <result column="update_userId" property="updateUserId" jdbcType="VARCHAR" />
         <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
         <result column="create_userId" property="createUserId" jdbcType="VARCHAR" />
@@ -19,17 +17,15 @@
     <!-- 查询通用列 -->
     <sql id="select_common_column">
     	select 
-    		`id`				`id`,
-	        parent_id           `parentId`,
-	        `name`			    `name`,
-	        `remarks`		    `remarks`,
-	        `version`           `version`,
-	        is_deleted          isDeleted,
-	        owner_id  	        ownerId,
-	        update_user_id	    updateUserId,
-	        update_date			`updateDate`,
-	        create_user_id	    createUserId,
-	        create_date			`createDate`
+    		`id`,
+	        parent_id,
+	        `name`,
+	        `remarks`,
+	        `version`,
+	        update_user_id,
+	        update_date,
+	        create_user_id,
+	        create_date
     </sql>
     
     <!-- from 表 -->

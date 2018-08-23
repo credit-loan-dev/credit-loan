@@ -83,13 +83,15 @@
 	<select id="get" resultMap="ProductConfigResult" >
 		<include refid="select_common_column"/>
 		<include refid="from_table"/>
-        where `id` =#{id}
+        where 1=1
+        and `id` =#{id}
     </select>
     
     <select id="getByCode" resultMap="ProductConfigResult" >
 		<include refid="select_common_column"/>
 		<include refid="from_table"/>
-        where `code` =#{code}
+        where 1=1
+        and `code` =#{code}
     </select>
    
     <insert id="insert" parameterMap="ProductConfigParameter">
@@ -99,12 +101,12 @@
     	<include refid="insert_common_table"></include>
 	</insert> 
 	
-	<delete id="delById">
+	<delete id="delete">
 		<include refid="delete_from_table"/>
 		where `id`=#{id}
 	</delete>
 	
-	<delete id="delByCode">
+	<delete id="deleteByCode">
 		<include refid="delete_from_table"/>
 		where `code`=#{code}
 	</delete>
