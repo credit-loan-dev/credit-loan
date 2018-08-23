@@ -13,6 +13,6 @@ public class StartUpTest extends BaseTest {
 
 	@Test
 	public synchronized void testMain() throws InterruptedException {
-		this.wait();
+		//this.wait();
 	}
 }

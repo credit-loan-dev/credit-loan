@@ -7,5 +7,5 @@ echo %APP_HOME%
 set CLASSPATH=%CLASSPATH%;%APP_HOME%\conf
 set CLASSPATH=%CLASSPATH%;%APP_HOME%\lib\*
 echo %CLASSPATH%
-java -classpath %CLASSPATH% com.sixliu.creditloan.product.StartUp
+java -classpath %CLASSPATH% com.sixliu.credit.product.StartUp
 pause

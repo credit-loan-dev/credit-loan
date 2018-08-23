@@ -12,7 +12,7 @@ eureka:
     instance-id: ${spring.cloud.client.ip-address}:${server.port}
 spring:
   application:
-    name: order-manager
+    name: product-manager
   datasource:
     druid:
       url: jdbc:mysql://192.168.1.103:3306/product_manager?useUnicode=true&characterEncoding=UTF-8&useSSL=false

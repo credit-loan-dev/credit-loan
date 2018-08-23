@@ -1,14 +1,12 @@
 package com.sixliu.creditloan.credit.service;
 
-import static org.junit.Assert.assertFalse;
-
-
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sixliu.creditloan.credit.BaseTest;
 import com.sixliu.creditloan.credit.CreditApplyDTO;
 import com.sixliu.creditloan.credit.service.CreditShopService;
+import com.sixliu.creditloan.product.service.ProductManagerService;
 
 /**
 *@author:MG01867
@@ -21,12 +19,16 @@ public class CreditShopServiceTest extends BaseTest{
 
 	@Autowired
 	CreditShopService creditShopService;
+	
+	@Autowired
+	private ProductManagerService productManagerService;
 
 	@Test
 	public void testInsert() {
+		Object result=productManagerService.get("67ea4cf2-a6d4-11e8-8df1-000c29851249");
 		CreditApplyDTO creditApply=new CreditApplyDTO();
 		creditShopService.apply(creditApply);
-		assertFalse(false);
+		System.out.println(result);
 	}
 
 }

@@ -8,7 +8,7 @@ cd "$( cd -P "$( dirname "$SOURCE"  )" && pwd  )"/..
 
 APP_HOME=`pwd`
 
-MAIN_CLASS=com.sixliu.creditloan.product.StartUp
+MAIN_CLASS=com.sixliu.credit.product.StartUp
 
 
 PID_FILE=$APP_HOME'/bin/program.pid'

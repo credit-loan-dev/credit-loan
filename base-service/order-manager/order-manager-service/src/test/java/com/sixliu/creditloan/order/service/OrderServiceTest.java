@@ -21,11 +21,11 @@ public class OrderServiceTest extends BaseTest {
 	OrderManagerService orderManagerService;
 	
 	@Autowired
-	ProductManagerService productManagerInnerClient;
+	ProductManagerService productManagerService;
 
 	@Test
 	public void testApply() {
-		ProductDTO productInnerDTO=productManagerInnerClient.get("c43d00de-9d29-11e8-9e01-005056986f0b");
+		ProductDTO productInnerDTO=productManagerService.get("c43d00de-9d29-11e8-9e01-005056986f0b");
 		System.out.println(productInnerDTO);
 	}
 }

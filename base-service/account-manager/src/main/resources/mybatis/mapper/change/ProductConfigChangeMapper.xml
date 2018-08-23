@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sixliu.creditloan.product.dao.change.ProductConfigChangeDao" >
+
+    <resultMap id="ProductConfigChangeResult" type="com.sixliu.creditloan.product.entity.change.ProductConfigChange" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="original_id" property="originalId" jdbcType="VARCHAR" />
+        <result column="code" property="code" jdbcType="VARCHAR" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="type_id" property="typeId" jdbcType="INTEGER" />
+        <result column="priority" property="priority" jdbcType="INTEGER" />
+        <result column="effective" property="effective" jdbcType="BOOLEAN" />
+        <result column="effective_date" property="effectiveDate" jdbcType="DATE" />
+        <result column="expire_date" property="expireDate" jdbcType="DATE" />            
+        <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+        <result column="version" property="version" jdbcType="INTEGER" />
+        <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR" />
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+        <result column="create_user_id" property="createUserId" jdbcType="VARCHAR" />
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+    
+    <parameterMap id="ProductConfigChangeParameter" type="com.sixliu.creditloan.product.entity.change.ProductConfigChange"/>
+    
+    <!-- from 表 -->
+    <sql id="from_table">
+    	from product_config_change
+    </sql>
+    
+
+    
+    <!-- 查询通用列 -->
+    <sql id="select_common_column">
+    	select 
+    		`id`,
+    		`original_id`,
+	        `code`,
+	        `name`,
+	        type_id,
+	        `priority`,
+	        effective,
+	        effective_date,
+	        expire_date,
+	        `remarks`,
+	        `version`,
+	        update_user_id,
+	        update_date,
+	        create_user_id,
+	        create_date
+    </sql>
+    
+    <!-- intsert to 表 -->
+    <sql id="insert_common_table">
+    	insert into product_config_change(`id`,
+    								`original_id`,
+    								`code`,
+    								`name`,
+    								type_id,
+    								`priority`,
+  									effective,
+    	 							effective_date,
+    	 							expire_date,
+    	 							`remarks`,
+    	 							update_user_id,
+    	 							create_user_id
+    	 							)
+    	 					 values(#{id},
+    	 					 		#{originalId},
+    	 							#{code},
+    	 							#{name},
+    	 							#{typeId},
+    	 							#{priority},   	 	
+    		   						#{effective},
+    		   						#{effectiveDate},
+    		   						#{expireDate},
+    		   						#{remarks},
+    		   						#{updateUserId},
+    		   						#{createUserId}
+    		   						)
+    </sql>
+
+    <sql id="delete_from_table">
+    	delete from product_config_change
+    </sql>
+    
+	<select id="get" resultMap="ProductConfigChangeResult" >
+		<include refid="select_common_column"/>
+		<include refid="from_table"/>
+        where 1=1
+        and `id` =#{id}
+    </select>
+    
+    <insert id="insert" parameterMap="ProductConfigChangeParameter">
+    	<selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
+              select uuid()
+    	</selectKey>
+    	<include refid="insert_common_table"></include>
+	</insert> 
+	
+	<delete id="delete">
+		<include refid="delete_from_table"/>
+		where `id`=#{id}
+	</delete>
+	
+</mapper>

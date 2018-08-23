@@ -1,0 +1,14 @@
+server:
+  port: 8080
+  jetty:
+    max-http-post-size: 10485760
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://192.168.1.103:8761//eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+spring:
+  application:
+    name: credit-service
