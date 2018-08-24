@@ -51,7 +51,7 @@ public class ProductAttributeConfigDaoTest extends BaseTest {
 	
 	@Test
 	public void testListByProductId() {
-		List<ProductAttributeConfig> productAttributeConfigs=productAttributeConfigDao.listByProductId("67ea4cf2-a6d4-11e8-8df1-000c29851249");
+		List<ProductAttributeConfig> productAttributeConfigs=productAttributeConfigDao.listByOwnerId("67ea4cf2-a6d4-11e8-8df1-000c29851249");
 		checkOk(productAttributeConfigs);
 	}
 	

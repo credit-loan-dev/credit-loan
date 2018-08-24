@@ -1,7 +1,5 @@
 package com.sixliu.creditloan.product.dao;
 
-import static org.junit.Assert.assertTrue;
-
 import java.util.Date;
 
 import org.junit.Test;
@@ -37,34 +35,34 @@ public class ProductConfigDaoTest extends BaseTest {
 		productConfig.setCreateUserId("sixliu");
 		productConfig.setUpdateUserId("sixliu");
 		int result=productDao.insert(productConfig);
-		assertTrue(1==result);
+		checkOk(result);
 	}
 
 	@Test
 	public void testGet() {
 		String id="67ea4cf2-a6d4-11e8-8df1-000c29851249";
 		ProductConfig productConfig=productDao.get(id);
-		assertTrue(null==productConfig||null!=productConfig);
+		checkOk(productConfig);
 	}
 
 	@Test
 	public void testGetByCode() {
 		String code="JLD";
 		ProductConfig productConfig=productDao.getByCode(code);
-		assertTrue(null==productConfig||null!=productConfig);
+		checkOk(productConfig);
 	}
 	
 	@Test
 	public void testDelete() {
 		String id="aec8c173-17d9-40c3-aebc-8f8d2b6d014a";
 		int result=productDao.delete(id);
-		assertTrue(1==result||1!=result);
+		checkOk(result);
 	}
 	
 	@Test
 	public void testDeleteByCode() {
 		String code="JLD";
 		int result=productDao.deleteByCode(code);
-		assertTrue(1==result||1!=result);
+		checkOk(result);
 	}
 }

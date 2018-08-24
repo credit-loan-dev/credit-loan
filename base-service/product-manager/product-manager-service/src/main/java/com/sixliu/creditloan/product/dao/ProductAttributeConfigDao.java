@@ -15,7 +15,7 @@ public interface ProductAttributeConfigDao {
 
 	ProductAttributeConfig get(String id);
 	
-	List<ProductAttributeConfig> listByProductId(String productId);
+	List<ProductAttributeConfig> listByOwnerId(String ownerId);
 	
 	int insert(ProductAttributeConfig productAttributeConfig);
 	

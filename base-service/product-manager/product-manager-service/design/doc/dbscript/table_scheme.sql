@@ -87,3 +87,28 @@ CREATE TABLE product_manager.`product_attribute_config` (
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '数据创建日期',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4 COMMENT='产品配置扩展属性表';
+
+CREATE TABLE product_manager.`product_credit_config` (
+  `id` varchar(36) NOT NULL COMMENT '数据id:业务无关性',
+  `product_id` varchar(36) NOT NULL COMMENT '产品id',
+  `creditApply_mutex_type` int(11) NOT NULL DEFAULT '1' COMMENT '授信申请互斥类型',
+  `use_blacklist_group_id` varchar(36) NOT NULL COMMENT '使用黑名单组id',
+  `loop_creditlimit` int(1) NOT NULL COMMENT '是否循环额度',
+  `increase_creditlimit` int(1) NOT NULL COMMENT '是否支持提高额度',
+  `decrease_creditlimit` int(1) NOT NULL COMMENT '是否支持降低额度',
+  `link_customer_base_creditlimit` int(1) NOT NULL COMMENT '是否关联客户基础额度',
+  `credit_apply_max_months` int(11) NOT NULL COMMENT '授信申请最大持续月数',
+  `credit_apply_flow_modle_id` varchar(36) NOT NULL COMMENT '授信申请流程模型',
+  `credit_apply_reject_influence_days` int(11) NOT NULL COMMENT '授信申请拒绝影响天数',
+  `min_creditlimit` int(11) NOT NULL COMMENT '最小授信额度',
+  `max_creditlimit` int(11) NOT NULL COMMENT '最大授信额度',
+  `creditlimit_effective_months` int(11) NOT NULL COMMENT '授信额度有效月数',
+  `remarks` varchar(100) DEFAULT NULL COMMENT '数据备注',
+  `version` int(11) NOT NULL DEFAULT '0' COMMENT '数据版本',
+  `update_user_id` varchar(36) NOT NULL COMMENT '数据更新用户id',
+  `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '数据更新日期id',
+  `create_user_id` varchar(36) NOT NULL COMMENT '数据创建用户id',
+  `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '数据创建日期',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `product_id_UNIQUE` (`product_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4 COMMENT='产品授信配置表';

@@ -6,6 +6,7 @@ import com.sixliu.creditloan.product.entity.BaseEntity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
 *@author:MG01867
@@ -15,13 +16,14 @@ import lombok.EqualsAndHashCode;
 *@describe 产品-授信配置
 */
 @Data
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 public class ProductCreditConfig extends BaseEntity {
 
 	/**产品id**/
 	private String productId;
 	
-	/**授信申请互斥类型:INT(1)**/
+	/**授信申请互斥类型:INT(11)**/
 	private CreditApplyMutexType creditApplyMutexType;
 	
 	/**使用黑名单组id**/
