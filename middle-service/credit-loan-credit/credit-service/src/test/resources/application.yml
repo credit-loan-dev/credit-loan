@@ -5,7 +5,7 @@ server:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://127.0.0.1:8761//eureka
+      defaultZone: http://192.168.1.103:8761//eureka
   instance:
     prefer-ip-address: true
     instance-id: ${spring.cloud.client.ip-address}:${server.port}
@@ -14,15 +14,15 @@ spring:
     name: credit-service
   zipkin:
     discovery-client-enabled: true
-    locator:
-      discovery:
-        enabled: true
   sleuth:
-    enabled: true
-    web:
-      enabled: true
     sampler:
-      probability: 1
+      probability: 1.0
+    messaging:
+      enabled: true
+    propagation-keys:
+    - Id
+    - Dog
+    - Goldfish
 mybatis:
   config-location: classpath:mybatis/mybatis-config.xml
   mapper-locations: classpath:mybatis/mapper/**/*.xml

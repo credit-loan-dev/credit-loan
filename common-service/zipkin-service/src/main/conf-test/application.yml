@@ -1,21 +1,21 @@
 server:
   port: 9999
-  
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://127.0.0.1:8761//eureka
+      defaultZone: http://192.168.1.103:8761//eureka
   instance:
     prefer-ip-address: true
     instance-id: ${spring.cloud.client.ip-address}:${server.port}
-    
 spring:
   application:
     name: zipkin-service
+  sleuth:
+    enabled: false
   datasource:
     druid:
-      url: jdbc:mysql://192.168.34.188:3306/data_access?useUnicode=true&characterEncoding=UTF-8&useSSL=false
-      username: test
+      url: jdbc:mysql://192.168.1.103:3306/zipkin?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+      username: credit_loan_dev
       password: 37dzsk9n5w.Q
       driver-class-name: com.mysql.cj.jdbc.Driver
       initialSize: 5
@@ -30,12 +30,6 @@ management:
     web:
       server:
         auto-time-requests: false
-
 zipkin:
   storage:
     type: mysql
-    
-info:
-  app:
-    name: ${spring.application.name}
-    version: 1.0.0

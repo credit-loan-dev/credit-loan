@@ -31,4 +31,7 @@ public abstract class BaseTest extends AbstractJUnit4SpringContextTests {
 		TimeZone.setDefault(zone); // 设置时区
 	}
 
+	protected static void checkObject(Object ob) {
+		
+	}
 }

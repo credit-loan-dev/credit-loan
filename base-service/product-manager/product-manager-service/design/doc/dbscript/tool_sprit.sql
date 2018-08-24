@@ -19,6 +19,15 @@ select * from product_attribute_config;
 #产品授信配置
 select * from product_credit_config;
 
+delete from zipkin_spans where name='post /product/get';
+delete from zipkin_annotations where trace_id_high=0;
+delete from zipkin_dependencies;
 
 #zipkin_spans
 select * from zipkin_spans;
+
+#zipkin_annotations
+select * from zipkin_annotations;
+
+#zipkin_dependencies
+select * from zipkin_dependencies;
