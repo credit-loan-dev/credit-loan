@@ -1,0 +1,27 @@
+server:
+  port: 9999
+spring:
+  application:
+    name: zipkin-service
+  datasource:
+    druid:
+      url: jdbc:mysql://192.168.34.188:3306/data_access?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+      username: test
+      password: 37dzsk9n5w.Q
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      initialSize: 5
+      minIdle: 5
+      maxActive: 20
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      filters: stat
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+management:
+  metrics:
+    web:
+      server:
+        auto-time-requests: false
+info:
+  app:
+    name: ${spring.application.name}
+    version: 1.0.0

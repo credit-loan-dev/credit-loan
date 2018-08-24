@@ -4,7 +4,6 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sixliu.creditloan.credit.BaseTest;
-import com.sixliu.creditloan.credit.CreditApplyDTO;
 import com.sixliu.creditloan.credit.service.CreditShopService;
 import com.sixliu.creditloan.product.service.ProductManagerService;
 
@@ -25,9 +24,7 @@ public class CreditShopServiceTest extends BaseTest{
 
 	@Test
 	public void testInsert() {
-		Object result=productManagerService.get("67ea4cf2-a6d4-11e8-8df1-000c29851249");
-		CreditApplyDTO creditApply=new CreditApplyDTO();
-		creditShopService.apply(creditApply);
+		Object result=productManagerService.get("c43d00de-9d29-11e8-9e01-005056986f0b");
 		System.out.println(result);
 	}
 

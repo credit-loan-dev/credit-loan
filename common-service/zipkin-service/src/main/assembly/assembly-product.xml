@@ -10,9 +10,6 @@
 		<dependencySet>
 			<outputDirectory>lib</outputDirectory>
 			<scope>runtime</scope>
-			<excludes>  
-                <exclude>data-access-mock*.*</exclude>  
-            </excludes>
 		</dependencySet>
 	</dependencySets>
 	<fileSets>
