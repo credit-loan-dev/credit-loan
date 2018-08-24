@@ -1,5 +1,14 @@
 server:
   port: 9999
+  
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761//eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    
 spring:
   application:
     name: zipkin-service
@@ -21,6 +30,11 @@ management:
     web:
       server:
         auto-time-requests: false
+
+zipkin:
+  storage:
+    type: mysql
+    
 info:
   app:
     name: ${spring.application.name}

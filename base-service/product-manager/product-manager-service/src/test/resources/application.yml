@@ -13,16 +13,19 @@ spring:
   application:
     name: product-manager
   zipkin:
+    enabled: true
+    base-url: http://10.0.22.175:9999
     discovery-client-enabled: true
     locator:
       discovery:
         enabled: true
   sleuth:
-    enabled: true
-    web:
-      enabled: true
     sampler:
-      probability: 1
+      probability: 1.0
+    feign:
+      enabled: true
+
+ 
   datasource:
     druid:
       url: jdbc:mysql://192.168.34.188:3306/data_access?useUnicode=true&characterEncoding=UTF-8&useSSL=false

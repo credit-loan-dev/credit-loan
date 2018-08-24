@@ -18,3 +18,7 @@ select * from product_attribute_config;
 
 #产品授信配置
 select * from product_credit_config;
+
+
+#zipkin_spans
+select * from zipkin_spans;
