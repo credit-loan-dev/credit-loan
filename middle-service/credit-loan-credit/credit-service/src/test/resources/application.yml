@@ -12,17 +12,21 @@ eureka:
 spring:
   application:
     name: credit-service
-  zipkin:
-    discovery-client-enabled: true
   sleuth:
     sampler:
       probability: 1.0
     messaging:
       enabled: true
+    log:
+      slf4j:
+        enabled: true
     propagation-keys:
     - Id
     - Dog
     - Goldfish
+logging:
+  level:
+    org.springframework.cloud.sleuth: debug
 mybatis:
   config-location: classpath:mybatis/mybatis-config.xml
   mapper-locations: classpath:mybatis/mapper/**/*.xml

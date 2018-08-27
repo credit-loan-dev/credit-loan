@@ -28,6 +28,7 @@ public class ProductConfigDaoTest extends BaseTest {
 		productConfig.setName("居乐贷"+System.currentTimeMillis());
 		productConfig.setTypeId("1");
 		productConfig.setPriority(1);
+		productConfig.setCreditlimitId(String.valueOf(System.currentTimeMillis()));
 		productConfig.setEffective(false);
 		productConfig.setEffectiveDate(new Date());
 		productConfig.setExpireDate(new Date());

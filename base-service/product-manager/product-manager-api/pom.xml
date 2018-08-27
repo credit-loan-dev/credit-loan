@@ -27,7 +27,7 @@
 			<version>${project.version}</version>
 		</dependency>
 		<!--内部项目依赖 -->
-
+		
 		<dependency>
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>

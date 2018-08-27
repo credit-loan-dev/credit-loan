@@ -7,13 +7,13 @@
 <configuration scan="true" scanPeriod="60 seconds"
 	debug="false">
 	
+	 <include resource="org/springframework/boot/logging/logback/base.xml" />
+	 
 	<!-- 此处设置字符集 -->
 	<property name="charset" value="UTF-8" />
 	<!-- 此处设置日志输出格式模版 -->
 	<property name="pattern"
 		value="[%-5level] [%date{yyyy-MM-dd HH:mm:ss}] [%thread] %logger{96} [%line] - %msg%n" />
-	<property name="trace_pattern"
-		value="[%-5level] [%date{yyyy-MM-dd HH:mm:ss}] [%thread] %logger{96} [%line]" />
 	<!-- 此处设置日志文件目录 -->
 	<property name="logFilePath" value="logs" />
 	<!-- 此处设置单个日志文件大小 -->
@@ -26,6 +26,18 @@
 		class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
 			<pattern>${pattern}</pattern>
+			<charset>${charset}</charset>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>info</level>
+		</filter>
+	</appender>
+	
+		<!--控制台日志输出 -->
+	<appender name="trace_console"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>[%-5level] [%date{yyyy-MM-dd HH:mm:ss}] [%thread] traceId:[%X{X-B3-TraceId:-}] [%15.15t] %-40.40logger{39} : %m%n</pattern>
 			<charset>${charset}</charset>
 		</encoder>
 		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
@@ -69,7 +81,7 @@
 
 	<!--必须在appender配置后面，否则找不到appender -->
 	<root level="info">
-		<appender-ref ref="console" />
+		<appender-ref ref="trace_console" />
 		<appender-ref ref="asy" />
 	</root>
 </configuration>

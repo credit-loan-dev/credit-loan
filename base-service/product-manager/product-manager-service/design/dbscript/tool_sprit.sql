@@ -1,5 +1,5 @@
 use data_access;
-#use product_manager;
+use product_manager;
 
 #产品类型配置
 select * from product_type_config;

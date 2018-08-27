@@ -38,7 +38,7 @@ public class ProductConfig extends BaseEntity {
 	/**产品优先级:INT(4)**/
 	private Integer priority;
 	
-	/**产品额度**/
+	/**产品额度id**/
 	private String creditlimitId;
 	
 	/**是否有效:INT(1)**/

@@ -14,13 +14,13 @@
 	<url>http://maven.apache.org</url>
 
 	<dependencies>
-		<!--基础工具依赖 -->
+		<!--基础环境工具依赖 -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		<!--基础工具依赖 -->
+		<!--基础环境工具依赖 -->
 
 		<!--内部项目依赖 -->
 		<dependency>
@@ -29,6 +29,9 @@
 			<version>${project.version}</version>
 		</dependency>
 		<!--内部项目依赖 -->
+
+		<!--基础开发工具依赖 -->
+		<!--基础开发工具依赖 -->
 
 		<!--orm和数据源框架依赖 -->
 		<dependency>
@@ -61,14 +64,6 @@
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-starter-tomcat</artifactId>
 				</exclusion>
-				<exclusion>
-					<groupId>com.fasterxml.jackson.core</groupId>
-					<artifactId>jackson-databind</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.jboss.logging</groupId>
-					<artifactId>jboss-logging</artifactId>
-				</exclusion>
 			</exclusions>
 		</dependency>
 
@@ -100,6 +95,11 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-openfeign</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-sleuth</artifactId>
 		</dependency>
 
 		<dependency>

@@ -19,6 +19,7 @@ CREATE TABLE product_manager.`product_config` (
   `name` varchar(20) NOT NULL COMMENT '产品名称',
   `type_id` varchar(36) NOT NULL COMMENT '产品类型id',
   `priority` int(4) NOT NULL COMMENT '产品优先级',
+  `creditlimit_id` varchar(36) NOT NULL COMMENT '产品额度id',
   `effective` varchar(45) NOT NULL,
   `effective_date` datetime NOT NULL COMMENT '有效开始日期',
   `expire_date` varchar(45) NOT NULL,

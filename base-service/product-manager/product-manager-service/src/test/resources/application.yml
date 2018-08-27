@@ -12,13 +12,6 @@ eureka:
 spring:
   application:
     name: product-manager
-  zipkin:
-    enabled: true
-    base-url: http://192.168.1.103:9999
-    discovery-client-enabled: true
-    locator:
-      discovery:
-        enabled: true
   sleuth:
     sampler:
       probability: 1.0

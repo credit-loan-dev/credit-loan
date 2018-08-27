@@ -9,6 +9,7 @@
         <result column="name" property="name" jdbcType="VARCHAR" />
         <result column="type_id" property="typeId" jdbcType="INTEGER" />
         <result column="priority" property="priority" jdbcType="INTEGER" />
+        <result column="creditlimit_id" property="creditlimitId" jdbcType="VARCHAR" />
         <result column="effective" property="effective" jdbcType="BOOLEAN" />
         <result column="effective_date" property="effectiveDate" jdbcType="DATE" />
         <result column="expire_date" property="expireDate" jdbcType="DATE" />            
@@ -37,6 +38,7 @@
 	        `name`,
 	        type_id,
 	        `priority`,
+	        creditlimit_id,
 	        effective,
 	        effective_date,
 	        expire_date,
@@ -55,6 +57,7 @@
     								`name`,
     								type_id,
     								`priority`,
+    								creditlimit_id,
   									effective,
     	 							effective_date,
     	 							expire_date,
@@ -66,7 +69,8 @@
     	 							#{code},
     	 							#{name},
     	 							#{typeId},
-    	 							#{priority},   	 	
+    	 							#{priority},
+    	 							#{creditlimitId},	 	
     		   						#{effective},
     		   						#{effectiveDate},
     		   						#{expireDate},

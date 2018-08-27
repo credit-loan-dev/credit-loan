@@ -24,8 +24,10 @@ public class CreditShopServiceTest extends BaseTest{
 
 	@Test
 	public void testInsert() {
-		Object result=productManagerService.get("67ea4cf2-a6d4-11e8-8df1-000c29851249");
-		checkObject(result);
+		for(int i=0;i<10;i++) {
+			Object result=productManagerService.get("67ea4cf2-a6d4-11e8-8df1-000c29851249");
+			checkObject(result);
+		}
 	}
 
 }
