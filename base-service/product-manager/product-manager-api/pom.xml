@@ -11,15 +11,8 @@
 	</parent>
 	<artifactId>product-manager-api</artifactId>
 	<name>product-manager-api</name>
-	<url>http://maven.apache.org</url>
-
+	
 	<dependencies>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<scope>provided</scope>
-		</dependency>
-
 		<!--内部项目依赖 -->
 		<dependency>
 			<groupId>com.sixliu</groupId>

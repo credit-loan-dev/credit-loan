@@ -11,17 +11,8 @@
 	</parent>
 	<artifactId>product-manager-service</artifactId>
 	<name>product-manager-service</name>
-	<url>http://maven.apache.org</url>
 
 	<dependencies>
-		<!--基础环境工具依赖 -->
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<!--基础环境工具依赖 -->
-
 		<!--内部项目依赖 -->
 		<dependency>
 			<groupId>com.sixliu</groupId>
@@ -29,9 +20,6 @@
 			<version>${project.version}</version>
 		</dependency>
 		<!--内部项目依赖 -->
-
-		<!--基础开发工具依赖 -->
-		<!--基础开发工具依赖 -->
 
 		<!--orm和数据源框架依赖 -->
 		<dependency>
