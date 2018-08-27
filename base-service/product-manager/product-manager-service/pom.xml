@@ -10,8 +10,17 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>product-manager-service</artifactId>
+	<name>product-manager-service</name>
+	<url>http://maven.apache.org</url>
 
 	<dependencies>
+		<!--基础工具依赖 -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<!--基础工具依赖 -->
 
 		<!--内部项目依赖 -->
 		<dependency>
@@ -21,20 +30,7 @@
 		</dependency>
 		<!--内部项目依赖 -->
 
-		<!--基础工具依赖 -->
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<scope>provided</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>druid-spring-boot-starter</artifactId>
-		</dependency>
-		<!--基础工具依赖 -->
-
-		<!--mybatis orm框架依赖 -->
+		<!--orm和数据源框架依赖 -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -43,9 +39,14 @@
 			<groupId>org.mybatis.spring.boot</groupId>
 			<artifactId>mybatis-spring-boot-starter</artifactId>
 		</dependency>
-		<!--mybatis orm框架依赖 -->
 
-		<!--spring-boot组件依赖 -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid-spring-boot-starter</artifactId>
+		</dependency>
+		<!--orm和数据源框架依赖-->
+
+		<!--spring-boot和spring-cloud组件依赖 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -65,9 +66,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jetty</artifactId>
 		</dependency>
-		<!--spring-boot组件依赖 -->
 
-		<!--spring-cloud组件依赖 -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-config</artifactId>
@@ -103,50 +102,9 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!--spring-cloud组件依赖 -->
+		<!--spring-boot和spring-cloud组件依赖 -->
 	</dependencies>
 
-	<profiles>
-		<profile>
-			<id>dev</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			<properties>
-				<env.devMode>dev</env.devMode>
-				<skipAssemblyDEV>false</skipAssemblyDEV>
-				<skipAssemblyQA>true</skipAssemblyQA>
-				<skipAssemblyPRODUCT>true</skipAssemblyPRODUCT>
-				<skipAssemblyPREVIEW>true</skipAssemblyPREVIEW>
-			</properties>
-		</profile>
-		<profile>
-			<id>test</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<properties>
-				<env.devMode>test</env.devMode>
-				<skipAssemblyDEV>true</skipAssemblyDEV>
-				<skipAssemblyQA>false</skipAssemblyQA>
-				<skipAssemblyPRODUCT>true</skipAssemblyPRODUCT>
-				<skipAssemblyPREVIEW>true</skipAssemblyPREVIEW>
-			</properties>
-		</profile>
-		<profile>
-			<id>product</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			<properties>
-				<env.devMode>product</env.devMode>
-				<skipAssemblyDEV>true</skipAssemblyDEV>
-				<skipAssemblyQA>true</skipAssemblyQA>
-				<skipAssemblyPRODUCT>false</skipAssemblyPRODUCT>
-				<skipAssemblyPREVIEW>true</skipAssemblyPREVIEW>
-			</properties>
-		</profile>
-	</profiles>
 	<build>
 		<finalName>${project.name}-${project.version}</finalName>
 		<plugins>

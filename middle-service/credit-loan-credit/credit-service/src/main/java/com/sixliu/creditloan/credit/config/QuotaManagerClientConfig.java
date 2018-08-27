@@ -2,7 +2,7 @@ package com.sixliu.creditloan.credit.config;
 
 import org.springframework.cloud.openfeign.FeignClient;
 
-import com.sixliu.credit.quota.api.QuotaManagerClient;
+import com.sixliu.creditloan.creditlimit.service.CreditlimitManagerClient;
 
 /**
 *@author:MG01867
@@ -12,6 +12,6 @@ import com.sixliu.credit.quota.api.QuotaManagerClient;
 *@describe //TODO
 */
 @FeignClient("creditlimit-manager")
-public interface QuotaManagerClientConfig extends QuotaManagerClient{
+public interface QuotaManagerClientConfig extends CreditlimitManagerClient{
 
 }

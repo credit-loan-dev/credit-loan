@@ -3,12 +3,12 @@ package com.sixliu.creditloan.credit.impl.check;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.sixliu.credit.quota.CreditlimitDTO;
-import com.sixliu.credit.quota.api.QuotaManagerClient;
 import com.sixliu.creditloan.credit.base.CreditOrderDTO;
 import com.sixliu.creditloan.credit.base.check.Context;
 import com.sixliu.creditloan.credit.base.check.CreditPreCheck;
 import com.sixliu.creditloan.credit.base.check.CreditPreCheckException;
+import com.sixliu.creditloan.creditlimit.dto.CreditlimitDTO;
+import com.sixliu.creditloan.creditlimit.service.CreditlimitManagerClient;
 import com.sixliu.creditloan.customer.dto.CustomerDTO;
 import com.sixliu.creditloan.customer.service.CustomerManagerService;
 import com.sixliu.creditloan.product.dto.ProductDTO;
@@ -27,7 +27,7 @@ public class CreditPreCheckForCustomer implements CreditPreCheck {
 	private CustomerManagerService customerManagerClient;
 
 	@Autowired
-	private QuotaManagerClient quotaManagerClient;
+	private CreditlimitManagerClient quotaManagerClient;
 
 	@Override
 	public void check(Context context) {

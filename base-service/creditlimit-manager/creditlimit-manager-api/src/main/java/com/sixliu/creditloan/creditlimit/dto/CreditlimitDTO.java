@@ -1,4 +1,4 @@
-package com.sixliu.credit.quota;
+package com.sixliu.creditloan.creditlimit.dto;
 
 
 import lombok.Data;

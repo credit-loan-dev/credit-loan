@@ -1,4 +1,4 @@
-package com.sixliu.risk;
+package com.sixliu.creditloan.risk;
 
 /**    
  * @author: sixliu
