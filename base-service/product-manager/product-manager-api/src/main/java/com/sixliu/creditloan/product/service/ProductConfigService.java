@@ -2,6 +2,8 @@ package com.sixliu.creditloan.product.service;
 
 import javax.validation.constraints.NotBlank;
 
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,7 +18,9 @@ import com.sixliu.creditloan.product.dto.ProductDTO;
  * @version:
  * @describe 产品配置服务
  */
-public interface ProductConfigService extends BaseService {
+@FeignClient("product-manager")
+@Validated
+public interface ProductConfigService {
 
 	/**
 	 * 通过产品id获取产品

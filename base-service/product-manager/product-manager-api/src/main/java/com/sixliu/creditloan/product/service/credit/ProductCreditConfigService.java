@@ -2,13 +2,14 @@ package com.sixliu.creditloan.product.service.credit;
 
 import javax.validation.constraints.NotBlank;
 
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sixliu.creditloan.product.dto.credit.ProductCreditDTO;
-import com.sixliu.creditloan.product.service.BaseService;
 
 /**
  * @author:MG01867
@@ -17,7 +18,9 @@ import com.sixliu.creditloan.product.service.BaseService;
  * @version:
  * @describe //TODO
  */
-public interface ProductCreditConfigService extends BaseService {
+@FeignClient("product-manager")
+@Validated
+public interface ProductCreditConfigService{
 
 	@RequestMapping(value = "/product/credit/get", method = RequestMethod.POST)
 	@ResponseBody

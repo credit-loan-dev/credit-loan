@@ -101,7 +101,6 @@
 	<build>
 		<finalName>${project.name}-${project.version}</finalName>
 		<plugins>
-			
 			<!-- 打包配置 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
