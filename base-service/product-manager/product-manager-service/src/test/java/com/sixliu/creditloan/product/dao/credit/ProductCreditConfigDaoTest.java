@@ -31,10 +31,10 @@ public class ProductCreditConfigDaoTest extends BaseTest {
 		if(null!=productConfig) {
 			ProductCreditConfig productCreditConfig=new ProductCreditConfig();
 			productCreditConfig.setProductId(productConfig.getId());
-			productCreditConfig.setCreditApplyMutexType(CreditApplyMutexType.FOR_ALL);
+			productCreditConfig.setApplyMutexType(CreditApplyMutexType.FOR_ALL);
 			productCreditConfig.setUseBlacklistGroupId("blacklistGroup");
 			productCreditConfig.setApplyMaxDayDuration(60);
-			productCreditConfig.setApplyFlowModleJobId("flowJobMod");
+			productCreditConfig.setApplyFlowJobModleId("flowJobMod");
 			productCreditConfig.setInterfereDaysAfterReject(15);
 			productCreditConfig.setRemarks("remarks");
 			productCreditConfig.setCreateUserId("sixliu");

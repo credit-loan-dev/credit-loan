@@ -94,6 +94,7 @@ public class MapUtils extends org.apache.commons.collections.MapUtils {
 	 * @param clazz 目标对象的类
 	 * @param map 待转换Map
 	 */
+	@SuppressWarnings("deprecation")
 	public static <T, V> T toObject(Class<T> clazz, Map<String, V> map) throws InstantiationException, IllegalAccessException,
 			InvocationTargetException {
 		T object = clazz.newInstance();
@@ -106,6 +107,7 @@ public class MapUtils extends org.apache.commons.collections.MapUtils {
 	 * @param map 待转换Map
 	 * @param toCamelCase 是否去掉下划线
 	 */
+	@SuppressWarnings("deprecation")
 	public static <T, V> T toObject(Class<T> clazz, Map<String, V> map, boolean toCamelCase) throws InstantiationException, IllegalAccessException,
 			InvocationTargetException {
 		T object = clazz.newInstance();

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sixliu.creditloan.product.BaseTest;
 import com.sixliu.creditloan.product.dto.ProductDTO;
-import com.sixliu.creditloan.product.service.ProductManagerService;
+import com.sixliu.creditloan.product.service.ProductConfigService;
 
 /**
 *@author:MG01867
@@ -19,7 +19,7 @@ import com.sixliu.creditloan.product.service.ProductManagerService;
 public class ProductConfigServiceTest extends BaseTest {
 
 	@Autowired
-	ProductManagerService productManagerService;
+	ProductConfigService productManagerService;
 
 	@Test
 	public void testInsert() {

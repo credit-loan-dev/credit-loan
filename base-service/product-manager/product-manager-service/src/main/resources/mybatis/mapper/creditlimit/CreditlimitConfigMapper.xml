@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sixliu.creditloan.product.dao.creditlimit.CreditlimitConfigDao">
+
+    <resultMap id="CreditlimitConfigResult" type="com.sixliu.creditloan.product.entity.creditlimit.CreditlimitConfig" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="product_id" property="productId" jdbcType="VARCHAR" />
+        <result column="product_creditlimit_id" property="productCreditlimitId" jdbcType="VARCHAR" />
+        <result column="loop_creditlimit" property="loopCreditlimit" jdbcType="INTEGER"/>
+        <result column="increase_creditlimit" property="increaseCreditlimit" jdbcType="INTEGER"/>
+        <result column="decrease_creditlimit" property="decreaseCreditlimit" jdbcType="INTEGER"/>
+        <result column="min_creditlimit" property="minCreditlimit" jdbcType="DECIMAL"/>
+        <result column="max_creditlimit" property="maxCreditlimit" jdbcType="DECIMAL"/>
+        <result column="effective_months" property="effectiveMonths" jdbcType="INTEGER"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+        <result column="version" property="version" jdbcType="INTEGER"/>
+        <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+        <result column="create_user_id" property="createUserId" jdbcType="VARCHAR" />
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+    <parameterMap id="CreditlimitConfigParameter" type="com.sixliu.creditloan.product.entity.creditlimit.CreditlimitConfig"/>
+    
+    <!-- from 表 -->
+    <sql id="from_table">
+    	from creditlimit_config
+    </sql>
+    
+    <!-- 查询通用列 -->
+    <sql id="select_common_column">
+    	select 
+    		`id`,
+	        product_id,
+	        product_creditlimit_id,
+	        loop_creditlimit,
+	        increase_creditlimit,
+	        decrease_creditlimit,
+	        min_creditlimit,
+	        max_creditlimit,
+	        effective_months,
+	        `remarks`,
+	        `version`,
+	        update_user_id,
+	        update_date,
+	        create_user_id,
+	        create_date
+	</sql>
+	
+    <!-- intsert to 表 -->
+    <sql id="insert_common_table">
+    	insert into creditlimit_config(
+    								id,
+    								product_id,
+    								product_creditlimit_id,    						
+    								loop_creditlimit,
+    								increase_creditlimit,
+  									decrease_creditlimit,  									 									
+  									min_creditlimit,
+  									max_creditlimit,
+  									effective_months,
+    	 							`remarks`,
+    	 							update_user_id,
+    	 							create_user_id
+    	 							)
+    	 					 values(#{id},
+    	 							#{productId},
+    	 							#{productCreditlimitId},
+    	 							#{loopCreditlimit},   	 	
+    		   						#{increaseCreditlimit},   		   						
+    		   						#{decreaseCreditlimit},
+    		   						#{minCreditlimit},
+    		   						#{maxCreditlimit},
+    		   						#{effectiveMonths},   		   						
+    		   						#{remarks},
+    		   						#{updateUserId},
+    		   						#{createUserId}
+    		   						)
+    </sql>
+
+    <sql id="delete_from_table">
+    	delete from creditlimit_config
+    </sql>
+    
+	<select id="get" resultMap="CreditlimitConfigResult" >
+		<include refid="select_common_column"/>
+		<include refid="from_table"/>
+        where 1=1
+        and `id` =#{id}
+    </select>
+    
+    <select id="getByProductId" resultMap="CreditlimitConfigResult" >
+		<include refid="select_common_column"/>
+		<include refid="from_table"/>
+        where 1=1
+        and product_id =#{productId}
+    </select>
+    
+    <insert id="insert" parameterMap="CreditlimitConfigParameter">
+    	<selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
+              select uuid()
+    	</selectKey>
+    	<include refid="insert_common_table"/>
+	</insert>
+	
+</mapper>

@@ -168,6 +168,12 @@
 				<artifactId>jaxb-api</artifactId>
 				<version>${jaxb-api.version}</version>
 			</dependency>
+			
+			<dependency>
+				<groupId>com.sun.xml.bind</groupId>
+				<artifactId>jaxb-impl</artifactId>
+				<version>${jaxb-impl.version}</version>
+			</dependency>
 
 			<dependency>
 				<groupId>com.sun.xml.bind</groupId>
@@ -179,12 +185,6 @@
 				<groupId>javax.activation</groupId>
 				<artifactId>activation</artifactId>
 				<version>${activation.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>com.sun.xml.bind</groupId>
-				<artifactId>jaxb-impl</artifactId>
-				<version>${jaxb-impl.version}</version>
 			</dependency>
 
 			<dependency>

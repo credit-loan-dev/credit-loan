@@ -10,7 +10,7 @@ import com.sixliu.creditloan.credit.base.check.CreditPreCheckException;
 import com.sixliu.creditloan.creditlimit.dto.CreditlimitDTO;
 import com.sixliu.creditloan.creditlimit.service.CreditlimitManagerClient;
 import com.sixliu.creditloan.product.dto.ProductDTO;
-import com.sixliu.creditloan.product.service.ProductManagerService;
+import com.sixliu.creditloan.product.service.ProductConfigService;
 
 /**
  * @author:MG01867
@@ -23,7 +23,7 @@ import com.sixliu.creditloan.product.service.ProductManagerService;
 public class CreditPreCheckForProduct implements CreditPreCheck {
 
 	@Autowired
-	private ProductManagerService productManagerClient;
+	private ProductConfigService productManagerClient;
 
 	@Autowired
 	private CreditlimitManagerClient quotaManagerClient;

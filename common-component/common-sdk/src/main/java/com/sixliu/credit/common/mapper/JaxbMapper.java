@@ -9,6 +9,12 @@ import com.sixliu.credit.common.lang.ExceptionUtils;
 import com.sixliu.credit.common.lang.StringUtils;
 import com.sixliu.credit.common.reflect.ReflectUtils;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.namespace.QName;
 import java.io.StringReader;
 import java.io.StringWriter;

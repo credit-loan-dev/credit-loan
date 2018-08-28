@@ -13,7 +13,7 @@ import com.sixliu.creditloan.product.dto.ProductDTO;
 import com.sixliu.creditloan.product.entity.ProductConfig;
 import com.sixliu.creditloan.product.entity.snapshot.ProductConfigSnapshot;
 import com.sixliu.creditloan.product.exception.AppException;
-import com.sixliu.creditloan.product.service.ProductManagerService;
+import com.sixliu.creditloan.product.service.ProductConfigService;
 
 /**
 *@author:MG01867
@@ -23,7 +23,7 @@ import com.sixliu.creditloan.product.service.ProductManagerService;
 *@describe //TODO
 */
 @RestController
-public class ProductManagerServiceImpl implements ProductManagerService{
+public class ProductManagerServiceImpl implements ProductConfigService{
 
 	final static Logger log = LoggerFactory.getLogger(ProductManagerServiceImpl.class);
 
@@ -48,7 +48,7 @@ public class ProductManagerServiceImpl implements ProductManagerService{
 	}
 
 	@Override
-	public String generateProductSnapshot(String productId) {
+	public String generateProductConfigSnapshot(String productId) {
 		ProductConfig productConfig=productConfigDao.get(productId);
 		if(null==productConfig) {
 			throw new AppException(String.format("The product[%s] is illegal", productId));

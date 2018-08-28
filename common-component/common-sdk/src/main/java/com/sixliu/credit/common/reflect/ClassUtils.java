@@ -261,7 +261,7 @@ abstract class VFS {
 	 * Get the singleton {@link VFS} instance. If no {@link VFS} implementation can be found for the
 	 * current environment, then this method returns null.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "deprecation" })
 	public static VFS getInstance() {
 		if (instance != null) {
 			return instance;

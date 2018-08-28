@@ -11,7 +11,7 @@ import com.sixliu.creditloan.order.dto.OrderMutexDTO;
 import com.sixliu.creditloan.order.entity.CreditOrder;
 import com.sixliu.creditloan.order.service.OrderManagerService;
 import com.sixliu.creditloan.product.dto.ProductDTO;
-import com.sixliu.creditloan.product.service.ProductManagerService;
+import com.sixliu.creditloan.product.service.ProductConfigService;
 import com.sixliu.flow.service.FlowService;
 
 /**
@@ -27,14 +27,14 @@ public class OrderManagerServiceImpl implements OrderManagerService {
 	private OrderDao orderDao;
 
 	@Autowired
-	private ProductManagerService productManagerClient;
+	private ProductConfigService productManagerClient;
 
 	private FlowService flowManager;
 
 	@Override
 	public String createOrder(CreateCreditOrderDTO createCreditOrder) {
 		ProductDTO product = productManagerClient.get(createCreditOrder.getProductId());
-		String flowJobId = flowManager.createFlowJob(product.getCreditApplyFlowModleId(),
+		String flowJobId = flowManager.createFlowJob(product.getCode(),
 				createCreditOrder.getInputUserId());
 		CreditOrder creditOrder = new CreditOrder();
 		creditOrder.setId(createCreditOrder.getId());

@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sixliu.creditloan.credit.BaseTest;
 import com.sixliu.creditloan.credit.service.CreditShopService;
-import com.sixliu.creditloan.product.service.ProductManagerService;
+import com.sixliu.creditloan.product.service.ProductConfigService;
 
 /**
 *@author:MG01867
@@ -20,7 +20,7 @@ public class CreditShopServiceTest extends BaseTest{
 	CreditShopService creditShopService;
 	
 	@Autowired
-	private ProductManagerService productManagerService;
+	private ProductConfigService productManagerService;
 
 	@Test
 	public void testInsert() {

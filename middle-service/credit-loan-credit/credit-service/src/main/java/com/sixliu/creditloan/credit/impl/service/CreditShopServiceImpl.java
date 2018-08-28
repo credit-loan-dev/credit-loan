@@ -16,7 +16,7 @@ import com.sixliu.creditloan.customer.dto.CustomerDTO;
 import com.sixliu.creditloan.order.dto.CreateCreditOrderDTO;
 import com.sixliu.creditloan.order.service.OrderManagerService;
 import com.sixliu.creditloan.product.dto.ProductDTO;
-import com.sixliu.creditloan.product.service.ProductManagerService;
+import com.sixliu.creditloan.product.service.ProductConfigService;
 
 /**
  * @author:MG01867
@@ -29,7 +29,7 @@ import com.sixliu.creditloan.product.service.ProductManagerService;
 public class CreditShopServiceImpl implements CreditShopService{
 
 	@Autowired
-	private ProductManagerService productManagerClient;
+	private ProductConfigService productManagerClient;
 
 	@Autowired
 	private OrderManagerService orderManagerService;
@@ -49,7 +49,7 @@ public class CreditShopServiceImpl implements CreditShopService{
 		Context context =creditPreCheckPiping.check(creditOrder);
 		ProductDTO product = context.getProduct();
 		CustomerDTO customer = context.getCustomer();
-		String productSnapshotId = productManagerClient.generateProductSnapshot(product.getId());
+		String productSnapshotId = productManagerClient.generateProductConfigSnapshot(product.getId());
 		String id=creditOrderIdGenerator.generator(product.getId());
 		CreateCreditOrderDTO createCreditOrder = new CreateCreditOrderDTO();
 		createCreditOrder.setActivityId(id);

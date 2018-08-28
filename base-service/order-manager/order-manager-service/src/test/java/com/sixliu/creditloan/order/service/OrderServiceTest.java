@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sixliu.creditloan.order.BaseTest;
 import com.sixliu.creditloan.product.dto.ProductDTO;
-import com.sixliu.creditloan.product.service.ProductManagerService;
+import com.sixliu.creditloan.product.service.ProductConfigService;
 
 
 /**
@@ -21,7 +21,7 @@ public class OrderServiceTest extends BaseTest {
 	OrderManagerService orderManagerService;
 	
 	@Autowired
-	ProductManagerService productManagerService;
+	ProductConfigService productManagerService;
 
 	@Test
 	public void testApply() {

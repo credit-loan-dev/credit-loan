@@ -30,7 +30,7 @@ public class CreditPreCheckForMutex implements CreditPreCheck {
 		ProductDTO product = context.getProduct();
 		CustomerDTO customer = context.getCustomer();
 		boolean pass = true;
-		if (CreditApplyMutexType.NONE != product.getCreditApplyMutexType()) {
+		if (CreditApplyMutexType.NONE !=CreditApplyMutexType.FOR_ALL) {
 			OrderMutexDTO orderMutex = new OrderMutexDTO();
 			orderMutex.setCustomerId(customer.getId());
 			orderMutex.setProductTypeId(product.getTypeId());

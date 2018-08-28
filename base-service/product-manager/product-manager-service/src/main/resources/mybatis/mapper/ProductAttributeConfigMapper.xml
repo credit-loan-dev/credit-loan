@@ -4,7 +4,7 @@
     <!-- 产品(product)属性和表字段映射 -->
     <resultMap id="ProductAttributeConfigResult" type="com.sixliu.creditloan.product.entity.ProductAttributeConfig" >
         <id column="id" property="id" jdbcType="VARCHAR" />
-        <result column="owner_id" property="ownerId" jdbcType="VARCHAR" />
+        <result column="product_id" property="productId" jdbcType="VARCHAR" />
         <result column="group" property="group" jdbcType="VARCHAR" />
         <result column="index" property="index" jdbcType="INTEGER"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
@@ -27,7 +27,7 @@
     <sql id="select_common_column">
     	select 
     		`id`,
-	        owner_id,
+	        product_id,
 	        `group`,
 	        `index`,
 	        `name`,
@@ -44,7 +44,7 @@
     <sql id="insert_common_table">
     	insert into product_attribute_config(
     								`id`,
-    								owner_id,
+    								product_id,
     								`group`,
     								`index`,
     								`name`,
@@ -54,7 +54,7 @@
     	 							create_user_id
     	 							)
     	 					 values(#{id},
-    	 							#{ownerId},
+    	 							#{productId},
     	 							#{group},
     	 							#{index},
     	 							#{name},   	 	
@@ -80,7 +80,7 @@
 		<include refid="select_common_column"/>
 		<include refid="from_table"/>
         where 1=1
-        and owner_id =#{ownerId}
+        and product_id =#{ownerId}
     </select>
     
     <insert id="insert" parameterMap="ProductAttributeConfigParameter">
@@ -97,6 +97,6 @@
 	
 	<delete id="deleteByProductId">
 		<include refid="delete_from_table"/>
-		where `owner_id`=#{productId}
+		where `product_id`=#{productId}
 	</delete>
 </mapper>

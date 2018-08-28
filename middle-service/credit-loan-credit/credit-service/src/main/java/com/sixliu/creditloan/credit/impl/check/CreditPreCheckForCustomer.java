@@ -34,17 +34,17 @@ public class CreditPreCheckForCustomer implements CreditPreCheck {
 		CreditOrderDTO creditOrder= context.getCreditOrder();
 		ProductDTO product = context.getProduct();
 		CustomerDTO customer = customerManagerClient.getAndHitBlacklist(creditOrder.getCustomerId(),
-				product.getBlacklistGroupId());
+				product.getCode());
 		if (null == customer) {
 			throw new CreditPreCheckException(
 					String.format("The customer[%s] is non-existent", creditOrder.getCustomerId()));
 		}
 		if (customer.isHitBlacklist()) {
 			throw new CreditPreCheckException(String.format("The customer[%s] is hit blacklist[%s]",
-					customer.getId(), product.getBlacklistGroupId()));
+					customer.getId(), product.getCode()));
 		}
 		context.setCustomer(customer);
-		if(1==product.getLinkCustomerBaseQuota()) {
+		if(null!=product.getCreditlimitId()) {
 			CreditlimitDTO customerCreditlimit = quotaManagerClient.get(customer.getCreditlimitId());
 			if (null == customerCreditlimit) {
 				throw new CreditPreCheckException(

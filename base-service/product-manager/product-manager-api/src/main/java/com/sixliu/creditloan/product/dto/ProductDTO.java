@@ -19,6 +19,9 @@ import lombok.Data;
 public class ProductDTO {
 
 	/**产品编码:VARCHAR(20)**/
+	private String id;
+	
+	/**产品编码:VARCHAR(20)**/
 	private String code;
 	
 	/**产品名称:VARCHAR(20)**/

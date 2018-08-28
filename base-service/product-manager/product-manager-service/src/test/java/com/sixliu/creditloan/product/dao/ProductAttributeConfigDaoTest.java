@@ -30,7 +30,7 @@ public class ProductAttributeConfigDaoTest extends BaseTest {
 		if(null!=result&&!result.isEmpty()) {
 			ProductConfig productConfig=result.get(0);
 			ProductAttributeConfig productAttributeConfig=new ProductAttributeConfig();
-			productAttributeConfig.setOwnerId(productConfig.getId());
+			productAttributeConfig.setProductId(productConfig.getId());
 			productAttributeConfig.setGroup("group");
 			productAttributeConfig.setIndex(0);
 			productAttributeConfig.setName("name");

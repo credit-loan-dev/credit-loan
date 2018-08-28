@@ -65,6 +65,7 @@ public class NumberUtils extends org.apache.commons.lang3.math.NumberUtils {
 	 * @param scale 表示表示需要精确到小数点以后几位。
 	 * @return 两个参数的商
 	 */
+	@SuppressWarnings("deprecation")
 	public static double div(double v1, double v2, int scale) {
 		if (scale < 0) {
 			throw new IllegalArgumentException("The scale must be a positive integer or zero");
@@ -78,6 +79,7 @@ public class NumberUtils extends org.apache.commons.lang3.math.NumberUtils {
 	 * 格式化双精度，保留两个小数
 	 * @return
 	 */
+	@SuppressWarnings("deprecation")
 	public static String formatDouble(Double b) {
 		BigDecimal bg = new BigDecimal(b);
 		return bg.setScale(2, BigDecimal.ROUND_HALF_UP).toString();
@@ -87,6 +89,7 @@ public class NumberUtils extends org.apache.commons.lang3.math.NumberUtils {
 	 * 百分比计算
 	 * @return
 	 */
+	@SuppressWarnings("deprecation")
 	public static String formatScale(double one, long total) {
 		BigDecimal bg = new BigDecimal(one * 100 / total);
 		return bg.setScale(0, BigDecimal.ROUND_HALF_UP).toString();
