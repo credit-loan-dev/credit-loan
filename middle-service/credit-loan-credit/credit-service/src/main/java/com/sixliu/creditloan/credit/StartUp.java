@@ -1,10 +1,13 @@
 package com.sixliu.creditloan.credit;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.SpringCloudApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import com.sixliu.creditloan.product.ProductManagerApi;
 
 /**
  * @author:MG01867
@@ -13,8 +16,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @version:
  * @describe //TODO
  */
-@SpringBootApplication
+@SpringCloudApplication
 @EnableFeignClients
+@ComponentScan(basePackageClasses= {StartUp.class,ProductManagerApi.class})
 public class StartUp implements WebMvcConfigurer {
 
 	public static void main(String[] args) {

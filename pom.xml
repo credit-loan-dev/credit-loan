@@ -23,6 +23,7 @@
 		<java.version>10</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
+		<maven-jar-plugin.version>3.1.0</maven-jar-plugin.version>
 		<lombok.version>1.18.2</lombok.version>
 		<!--java和代码源文件配置 -->
 
@@ -34,9 +35,9 @@
 		<!--jdk 模块化支持 -->
 		<jaxb-api.version>2.3.0</jaxb-api.version>
 		<jaxb-core.version>2.3.0.1</jaxb-core.version>
-		<activation.version>1.1.1</activation.version>
 		<jaxb-impl.version>2.3.0.1</jaxb-impl.version>
 		<jaxb-runtime.version>2.3.0.1</jaxb-runtime.version>
+		<activation.version>1.1.1</activation.version>
 		<jersey-bundle.version>1.19.4</jersey-bundle.version>
 		<!--jdk 模块化支持 -->
 
@@ -114,7 +115,7 @@
 			<artifactId>lombok</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -168,7 +169,7 @@
 				<artifactId>jaxb-api</artifactId>
 				<version>${jaxb-api.version}</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>com.sun.xml.bind</groupId>
 				<artifactId>jaxb-impl</artifactId>
@@ -314,11 +315,13 @@
 					<target>${java.version}</target>
 					<encoding>${project.build.sourceEncoding}</encoding>
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<version>${spring-boot.version}</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.ow2.asm</groupId>
+						<artifactId>asm</artifactId>
+						<version>6.2.1</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 		</plugins>
 	</build>

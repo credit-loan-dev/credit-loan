@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sixliu.creditloan.product.dao.ProductTypeConfigDao" >
+    <!-- 产品(product)属性和表字段映射 -->
+    <resultMap id="ProductTypeConfigResult" type="com.sixliu.creditloan.product.entity.ProductTypeConfig" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="parent_id" property="parentId" jdbcType="VARCHAR" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="depth" property="depth" jdbcType="INTEGER" />
+        <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+        <result column="version" property="version" jdbcType="INTEGER" />
+        <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR" />
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+        <result column="create_user_id" property="createUserId" jdbcType="VARCHAR" />
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+    
+    <parameterMap id="ProductTypeConfigParameter" type="com.sixliu.creditloan.product.entity.ProductTypeConfig"/>
+    
+    <!-- 查询通用列 -->
+    <sql id="select_common_column">
+    	select 
+    		`id`,
+	        parent_id,
+	        `name`,
+	        `depth`,
+	        `remarks`,
+	        `version`,
+	        update_user_id,
+	        update_date,
+	        create_user_id,
+	        create_date
+    </sql>
+    
+    <!-- from 表 -->
+    <sql id="from_table">
+    	from  product_type_config
+    </sql>
+    
+    <!-- intsert to 表 -->
+    <sql id="insert_common_table">
+    	insert into product_type_config(id,parent_id,name,depth,remarks,update_user_id,create_user_id)
+    							values(#{id},#{parentId},#{name},#{depth},#{remarks},#{updateUserId},#{createUserId})
+    </sql>
+
+	<select id="getById" resultMap="ProductTypeConfigResult" >
+		<include refid="select_common_column"></include>
+		<include refid="from_table"></include>
+        where id =#{id}
+    </select>
+    
+    <select id="listAll" resultMap="ProductTypeConfigResult" >
+		<include refid="select_common_column"></include>
+		<include refid="from_table"></include>
+    </select>
+    
+    <insert id="insert" parameterMap="ProductTypeConfigParameter">
+    	<selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
+              select uuid()
+    	</selectKey>
+    	<include refid="insert_common_table"></include> 
+	</insert>
+	
+</mapper>

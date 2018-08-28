@@ -11,25 +11,19 @@
 	</parent>
 	<artifactId>credit-service</artifactId>
 	<name>credit-service</name>
-	<url>http://maven.apache.org</url>
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
+
 	<dependencies>
-		
 		<dependency>
-            <groupId>net.logstash.logback</groupId>
-            <artifactId>logstash-logback-encoder</artifactId>
-            <version>4.6</version>
-        </dependency>
-		
-		
+			<groupId>net.logstash.logback</groupId>
+			<artifactId>logstash-logback-encoder</artifactId>
+			<version>4.6</version>
+		</dependency>
+
 		<dependency>
 			<groupId>com.sixliu</groupId>
 			<artifactId>common-sdk</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-
 
 		<dependency>
 			<groupId>com.sixliu</groupId>
@@ -150,4 +144,62 @@
 			<artifactId>spring-cloud-starter-sleuth</artifactId>
 		</dependency>
 	</dependencies>
+
+	<build>
+		<finalName>${project.name}-${project.version}</finalName>
+		<plugins>
+			<!-- 打包配置 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<appendAssemblyId>false</appendAssemblyId>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly-dev</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<!--profile声明参数调用:mvn clean package -P dev -->
+							<!--是否跳过这个执行器。true:跳过;false:不跳过 -->
+							<skipAssembly>${skipAssemblyDEV}</skipAssembly>
+							<descriptors>
+								<!--加载指定的assembly配置文件 -->
+								<descriptor>src/main/assembly/assembly-dev.xml</descriptor>
+							</descriptors>
+						</configuration>
+					</execution>
+					<execution>
+						<id>make-assembly-qa</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<skipAssembly>${skipAssemblyQA}</skipAssembly>
+							<descriptors>
+								<descriptor>src/main/assembly/assembly-test.xml</descriptor>
+							</descriptors>
+						</configuration>
+					</execution>
+					<execution>
+						<id>make-assembly-product</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<skipAssembly>${skipAssemblyPRODUCT}</skipAssembly>
+							<descriptors>
+								<descriptor>src/main/assembly/assembly-product.xml</descriptor>
+							</descriptors>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>

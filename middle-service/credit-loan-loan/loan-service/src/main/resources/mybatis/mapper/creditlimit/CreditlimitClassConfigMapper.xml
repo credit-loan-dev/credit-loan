@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sixliu.creditloan.product.dao.creditlimit.CreditlimitClassConfigDao">
+
+    <resultMap id="CreditlimitClassConfigResult" type="com.sixliu.creditloan.product.entity.creditlimit.CreditlimitClassConfig" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="product_id" property="productId" jdbcType="VARCHAR" />
+        <result column="type" property="type" jdbcType="INTEGER" />
+        <result column="ratio" property="ratio" jdbcType="DECIMAL"/>
+        <result column="risk_level" property="riskLevel" jdbcType="INTEGER"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+        <result column="version" property="version" jdbcType="INTEGER"/>
+        <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+        <result column="create_user_id" property="createUserId" jdbcType="VARCHAR" />
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+    <parameterMap id="CreditlimitClassConfigParameter" type="com.sixliu.creditloan.product.entity.creditlimit.CreditlimitClassConfig"/>
+    
+    <!-- from 表 -->
+    <sql id="from_table">
+    	from creditlimit_class_config
+    </sql>
+    
+    <!-- 查询通用列 -->
+    <sql id="select_common_column">
+    	select 
+    		`id`,
+	        product_id,
+	        `type`,
+	        `ratio`,
+	        risk_level,	    
+	        `remarks`,
+	        `version`,
+	        update_user_id,
+	        update_date,
+	        create_user_id,
+	        create_date
+	</sql>
+	
+    <!-- intsert to 表 -->
+    <sql id="insert_common_table">
+    	insert into creditlimit_class_config(
+    								id,
+    								product_id,
+    								`type`,    						
+    								`ratio`,
+    								risk_level, 									
+    	 							`remarks`,
+    	 							update_user_id,
+    	 							create_user_id
+    	 							)
+    	 					 values(#{id},
+    	 							#{productId},
+    	 							#{type},
+    	 							#{ratio},   	 	
+    		   						#{riskLevel},   		   						    		   					   						
+    		   						#{remarks},
+    		   						#{updateUserId},
+    		   						#{createUserId}
+    		   						)
+    </sql>
+
+    <sql id="delete_from_table">
+    	delete from creditlimit_class_config
+    </sql>
+    
+	<select id="get" resultMap="CreditlimitClassConfigResult" >
+		<include refid="select_common_column"/>
+		<include refid="from_table"/>
+        where 1=1
+        and `id` =#{id}
+    </select>
+    
+    <select id="getByProductId" resultMap="CreditlimitClassConfigResult" >
+		<include refid="select_common_column"/>
+		<include refid="from_table"/>
+        where 1=1
+        and product_id =#{productId}
+    </select>
+    
+    <insert id="insert" parameterMap="CreditlimitClassConfigParameter">
+    	<selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
+              select uuid()
+    	</selectKey>
+    	<include refid="insert_common_table"/>
+	</insert>
+	
+</mapper>

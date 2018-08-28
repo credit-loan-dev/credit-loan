@@ -11,10 +11,8 @@
 	</parent>
 	<artifactId>service-register</artifactId>
 	<name>service-register</name>
-	<url>http://maven.apache.org</url>
 
 	<dependencies>
-
 		<dependency>
 			<groupId>javax.xml.bind</groupId>
 			<artifactId>jaxb-api</artifactId>
@@ -99,7 +97,7 @@
 		</profile>
 	</profiles>
 	<build>
-		<finalName>${name}-${version}</finalName>
+		<finalName>${project.name}-${project.version}</finalName>
 		<plugins>
 			<!-- 打包配置 -->
 			<plugin>
