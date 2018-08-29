@@ -5,6 +5,7 @@ import com.sixliu.creditloan.product.entity.BaseEntity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
 *@author:MG01867
@@ -15,6 +16,7 @@ import lombok.EqualsAndHashCode;
 */
 @Data
 @EqualsAndHashCode(callSuper = false)
+@ToString(callSuper = true)
 public class ProductLoanConfig extends BaseEntity{
 
 	/**产品id**/

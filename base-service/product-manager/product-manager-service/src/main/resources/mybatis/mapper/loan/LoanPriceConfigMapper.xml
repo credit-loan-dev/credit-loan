@@ -5,12 +5,30 @@
     <resultMap id="ProductLoanConfigResult" type="com.sixliu.creditloan.product.entity.loan.ProductLoanConfig" >
         <id column="id" property="id" jdbcType="VARCHAR" />
         <result column="product_id" property="productId" jdbcType="VARCHAR" />
-        <result column="flow_job_modle_id" property="flowJobModleId" jdbcType="VARCHAR" />
+        <result column="repayment_strategy" property="repaymentStrategy" jdbcType="VARCHAR" />
         <result column="min_single_loan_amount" property="minSingleLoanAmount" jdbcType="DECIMAL"/>
         <result column="max_single_loan_amount" property="maxSingleLoanAmount" jdbcType="DECIMAL"/>
         <result column="loan_term_type" property="loanTermType" jdbcType="VARCHAR"/>
         <result column="min_single_loan_term" property="minSingleLoanTerm" jdbcType="INTEGER"/>
         <result column="max_single_loan_term" property="maxSingleLoanTerm" jdbcType="INTEGER"/>
+        <result column="poundage_rate" property="poundageRate" jdbcType="DECIMAL"/>
+        <result column="interest_rate" property="interestRate" jdbcType="DECIMAL"/>
+        
+        <result column="loan_extension_enable" property="loanExtensionEnable" jdbcType="DECIMAL"/>
+        <result column="loan_extension_max_count" property="loanExtensionMaxCount" jdbcType="DECIMAL"/>
+        <result column="loan_extension_max_total_term" property="loanExtensionMaxTotalTerm" jdbcType="DECIMAL"/>
+        <result column="loan_extension_max_term" property="loanExtensionMaxTerm" jdbcType="DECIMAL"/>
+        <result column="loan_extension_interest_rate" property="loanExtensionInterestRate" jdbcType="DECIMAL"/>
+        
+        <result column="loan_overdue_enable" property="maxSingleLoanAmount" jdbcType="DECIMAL"/>
+        <result column="loan_overdue_max_count" property="maxSingleLoanAmount" jdbcType="DECIMAL"/>
+        <result column="loan_overdue_max_total_term" property="maxSingleLoanAmount" jdbcType="DECIMAL"/>
+        <result column="loan_overdue_max_term" property="maxSingleLoanAmount" jdbcType="DECIMAL"/>
+        <result column="loan_overdue_interest_rate" property="maxSingleLoanAmount" jdbcType="DECIMAL"/>
+        
+        <result column="early_repayment_enable" property="maxSingleLoanAmount" jdbcType="DECIMAL"/>
+        <result column="early_repayment_interest_rate" property="maxSingleLoanAmount" jdbcType="DECIMAL"/>
+        
         <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
         <result column="version" property="version" jdbcType="INTEGER"/>
         <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR"/>

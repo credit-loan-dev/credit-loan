@@ -15,7 +15,7 @@ import org.apache.ibatis.type.MappedTypes;
  * @date:2018年8月29日
  * @E-mail:359852326@qq.com
  * @version:
- * @describe 还款策略类型
+ * @describe 还款策略类型:VARCHAR(20)
  */
 public enum RepaymentStrategy {
 

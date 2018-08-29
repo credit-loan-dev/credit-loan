@@ -179,3 +179,35 @@ CREATE TABLE `product_loan_config` (
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '数据创建日期',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='产品贷款配置';
+
+CREATE TABLE `loan_price_config` (
+  `id` varchar(36) NOT NULL COMMENT '数据id',
+  `name` varchar(36) NOT NULL COMMENT '贷款定价名称',
+  `product_id` varchar(36) NOT NULL COMMENT '产品id',
+  `repayment_strategy` varchar(20) NOT NULL COMMENT '还款策略类型',
+  `min_single_loan_amount` decimal(24,2) NOT NULL COMMENT '最小单笔贷款金额',
+  `max_single_loan_amount` decimal(24,2) NOT NULL COMMENT '最大单笔贷款金额',
+  `loan_term_type` varchar(20) NOT NULL COMMENT '贷款期限类型',
+  `min_single_loan_term` int(11) NOT NULL COMMENT '最小单笔贷款期限',
+  `max_single_loan_term` int(11) NOT NULL COMMENT '最大单笔贷款期限',
+  `poundage_rate` decimal(3,2) NOT NULL COMMENT '手续费率',
+  `loan_extension_enable` int(1) NOT NULL COMMENT '开启展期',
+  `loan_extension_max_count` int(11) NOT NULL COMMENT '最大展期次数',
+  `loan_extension_max_total_term` int(11) NOT NULL COMMENT '最大展期累计期数',
+  `loan_extension_max_term` int(11) NOT NULL COMMENT '最大展期期数',
+  `loan_extension_interest_rate` decimal(3,2) NOT NULL COMMENT '展期利率',
+  `loan_overdue_enable` int(1) NOT NULL COMMENT '开启逾期',
+  `loan_overdue_max_count` int(11) NOT NULL COMMENT '最大逾期次数',
+  `loan_overdue_max_total_term` int(11) NOT NULL COMMENT '最大逾期累计期数',
+  `loan_overdue_max_term` int(11) NOT NULL COMMENT '最大逾期期数',
+  `loan_overdue_interest_rate` decimal(3,2) NOT NULL COMMENT '逾期利率',
+  `early_repayment_enable` int(1) NOT NULL COMMENT '提前还款配置',
+  `early_repayment_interest_rate` decimal(3,2) NOT NULL COMMENT '提前还款利率期限',
+  `remarks` varchar(100) DEFAULT NULL COMMENT '备注',
+  `version` int(11) NOT NULL DEFAULT '0' COMMENT '版本',
+  `update_user_id` varchar(36) NOT NULL COMMENT '数据更新用户id',
+  `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '数据更新日期',
+  `create_user_id` varchar(36) NOT NULL COMMENT '创建数据用户id',
+  `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '数据创建日期',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='产品贷款定价配置';

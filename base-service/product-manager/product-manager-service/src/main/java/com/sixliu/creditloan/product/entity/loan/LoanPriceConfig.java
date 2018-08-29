@@ -8,6 +8,7 @@ import com.sixliu.creditloan.product.entity.BaseEntity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
  * @author:MG01867
@@ -18,6 +19,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
+@ToString(callSuper = true)
 public class LoanPriceConfig extends BaseEntity {
 
 	/** 定价名称**/
@@ -25,6 +27,9 @@ public class LoanPriceConfig extends BaseEntity {
 	
 	/**产品id**/
 	private String productId;
+	
+	/** 还款策略**/
+	private RepaymentStrategy repaymentStrategy;
 	
 	/** 最小单笔贷款金额:VARCHAR(20) **/
 	private Double minSingleLoanAmount;
@@ -45,15 +50,12 @@ public class LoanPriceConfig extends BaseEntity {
 	private Double poundageRate;
 	
 	//正常还款配置
-	/** 还款策略**/
-	private RepaymentStrategy repaymentStrategy;
-	
 	/**正常利率**/
 	private Double interestRate;
 	
 	//展期配置
 	/**开启展期**/
-	private Boolean enableLoanExtension;
+	private Boolean loanExtensionEnable;
 	
 	/**最大展期次数**/
 	private Integer loanExtensionMaxCount;
@@ -69,13 +71,13 @@ public class LoanPriceConfig extends BaseEntity {
 	
 	//逾期还款配置
 	/**开启逾期**/
-	private Boolean enableLoanOverdue;
+	private Boolean loanOverdueEnable;
 	
 	/**最大逾期次数**/
 	private Integer loanOverdueMaxCount;
 	
 	/**最大逾期累计期数**/
-	private Integer loanOverMaxTotalTerm;
+	private Integer loanOverdueMaxTotalTerm;
 	
 	/**最大逾期期数**/
 	private Integer loanOverdueMaxTerm;
@@ -85,7 +87,7 @@ public class LoanPriceConfig extends BaseEntity {
 	
 	//提前还款配置
 	/**开启提前还款**/
-	private Boolean enableEarlyRepayment;
+	private Boolean earlyRepaymentEnable;
 	
 	/**提前还款利率期限**/
 	private Double earlyRepaymentInterestRate;

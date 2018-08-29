@@ -15,7 +15,7 @@ import org.apache.ibatis.type.MappedTypes;
  * @date:2018年6月21日
  * @E-mail:359852326@qq.com
  * @version:
- * @describe 贷款期限类型
+ * @describe 贷款期限类型:VARCHAR(20)
  */
 public enum LoanTermType {
 
