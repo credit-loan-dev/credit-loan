@@ -20,7 +20,7 @@ import com.sixliu.creditloan.product.dto.credit.ProductCreditDTO;
  */
 @FeignClient("product-manager")
 @Validated
-public interface ProductCreditConfigService{
+public interface ProductCreditConfigService {
 
 	@RequestMapping(value = "/product/credit/get", method = RequestMethod.POST)
 	@ResponseBody
