@@ -37,4 +37,4 @@ spring:
 mybatis:
   config-location: classpath:mybatis/mybatis-config.xml
   mapper-locations: classpath:mybatis/mapper/**/*.xml
-  type-handlers-package: com.sixliu.creditloan.product
+  type-handlers-package: com.sixliu.creditloan.product.constant

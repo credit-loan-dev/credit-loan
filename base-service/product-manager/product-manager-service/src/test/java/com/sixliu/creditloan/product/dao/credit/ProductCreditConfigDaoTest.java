@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sixliu.creditloan.product.BaseTest;
-import com.sixliu.creditloan.product.CreditApplyMutexType;
+import com.sixliu.creditloan.product.constant.CreditApplyMutexType;
 import com.sixliu.creditloan.product.dao.ProductConfigDao;
 import com.sixliu.creditloan.product.entity.ProductConfig;
 import com.sixliu.creditloan.product.entity.credit.ProductCreditConfig;
@@ -34,7 +34,7 @@ public class ProductCreditConfigDaoTest extends BaseTest {
 			productCreditConfig.setApplyMutexType(CreditApplyMutexType.FOR_ALL);
 			productCreditConfig.setUseBlacklistGroupId("blacklistGroup");
 			productCreditConfig.setApplyMaxDayDuration(60);
-			productCreditConfig.setApplyFlowJobModleId("flowJobMod");
+			productCreditConfig.setFlowJobModleId("flowJobMod");
 			productCreditConfig.setInterfereDaysAfterReject(15);
 			productCreditConfig.setRemarks("remarks");
 			productCreditConfig.setCreateUserId("sixliu");

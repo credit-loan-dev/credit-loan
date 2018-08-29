@@ -1,7 +1,7 @@
 package com.sixliu.creditloan.order.entity;
 
 import com.sixliu.credit.common.entity.BaseEntity;
-import com.sixliu.creditloan.product.LoanTermType;
+import com.sixliu.creditloan.product.constant.LoanTermType;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

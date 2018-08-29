@@ -1,17 +1,14 @@
-package com.sixliu.creditloan.product;
+package com.sixliu.creditloan.product.constant;
 
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedJdbcTypes;
 import org.apache.ibatis.type.MappedTypes;
-
-
 
 /**
  * @author:MG01867
@@ -22,81 +19,57 @@ import org.apache.ibatis.type.MappedTypes;
  */
 public enum LoanTermType {
 
-	/** 无固定期 **/
-	NON_FIXED_PERIOD(0),
 	/** 天 **/
-	DAY(1),
+	DAY("D"),
 	/** 月 **/
-	MONTH(2),
+	MONTH("M"),
 	/** 季度 **/
-	QUARTER(3),
+	QUARTER("Q"),
 	/** 年 **/
-	YEAR(4);
+	YEAR("Y");
 
-	private int value;
+	private String value;
 
-	LoanTermType(int value) {
+	LoanTermType(String value) {
 		this.value = value;
 	}
 
-	public int value() {
+	public String value() {
 		return value;
 	}
 
-	public static LoanTermType valueOf(int value) {
-		if (0 == value) {
-			return NON_FIXED_PERIOD;
-		} else if (1 == value) {
-			return DAY;
-		} else if (2 == value) {
-			return MONTH;
-		} else if (3 == value) {
-			return QUARTER;
-		} else if (4 == value) {
-			return YEAR;
-		} else {
-			throw new IllegalArgumentException();
+	public static boolean check(String value) {
+		if (DAY.value.equals(value) || MONTH.value.equals(value) || QUARTER.value.equals(value) || YEAR.value.equals(value)) {
+			return true;
 		}
+		return false;
 	}
 
-	/**
-	 * 检查贷款期限类型值是否合法
-	 * 
-	 * @param loanTermType
-	 * @return
-	 */
-	public static boolean check(int loanTermType) {
-		if (loanTermType < NON_FIXED_PERIOD.value || loanTermType > YEAR.value) {
-			return false;
-		}
-		return true;
-	}
-	
-	@MappedTypes(value=LoanTermType.class) 
-	@MappedJdbcTypes(value= {JdbcType.INTEGER})
+	@MappedTypes(value = LoanTermType.class)
+	@MappedJdbcTypes(value = { JdbcType.INTEGER })
 	public static class LoanTermTypeHandler extends BaseTypeHandler<LoanTermType> {
 
 		@Override
 		public void setNonNullParameter(PreparedStatement ps, int i, LoanTermType parameter, JdbcType jdbcType)
 				throws SQLException {
-			ps.setInt(i, parameter.value());
+			ps.setString(i, parameter.value());
 		}
 
 		@Override
 		public LoanTermType getNullableResult(ResultSet rs, String columnName) throws SQLException {
-			int value = rs.getInt(columnName);
+			String value = rs.getString(columnName);
 			return LoanTermType.valueOf(value);
 		}
 
 		@Override
 		public LoanTermType getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
-			int value = rs.getInt(columnIndex);
+			String value = rs.getString(columnIndex);
 			return LoanTermType.valueOf(value);
 		}
 
 		@Override
 		public LoanTermType getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
-			int value = cs.getInt(columnIndex);
+			String value = cs.getString(columnIndex);
 			return LoanTermType.valueOf(value);
 		}
 

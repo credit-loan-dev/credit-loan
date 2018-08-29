@@ -1,7 +1,7 @@
 package com.sixliu.creditloan.product.entity.credit;
 
 
-import com.sixliu.creditloan.product.CreditApplyMutexType;
+import com.sixliu.creditloan.product.constant.CreditApplyMutexType;
 import com.sixliu.creditloan.product.entity.BaseEntity;
 
 import lombok.Data;
@@ -23,7 +23,10 @@ public class ProductCreditConfig extends BaseEntity {
 	/**产品id**/
 	private String productId;
 	
-	/**授信申请互斥类型:INT(11)**/
+	/**授信申请流程模型id**/
+	private String flowJobModleId;
+	
+	/**授信申请互斥类型:VARCHAR(8)**/
 	private CreditApplyMutexType applyMutexType;
 	
 	/**使用黑名单组id**/
@@ -31,9 +34,6 @@ public class ProductCreditConfig extends BaseEntity {
 	
 	/**授信申请最大持续天数**/
 	private Integer applyMaxDayDuration;
-	
-	/**授信申请流程模型id**/
-	private String applyFlowJobModleId;
 	
 	/**授信申请拒绝后干扰天数**/
 	private Integer interfereDaysAfterReject;

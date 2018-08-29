@@ -66,6 +66,5 @@
 	<!--必须在appender配置后面，否则找不到appender-->
 	<root level="info">
         <appender-ref ref="console"/>
-		<appender-ref ref="asy"/>
 	</root>
 </configuration>

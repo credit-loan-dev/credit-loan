@@ -9,7 +9,7 @@ import com.sixliu.creditloan.creditlimit.dto.CreditlimitDTO;
 import com.sixliu.creditloan.creditlimit.service.CreditlimitManagerClient;
 import com.sixliu.creditloan.order.dto.OrderMutexDTO;
 import com.sixliu.creditloan.order.service.OrderManagerService;
-import com.sixliu.creditloan.product.CreditApplyMutexType;
+import com.sixliu.creditloan.product.constant.CreditApplyMutexType;
 import com.sixliu.creditloan.product.dto.ProductDTO;
 import com.sixliu.creditloan.product.service.ProductConfigService;
 

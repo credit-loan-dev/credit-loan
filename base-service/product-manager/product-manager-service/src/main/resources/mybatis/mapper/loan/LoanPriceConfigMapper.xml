@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.sixliu.creditloan.product.dao.credit.ProductCreditConfigDao">
+<mapper namespace="com.sixliu.creditloan.product.dao.loan.ProductLoanConfigDao">
 
-    <resultMap id="ProductCreditConfigResult" type="com.sixliu.creditloan.product.entity.credit.ProductCreditConfig" >
+    <resultMap id="ProductLoanConfigResult" type="com.sixliu.creditloan.product.entity.loan.ProductLoanConfig" >
         <id column="id" property="id" jdbcType="VARCHAR" />
         <result column="product_id" property="productId" jdbcType="VARCHAR" />
-        <result column="apply_mutex_type" property="applyMutexType" jdbcType="VARCHAR" />
-        <result column="use_blacklist_group_id" property="useBlacklistGroupId" jdbcType="INTEGER"/>
-        <result column="apply_max_day_duration" property="applyMaxDayDuration" jdbcType="INTEGER"/>
-        <result column="apply_flow_job_modle_id" property="applyFlowJobModleId" jdbcType="VARCHAR"/>
-        <result column="interfere_days_after_reject" property="interfereDaysAfterReject" jdbcType="INTEGER"/>
+        <result column="flow_job_modle_id" property="flowJobModleId" jdbcType="VARCHAR" />
+        <result column="min_single_loan_amount" property="minSingleLoanAmount" jdbcType="DECIMAL"/>
+        <result column="max_single_loan_amount" property="maxSingleLoanAmount" jdbcType="DECIMAL"/>
+        <result column="loan_term_type" property="loanTermType" jdbcType="VARCHAR"/>
+        <result column="min_single_loan_term" property="minSingleLoanTerm" jdbcType="INTEGER"/>
+        <result column="max_single_loan_term" property="maxSingleLoanTerm" jdbcType="INTEGER"/>
         <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
         <result column="version" property="version" jdbcType="INTEGER"/>
         <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR"/>
@@ -17,11 +18,11 @@
         <result column="create_user_id" property="createUserId" jdbcType="VARCHAR" />
         <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
     </resultMap>
-    <parameterMap id="ProductCreditConfigParameter" type="com.sixliu.creditloan.product.entity.credit.ProductCreditConfig"/>
+    <parameterMap id="ProductLoanConfigParameter" type="com.sixliu.creditloan.product.entity.loan.ProductLoanConfig"/>
     
     <!-- from 表 -->
     <sql id="from_table">
-    	from product_credit_config
+    	from product_loan_config
     </sql>
     
     <!-- 查询通用列 -->
@@ -29,11 +30,12 @@
     	select 
     		`id`,
 	        product_id,
-	        apply_mutex_type,
-	        use_blacklist_group_id,	 
-	        apply_max_day_duration,
-	        apply_flow_job_modle_id,
-	        interfere_days_after_reject,
+	        flow_job_modle_id,
+	        min_single_loan_amount,	 
+	        max_single_loan_amount,
+	        loan_term_type,
+	        min_single_loan_term,
+	        max_single_loan_term,
 	        `remarks`,
 	        `version`,
 	        update_user_id,
@@ -44,25 +46,27 @@
 	
     <!-- intsert to 表 -->
     <sql id="insert_common_table">
-    	insert into product_credit_config(
+    	insert into product_loan_config(
     								id,
     								product_id,
-    								apply_mutex_type,
-    								use_blacklist_group_id,   					
-  									apply_max_day_duration,
-  									apply_flow_job_modle_id,
-  									interfere_days_after_reject,
+    								flow_job_modle_id,
+    								min_single_loan_amount,   					
+  									max_single_loan_amount,
+  									loan_term_type,
+  									min_single_loan_term,
+  									max_single_loan_term,
     	 							`remarks`,
     	 							update_user_id,
     	 							create_user_id
     	 							)
     	 					 values(#{id},
     	 							#{productId},
-    	 							#{applyMutexType},
-    	 							#{useBlacklistGroupId},
-    		   						#{applyMaxDayDuration},
-    		   						#{applyFlowJobModleId},
-    		   						#{interfereDaysAfterReject},		   						
+    	 							#{flowJobModleId},
+    	 							#{minSingleLoanAmount},
+    		   						#{maxSingleLoanAmount},
+    		   						#{loanTermType},
+    		   						#{minSingleLoanTerm},	
+    		   						#{maxSingleLoanTerm},	   						
     		   						#{remarks},
     		   						#{updateUserId},
     		   						#{createUserId}
@@ -70,24 +74,24 @@
     </sql>
 
     <sql id="delete_from_table">
-    	delete from product_credit_config
+    	delete from product_loan_config
     </sql>
     
-	<select id="get" resultMap="ProductCreditConfigResult" >
+	<select id="get" resultMap="ProductLoanConfigResult" >
 		<include refid="select_common_column"/>
 		<include refid="from_table"/>
         where 1=1
         and `id` =#{id}
     </select>
     
-    <select id="getByProductId" resultMap="ProductCreditConfigResult" >
+    <select id="getByProductId" resultMap="ProductLoanConfigResult" >
 		<include refid="select_common_column"/>
 		<include refid="from_table"/>
         where 1=1
         and product_id =#{productId}
     </select>
     
-    <insert id="insert" parameterMap="ProductCreditConfigParameter">
+    <insert id="insert" parameterMap="ProductLoanConfigParameter">
     	<selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
               select uuid()
     	</selectKey>

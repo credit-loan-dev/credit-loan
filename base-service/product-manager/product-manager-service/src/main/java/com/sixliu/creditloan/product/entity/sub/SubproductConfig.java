@@ -12,16 +12,16 @@ import lombok.EqualsAndHashCode;
  * @E-mail:359852326@qq.com
  * @version:
  * @describe 贷款子产品
- * 
- * 
  */
-
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class SubproductConfig extends ProductConfig {
 	
 	/** 父产品id:VARCHAR(36)**/
 	private String parentId;
+	
+	/** 合作伙伴id:VARCHAR(36)**/
+	private String partnerId;
 	
 	/** 要求共同借款人**/
 	private Integer requireCoborrower;

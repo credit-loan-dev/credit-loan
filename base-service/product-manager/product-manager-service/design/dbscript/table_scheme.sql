@@ -131,7 +131,7 @@ CREATE TABLE `creditlimit_class_config` (
 CREATE TABLE `product_credit_config` (
   `id` varchar(36) NOT NULL COMMENT '数据id:业务无关性',
   `product_id` varchar(36) NOT NULL COMMENT '产品id',
-  `apply_mutex_type` int(11) NOT NULL DEFAULT '1' COMMENT '授信申请互斥类型',
+  `apply_mutex_type` VARCHAR(20) NOT NULL DEFAULT '1' COMMENT '授信申请互斥类型',
   `use_blacklist_group_id` varchar(36) NOT NULL COMMENT '使用黑名单组id',
   `apply_max_day_duration` int(11) NOT NULL COMMENT '授信申请最大持续月数',
   `apply_flow_job_modle_id` varchar(36) NOT NULL COMMENT '授信申请流程模型',
@@ -161,3 +161,21 @@ CREATE TABLE `credit_apply_form_config` (
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '数据创建日期',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='产品授信申请表单配置';
+
+CREATE TABLE `product_loan_config` (
+  `id` varchar(36) NOT NULL COMMENT '数据id',
+  `product_id` varchar(36) NOT NULL COMMENT '产品id',
+  `flow_job_modle_id` varchar(36) NOT NULL COMMENT '贷款申请流程模型id',
+  `min_single_loan_amount` decimal(24,2) NOT NULL COMMENT '最小单笔贷款金额',
+  `max_single_loan_amount` decimal(24,2) NOT NULL COMMENT '最大单笔贷款金额',
+  `loan_term_type` varchar(20) NOT NULL COMMENT '贷款期限类型',
+  `min_single_loan_term` int(11) NOT NULL COMMENT '最小单笔贷款期限',
+  `max_single_loan_term` int(11) NOT NULL COMMENT '最大单笔贷款期限',
+  `remarks` varchar(100) DEFAULT NULL COMMENT '备注',
+  `version` int(11) NOT NULL DEFAULT '0' COMMENT '版本',
+  `update_user_id` varchar(36) NOT NULL COMMENT '数据更新用户id',
+  `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '数据更新日期',
+  `create_user_id` varchar(36) NOT NULL COMMENT '创建数据用户id',
+  `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '数据创建日期',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='产品贷款配置';

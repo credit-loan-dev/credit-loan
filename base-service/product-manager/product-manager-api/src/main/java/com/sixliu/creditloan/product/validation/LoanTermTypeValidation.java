@@ -11,7 +11,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import javax.validation.Payload;
 
-import com.sixliu.creditloan.product.LoanTermType;
+import com.sixliu.creditloan.product.constant.LoanTermType;
 
 /**
 *@author:MG01867
@@ -36,13 +36,10 @@ public @interface LoanTermTypeValidation {
 
 	boolean inclusive() default true;
 
-	public class LoanTermTypeChecker implements ConstraintValidator<LoanTermTypeValidation,Integer> {
+	public class LoanTermTypeChecker implements ConstraintValidator<LoanTermTypeValidation,String> {
 
 		@Override
-		public boolean isValid(Integer value, ConstraintValidatorContext context) {
-			if(null==value) {
-				return true;
-			}
+		public boolean isValid(String value, ConstraintValidatorContext context) {
 			return LoanTermType.check(value);
 		}
 

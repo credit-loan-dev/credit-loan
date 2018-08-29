@@ -1,6 +1,6 @@
 package com.sixliu.creditloan.product.dto.credit;
 
-import com.sixliu.creditloan.product.CreditApplyMutexType;
+import com.sixliu.creditloan.product.constant.CreditApplyMutexType;
 
 import lombok.Data;
 
