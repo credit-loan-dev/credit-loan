@@ -2,6 +2,7 @@ package com.sixliu.creditloan.credit.service;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.client.RestTemplate;
 
 import com.sixliu.creditloan.credit.BaseTest;
 import com.sixliu.creditloan.credit.service.CreditShopService;
@@ -21,6 +22,8 @@ public class CreditShopServiceTest extends BaseTest {
 
 	@Autowired
 	ProductConfigService productManagerService;
+	
+    RestTemplate restTemplate;
 
 	@Test
 	public void testInsert() {

@@ -18,12 +18,9 @@ import com.sixliu.creditloan.credit.dto.CreditApplyDTO;
 @Component
 public class CreditApplyPreCheckManager implements CreditApplyPreCheck {
 
+
 	private Map<String, List<CreditApplyPreCheck>> creditApplyPreCheckCache = new HashMap<>();
 
-	private List<CreditApplyPreCheck> getCreditApplyPreChecks(String productId){
-		return creditApplyPreCheckCache.get(productId);
-	}
-	
 	@Override
 	public void check(CreditApplyDTO creditApplyDTO) {
 		List<CreditApplyPreCheck> creditApplyPreChecks=getCreditApplyPreChecks(creditApplyDTO.getProductId());
@@ -35,5 +32,8 @@ public class CreditApplyPreCheckManager implements CreditApplyPreCheck {
 			creditApplyPreCheck.check(creditApplyDTO);
 		}
 	}
-
+	
+	private List<CreditApplyPreCheck> getCreditApplyPreChecks(String productId){
+		return creditApplyPreCheckCache.get(productId);
+	}
 }
