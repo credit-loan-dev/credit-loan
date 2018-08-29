@@ -14,8 +14,6 @@ import lombok.Data;
 public class CustomerDTO {
 
 	private String id;
-	
-	private boolean hitBlacklist;
-	
+
 	private String creditlimitId;
 }

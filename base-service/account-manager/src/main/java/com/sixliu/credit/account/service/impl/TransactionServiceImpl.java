@@ -12,7 +12,6 @@ import com.sixliu.credit.account.dto.TakeAmountResultDTO;
 import com.sixliu.credit.account.dto.TransactionResultDTO;
 import com.sixliu.credit.account.entity.Account;
 import com.sixliu.credit.account.service.TransactionService;
-import com.sixliu.credit.common.exception.IllegalOperationAppException;
 
 /**
 *@author:MG01867
@@ -31,7 +30,7 @@ public class TransactionServiceImpl implements TransactionService{
 	public TakeAmountResultDTO take(TakeAmountDTO request) {
 		Account account=accountDao.get(request.getAccountId());
 		if(null==account) {
-			throw new IllegalOperationAppException("the account[%s] is non-existent");
+			throw new IllegalArgumentException("the account[%s] is non-existent");
 		}
 		return null;
 	}

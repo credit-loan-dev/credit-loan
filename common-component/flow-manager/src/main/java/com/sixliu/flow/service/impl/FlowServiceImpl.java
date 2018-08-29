@@ -10,7 +10,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
-import com.sixliu.credit.common.exception.IllegalArgumentAppException;
 import com.sixliu.flow.FlowJob;
 import com.sixliu.flow.FlowJobModel;
 import com.sixliu.flow.FlowTask;
@@ -81,16 +80,16 @@ public class FlowServiceImpl implements FlowService {
 	public String createFlowJob(String flowJobModelId,String userId) {
 		FlowJobModel flowJobModel = flowJobModelDao.get(flowJobModelId);
 		if (null == flowJobModel) {
-			throw new IllegalArgumentAppException(
+			throw new IllegalArgumentException(
 					String.format("The flowJobClass[%s] is non-existent", flowJobModelId));
 		}
 		User user = userDao.get(flowJobModelId);
 		if (null == user) {
-			throw new IllegalArgumentAppException(
+			throw new IllegalArgumentException(
 					String.format("The user[%s] is non-existent", userId));
 		}
 		if (!StringUtils.equals(user.getRoleId(), flowJobModel.getCreateRoleId())) {
-			throw new IllegalArgumentAppException(
+			throw new IllegalArgumentException(
 					String.format("The user[%s] create flowJob of flowJobClass[%s] Permission denied",
 							userId, flowJobModel));
 		}
@@ -173,7 +172,7 @@ public class FlowServiceImpl implements FlowService {
 	public void cancelFlowJob(String flowJobId, String userId) {
 		FlowJob flowJob = getAndCheckFlowJob(flowJobId);
 		if (!StringUtils.equals(userId, flowJob.getCreateUserId())) {
-			throw new IllegalArgumentAppException(String
+			throw new IllegalArgumentException(String
 					.format("The user[%s] cancelFlowJob flowJob[%s] Permission denied", userId, userId, flowJobId));
 		}
 		flowJob.setStatus(JobStatus.CANCEL_ENDED);
@@ -187,7 +186,7 @@ public class FlowServiceImpl implements FlowService {
 	private User getAndCheckUser(String userId) {
 		User user = userDao.get(userId);
 		if (null == user) {
-			throw new IllegalArgumentAppException(String.format("The user[%s] is non-existent", userId));
+			throw new IllegalArgumentException(String.format("The user[%s] is non-existent", userId));
 		}
 		return user;
 	}

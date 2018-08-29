@@ -17,8 +17,6 @@ import org.springframework.expression.Expression;
 import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 
-import com.sixliu.credit.common.exception.SystemAppException;
-
 /**
  * @author:MG01867
  * @date:2018年7月7日
@@ -71,7 +69,7 @@ public abstract class AbstractDistributedLockAop {
 						};
 					}
 					if (null == getStampHandler) {
-						throw new SystemAppException("the distributedLock is unsupport");
+						throw new IllegalStateException("the distributedLock is unsupport");
 					}
 					cache.put(annotation, getStampHandler);
 				}
@@ -91,7 +89,7 @@ public abstract class AbstractDistributedLockAop {
 						distributedLock = getDistributedLockFactory().newInstance(stamp);
 						lockCache.put(stamp, distributedLock);
 					} catch (Exception exception) {
-						throw new SystemAppException(exception);
+						throw new IllegalStateException(exception);
 					}
 				}
 			}
@@ -122,7 +120,7 @@ public abstract class AbstractDistributedLockAop {
 						}
 					}
 					if (null == distributedLockFactory) {
-						throw new SystemAppException(
+						throw new IllegalStateException(
 								"there is not DistributedLockFactory and will unsupport DistributedLock");
 					}
 				}

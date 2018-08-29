@@ -6,8 +6,6 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
 
-import com.sixliu.credit.common.exception.SystemAppException;
-
 /**
 *@author:MG01867
 *@date:2018年7月7日
@@ -27,13 +25,13 @@ public class DistributedWriteLockAop extends AbstractDistributedLockAop{
 			distributedLock.writeLock();
 			joinPoint.proceed(joinPoint.getArgs());
 		} catch (Throwable exception) {
-			throw new SystemAppException(exception);
+			throw new IllegalStateException(exception);
 		} finally {
 			if(null!=distributedLock) {
 				try {
 					distributedLock.unwriteLock();
 				} catch (Exception exception) {
-					throw new SystemAppException(exception);
+					throw new IllegalStateException(exception);
 				}
 			}
 		}

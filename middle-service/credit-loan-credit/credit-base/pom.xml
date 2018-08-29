@@ -11,24 +11,14 @@
 	</parent>
 	<artifactId>credit-base</artifactId>
 	<name>credit-base</name>
-	<url>http://maven.apache.org</url>
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
+
 	<dependencies>
-
-		<dependency>
-			<groupId>com.sixliu</groupId>
-			<artifactId>common-sdk</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-
 		<dependency>
 			<groupId>com.sixliu</groupId>
 			<artifactId>creditlimit-manager-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.sixliu</groupId>
 			<artifactId>customer-manager-api</artifactId>
@@ -48,6 +38,12 @@
 		</dependency>
 		
 		<dependency>
+			<groupId>com.sixliu</groupId>
+			<artifactId>credit-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 		</dependency>
@@ -58,9 +54,8 @@
 		</dependency>
 
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
 		</dependency>
 	</dependencies>
 </project>

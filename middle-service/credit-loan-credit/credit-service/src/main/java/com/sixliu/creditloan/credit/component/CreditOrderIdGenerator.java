@@ -1,4 +1,9 @@
-package com.sixliu.creditloan.credit.base.component;
+package com.sixliu.creditloan.credit.component;
+
+import java.util.UUID;
+
+import org.springframework.stereotype.Component;
+
 /**
 *@author:MG01867
 *@date:2018年8月10日
@@ -6,9 +11,10 @@ package com.sixliu.creditloan.credit.base.component;
 *@version:
 *@describe 授信订单id生成器
 */
+@Component
 public class CreditOrderIdGenerator {
 
 	public String generator(String productId) {
-		return null;
+		return UUID.randomUUID().toString();
 	}
 }

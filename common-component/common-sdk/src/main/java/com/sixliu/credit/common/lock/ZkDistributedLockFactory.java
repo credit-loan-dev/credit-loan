@@ -8,9 +8,6 @@ import org.apache.curator.framework.recipes.locks.InterProcessReadWriteLock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
-import com.sixliu.credit.common.exception.SystemAppException;
-
 /**
  * @author:MG01867
  * @date:2018年7月7日
@@ -32,7 +29,7 @@ public class ZkDistributedLockFactory implements DistributedLockFactory {
 	@Override
 	public DistributedLock newInstance(String stamp) {
 		if (null != curatorFramework) {
-			throw new SystemAppException("default ZkDistributedLockFactory no support");
+			throw new IllegalStateException("default ZkDistributedLockFactory no support");
 		}
 		InterProcessReadWriteLock interProcessReadWriteLock = new InterProcessReadWriteLock(curatorFramework, stamp);
 		return new ZkDistributedLock(interProcessReadWriteLock);

@@ -1,4 +1,4 @@
-package com.sixliu.creditloan.credit;
+package com.sixliu.creditloan.credit.dto;
 
 import java.util.Map;
 

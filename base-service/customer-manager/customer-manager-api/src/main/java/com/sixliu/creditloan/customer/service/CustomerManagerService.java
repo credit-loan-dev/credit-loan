@@ -19,9 +19,5 @@ public interface CustomerManagerService {
 
 	@RequestMapping(value = "/customer/get", method = RequestMethod.POST)
 	CustomerDTO get(@RequestParam(name = "id") String id);
-	
-	@RequestMapping(value = "/customer/getAndHitBlacklist", method = RequestMethod.POST)
-	CustomerDTO getAndHitBlacklist(@RequestParam(name = "customerId") String customerId,
-			@RequestParam(name = "blacklistGroup") String blacklistGroup);
 
 }

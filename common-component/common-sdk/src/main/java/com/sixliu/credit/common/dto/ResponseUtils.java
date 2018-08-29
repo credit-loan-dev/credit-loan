@@ -1,6 +1,5 @@
 package com.sixliu.credit.common.dto;
 
-import com.sixliu.credit.common.exception.IllegalResponseAppException;
 
 /**
  * @author: sixliu
@@ -44,7 +43,7 @@ public class ResponseUtils {
 
 	private static void checkfailedCode(int code) {
 		if (SUCCEED_CODE == code) {
-			throw new IllegalResponseAppException(String.format("the faild code[%s] is illegal", code));
+			throw new IllegalArgumentException(String.format("the faild code[%s] is illegal", code));
 		}
 	}
 }
