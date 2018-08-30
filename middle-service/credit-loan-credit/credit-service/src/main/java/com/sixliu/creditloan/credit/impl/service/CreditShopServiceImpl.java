@@ -25,7 +25,7 @@ public class CreditShopServiceImpl implements CreditShopService {
 
 	@Autowired
 	private ProductConfigService productManagerClient;
-
+	
 	@Autowired
 	private OrderManagerService orderManagerService;
 

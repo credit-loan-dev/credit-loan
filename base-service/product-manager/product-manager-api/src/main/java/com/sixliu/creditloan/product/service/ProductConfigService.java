@@ -54,5 +54,5 @@ public interface ProductConfigService {
 	@ResponseBody
 	String generateProductConfigSnapshot(
 			@NotBlank(message = "The product's id must be non blank") @RequestParam(name = "id") String id);
-
+	
 }

@@ -20,29 +20,19 @@ import org.apache.ibatis.type.MappedTypes;
 public enum RepaymentStrategy {
 
 	/** 等本等息 **/
-	ECEI("ECEI"),
+	ECEI,
 	/** 等额本息 **/
-	ACPI("ACPI"),
+	ACPI,
 	/** 等额本金 **/
-	AC("AC");
+	AC;
 
-	private String value;
-
-	RepaymentStrategy(String value) {
-		this.value = value;
-	}
-
-	public String value() {
-		return value;
-	}
-	
-	public static boolean check(String value) {
-		if (ECEI.value.equals(value) || ACPI.value.equals(value) || AC.value.equals(value)) {
+	public static boolean validate(String value) {
+		if (ECEI.name().equals(value) || ACPI.name().equals(value) || AC.name().equals(value)) {
 			return true;
 		}
 		return false;
 	}
-
+	
 	@MappedTypes(value = RepaymentStrategy.class)
 	@MappedJdbcTypes(value = { JdbcType.VARCHAR })
 	public static class LoanTermTypeHandler extends BaseTypeHandler<RepaymentStrategy> {
@@ -50,7 +40,7 @@ public enum RepaymentStrategy {
 		@Override
 		public void setNonNullParameter(PreparedStatement ps, int i, RepaymentStrategy parameter, JdbcType jdbcType)
 				throws SQLException {
-			ps.setString(i, parameter.value());
+			ps.setString(i, parameter.name());
 		}
 
 		@Override

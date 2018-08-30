@@ -20,39 +20,30 @@ import org.apache.ibatis.type.MappedTypes;
 public enum LoanTermType {
 
 	/** 天 **/
-	DAY("D"),
+	DAY,
 	/** 月 **/
-	MONTH("M"),
+	MONTH,
 	/** 季度 **/
-	QUARTER("Q"),
+	QUARTER,
 	/** 年 **/
-	YEAR("Y");
+	YEAR;
 
-	private String value;
-
-	LoanTermType(String value) {
-		this.value = value;
-	}
-
-	public String value() {
-		return value;
-	}
-
-	public static boolean check(String value) {
-		if (DAY.value.equals(value) || MONTH.value.equals(value) || QUARTER.value.equals(value) || YEAR.value.equals(value)) {
+	public static boolean validate(String value) {
+		if (DAY.name().equals(value) || MONTH.name().equals(value) || QUARTER.name().equals(value)
+				|| YEAR.name().equals(value)) {
 			return true;
 		}
 		return false;
 	}
 
 	@MappedTypes(value = LoanTermType.class)
-	@MappedJdbcTypes(value = { JdbcType.INTEGER })
+	@MappedJdbcTypes(value = { JdbcType.VARCHAR })
 	public static class LoanTermTypeHandler extends BaseTypeHandler<LoanTermType> {
 
 		@Override
 		public void setNonNullParameter(PreparedStatement ps, int i, LoanTermType parameter, JdbcType jdbcType)
 				throws SQLException {
-			ps.setString(i, parameter.value());
+			ps.setString(i, parameter.name());
 		}
 
 		@Override

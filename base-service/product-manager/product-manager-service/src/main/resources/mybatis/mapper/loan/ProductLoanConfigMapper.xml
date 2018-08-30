@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.sixliu.creditloan.product.dao.loan.LoanPriceConfigDao">
+<mapper namespace="com.sixliu.creditloan.product.dao.loan.ProductLoanConfigDao">
 
-    <resultMap id="LoanPriceConfigResult" type="com.sixliu.creditloan.product.entity.loan.LoanPriceConfig" >
+    <resultMap id="ProductLoanConfigResult" type="com.sixliu.creditloan.product.entity.loan.ProductLoanConfig" >
         <id column="id" property="id" jdbcType="VARCHAR" />
         <result column="product_id" property="productId" jdbcType="VARCHAR" />
         <result column="flow_job_modle_id" property="flowJobModleId" jdbcType="VARCHAR" />
@@ -18,11 +18,12 @@
         <result column="create_user_id" property="createUserId" jdbcType="VARCHAR" />
         <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
     </resultMap>
-    <parameterMap id="LoanPriceConfigParameter" type="com.sixliu.creditloan.product.entity.loan.LoanPriceConfig"/>
+    
+    <parameterMap id="ProductLoanConfigParameter" type="com.sixliu.creditloan.product.entity.loan.ProductLoanConfig"/>
     
     <!-- from 表 -->
     <sql id="from_table">
-    	from loan_price_config
+    	from product_loan_config
     </sql>
     
     <!-- 查询通用列 -->
@@ -46,7 +47,7 @@
 	
     <!-- intsert to 表 -->
     <sql id="insert_common_table">
-    	insert into loan_price_config(
+    	insert into product_loan_config(
     								id,
     								product_id,
     								flow_job_modle_id,
@@ -74,7 +75,7 @@
     </sql>
 
     <sql id="delete_from_table">
-    	delete from loan_price_config
+    	delete from product_loan_config
     </sql>
     
 	<select id="get" resultMap="ProductLoanConfigResult" >

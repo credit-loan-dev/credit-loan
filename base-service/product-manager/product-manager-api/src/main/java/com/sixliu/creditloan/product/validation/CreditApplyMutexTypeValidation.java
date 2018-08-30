@@ -11,20 +11,20 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import javax.validation.Payload;
 
-import com.sixliu.creditloan.product.constant.LoanTermType;
+import com.sixliu.creditloan.product.constant.CreditApplyMutexType;
 
 /**
 *@author:MG01867
-*@date:2018年8月23日
+*@date:2018年8月30日
 *@E-mail:359852326@qq.com
 *@version:
 *@describe //TODO
 */
 @Target({ ElementType.FIELD, ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = LoanTermTypeValidation.Checker.class)
+@Constraint(validatedBy = CreditApplyMutexTypeValidation.Checker.class)
 @Documented
-public @interface LoanTermTypeValidation {
+public @interface CreditApplyMutexTypeValidation {
 
 	String message() default "";
 
@@ -36,11 +36,11 @@ public @interface LoanTermTypeValidation {
 
 	boolean inclusive() default true;
 
-	public class Checker implements ConstraintValidator<LoanTermTypeValidation,String> {
+	public class Checker implements ConstraintValidator<CreditApplyMutexTypeValidation,String> {
 
 		@Override
 		public boolean isValid(String value, ConstraintValidatorContext context) {
-			return LoanTermType.validate(value);
+			return CreditApplyMutexType.validate(value);
 		}
 
 	}

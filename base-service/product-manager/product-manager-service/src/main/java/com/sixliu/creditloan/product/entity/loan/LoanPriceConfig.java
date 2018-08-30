@@ -23,7 +23,7 @@ import lombok.ToString;
 public class LoanPriceConfig extends BaseEntity {
 
 	/** 定价名称**/
-	private Integer name;
+	private String name;
 	
 	/**产品id**/
 	private String productId;
@@ -52,6 +52,16 @@ public class LoanPriceConfig extends BaseEntity {
 	//正常还款配置
 	/**正常利率**/
 	private Double interestRate;
+	
+	//合作配置
+	/**开启合作**/
+	private Boolean partnerEnable;
+	
+	/**合作伙伴id**/
+	private String partnerId;
+	
+	/**贴息利率**/
+	private Double partnerDiscountChargesRate;
 	
 	//展期配置
 	/**开启展期**/

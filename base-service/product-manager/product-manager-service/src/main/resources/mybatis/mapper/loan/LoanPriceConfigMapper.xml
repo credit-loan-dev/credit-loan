@@ -1,34 +1,42 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.sixliu.creditloan.product.dao.loan.ProductLoanConfigDao">
+<mapper namespace="com.sixliu.creditloan.product.dao.loan.LoanPriceConfigDao">
 
-    <resultMap id="ProductLoanConfigResult" type="com.sixliu.creditloan.product.entity.loan.ProductLoanConfig" >
+    <resultMap id="LoanPriceConfigResult" type="com.sixliu.creditloan.product.entity.loan.LoanPriceConfig" >
         <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
         <result column="product_id" property="productId" jdbcType="VARCHAR" />
+        
         <result column="repayment_strategy" property="repaymentStrategy" jdbcType="VARCHAR" />
+        
         <result column="min_single_loan_amount" property="minSingleLoanAmount" jdbcType="DECIMAL"/>
         <result column="max_single_loan_amount" property="maxSingleLoanAmount" jdbcType="DECIMAL"/>
         <result column="loan_term_type" property="loanTermType" jdbcType="VARCHAR"/>
         <result column="min_single_loan_term" property="minSingleLoanTerm" jdbcType="INTEGER"/>
         <result column="max_single_loan_term" property="maxSingleLoanTerm" jdbcType="INTEGER"/>
+        
         <result column="poundage_rate" property="poundageRate" jdbcType="DECIMAL"/>
-        <result column="interest_rate" property="interestRate" jdbcType="DECIMAL"/>
+        <result column="interest_rate" property="interestRate" jdbcType="DECIMAL"/>    
+           
+        <result column="partner_enable" property="partnerEnable" jdbcType="TINYINT"/> 
+        <result column="partner_id" property="partnerId" jdbcType="VARCHAR"/> 
+        <result column="partner_discount_charges_rate" property="partnerDiscountChargesRate" jdbcType="DECIMAL"/>  
         
-        <result column="loan_extension_enable" property="loanExtensionEnable" jdbcType="DECIMAL"/>
-        <result column="loan_extension_max_count" property="loanExtensionMaxCount" jdbcType="DECIMAL"/>
-        <result column="loan_extension_max_total_term" property="loanExtensionMaxTotalTerm" jdbcType="DECIMAL"/>
-        <result column="loan_extension_max_term" property="loanExtensionMaxTerm" jdbcType="DECIMAL"/>
-        <result column="loan_extension_interest_rate" property="loanExtensionInterestRate" jdbcType="DECIMAL"/>
-        
-        <result column="loan_overdue_enable" property="maxSingleLoanAmount" jdbcType="DECIMAL"/>
-        <result column="loan_overdue_max_count" property="maxSingleLoanAmount" jdbcType="DECIMAL"/>
-        <result column="loan_overdue_max_total_term" property="maxSingleLoanAmount" jdbcType="DECIMAL"/>
-        <result column="loan_overdue_max_term" property="maxSingleLoanAmount" jdbcType="DECIMAL"/>
-        <result column="loan_overdue_interest_rate" property="maxSingleLoanAmount" jdbcType="DECIMAL"/>
-        
-        <result column="early_repayment_enable" property="maxSingleLoanAmount" jdbcType="DECIMAL"/>
-        <result column="early_repayment_interest_rate" property="maxSingleLoanAmount" jdbcType="DECIMAL"/>
-        
+        <result column="loan_extension_enable" property="loanExtensionEnable" jdbcType="TINYINT"/>
+        <result column="loan_extension_max_count" property="loanExtensionMaxCount" jdbcType="INTEGER"/>
+        <result column="loan_extension_max_total_term" property="loanExtensionMaxTotalTerm" jdbcType="INTEGER"/>
+        <result column="loan_extension_max_term" property="loanExtensionMaxTerm" jdbcType="INTEGER"/>
+        <result column="loan_extension_interest_rate" property="loanExtensionInterestRate" jdbcType="DECIMAL"/> 
+               
+        <result column="loan_overdue_enable" property="loanOverdueEnable" jdbcType="TINYINT"/>
+        <result column="loan_overdue_max_count" property="loanOverdueMaxCount" jdbcType="INTEGER"/>
+        <result column="loan_overdue_max_total_term" property="loanOverdueMaxTotalTerm" jdbcType="INTEGER"/>
+        <result column="loan_overdue_max_term" property="loanOverdueMaxTerm" jdbcType="INTEGER"/>
+        <result column="loan_overdue_interest_rate" property="loanOverdueInterestRate" jdbcType="DECIMAL"/>
+            
+        <result column="early_repayment_enable" property="earlyRepaymentEnable" jdbcType="TINYINT"/>
+        <result column="early_repayment_interest_rate" property="earlyRepaymentInterestRate" jdbcType="DECIMAL"/>   
+            
         <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
         <result column="version" property="version" jdbcType="INTEGER"/>
         <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR"/>
@@ -36,24 +44,43 @@
         <result column="create_user_id" property="createUserId" jdbcType="VARCHAR" />
         <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
     </resultMap>
-    <parameterMap id="ProductLoanConfigParameter" type="com.sixliu.creditloan.product.entity.loan.ProductLoanConfig"/>
+    
+    <parameterMap id="LoanPriceConfigParameter" type="com.sixliu.creditloan.product.entity.loan.LoanPriceConfig"/>
     
     <!-- from 表 -->
     <sql id="from_table">
-    	from product_loan_config
+    	from loan_price_config
     </sql>
-    
+ 
     <!-- 查询通用列 -->
     <sql id="select_common_column">
     	select 
     		`id`,
+    		`name`,
 	        product_id,
-	        flow_job_modle_id,
+	        repayment_strategy,
 	        min_single_loan_amount,	 
 	        max_single_loan_amount,
 	        loan_term_type,
 	        min_single_loan_term,
 	        max_single_loan_term,
+	        poundage_rate,
+	        interest_rate,
+	        partner_enable,
+	        partner_id,
+	        partner_discount_charges_rate,
+	        loan_extension_enable,
+	        loan_extension_max_count,
+	        loan_extension_max_total_term,
+	        loan_extension_max_term,
+	        loan_extension_interest_rate,
+	        loan_overdue_enable,
+	        loan_overdue_max_count,
+	        loan_overdue_max_total_term,
+	        loan_overdue_max_term,
+	        loan_overdue_interest_rate,
+	        early_repayment_enable,
+	        early_repayment_interest_rate,
 	        `remarks`,
 	        `version`,
 	        update_user_id,
@@ -64,27 +91,63 @@
 	
     <!-- intsert to 表 -->
     <sql id="insert_common_table">
-    	insert into product_loan_config(
+    	insert into loan_price_config(
     								id,
+    								name,
     								product_id,
-    								flow_job_modle_id,
+    								repayment_strategy,
     								min_single_loan_amount,   					
   									max_single_loan_amount,
   									loan_term_type,
   									min_single_loan_term,
   									max_single_loan_term,
+  									poundage_rate,
+	        						interest_rate,
+	        						partner_enable,
+	        						partner_id,
+	       		 					partner_discount_charges_rate,
+	        						loan_extension_enable,
+	        						loan_extension_max_count,
+	        						loan_extension_max_total_term,
+	        						loan_extension_max_term,
+	        						loan_extension_interest_rate,
+	        						loan_overdue_enable,
+	        						loan_overdue_max_count,
+	        						loan_overdue_max_total_term,
+	        						loan_overdue_max_term,
+	        						loan_overdue_interest_rate,
+	        						early_repayment_enable,
+	        						early_repayment_interest_rate,
     	 							`remarks`,
     	 							update_user_id,
     	 							create_user_id
     	 							)
     	 					 values(#{id},
+    	 					 		#{name},
     	 							#{productId},
-    	 							#{flowJobModleId},
+    	 							#{repaymentStrategy},
     	 							#{minSingleLoanAmount},
     		   						#{maxSingleLoanAmount},
     		   						#{loanTermType},
     		   						#{minSingleLoanTerm},	
-    		   						#{maxSingleLoanTerm},	   						
+    		   						#{maxSingleLoanTerm},
+    		   						#{poundageRate},
+	        						#{interestRate},
+	        						#{partnerEnable},
+	        						#{partnerId},
+	       		 					#{partnerDiscountChargesRate},
+	        						#{loanExtensionEnable},
+	        						#{loanExtensionMaxCount},
+	        						#{loanExtensionMaxTotalTerm},
+	        						#{loanExtensionMaxTerm},
+	        						#{loanExtensionInterestRate},	        						
+	        						#{loanOverdueEnable},
+	        						#{loanOverdueMaxCount},
+	        						#{loanOverdueMaxTotalTerm},
+	        						#{loanOverdueMaxTerm},
+	        						#{loanOverdueInterestRate},	        			
+	        						#{earlyRepaymentEnable},
+	        						#{earlyRepaymentInterestRate},						
     		   						#{remarks},
     		   						#{updateUserId},
     		   						#{createUserId}
@@ -92,28 +155,27 @@
     </sql>
 
     <sql id="delete_from_table">
-    	delete from product_loan_config
+    	delete from loan_price_config
     </sql>
     
-	<select id="get" resultMap="ProductLoanConfigResult" >
+	<select id="get" resultMap="LoanPriceConfigResult" >
 		<include refid="select_common_column"/>
 		<include refid="from_table"/>
         where 1=1
         and `id` =#{id}
     </select>
     
-    <select id="getByProductId" resultMap="ProductLoanConfigResult" >
+    <select id="getByProductId" resultMap="LoanPriceConfigResult" >
 		<include refid="select_common_column"/>
 		<include refid="from_table"/>
         where 1=1
         and product_id =#{productId}
     </select>
     
-    <insert id="insert" parameterMap="ProductLoanConfigParameter">
+    <insert id="insert" parameterMap="LoanPriceConfigParameter">
     	<selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
               select uuid()
     	</selectKey>
     	<include refid="insert_common_table"/>
 	</insert>
-	
 </mapper>

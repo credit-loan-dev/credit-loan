@@ -20,27 +20,25 @@ import org.apache.ibatis.type.MappedTypes;
 public enum CreditApplyMutexType {
 
 	/** 无互斥 **/
-	NONE("NONE"),
+	NONE,
 
 	/** 跟自己互斥 **/
-	FOR_SELF("FOR_SELF"),
+	FOR_SELF,
 
 	/** 跟同类型产品互斥 **/
-	FOR_TYPE("FOR_TYPE"),
+	FOR_TYPE,
 
 	/** 跟所有产品互斥 **/
-	FOR_ALL("FOR_ALL");
+	FOR_ALL;
 
-	private final String value;
-
-	private CreditApplyMutexType(String value) {
-		this.value = value;
+	public static boolean validate(String value) {
+		if (NONE.name().equals(value) || FOR_SELF.name().equals(value) || FOR_TYPE.name().equals(value)
+				|| FOR_ALL.name().equals(value)) {
+			return true;
+		}
+		return false;
 	}
-
-	public String value() {
-		return value;
-	}
-
+	
 	@MappedTypes(value=CreditApplyMutexType.class) 
 	@MappedJdbcTypes(value= {JdbcType.VARCHAR})
 	public static class CreditApplyMutexTypeHandler extends BaseTypeHandler<CreditApplyMutexType> {
@@ -49,7 +47,7 @@ public enum CreditApplyMutexType {
 		@Override
 		public void setNonNullParameter(PreparedStatement ps, int i, CreditApplyMutexType parameter, JdbcType jdbcType)
 				throws SQLException {
-			ps.setString(i, parameter.value());
+			ps.setString(i, parameter.name());
 		}
 
 		@Override
