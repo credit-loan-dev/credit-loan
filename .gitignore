@@ -1,9 +1,6 @@
 # Compiled class file
-*/.settings/*
-*/target/*
-*/*/target/*
-*/*/*/target/*
-*/*/*/*/target/*
+**/.settings/*
+**/target/*
 *.class
 # Log file
 *.log
@@ -56,3 +53,6 @@ dist/
 nbdist/
 .nb-gradle/
 /bin/
+
+### vue ###
+**/node_modules/*
