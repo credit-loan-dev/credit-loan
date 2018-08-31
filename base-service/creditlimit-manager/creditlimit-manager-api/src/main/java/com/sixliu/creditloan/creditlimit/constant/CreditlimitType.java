@@ -1,4 +1,4 @@
-package com.sixliu.creditloan.creditlimit;
+package com.sixliu.creditloan.creditlimit.constant;
 
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
@@ -20,33 +20,11 @@ import org.apache.ibatis.type.MappedTypes;
 public enum CreditlimitType {
 
 	/** 取现 **/
-	TAKE_CASH(0),
+	TAKE_CASH,
 	/** 消费 **/
-	CONSUME(1),
+	CONSUME,
 	/** 特殊 **/
-	SPECIAL(2);
-
-	private int value;
-
-	CreditlimitType(int value) {
-		this.value = value;
-	}
-
-	public int value() {
-		return value;
-	}
-
-	public static CreditlimitType valueOf(int value) {
-		if (0 == value) {
-			return TAKE_CASH;
-		} else if (1 == value) {
-			return CONSUME;
-		} else if (2 == value) {
-			return SPECIAL;
-		} else {
-			throw new IllegalArgumentException();
-		}
-	}
+	SPECIAL;
 
 	/**
 	 * 检查贷款期限类型值是否合法
@@ -54,38 +32,38 @@ public enum CreditlimitType {
 	 * @param loanTermType
 	 * @return
 	 */
-	public static boolean check(int creditlimitUseageType) {
-		if (creditlimitUseageType < TAKE_CASH.value || creditlimitUseageType > SPECIAL.value) {
-			return false;
+	public static boolean validate(String value) {
+		if (TAKE_CASH.name().equals(value) || CONSUME.name().equals(value) || SPECIAL.name().equals(value)) {
+			return true;
 		}
-		return true;
+		return false;
 	}
 
 	@MappedTypes(value = CreditlimitType.class)
-	@MappedJdbcTypes(value = { JdbcType.INTEGER })
+	@MappedJdbcTypes(value = {JdbcType.VARCHAR,JdbcType.CHAR})
 	public static class CreditlimitTypeHandler extends BaseTypeHandler<CreditlimitType> {
 
 		@Override
 		public void setNonNullParameter(PreparedStatement ps, int i, CreditlimitType parameter, JdbcType jdbcType)
 				throws SQLException {
-			ps.setInt(i, parameter.value());
+			ps.setString(i, parameter.name());
 		}
 
 		@Override
 		public CreditlimitType getNullableResult(ResultSet rs, String columnName) throws SQLException {
-			int value = rs.getInt(columnName);
+			String value = rs.getString(columnName);
 			return CreditlimitType.valueOf(value);
 		}
 
 		@Override
 		public CreditlimitType getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
-			int value = rs.getInt(columnIndex);
+			String value = rs.getString(columnIndex);
 			return CreditlimitType.valueOf(value);
 		}
 
 		@Override
 		public CreditlimitType getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
-			int value = cs.getInt(columnIndex);
+			String value = cs.getString(columnIndex);
 			return CreditlimitType.valueOf(value);
 		}
 

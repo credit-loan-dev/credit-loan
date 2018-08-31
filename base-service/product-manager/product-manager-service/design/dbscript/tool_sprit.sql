@@ -38,8 +38,3 @@ select * from zipkin_dependencies;
 
 
 
-
-
-
-
-

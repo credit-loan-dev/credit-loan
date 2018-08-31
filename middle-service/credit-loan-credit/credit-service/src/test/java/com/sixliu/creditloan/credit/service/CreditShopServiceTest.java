@@ -2,11 +2,10 @@ package com.sixliu.creditloan.credit.service;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.client.RestTemplate;
 
 import com.sixliu.creditloan.credit.BaseTest;
+import com.sixliu.creditloan.credit.dto.CreditApplyDTO;
 import com.sixliu.creditloan.credit.service.CreditShopService;
-import com.sixliu.creditloan.product.service.ProductConfigService;
 
 /**
  * @author:MG01867
@@ -20,17 +19,13 @@ public class CreditShopServiceTest extends BaseTest {
 	@Autowired
 	CreditShopService creditShopService;
 
-	@Autowired
-	ProductConfigService productManagerService;
-	
-    RestTemplate restTemplate;
-
 	@Test
-	public void testInsert() {
-		for (int i = 0; i < 10; i++) {
-			Object result = productManagerService.get("67ea4cf2-a6d4-11e8-8df1-000c29851249");
-			checkObject(result);
-		}
+	public void testApply() {
+		CreditApplyDTO creditApply=new CreditApplyDTO();
+		creditApply.setProductId("c43d00de-9d29-11e8-9e01-005056986f0b");
+		creditApply.setCustomerId("sixliu");
+		String creditOrderId=creditShopService.apply(creditApply);
+		log.info("credit order id:"+creditOrderId);
 	}
 
 }

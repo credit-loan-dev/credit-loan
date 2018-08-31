@@ -25,7 +25,7 @@ public class ExceptionInterceptor {
 
 	static final Logger log = LoggerFactory.getLogger(ExceptionInterceptor.class);
 
-	private final static String msg = "system error";
+	final static String SYSTEM_ERROR_MSG = "system error";
 
 	@ExceptionHandler(value = Exception.class)
 	@ResponseBody
@@ -39,7 +39,7 @@ public class ExceptionInterceptor {
 			return exception.getMessage();
 		} else {
 			resp.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
-			return msg;
+			return SYSTEM_ERROR_MSG;
 		}
 	}
 }

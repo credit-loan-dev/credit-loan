@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.sixliu.creditloan.product.dto.ProductDTO;
+import com.sixliu.creditloan.product.dto.ProductForCreditDTO;
 
 /**
  * @author:MG01867
@@ -23,14 +23,14 @@ import com.sixliu.creditloan.product.dto.ProductDTO;
 public interface ProductConfigService {
 
 	/**
-	 * 通过产品id获取产品
+	 * 通过产品id获取产品:面向授信
 	 * 
 	 * @param id
 	 * @return
 	 */
 	@RequestMapping(value = "/product/get", method = RequestMethod.POST)
 	@ResponseBody
-	ProductDTO get(@NotBlank(message = "The product's Id must be non blank") @RequestParam(name = "id") String id);
+	ProductForCreditDTO get(@NotBlank(message = "The product's Id must be non blank") @RequestParam(name = "id") String id);
 
 	/**
 	 * 通过产品id获取产品
@@ -40,7 +40,7 @@ public interface ProductConfigService {
 	 */
 	@RequestMapping(value = "/product/getByCode", method = RequestMethod.POST)
 	@ResponseBody
-	ProductDTO getByCode(
+	ProductForCreditDTO getByCode(
 			@RequestParam(name = "code") @NotBlank(message = "The product's code must be non blank") String code);
 
 	/**

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sixliu.creditloan.product.converter.ProductDTOConverter;
 import com.sixliu.creditloan.product.dao.ProductConfigDao;
 import com.sixliu.creditloan.product.dao.snapshot.ProductConfigSnapshotDao;
-import com.sixliu.creditloan.product.dto.ProductDTO;
+import com.sixliu.creditloan.product.dto.ProductForCreditDTO;
 import com.sixliu.creditloan.product.entity.ProductConfig;
 import com.sixliu.creditloan.product.entity.snapshot.ProductConfigSnapshot;
 import com.sixliu.creditloan.product.exception.AppException;
@@ -34,7 +34,7 @@ public class ProductManagerServiceImpl implements ProductConfigService{
 	private ProductConfigSnapshotDao productConfigSnapshotDao;
 	
 	@Override
-	public ProductDTO get(String id) {
+	public ProductForCreditDTO get(String id) {
 		ProductConfig productConfig=productConfigDao.get(id);
 		return ProductDTOConverter.convert(productConfig);
 	}
@@ -42,7 +42,7 @@ public class ProductManagerServiceImpl implements ProductConfigService{
 
 
 	@Override
-	public ProductDTO getByCode(String code) {
+	public ProductForCreditDTO getByCode(String code) {
 		ProductConfig productConfig=productConfigDao.getByCode(code);
 		return ProductDTOConverter.convert(productConfig);
 	}

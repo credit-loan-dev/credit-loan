@@ -5,8 +5,10 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -49,8 +51,9 @@ public class AutoApprovalHandlerManager {
 	public AutoApprovalHandlerManager(int workerThreads, int scheduledThreads) {
 		this.initialDelayRandom = new Random();
 		this.cache = new HashMap<>();
-		this.workerThreadPool = Executors.newFixedThreadPool(workerThreads, this::newWorkerThread);
-		this.scheduledThreadPool = Executors.newScheduledThreadPool(scheduledThreads, this::newScheduledThread);
+		this.workerThreadPool = new ThreadPoolExecutor(workerThreads, workerThreads, 0L, TimeUnit.MILLISECONDS,
+				new LinkedBlockingQueue<Runnable>(), this::newWorkerThread);
+		this.scheduledThreadPool = new ScheduledThreadPoolExecutor(scheduledThreads, this::newScheduledThread);
 	}
 
 	private Thread newWorkerThread(Runnable r) {

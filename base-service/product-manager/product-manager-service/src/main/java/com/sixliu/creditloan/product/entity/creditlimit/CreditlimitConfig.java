@@ -24,6 +24,12 @@ public class CreditlimitConfig extends BaseEntity {
 	/** 产品额度id **/
 	private String productCreditlimitId;
 	
+	/** 渠道额度id **/
+	private String channelCreditlimitId;
+	
+	/** 关联客户基础额度**/
+	private String linkCustomerBaseCreditlimit;
+	
 	/**是否循环额度:INT(1)**/
 	private Boolean loopCreditlimit;
 	

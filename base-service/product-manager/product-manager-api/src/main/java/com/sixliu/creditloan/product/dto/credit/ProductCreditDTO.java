@@ -20,6 +20,9 @@ public class ProductCreditDTO{
 	/**产品id**/
 	private String productId;
 	
+	/**产品额度id**/
+	private String creditlimitId;
+	
 	/**使用黑名单组id**/
 	private String useBlacklistGroupId;
 	

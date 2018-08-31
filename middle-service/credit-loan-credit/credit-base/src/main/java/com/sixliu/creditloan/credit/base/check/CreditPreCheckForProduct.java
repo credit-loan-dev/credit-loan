@@ -1,4 +1,4 @@
-package com.sixliu.creditloan.credit.impl.check;
+package com.sixliu.creditloan.credit.base.check;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -10,7 +10,7 @@ import com.sixliu.creditloan.creditlimit.service.CreditlimitManagerClient;
 import com.sixliu.creditloan.order.dto.OrderMutexDTO;
 import com.sixliu.creditloan.order.service.OrderManagerService;
 import com.sixliu.creditloan.product.constant.CreditApplyMutexType;
-import com.sixliu.creditloan.product.dto.ProductDTO;
+import com.sixliu.creditloan.product.dto.ProductForCreditDTO;
 import com.sixliu.creditloan.product.service.ProductConfigService;
 
 /**
@@ -24,56 +24,60 @@ import com.sixliu.creditloan.product.service.ProductConfigService;
 public class CreditPreCheckForProduct implements CreditApplyPreCheck {
 
 	@Autowired
-	private ProductConfigService productManagerClient;
+	private ProductConfigService productConfigService;
 
 	@Autowired
-	private CreditlimitManagerClient quotaManagerClient;
-	
+	private CreditlimitManagerClient creditlimitManagerClient;
+
 	@Autowired
 	private OrderManagerService orderManagerService;
 
-
+	public CreditPreCheckForProduct(ProductConfigService productConfigService,CreditlimitManagerClient creditlimitManagerClient,OrderManagerService orderManagerService) {
+		this.productConfigService=productConfigService;
+		this.creditlimitManagerClient=creditlimitManagerClient;
+		this.orderManagerService=orderManagerService;
+	}
+	
 	@Override
 	public void check(CreditApplyDTO creditApplyDTO) {
-		ProductDTO productDTO = productManagerClient.get(creditApplyDTO.getProductId());
-		if (null == productDTO) {
+		ProductForCreditDTO productForCreditDTO = productConfigService.get(creditApplyDTO.getProductId());
+		if (null == productForCreditDTO) {
 			throw new IllegalArgumentException(
 					String.format("The product[%s] is non-existent", creditApplyDTO.getProductId()));
 		}
-		if (!productDTO.getEffective()) {
+		if (!productForCreditDTO.getEffective()) {
 			throw new IllegalArgumentException(
 					String.format("The product[%s] is not effective", creditApplyDTO.getProductId()));
 		}
-		checkBlanklist(creditApplyDTO, productDTO);
-		CreditlimitDTO prductCreditlimit = quotaManagerClient.get(productDTO.getCreditlimitId());
+		checkBlanklist(creditApplyDTO, productForCreditDTO);
+		CreditlimitDTO prductCreditlimit = creditlimitManagerClient.get(productForCreditDTO.getCreditlimitId());
 		if (null == prductCreditlimit) {
 			throw new IllegalArgumentException(
-					String.format("The product[%s] is Illegal admittance", productDTO.getCreditlimitId()));
+					String.format("The product[%s] is Illegal admittance", productForCreditDTO.getCreditlimitId()));
 		}
 		if (!prductCreditlimit.getEffective()) {
 			throw new IllegalArgumentException(String.format("The creditlimit[%s] of product[%s] is not effective",
-					productDTO.getCreditlimitId(), productDTO.getId()));
+					productForCreditDTO.getCreditlimitId(), productForCreditDTO.getId()));
 		}
 		if (creditApplyDTO.getApplyCreditlimit() > prductCreditlimit.getSurplusAmount()) {
 			throw new IllegalArgumentException(String.format("The creditlimit[%s] of product[%s] is not enough",
-					productDTO.getCreditlimitId(), productDTO.getId()));
+					productForCreditDTO.getCreditlimitId(), creditApplyDTO.getProductId()));
 		}
 		boolean pass = true;
-		if (CreditApplyMutexType.NONE !=CreditApplyMutexType.FOR_ALL) {
+		if (CreditApplyMutexType.NONE != CreditApplyMutexType.FOR_ALL) {
 			OrderMutexDTO orderMutex = new OrderMutexDTO();
 			orderMutex.setCustomerId(creditApplyDTO.getCustomerId());
-			orderMutex.setProductTypeId(productDTO.getTypeId());
-			orderMutex.setProductId(productDTO.getId());
+			orderMutex.setProductTypeId(productForCreditDTO.getTypeId());
+			orderMutex.setProductId(productForCreditDTO.getId());
 			pass = orderManagerService.hasMutexOrder(orderMutex);
 		}
 		if (!pass) {
 			throw new IllegalArgumentException(String.format("The customer[%s] has already credit order of product[%s]",
-					creditApplyDTO.getCustomerId(), productDTO.getId()));
+					creditApplyDTO.getCustomerId(), productForCreditDTO.getId()));
 		}
 	}
 
-	
-	private void checkBlanklist(CreditApplyDTO creditApplyDTO,ProductDTO productDTO){
-		
+	private void checkBlanklist(CreditApplyDTO creditApplyDTO, ProductForCreditDTO productForCreditDTO) {
+
 	}
 }

@@ -5,8 +5,10 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -24,14 +26,14 @@ public class AsyHandleManager {
 
 	private final static Logger log = LoggerFactory.getLogger(AsyHandleManager.class);
 
-	/**工作线程名字索引**/
+	/** 工作线程名字索引 **/
 	private final static AtomicInteger WORKER_THREAD_INDEX = new AtomicInteger(0);
-	/**工作线程名字前缀**/
+	/** 工作线程名字前缀 **/
 	private final static String WORKER_THREAD_NAME_PRE = "";
 
-	/**定时检查线程名字索引**/
+	/** 定时检查线程名字索引 **/
 	private final static AtomicInteger SCHEDULED_THREAD_INDEX = new AtomicInteger(0);
-	/**定时检查线程名字前缀**/
+	/** 定时检查线程名字前缀 **/
 	private final static String SCHEDULED_THREAD_NAME_PRE = "";
 
 	/** 初始化延迟随机器 **/
@@ -46,8 +48,9 @@ public class AsyHandleManager {
 	public AsyHandleManager(int workerThreads, int scheduledThreads) {
 		this.initialDelayRandom = new Random();
 		this.cache = new HashMap<>();
-		this.workerThreadPool = Executors.newFixedThreadPool(workerThreads, this::newWorkerThread);
-		this.scheduledThreadPool = Executors.newScheduledThreadPool(scheduledThreads, this::newScheduledThread);
+		this.workerThreadPool = new ThreadPoolExecutor(workerThreads, workerThreads, 0L, TimeUnit.MILLISECONDS,
+				new LinkedBlockingQueue<Runnable>(), this::newWorkerThread);
+		this.scheduledThreadPool = new ScheduledThreadPoolExecutor(scheduledThreads, this::newScheduledThread);
 	}
 
 	private Thread newWorkerThread(Runnable r) {

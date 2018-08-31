@@ -1,6 +1,6 @@
 package com.sixliu.creditloan.product.entity.creditlimit;
 
-import com.sixliu.creditloan.creditlimit.CreditlimitType;
+import com.sixliu.creditloan.creditlimit.constant.CreditlimitType;
 import com.sixliu.creditloan.product.entity.BaseEntity;
 
 import lombok.Data;

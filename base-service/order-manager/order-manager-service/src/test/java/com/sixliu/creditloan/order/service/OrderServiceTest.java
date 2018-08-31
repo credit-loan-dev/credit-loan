@@ -4,7 +4,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sixliu.creditloan.order.BaseTest;
-import com.sixliu.creditloan.product.dto.ProductDTO;
+import com.sixliu.creditloan.product.dto.ProductForCreditDTO;
 import com.sixliu.creditloan.product.service.ProductConfigService;
 
 
@@ -25,7 +25,7 @@ public class OrderServiceTest extends BaseTest {
 
 	@Test
 	public void testApply() {
-		ProductDTO productInnerDTO=productManagerService.get("c43d00de-9d29-11e8-9e01-005056986f0b");
+		ProductForCreditDTO productInnerDTO=productManagerService.get("c43d00de-9d29-11e8-9e01-005056986f0b");
 		System.out.println(productInnerDTO);
 	}
 }
