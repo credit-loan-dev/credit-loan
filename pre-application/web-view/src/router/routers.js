@@ -43,7 +43,7 @@ export default [
       }
     ]
   },
-  {
+  /*{
     path: '/components',
     name: 'components',
     meta: {
@@ -203,7 +203,7 @@ export default [
         component: () => import('@/view/directive/directive.vue')
       }
     ]
-  },
+  },*/
 
   /**
    * 这里开始是开始的代码
