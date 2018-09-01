@@ -56,8 +56,6 @@
 
         </Layout>
       </Layout>
-
-
       <div slot="footer">
       </div>
     </Modal>
