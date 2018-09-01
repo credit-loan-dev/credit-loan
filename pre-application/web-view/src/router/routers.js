@@ -43,7 +43,7 @@ export default [
       }
     ]
   },
-  /*{
+  {
     path: '/components',
     name: 'components',
     meta: {
@@ -107,8 +107,8 @@ export default [
         component: () => import('@/view/components/icons/icons.vue')
       }
     ]
-  },*/
-  /*{
+  },
+  {
     path: '/update',
     name: 'update',
     meta: {
@@ -136,8 +136,8 @@ export default [
         component: () => import('@/view/update/update-paste.vue')
       }
     ]
-  },*/
-  /*{
+  },
+  {
     path: '/excel',
     name: 'excel',
     meta: {
@@ -165,8 +165,8 @@ export default [
         component: () => import('@/view/excel/export-excel.vue')
       }
     ]
-  },*/
-  /*{
+  },
+  {
     path: '/tools_methods',
     name: 'tools_methods',
     meta: {
@@ -203,7 +203,7 @@ export default [
         component: () => import('@/view/directive/directive.vue')
       }
     ]
-  },*/
+  },
 
   /**
    * 这里开始是开始的代码

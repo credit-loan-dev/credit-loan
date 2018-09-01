@@ -44,12 +44,25 @@
   </div>
 </template>
 <script>
+  import { getchildProductLoanConfigInfo } from '@/api/data'
   export default {
+    props:['productId'],
     data(){
       return {
         formItem:{
 
       }
+      }
+    },watch: {
+      productId:{
+        handler(curVal,oldVal){
+          getchildProductLoanConfigInfo(curVal).then(res=>{
+            this.formItem = res.data.item
+          }).error(err=>{
+
+          })
+        },
+        deep: true,
       }
     }
   }

@@ -85,7 +85,9 @@
   </div>
 </template>
 <script>
+  import { getchildProductLimitConfigInfo } from '@/api/data'
   export default {
+    props:['productId'],
     data(){
       return {
         formItem:{
@@ -99,6 +101,17 @@
           type:""
 
         }
+      }
+    },watch: {
+      productId:{
+        handler(curVal,oldVal){
+          getchildProductLimitConfigInfo(curVal).then(res=>{
+            this.formItem = res.data.item
+          }).error(err=>{
+
+          })
+        },
+        deep: true,
       }
     }
   }

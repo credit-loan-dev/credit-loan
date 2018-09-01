@@ -103,3 +103,121 @@ export const getProductAlterApply = req => {
     msg: ''
   }
 }
+export const getchildProduct = req => {
+  let paramObj = getParams(req.url)
+  console.log(paramObj)
+  let tableData = []
+  doCustomTimes(5, () => {
+    tableData.push(Mock.mock({
+      productCode: '@string(10,10)',
+      productName: '@name'
+    }))
+  })
+  return {
+    code: 200,
+    data: {
+      list: tableData,
+      total: 5
+    },
+    msg: ''
+  }
+}
+
+export const getchildProductBasicInfo = req => {
+  let paramObj = getParams(req.url)
+  let tableData = {}
+  doCustomTimes(1, () => {
+    tableData =(Mock.mock({
+      productId: paramObj.productId,
+      name: '@name',
+      typeId:'@integer(1, 4)',
+      priority:'@integer(1, 4)',
+      expireDate:'@date(yyyy-MM-dd)',
+      effectiveDate:'@date(yyyy-MM-dd)',
+      effective:'@boolean',
+      textarea:'@csentence'
+    }))
+  })
+  return {
+    code: 200,
+    data: {
+      item: tableData,
+      total: 1
+    },
+    msg: ''
+  }
+}
+
+export const getchildProductCreditConfigInfo = req => {
+  let paramObj = getParams(req.url)
+  let tableData = {}
+  doCustomTimes(1, () => {
+    tableData =(Mock.mock({
+      productId: paramObj.productId,
+      useBlacklistGroupId: '@name',
+      applyMutexType:'@integer(1, 4)',
+      minCreditlLimit:'@integer(10000, 50000)',
+      maxCreditlLimit:'@integer(300000, 500000)',
+      limitValidMonths:'@integer(1, 36)',
+      applyMaxMonthDuration:'@integer(1, 36)',
+      applyMaxDayDuration:'@integer(1, 36)',
+      flowJobModleId:'@id'
+    }))
+  })
+  return {
+    code: 200,
+    data: {
+      item: tableData,
+      total: 1
+    },
+    msg: ''
+  }
+}
+
+export const getchildProductLoanConfigInfo = req => {
+  let paramObj = getParams(req.url)
+  let tableData = {}
+  doCustomTimes(1, () => {
+    tableData =(Mock.mock({
+      productId: paramObj.productId,
+      minSingleLoanAmount: '@integer(10000, 30000)',
+      maxSingleLoanAmount:'@integer(100000, 500000)',
+      loanTermType:'@string(6, 6)',
+      minSingleLoanTerm:'@integer(3, 50)',
+      maxSingleLoanTerm:'@integer(1, 36)'
+    }))
+  })
+  return {
+    code: 200,
+    data: {
+      item: tableData,
+      total: 1
+    },
+    msg: ''
+  }
+}
+
+export const getchildProductLimitConfigInfo = req => {
+  let paramObj = getParams(req.url)
+  let tableData = {}
+  doCustomTimes(1, () => {
+    tableData =(Mock.mock({
+      productId: paramObj.productId,
+      type: '@string(6, 6)',
+      ratio:'@integer(10, 100)',
+      riskLevel:'@integer(1, 10)',
+      linkCustomerBaseCreditlimit:'@boolean',
+      loopCreditlimit:'@boolean',
+      increaseCreditlimit:'@boolean',
+      decreaseCreditlimit:'@boolean',
+    }))
+  })
+  return {
+    code: 200,
+    data: {
+      item: tableData,
+      total: 1
+    },
+    msg: ''
+  }
+}

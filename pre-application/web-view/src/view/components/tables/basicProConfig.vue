@@ -1,5 +1,6 @@
 <template>
   <div>
+
     <Form :model="libraryInfo" :label-width="150">
       <Row>
       <Col span="12">
@@ -72,8 +73,10 @@
   </div>
 </template>
 <script>
+  import { getchildProductBasicInfo } from '@/api/data'
   export default {
     name: 'BasicProConfig',
+    props:['productId'],
     data() {
       return {
         formItem: {
@@ -84,7 +87,24 @@
           expireDate:"",
           effectiveDate:"",
           effective:true
-        }
+        },
+        productId:this.productId
+      }
+    },
+    updated: function (){
+
+    },methods:{
+
+    },watch: {
+      productId:{
+        handler(curVal,oldVal){
+          getchildProductBasicInfo(curVal).then(res=>{
+            this.formItem = res.data.item
+          }).error(err=>{
+
+          })
+        },
+        deep: true,
       }
     }
   }
