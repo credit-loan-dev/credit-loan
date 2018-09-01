@@ -12,64 +12,115 @@
       title="产品详情"
       @on-ok="ok"
       @on-cancel="cancel"
-      width="500px" scrollable="true">
-      <Input v-model="dataInfo.code" readonly="true" size="small">
-      <span slot="prepend" width="200">产品编号</span>
-      </Input>
-      <Input v-model="dataInfo.name" size="small">
-      <span slot="prepend">产品名称</span>
-      </Input>
-      <Input v-model="dataInfo.typeId" readonly="true" size="small">
-      <span slot="prepend">产品类型</span>
-      </Input>
-      <Input v-model="dataInfo.priority" readonly="true" size="small">
-      <span slot="prepend">产品优先级</span>
-      </Input>
-      <Input v-model="dataInfo.creditApplyMaxMonths" readonly="true" size="small">
-      <span slot="prepend">授信申请最大持续月数</span>
-      </Input>
-      <Input v-model="dataInfo.creditApplyFlowModleId" readonly="true" size="small">
-      <span slot="prepend">授信申请流程模型id</span>
-      </Input>
-      <Input v-model="dataInfo.creditApplyRejectInfluenceDays" readonly="true" size="small">
-      <span slot="prepend">授信申请拒绝影响天数</span>
-      </Input>
-      <Input v-model="dataInfo.loopQuota" readonly="true" size="small">
-      <span slot="prepend">是否循环额度</span>
-      </Input>
-      <Input v-model="dataInfo.increaseQuota" readonly="true" size="small">
-      <span slot="prepend">是否支持提高额度</span>
-      </Input>
-      <Input v-model="dataInfo.minCreditQuota" readonly="true" size="small">
-      <span slot="prepend">最小授信额度</span>
-      </Input>
-      <Input v-model="dataInfo.maxCreditQuota" readonly="true" size="small">
-      <span slot="prepend">最大授信额度</span>
-      </Input>
-      <Input v-model="dataInfo.quotaEffectiveMonths" readonly="true" size="small">
-      <span slot="prepend">额度有效月数</span>
-      </Input>
-      <Input v-model="dataInfo.minSingleLoanAmount" readonly="true" size="small">
-      <span slot="prepend">最小单笔贷款金额</span>
-      </Input>
-      <Input v-model="dataInfo.maxSingleLoanAmount" readonly="true" size="small">
-      <span slot="prepend">最大单笔贷款金额</span>
-      </Input>
-      <Input v-model="dataInfo.singleLoanTermType" readonly="true" size="small">
-      <span slot="prepend">单笔贷款期限类型</span>
-      </Input>
-      <Input v-model="dataInfo.minSingleLoanTerm" readonly="true" size="small">
-      <span slot="prepend">最小单笔贷款期限</span>
-      </Input>
-      <Input v-model="dataInfo.maxSingleLoanTerm" readonly="true" size="small">
-      <span slot="prepend">最大单笔贷款期限</span>
-      </Input>
-      <Input v-model="dataInfo.loanFlowModleId" readonly="true" size="small">
-      <span slot="prepend">贷款申请流程模型id</span>
-      </Input>
-      <Input v-model="dataInfo.effective" readonly="true" size="small">
-      <span slot="prepend">是否有效</span>
-      </Input>
+      draggable="true"
+      width="90%" scrollable="true">
+      <Layout >
+        <Sider width=240 style="background-color: white">
+          <Menu active-name="1-2" :open-names="['1']">
+            <Submenu name="1">
+              <template slot="title">
+                <Icon type="ios-analytics" />
+                父产品
+              </template>
+              <MenuGroup title="父产品下所属子产品">
+                <MenuItem name="1-1">子产品 1</MenuItem>
+                <MenuItem name="1-2">子产品 2</MenuItem>
+                <MenuItem name="1-3">子产品 3</MenuItem>
+                <MenuItem name="1-4">子产品 4</MenuItem>
+              </MenuGroup>
+            </Submenu>
+          </Menu>
+
+        </Sider>
+        <Layout >
+          <Content style="background-color: white">
+            <Tabs type="card" size="small">
+              <TabPane label="基本配置">
+                <BasicProConfig></BasicProConfig>
+              </TabPane>
+              <TabPane label="产品授信配置">
+                <ProductCreditConfig></ProductCreditConfig>
+              </TabPane>
+              <TabPane label="授信申请input配置">标签二的内容</TabPane>
+              <TabPane label="贷款配置">
+                <ProductLoanConfig></ProductLoanConfig>
+              </TabPane>
+              <TabPane label="定价配置">标签三的内容</TabPane>
+              <TabPane label="额度配置">
+                <LimitConfig></LimitConfig>
+              </TabPane>
+              <TabPane label="扩展属性配置">标签三的内容</TabPane>
+            </Tabs>
+
+
+
+
+              <!--<Input v-model="dataInfo.code" readonly="true" size="small">
+              <span slot="prepend" width="200">产品编号</span>
+              </Input>
+              <Input v-model="dataInfo.name" size="small">
+              <span slot="prepend">产品名称</span>
+              </Input>
+              <Input v-model="dataInfo.typeId" readonly="true" size="small">
+              <span slot="prepend">产品类型</span>
+              </Input>
+              <Input v-model="dataInfo.priority" readonly="true" size="small">
+              <span slot="prepend">产品优先级</span>
+              </Input>
+              <Input v-model="dataInfo.creditApplyMaxMonths" readonly="true" size="small">
+              <span slot="prepend">授信申请最大持续月数</span>
+              </Input>
+              <Input v-model="dataInfo.creditApplyFlowModleId" readonly="true" size="small">
+              <span slot="prepend">授信申请流程模型id</span>
+              </Input>
+              <Input v-model="dataInfo.creditApplyRejectInfluenceDays" readonly="true" size="small">
+              <span slot="prepend">授信申请拒绝影响天数</span>
+              </Input>
+              <Input v-model="dataInfo.loopQuota" readonly="true" size="small">
+              <span slot="prepend">是否循环额度</span>
+              </Input>
+              <Input v-model="dataInfo.increaseQuota" readonly="true" size="small">
+              <span slot="prepend">是否支持提高额度</span>
+              </Input>
+              <Input v-model="dataInfo.minCreditQuota" readonly="true" size="small">
+              <span slot="prepend">最小授信额度</span>
+              </Input>
+              <Input v-model="dataInfo.maxCreditQuota" readonly="true" size="small">
+              <span slot="prepend">最大授信额度</span>
+              </Input>
+              <Input v-model="dataInfo.quotaEffectiveMonths" readonly="true" size="small">
+              <span slot="prepend">额度有效月数</span>
+              </Input>
+              <Input v-model="dataInfo.minSingleLoanAmount" readonly="true" size="small">
+              <span slot="prepend">最小单笔贷款金额</span>
+              </Input>
+              <Input v-model="dataInfo.maxSingleLoanAmount" readonly="true" size="small">
+              <span slot="prepend">最大单笔贷款金额</span>
+              </Input>
+              <Input v-model="dataInfo.singleLoanTermType" readonly="true" size="small">
+              <span slot="prepend">单笔贷款期限类型</span>
+              </Input>
+              <Input v-model="dataInfo.minSingleLoanTerm" readonly="true" size="small">
+              <span slot="prepend">最小单笔贷款期限</span>
+              </Input>
+              <Input v-model="dataInfo.maxSingleLoanTerm" readonly="true" size="small">
+              <span slot="prepend">最大单笔贷款期限</span>
+              </Input>
+              <Input v-model="dataInfo.loanFlowModleId" readonly="true" size="small">
+              <span slot="prepend">贷款申请流程模型id</span>
+              </Input>
+              <Input v-model="dataInfo.effective" readonly="true" size="small">
+              <span slot="prepend">是否有效</span>
+              </Input>-->
+
+          </Content>
+
+        </Layout>
+      </Layout>
+
+
+      <div slot="footer">
+      </div>
     </Modal>
     </div>
   </div>
@@ -78,10 +129,18 @@
 <script>
 import Tables from '_c/tables'
 import { getProTableData } from '@/api/data'
+import BasicProConfig from './basicProConfig'
+import  LimitConfig from  './limitConfig'
+import  ProductCreditConfig from  './productCreditConfig'
+import  ProductLoanConfig from  './productLoanConfig'
 export default {
   name: 'tables_page',
   components: {
-    Tables
+    Tables,
+    BasicProConfig,
+    LimitConfig,
+    ProductCreditConfig,
+    ProductLoanConfig
   },
   data () {
     return {
@@ -135,7 +194,39 @@ export default {
         }
       ],
       tableData: [],
-      dataInfo:{}
+      dataInfo:{},
+      data1: [
+        {
+          title: 'parent 1',
+          expand: true,
+          children: [
+            {
+              title: 'parent 1-1',
+              expand: true,
+              children: [
+                {
+                  title: 'leaf 1-1-1'
+                },
+                {
+                  title: 'leaf 1-1-2'
+                }
+              ]
+            },
+            {
+              title: 'parent 1-2',
+              expand: true,
+              children: [
+                {
+                  title: 'leaf 1-2-1'
+                },
+                {
+                  title: 'leaf 1-2-1'
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   },
   methods: {
