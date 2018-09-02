@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <Form :model="libraryInfo" :label-width="150">
+    <Form :model="formItem" :label-width="150">
       <Row>
       <Col span="12">
         <FormItem label="产品编号">

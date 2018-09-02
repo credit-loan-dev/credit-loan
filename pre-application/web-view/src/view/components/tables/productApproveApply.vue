@@ -11,8 +11,6 @@
     <Modal
       v-model="modal1"
       title="产品详情"
-      @on-ok="ok"
-      @on-cancel="cancel"
       width="500px" scrollable="true">
       <Input v-model="dataInfo.code" readonly="true" size="small">
       <span slot="prepend" width="200">产品编号</span>

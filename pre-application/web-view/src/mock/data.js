@@ -200,7 +200,7 @@ export const getchildProductLoanConfigInfo = req => {
 export const getchildProductLimitConfigInfo = req => {
   let paramObj = getParams(req.url)
   let tableData = {}
-  doCustomTimes(1, () => {
+  doCustomTimes(paramObj.rowNums, () => {
     tableData =(Mock.mock({
       productId: paramObj.productId,
       type: '@string(6, 6)',
@@ -217,6 +217,47 @@ export const getchildProductLimitConfigInfo = req => {
     data: {
       item: tableData,
       total: 1
+    },
+    msg: ''
+  }
+}
+export const getloanPriceConfigDataList = req => {
+  let paramObj = getParams(req.url)
+  let tableData = []
+  doCustomTimes(paramObj.rowNums, () => {
+    tableData.push(Mock.mock({
+      productId: paramObj.productId,
+      name: '@string(6, 6)',
+      repaymentStrategy:'@string(6, 6)',
+      minSingleLoanAmount:'@integer(20000, 50000)',
+      maxSingleLoanAmount:'@integer(200000, 500000)',
+      loanTermType:'@integer(1,3)',
+      loanOverdueMaxCount:'@integer(1,3)',
+      loanOverdueMaxTotalTerm:'@integer(1,3)',
+      loanOverdueMaxTerm:'@integer(1,3)',
+      minSingleLoanTerm:'@integer(1,12)',
+      maxSingleLoanTerm:'@integer(12,36)',
+      loanExtensionMaxCount:'@integer(2,4)',
+      loanExtensionMaxTotalTerm:'@integer(2,4)',
+      loanExtensionMaxTerm:'@integer(2,4)',
+      poundageRate:'@float(1,10 , 2, 2)',
+      interestRate:'@float(1,5 , 2, 2)',
+      partnerDiscountChargesRate:'@float(1,5 , 2, 2)',
+      loanExtensionInterestRate:'@float(1,5 , 2, 2)',
+      loanOverdueInterestRate:'@float(1,5 , 2, 2)',
+      earlyRepaymentInterestRate:'@float(1,5 , 2, 2)',
+      partnerEnable:'@boolean',
+      partnerId:'@id',
+      loanExtensionEnable:'@boolean',
+      loanOverdueEnable:'@boolean',
+      earlyRepaymentEnable:'@boolean',
+    }))
+  })
+  return {
+    code: 200,
+    data: {
+      list: tableData,
+      total: 10
     },
     msg: ''
   }

@@ -88,3 +88,15 @@ export const getchildProductLimitConfigInfo = (productId) => {
     }
   })
 }
+// 根据产品id加载对应的 定价配置列表信息
+export const getloanPriceConfigDataList = (page, rowNums,productId) => {
+  return axios.request({
+    url: '/getloanPriceConfigDataList/getAll',
+    method: 'post',
+    params: {
+      page: page,
+      rowNums: rowNums,
+      productId: productId
+    }
+  })
+}

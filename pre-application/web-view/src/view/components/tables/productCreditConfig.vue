@@ -1,6 +1,6 @@
 <template>
   <dvi>
-    <Form :model="libraryInfo" :label-width="150">
+    <Form :model="formItem" :label-width="150">
       <Row>
         <Col span="12">
           <FormItem label="授信申请黑名单">

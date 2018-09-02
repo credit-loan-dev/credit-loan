@@ -3,7 +3,7 @@ import { login, logout, getUserInfo } from './login'
 import {
   getTableData, getProTableData, getCustomRepaymentType, getProductAlterApply,getchildProduct
   ,getchildProductBasicInfo,getchildProductCreditConfigInfo,getchildProductLoanConfigInfo,
-  getchildProductLimitConfigInfo
+  getchildProductLimitConfigInfo,getloanPriceConfigDataList
 } from './data'
 
 // 登录相关和获取用户信息
@@ -19,6 +19,7 @@ Mock.mock(/\getchildProductBasicInfo\/getAll/, getchildProductBasicInfo)
 Mock.mock(/\/getchildProductCreditConfigInfo\/getAll/, getchildProductCreditConfigInfo)
 Mock.mock(/\/getchildProductLoanConfigInfo\/getAll/, getchildProductLoanConfigInfo)
 Mock.mock(/\/getchildProductLimitConfigInfo\/getAll/, getchildProductLimitConfigInfo)
+Mock.mock(/\/getloanPriceConfigDataList\/getAll/, getloanPriceConfigDataList)
 
 
 export default Mock
