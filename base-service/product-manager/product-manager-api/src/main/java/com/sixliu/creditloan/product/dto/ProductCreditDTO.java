@@ -16,7 +16,7 @@ import lombok.Data;
  * @describe //TODO
  */
 @Data
-public class ProductForCreditDTO {
+public class ProductCreditDTO {
 
 	/**产品编码:VARCHAR(20)**/
 	private String id;

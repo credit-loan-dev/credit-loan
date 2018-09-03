@@ -10,8 +10,8 @@ import com.sixliu.creditloan.creditlimit.service.CreditlimitManagerClient;
 import com.sixliu.creditloan.order.dto.OrderMutexDTO;
 import com.sixliu.creditloan.order.service.OrderManagerService;
 import com.sixliu.creditloan.product.constant.CreditApplyMutexType;
-import com.sixliu.creditloan.product.dto.ProductForCreditDTO;
-import com.sixliu.creditloan.product.service.ProductConfigService;
+import com.sixliu.creditloan.product.dto.ProductCreditDTO;
+import com.sixliu.creditloan.product.service.ProductForCreditLoanService;
 
 /**
  * @author:MG01867
@@ -24,7 +24,7 @@ import com.sixliu.creditloan.product.service.ProductConfigService;
 public class CreditPreCheckForProduct implements CreditApplyPreCheck {
 
 	@Autowired
-	private ProductConfigService productConfigService;
+	private ProductForCreditLoanService productConfigService;
 
 	@Autowired
 	private CreditlimitManagerClient creditlimitManagerClient;
@@ -32,7 +32,7 @@ public class CreditPreCheckForProduct implements CreditApplyPreCheck {
 	@Autowired
 	private OrderManagerService orderManagerService;
 
-	public CreditPreCheckForProduct(ProductConfigService productConfigService,CreditlimitManagerClient creditlimitManagerClient,OrderManagerService orderManagerService) {
+	public CreditPreCheckForProduct(ProductForCreditLoanService productConfigService,CreditlimitManagerClient creditlimitManagerClient,OrderManagerService orderManagerService) {
 		this.productConfigService=productConfigService;
 		this.creditlimitManagerClient=creditlimitManagerClient;
 		this.orderManagerService=orderManagerService;
@@ -40,7 +40,7 @@ public class CreditPreCheckForProduct implements CreditApplyPreCheck {
 	
 	@Override
 	public void check(CreditApplyDTO creditApplyDTO) {
-		ProductForCreditDTO productForCreditDTO = productConfigService.get(creditApplyDTO.getProductId());
+		ProductCreditDTO productForCreditDTO = productConfigService.get(creditApplyDTO.getProductId());
 		if (null == productForCreditDTO) {
 			throw new IllegalArgumentException(
 					String.format("The product[%s] is non-existent", creditApplyDTO.getProductId()));
@@ -77,7 +77,7 @@ public class CreditPreCheckForProduct implements CreditApplyPreCheck {
 		}
 	}
 
-	private void checkBlanklist(CreditApplyDTO creditApplyDTO, ProductForCreditDTO productForCreditDTO) {
+	private void checkBlanklist(CreditApplyDTO creditApplyDTO, ProductCreditDTO productForCreditDTO) {
 
 	}
 }

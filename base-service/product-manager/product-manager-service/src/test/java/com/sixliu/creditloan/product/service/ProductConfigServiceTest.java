@@ -6,8 +6,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sixliu.creditloan.product.BaseTest;
-import com.sixliu.creditloan.product.dto.ProductForCreditDTO;
-import com.sixliu.creditloan.product.service.ProductConfigService;
+import com.sixliu.creditloan.product.dto.ProductCreditDTO;
+import com.sixliu.creditloan.product.service.ProductForCreditLoanService;
 
 /**
 *@author:MG01867
@@ -19,11 +19,11 @@ import com.sixliu.creditloan.product.service.ProductConfigService;
 public class ProductConfigServiceTest extends BaseTest {
 
 	@Autowired
-	ProductConfigService productManagerService;
+	ProductForCreditLoanService productForCreditService;
 
 	@Test
 	public void testInsert() {
-		ProductForCreditDTO product=productManagerService.get("c43d00de-9d29-11e8-9e01-005056986f0b");
+		ProductCreditDTO product=productForCreditService.getProduct("c43d00de-9d29-11e8-9e01-005056986f0b");
 		checkOk(product);
 	}
 

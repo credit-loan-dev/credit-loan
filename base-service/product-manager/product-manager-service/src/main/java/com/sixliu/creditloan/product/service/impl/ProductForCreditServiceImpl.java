@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sixliu.creditloan.product.converter.ProductDTOConverter;
 import com.sixliu.creditloan.product.dao.ProductConfigDao;
 import com.sixliu.creditloan.product.dao.snapshot.ProductConfigSnapshotDao;
-import com.sixliu.creditloan.product.dto.ProductForCreditDTO;
+import com.sixliu.creditloan.product.dto.ProductCreditDTO;
 import com.sixliu.creditloan.product.entity.ProductConfig;
 import com.sixliu.creditloan.product.entity.snapshot.ProductConfigSnapshot;
 import com.sixliu.creditloan.product.exception.AppException;
-import com.sixliu.creditloan.product.service.ProductConfigService;
+import com.sixliu.creditloan.product.service.ProductForCreditLoanService;
 
 /**
 *@author:MG01867
@@ -23,9 +23,9 @@ import com.sixliu.creditloan.product.service.ProductConfigService;
 *@describe //TODO
 */
 @RestController
-public class ProductManagerServiceImpl implements ProductConfigService{
+public class ProductForCreditServiceImpl implements ProductForCreditLoanService{
 
-	final static Logger log = LoggerFactory.getLogger(ProductManagerServiceImpl.class);
+	final static Logger log = LoggerFactory.getLogger(ProductForCreditServiceImpl.class);
 
 	@Autowired
 	private ProductConfigDao productConfigDao;
@@ -34,21 +34,14 @@ public class ProductManagerServiceImpl implements ProductConfigService{
 	private ProductConfigSnapshotDao productConfigSnapshotDao;
 	
 	@Override
-	public ProductForCreditDTO get(String id) {
+	public ProductCreditDTO getProduct(String id) {
 		ProductConfig productConfig=productConfigDao.get(id);
 		return ProductDTOConverter.convert(productConfig);
 	}
 
 
-
 	@Override
-	public ProductForCreditDTO getByCode(String code) {
-		ProductConfig productConfig=productConfigDao.getByCode(code);
-		return ProductDTOConverter.convert(productConfig);
-	}
-
-	@Override
-	public String generateProductConfigSnapshot(String productId) {
+	public String generateProductSnapshot(String productId) {
 		ProductConfig productConfig=productConfigDao.get(productId);
 		if(null==productConfig) {
 			throw new AppException(String.format("The product[%s] is illegal", productId));

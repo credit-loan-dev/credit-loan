@@ -2,7 +2,7 @@ package com.sixliu.creditloan.product.converter;
 
 import org.springframework.beans.BeanUtils;
 
-import com.sixliu.creditloan.product.dto.ProductForCreditDTO;
+import com.sixliu.creditloan.product.dto.ProductCreditDTO;
 import com.sixliu.creditloan.product.entity.ProductConfig;
 
 /**
@@ -14,10 +14,10 @@ import com.sixliu.creditloan.product.entity.ProductConfig;
 */
 public class ProductDTOConverter {
 
-	public static ProductForCreditDTO convert(ProductConfig productConfig) {
-		ProductForCreditDTO product=null;
+	public static ProductCreditDTO convert(ProductConfig productConfig) {
+		ProductCreditDTO product=null;
 		if(null!=productConfig) {
-			product=new ProductForCreditDTO();
+			product=new ProductCreditDTO();
 			BeanUtils.copyProperties(productConfig, product);
 		}
 		return product;

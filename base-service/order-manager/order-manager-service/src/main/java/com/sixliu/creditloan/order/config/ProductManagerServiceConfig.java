@@ -2,7 +2,7 @@ package com.sixliu.creditloan.order.config;
 
 import org.springframework.cloud.openfeign.FeignClient;
 
-import com.sixliu.creditloan.product.service.ProductConfigService;
+import com.sixliu.creditloan.product.service.ProductForCreditLoanService;
 
 /**
  * @author:MG01867
@@ -12,6 +12,6 @@ import com.sixliu.creditloan.product.service.ProductConfigService;
  * @describe //TODO
  */
 @FeignClient("product-manager")
-public interface ProductManagerServiceConfig extends ProductConfigService{
+public interface ProductManagerServiceConfig extends ProductForCreditLoanService{
 	
 }

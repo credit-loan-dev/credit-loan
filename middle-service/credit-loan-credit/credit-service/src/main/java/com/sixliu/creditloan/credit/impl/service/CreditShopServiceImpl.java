@@ -11,7 +11,7 @@ import com.sixliu.creditloan.credit.dto.CreditApplyDTO;
 import com.sixliu.creditloan.credit.service.CreditShopService;
 import com.sixliu.creditloan.order.dto.CreateCreditOrderDTO;
 import com.sixliu.creditloan.order.service.OrderManagerService;
-import com.sixliu.creditloan.product.service.ProductConfigService;
+import com.sixliu.creditloan.product.service.ProductForCreditLoanService;
 
 /**
  * @author:MG01867
@@ -24,7 +24,7 @@ import com.sixliu.creditloan.product.service.ProductConfigService;
 public class CreditShopServiceImpl implements CreditShopService {
 
 	@Autowired
-	private ProductConfigService productManagerClient;
+	private ProductForCreditLoanService productManagerClient;
 	
 	@Autowired
 	private OrderManagerService orderManagerService;

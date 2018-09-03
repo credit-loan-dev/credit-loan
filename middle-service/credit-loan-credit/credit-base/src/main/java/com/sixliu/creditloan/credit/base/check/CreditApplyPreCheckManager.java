@@ -12,7 +12,7 @@ import com.sixliu.creditloan.credit.dto.CreditApplyDTO;
 import com.sixliu.creditloan.creditlimit.service.CreditlimitManagerClient;
 import com.sixliu.creditloan.customer.service.CustomerManagerService;
 import com.sixliu.creditloan.order.service.OrderManagerService;
-import com.sixliu.creditloan.product.service.ProductConfigService;
+import com.sixliu.creditloan.product.service.ProductForCreditLoanService;
 
 /**
  * @author:MG01867
@@ -28,7 +28,7 @@ public class CreditApplyPreCheckManager implements CreditApplyPreCheck {
 	private CustomerManagerService customerManagerService;
 
 	@Autowired
-	private ProductConfigService productConfigService;
+	private ProductForCreditLoanService productConfigService;
 
 	@Autowired
 	private CreditlimitManagerClient creditlimitManagerClient;
