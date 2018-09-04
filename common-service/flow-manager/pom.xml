@@ -3,19 +3,15 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>com.sixliu</groupId>
-    <artifactId>credit-loan</artifactId>
+    <artifactId>common-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>common-service</artifactId>
+  <artifactId>flow-manager</artifactId>
   <packaging>pom</packaging>
-  <name>common-service</name>
-  <description>common-service</description>
-  	<modules>
-		<module>user-manager</module>
-		<module>payment-manager</module>
-		<module>notice-manager</module>
-    	<module>service-register</module>
-    	<module>api-gateway</module>
-    	<module>flow-manager</module>
-  	</modules>
+  <name>flow-manager</name>
+  <description>flow-manager</description>
+  <modules>
+    <module>flow-manager-api</module>
+    <module>flow-service</module>
+  </modules>
 </project>
