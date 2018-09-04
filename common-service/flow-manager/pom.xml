@@ -12,6 +12,6 @@
   <description>flow-manager</description>
   <modules>
     <module>flow-manager-api</module>
-    <module>flow-service</module>
+    <module>flow-manager-service</module>
   </modules>
 </project>
