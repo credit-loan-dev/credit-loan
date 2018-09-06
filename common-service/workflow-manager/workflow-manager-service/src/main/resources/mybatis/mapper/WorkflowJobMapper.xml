@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sixliu.creditloan.product.dao.ProductConfigDao" >
+
+    <resultMap id="WorkflowJobResult" type="com.sixliu.creditloan.workflow.entity.WorkflowJob" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="workflow_job_model_id" property="workflowJobModelId" jdbcType="VARCHAR" />
+        <result column="status" property="status" jdbcType="VARCHAR" />
+        <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+        <result column="version" property="version" jdbcType="INTEGER" />
+        <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR" />
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+        <result column="create_user_id" property="createUserId" jdbcType="VARCHAR" />
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+    
+    <parameterMap id="WorkflowJobParameter" type="com.sixliu.creditloan.workflow.entity.WorkflowJob"/>
+    
+    <!-- from 表 -->
+    <sql id="from_table">
+    	from workflow_job
+    </sql>
+    
+
+    
+    <!-- 查询通用列 -->
+    <sql id="select_common_column">
+    	select 
+    		`id`,
+	        `name`,
+	        workflow_job_model_id,
+	        `status`,
+	        `remarks`,
+	        `version`,
+	        update_user_id,
+	        update_date,
+	        create_user_id,
+	        create_date
+    </sql>
+    
+    <!-- intsert to 表 -->
+    <sql id="insert_common_table">
+    	insert into workflow_job(`id`,
+    								`name`,
+    								workflow_job_model_id,
+    								`status`,
+    	 							`remarks`,
+    	 							update_user_id,
+    	 							create_user_id
+    	 							)
+    	 					 values(#{id},
+    	 							#{name},
+    	 							#{workflowJobModelId},
+    	 							#{status},
+    		   						#{remarks},
+    		   						#{updateUserId},
+    		   						#{createUserId}
+    		   						)
+    </sql>
+
+    <sql id="delete_from_table">
+    	delete from workflow_job
+    </sql>
+    
+	<select id="get" resultMap="WorkflowJobResult">
+		<include refid="select_common_column"/>
+		<include refid="from_table"/>
+        where 1=1
+        and `id` =#{id}
+    </select>
+    
+    <insert id="insert" parameterMap="WorkflowJobParameter">
+    	<selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
+              select uuid()
+    	</selectKey>
+    	<include refid="insert_common_table"></include>
+	</insert> 
+	
+	<delete id="delete">
+		<include refid="delete_from_table"/>
+		where `id`=#{id}
+	</delete>
+
+</mapper>
