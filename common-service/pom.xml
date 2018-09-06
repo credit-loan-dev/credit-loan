@@ -16,6 +16,6 @@
 		<module>notice-manager</module>
     	<module>service-register</module>
     	<module>api-gateway</module>
-    	<module>flow-manager</module>
+    	<module>workflow-manager</module>
   	</modules>
 </project>
