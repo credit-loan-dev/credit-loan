@@ -41,7 +41,7 @@ public class WorkflowTask extends BaseEntity {
 	private String ownerUserId;
 
 	/** 流程作业任务所处状态 **/
-	private TaskStatus status = TaskStatus.PENDING;
+	private TaskStatus status;
 
 	/** 流程作业任务内部意见 **/
 	private String innerOpinion;

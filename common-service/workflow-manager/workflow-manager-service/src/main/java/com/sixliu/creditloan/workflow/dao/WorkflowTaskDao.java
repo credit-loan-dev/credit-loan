@@ -2,8 +2,10 @@ package com.sixliu.creditloan.workflow.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.sixliu.creditloan.workflow.constant.TaskStatus;
-import com.sixliu.creditloan.workflow.dto.FlowTask;
+import com.sixliu.creditloan.workflow.entity.WorkflowTask;
 
 /**
  * @author:MG01867
@@ -14,13 +16,13 @@ import com.sixliu.creditloan.workflow.dto.FlowTask;
  */
 public interface WorkflowTaskDao {
 
-	int insert(FlowTask flowTask);
+	int insert(WorkflowTask workflowTask);
 
-	FlowTask get(String id);
+	WorkflowTask get(String id);
 
-	List<FlowTask> listByRoleId(String roleId);
+	List<WorkflowTask> listByRoleId(String roleId);
 	
-	List<FlowTask> listByRoleIdAndStatus(String roleId,TaskStatus status);
+	List<WorkflowTask> listByRoleIdAndStatus(@Param("roleId") String roleId,@Param("status") TaskStatus status);
 
-	int update(FlowTask flowTask);
+	int update(WorkflowTask workflowTask);
 }

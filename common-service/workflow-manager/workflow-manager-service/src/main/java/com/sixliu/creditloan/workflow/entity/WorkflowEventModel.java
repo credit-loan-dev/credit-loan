@@ -6,19 +6,19 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-/**
- * @author:MG01867
- * @date:2018年9月6日
- * @E-mail:359852326@qq.com
- * @version:
- * @describe //TODO
+/**    
+ * @author: sixliu
+ * @email:  359852326@qq.com
+ * @date:   2018年9月6日 下午10:57:07   
+ * @version V1.0 
+ * @Description:TODO
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class WorkflowEvent extends BaseEntity {
+public class WorkflowEventModel extends BaseEntity {
 	
-	/**流程任务id**/
+	/**流程任务模型id**/
 	private String taskId;
 	
 	/**事件类型**/

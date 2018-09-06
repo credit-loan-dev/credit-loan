@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.sixliu.creditloan.workflow.dao.WorkflowTaskDao" >
+<mapper namespace="com.sixliu.creditloan.workflow.dao.WorkflowTaskModelDao" >
 
-    <resultMap id="WorkflowTaskResult" type="com.sixliu.creditloan.workflow.entity.WorkflowTask" >
+    <resultMap id="WorkflowTaskModelResult" type="com.sixliu.creditloan.workflow.entity.WorkflowTaskModel" >
         <id column="id" property="id" jdbcType="VARCHAR" />
         <result column="name" property="name" jdbcType="VARCHAR" />
-        <result column="job_id" property="jobId" jdbcType="VARCHAR" />
-        <result column="model_id" property="modelId" jdbcType="VARCHAR" />
+        <result column="job_model_id" property="jobModelId" jdbcType="VARCHAR" />
         <result column="phase" property="phase" jdbcType="INTEGER" />
         <result column="type" property="type" jdbcType="VARCHAR" />
         <result column="worker" property="worker" jdbcType="VARCHAR" />
-        <result column="owner_user_id" property="ownerUserId" jdbcType="VARCHAR" />
-        <result column="status" property="status" jdbcType="VARCHAR" />
-        <result column="inner_opinion" property="innerOpinion" jdbcType="VARCHAR" />
-        <result column="outer_opinion" property="outerOpinion" jdbcType="VARCHAR" />
         <result column="remarks" property="remarks" jdbcType="VARCHAR" />
         <result column="version" property="version" jdbcType="INTEGER" />
         <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR" />
@@ -22,11 +17,11 @@
         <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
     </resultMap>
     
-    <parameterMap id="WorkflowTaskParameter" type="com.sixliu.creditloan.workflow.entity.WorkflowTask"/>
+    <parameterMap id="WorkflowTaskModelParameter" type="com.sixliu.creditloan.workflow.entity.WorkflowTaskModel"/>
     
     <!-- from 表 -->
     <sql id="from_table">
-    	from workflow_task
+    	from workflow_task_model
     </sql>
     
 
@@ -36,15 +31,10 @@
     	select 
     		`id`,
 	        `name`,
-	        job_id,
-	        model_id,
+	        job_model_id,
 	        `phase`,
 	        `type`,
 	        `worker`,
-	        owner_user_id,
-	        `status`,
-	        inner_opinion,
-	        outer_opinion,
 	        `remarks`,
 	        `version`,
 	        update_user_id,
@@ -55,7 +45,7 @@
     
     <!-- intsert to 表 -->
     <sql id="insert_common_table">
-    	insert into workflow_task(`id`,
+    	insert into workflow_task_model(`id`,
     								`name`,
     								job_model_id,
     								`phase`,
@@ -78,7 +68,7 @@
     </sql>
 
     <sql id="delete_from_table">
-    	delete from workflow_task
+    	delete from workflow_task_model
     </sql>
     
 	<select id="get" resultMap="WorkflowTaskModelResult">
