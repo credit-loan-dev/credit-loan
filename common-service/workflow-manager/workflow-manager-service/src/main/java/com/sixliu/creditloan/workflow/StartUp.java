@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.sixliu.credit.rbac.UserManagerApi;
 import com.sixliu.creditloan.workflow.dao.BaseDao;
 
 
@@ -19,7 +20,7 @@ import com.sixliu.creditloan.workflow.dao.BaseDao;
  * @describe 服务启动类
  */
 @SpringCloudApplication
-@EnableFeignClients
+@EnableFeignClients(basePackageClasses = { UserManagerApi.class})
 @EnableTransactionManagement 
 @MapperScan(basePackageClasses=BaseDao.class)
 public class StartUp implements WebMvcConfigurer {

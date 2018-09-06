@@ -12,7 +12,7 @@ import com.sixliu.creditloan.workflow.dto.FlowTask;
  * @version:
  * @describe //TODO
  */
-public interface FlowTaskDao {
+public interface WorkflowTaskDao {
 
 	int insert(FlowTask flowTask);
 

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.sixliu.creditloan.workflow.dao.WorkflowJobDao" >
+<mapper namespace="com.sixliu.creditloan.workflow.dao.WorkflowJobModelDao" >
 
-    <resultMap id="WorkflowJobResult" type="com.sixliu.creditloan.workflow.entity.WorkflowJob" >
+    <resultMap id="WorkflowJobModelResult" type="com.sixliu.creditloan.workflow.entity.WorkflowJobModel" >
         <id column="id" property="id" jdbcType="VARCHAR" />
         <result column="name" property="name" jdbcType="VARCHAR" />
-        <result column="model_id" property="modelId" jdbcType="VARCHAR" />
-        <result column="status" property="status" jdbcType="VARCHAR" />
+        <result column="create_role_id" property="createRoleId" jdbcType="VARCHAR" />
         <result column="remarks" property="remarks" jdbcType="VARCHAR" />
         <result column="version" property="version" jdbcType="INTEGER" />
         <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR" />
@@ -15,11 +14,11 @@
         <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
     </resultMap>
     
-    <parameterMap id="WorkflowJobParameter" type="com.sixliu.creditloan.workflow.entity.WorkflowJob"/>
+    <parameterMap id="WorkflowJobModelParameter" type="com.sixliu.creditloan.workflow.entity.WorkflowJobModel"/>
     
     <!-- from 表 -->
     <sql id="from_table">
-    	from workflow_job
+    	from workflow_job_model
     </sql>
     
 
@@ -29,8 +28,7 @@
     	select 
     		`id`,
 	        `name`,
-	        model_id,
-	        `status`,
+	        create_role_id,
 	        `remarks`,
 	        `version`,
 	        update_user_id,
@@ -41,18 +39,16 @@
     
     <!-- intsert to 表 -->
     <sql id="insert_common_table">
-    	insert into workflow_job(`id`,
+    	insert into workflow_job_model(`id`,
     								`name`,
-    								model_id,
-    								`status`,
+    								create_role_id,
     	 							`remarks`,
     	 							update_user_id,
     	 							create_user_id
     	 							)
     	 					 values(#{id},
     	 							#{name},
-    	 							#{modelId},
-    	 							#{status},
+    	 							#{createRoleId},
     		   						#{remarks},
     		   						#{updateUserId},
     		   						#{createUserId}
@@ -60,17 +56,17 @@
     </sql>
 
     <sql id="delete_from_table">
-    	delete from workflow_job
+    	delete from workflow_job_model
     </sql>
     
-	<select id="get" resultMap="WorkflowJobResult">
+	<select id="get" resultMap="WorkflowJobModelResult">
 		<include refid="select_common_column"/>
 		<include refid="from_table"/>
         where 1=1
         and `id` =#{id}
     </select>
     
-    <insert id="insert" parameterMap="WorkflowJobParameter">
+    <insert id="insert" parameterMap="WorkflowJobModelParameter">
     	<selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
               select uuid()
     	</selectKey>

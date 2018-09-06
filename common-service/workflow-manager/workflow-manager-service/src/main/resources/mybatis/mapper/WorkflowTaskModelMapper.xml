@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.sixliu.creditloan.workflow.dao.WorkflowJobDao" >
+<mapper namespace="com.sixliu.creditloan.workflow.dao.WorkflowTaskDao" >
 
-    <resultMap id="WorkflowJobResult" type="com.sixliu.creditloan.workflow.entity.WorkflowJob" >
+    <resultMap id="WorkflowTaskResult" type="com.sixliu.creditloan.workflow.entity.WorkflowTask" >
         <id column="id" property="id" jdbcType="VARCHAR" />
         <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="job_id" property="jobId" jdbcType="VARCHAR" />
         <result column="model_id" property="modelId" jdbcType="VARCHAR" />
+        <result column="phase" property="phase" jdbcType="INTEGER" />
+        <result column="type" property="type" jdbcType="VARCHAR" />
+        <result column="worker" property="worker" jdbcType="VARCHAR" />
+        <result column="owner_user_id" property="ownerUserId" jdbcType="VARCHAR" />
         <result column="status" property="status" jdbcType="VARCHAR" />
+        <result column="inner_opinion" property="innerOpinion" jdbcType="VARCHAR" />
+        <result column="outer_opinion" property="outerOpinion" jdbcType="VARCHAR" />
         <result column="remarks" property="remarks" jdbcType="VARCHAR" />
         <result column="version" property="version" jdbcType="INTEGER" />
         <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR" />
@@ -15,11 +22,11 @@
         <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
     </resultMap>
     
-    <parameterMap id="WorkflowJobParameter" type="com.sixliu.creditloan.workflow.entity.WorkflowJob"/>
+    <parameterMap id="WorkflowTaskParameter" type="com.sixliu.creditloan.workflow.entity.WorkflowTask"/>
     
     <!-- from 表 -->
     <sql id="from_table">
-    	from workflow_job
+    	from workflow_task
     </sql>
     
 
@@ -29,8 +36,15 @@
     	select 
     		`id`,
 	        `name`,
+	        job_id,
 	        model_id,
+	        `phase`,
+	        `type`,
+	        `worker`,
+	        owner_user_id,
 	        `status`,
+	        inner_opinion,
+	        outer_opinion,
 	        `remarks`,
 	        `version`,
 	        update_user_id,
@@ -41,18 +55,22 @@
     
     <!-- intsert to 表 -->
     <sql id="insert_common_table">
-    	insert into workflow_job(`id`,
+    	insert into workflow_task(`id`,
     								`name`,
-    								model_id,
-    								`status`,
+    								job_model_id,
+    								`phase`,
+    								`type`,
+    								`worker`,
     	 							`remarks`,
     	 							update_user_id,
     	 							create_user_id
     	 							)
     	 					 values(#{id},
     	 							#{name},
-    	 							#{modelId},
-    	 							#{status},
+    	 							#{jobModelId},
+    	 							#{phase},
+    	 							#{type},
+    	 							#{worker},
     		   						#{remarks},
     		   						#{updateUserId},
     		   						#{createUserId}
@@ -60,22 +78,37 @@
     </sql>
 
     <sql id="delete_from_table">
-    	delete from workflow_job
+    	delete from workflow_task
     </sql>
     
-	<select id="get" resultMap="WorkflowJobResult">
+	<select id="get" resultMap="WorkflowTaskModelResult">
 		<include refid="select_common_column"/>
 		<include refid="from_table"/>
         where 1=1
         and `id` =#{id}
     </select>
     
-    <insert id="insert" parameterMap="WorkflowJobParameter">
+    <insert id="insert" parameterMap="WorkflowTaskModelParameter">
     	<selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
               select uuid()
     	</selectKey>
     	<include refid="insert_common_table"></include>
-	</insert> 
+	</insert>
+	
+	<select id="listByJobModelId" resultMap="WorkflowTaskModelResult">
+		<include refid="select_common_column"/>
+		<include refid="from_table"/>
+        where 1=1
+        and `job_model_id` =#{jobModelId}
+    </select>
+    
+    <select id="getByJobModelIdAndPhase" resultMap="WorkflowTaskModelResult">
+		<include refid="select_common_column"/>
+		<include refid="from_table"/>
+        where 1=1
+        and `job_model_id` =#{jobModelId}
+        and `phase` =#{phase}
+    </select>
 	
 	<delete id="delete">
 		<include refid="delete_from_table"/>

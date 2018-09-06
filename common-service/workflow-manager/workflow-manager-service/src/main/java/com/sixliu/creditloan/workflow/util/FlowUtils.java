@@ -6,8 +6,8 @@ import com.sixliu.creditloan.workflow.constant.JobStatus;
 import com.sixliu.creditloan.workflow.constant.TaskStatus;
 import com.sixliu.creditloan.workflow.dto.FlowJobModel;
 import com.sixliu.creditloan.workflow.dto.FlowTask;
-import com.sixliu.creditloan.workflow.dto.FlowTaskModel;
 import com.sixliu.creditloan.workflow.entity.WorkflowJob;
+import com.sixliu.creditloan.workflow.entity.WorkflowTaskModel;
 
 /**
  * @author:MG01867
@@ -26,15 +26,15 @@ public class FlowUtils{
 		return flowJob;
 	}
 
-	public static FlowTask newFlowTask(FlowTaskModel flowTaskModel, String flowJobId,
+	public static FlowTask newFlowTask(WorkflowTaskModel workflowTaskModel, String flowJobId,
 			String userId) {
 		FlowTask flowTask = new FlowTask();
-		flowTask.setFlowTaskModelId(flowTaskModel.getId());
+		flowTask.setFlowTaskModelId(workflowTaskModel.getId());
 		flowTask.setFlowJobId(flowJobId);
-		flowTask.setPhase(flowTaskModel.getPhase());
+		flowTask.setPhase(workflowTaskModel.getPhase());
 		flowTask.setStatus(TaskStatus.POOLING);
-		flowTask.setType(flowTaskModel.getType());
-		flowTask.setWorker(flowTaskModel.getWorker());
+		flowTask.setType(workflowTaskModel.getType());
+		flowTask.setWorker(workflowTaskModel.getWorker());
 		Date nowDate = new Date();
 		flowTask.setCreateDate(nowDate);
 		flowTask.setUpdateDate(nowDate);

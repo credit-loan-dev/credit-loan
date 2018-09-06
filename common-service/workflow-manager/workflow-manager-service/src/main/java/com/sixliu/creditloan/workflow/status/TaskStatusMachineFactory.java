@@ -7,14 +7,12 @@ import org.springframework.stereotype.Component;
 
 import com.sixliu.creditloan.workflow.constant.JobStatus;
 import com.sixliu.creditloan.workflow.constant.TaskStatus;
-import com.sixliu.creditloan.workflow.dao.FlowTaskModelDao;
-import com.sixliu.creditloan.workflow.dto.FlowJob;
+import com.sixliu.creditloan.workflow.dao.WorkflowTaskModelDao;
 import com.sixliu.creditloan.workflow.dto.FlowTask;
-import com.sixliu.creditloan.workflow.dto.FlowTaskModel;
 import com.sixliu.creditloan.workflow.dto.FlowTaskResult;
+import com.sixliu.creditloan.workflow.entity.WorkflowJob;
+import com.sixliu.creditloan.workflow.entity.WorkflowTaskModel;
 import com.sixliu.creditloan.workflow.util.FlowUtils;
-
-import lombok.NonNull;
 
 /**
  * @author:MG01867
@@ -27,7 +25,7 @@ import lombok.NonNull;
 public class TaskStatusMachineFactory {
 
 	@Autowired
-	private FlowTaskModelDao flowTaskModelDao;
+	private WorkflowTaskModelDao flowTaskModelDao;
 
 	public TaskStatusMachine get(TaskStatus taskStatus) {
 		if (TaskStatus.POOLING == taskStatus) {
@@ -52,8 +50,7 @@ public class TaskStatusMachineFactory {
 	/** 待认领 **/
 	private TaskStatusMachine POOLING = new TaskStatusMachine() {
 		@Override
-		public FlowTask process(@NonNull FlowJob flowJob, @NonNull FlowTask flowTask,
-				@NonNull FlowTaskResult approvalResult) {
+		public FlowTask process(WorkflowJob workflowJob,FlowTask flowTask,FlowTaskResult approvalResult) {
 			if (TaskStatus.PENDING != approvalResult.getStatus()) {
 				throw new IllegalStateException(String.format(
 						"This approvalResult's status[%s] of flowTask[%s][%s] is illegal", approvalResult.getStatus(),
@@ -68,35 +65,34 @@ public class TaskStatusMachineFactory {
 	/** 待处理 **/
 	private TaskStatusMachine PENDING = new TaskStatusMachine() {
 		@Override
-		public FlowTask process(@NonNull FlowJob flowJob, @NonNull FlowTask flowTask,
-				@NonNull FlowTaskResult approvalResult) {
+		public FlowTask process(WorkflowJob workflowJob,FlowTask flowTask,FlowTaskResult approvalResult) {
 			TaskStatus next = approvalResult.getStatus();
 			FlowTask nextFlowTask = null;
 			if (TaskStatus.PASS == next) {
-				FlowTaskModel nextFlowTaskModel = flowTaskModelDao
-						.getByflowJobModelAndPhase(flowJob.getFlowJobModelId(), flowTask.getPhase() + 1);
-				if (null != nextFlowTaskModel) {
-					nextFlowTask = FlowUtils.newFlowTask(nextFlowTaskModel, flowTask.getFlowJobId(),
+				WorkflowTaskModel nextWorkflowTaskModel = flowTaskModelDao
+						.getByJobModelIdAndPhase(workflowJob.getModelId(), flowTask.getPhase() + 1);
+				if (null != nextWorkflowTaskModel) {
+					nextFlowTask = FlowUtils.newFlowTask(nextWorkflowTaskModel, flowTask.getFlowJobId(),
 							approvalResult.getUserId());
 				} else {
-					flowJob.setStatus(JobStatus.PASS_ENDED);
-					flowJob.setUpdateDate(new Date());
+					workflowJob.setStatus(JobStatus.PASS_ENDED);
+					workflowJob.setUpdateDate(new Date());
 				}
 			} else if (TaskStatus.REJECT == next) {
-				flowJob.setStatus(JobStatus.REJECT_ENDED);
-				flowJob.setUpdateDate(new Date());
+				workflowJob.setStatus(JobStatus.REJECT_ENDED);
+				workflowJob.setUpdateDate(new Date());
 			} else if (TaskStatus.HANG_UP == next) {
 
 			} else if (TaskStatus.OVERRULE == next) {
-				FlowTaskModel overruleFlowTaskModel = flowTaskModelDao
-						.getByflowJobModelAndPhase(flowJob.getFlowJobModelId(), approvalResult.getOverrulePhase());
-				if (null == overruleFlowTaskModel) {
+				WorkflowTaskModel overruleWorkflowTaskModel = flowTaskModelDao
+						.getByJobModelIdAndPhase(workflowJob.getModelId(), approvalResult.getOverrulePhase());
+				if (null == overruleWorkflowTaskModel) {
 					throw new IllegalArgumentException("the ");
 				}
-				if (overruleFlowTaskModel.getPhase() > flowTask.getPhase()) {
+				if (overruleWorkflowTaskModel.getPhase() > flowTask.getPhase()) {
 					throw new IllegalArgumentException("the ");
 				}
-				nextFlowTask = FlowUtils.newFlowTask(overruleFlowTaskModel, flowTask.getFlowJobId(),
+				nextFlowTask = FlowUtils.newFlowTask(overruleWorkflowTaskModel, flowTask.getFlowJobId(),
 						approvalResult.getUserId());
 			} else {
 				throw new IllegalStateException(String.format(
@@ -114,28 +110,26 @@ public class TaskStatusMachineFactory {
 	/** 通过 **/
 	private TaskStatusMachine PASS = new TaskStatusMachine() {
 		@Override
-		public FlowTask process(@NonNull FlowJob flowJob, @NonNull FlowTask flowTask,
-				@NonNull FlowTaskResult approvalResult) {
+		public FlowTask process(WorkflowJob workflowJob,FlowTask flowTask,FlowTaskResult approvalResult) {
 			throw new UnsupportedOperationException(
 					String.format("No operation is supported when the flowTask[%s]'s status[%s] of flowJob[%s]",
-							flowTask.getId(), PASS, flowJob.getId()));
+							flowTask.getId(), PASS, workflowJob.getId()));
 		}
 	};
 
 	/** 转移 **/
 	private TaskStatusMachine TRANSFER = new TaskStatusMachine() {
 		@Override
-		public FlowTask process(@NonNull FlowJob flowJob, @NonNull FlowTask flowTask,
-				@NonNull FlowTaskResult approvalResult) {
-			if (JobStatus.STARTED != flowJob.getStatus()) {
+		public FlowTask process(WorkflowJob workflowJob,FlowTask flowTask,FlowTaskResult approvalResult) {
+			if (JobStatus.STARTED != workflowJob.getStatus()) {
 				throw new UnsupportedOperationException(
 						String.format("No operation is supported when the flowTask[%s]'s status[%s] of flowJob[%s]",
-								flowTask.getId(), PASS, flowJob.getId()));
+								flowTask.getId(), PASS, workflowJob.getId()));
 			}
 			if (TaskStatus.PENDING != flowTask.getStatus()) {
 				throw new UnsupportedOperationException(
 						String.format("No operation is supported when the flowTask[%s]'s status[%s] of flowJob[%s]",
-								flowTask.getId(), PASS, flowJob.getId()));
+								flowTask.getId(), PASS, workflowJob.getId()));
 			}
 			flowTask.setStatus(TaskStatus.TRANSFER);
 			flowTask.setUpdateDate(new Date());
@@ -146,30 +140,27 @@ public class TaskStatusMachineFactory {
 	/** 拒绝 **/
 	private TaskStatusMachine REJECT = new TaskStatusMachine() {
 		@Override
-		public FlowTask process(@NonNull FlowJob flowJob, @NonNull FlowTask flowTask,
-				@NonNull FlowTaskResult approvalResult) {
+		public FlowTask process(WorkflowJob workflowJob,FlowTask flowTask,FlowTaskResult approvalResult) {
 			throw new UnsupportedOperationException(
 					String.format("No operation is supported when the flowTask[%s]'s status[%s] of flowJob[%s]",
-							flowTask.getId(), REJECT, flowJob.getId()));
+							flowTask.getId(), REJECT, workflowJob.getId()));
 		}
 	};
 
 	/** 驳回 **/
 	private TaskStatusMachine OVERRULE = new TaskStatusMachine() {
 		@Override
-		public FlowTask process(@NonNull FlowJob flowJob, @NonNull FlowTask flowTask,
-				@NonNull FlowTaskResult approvalResult) {
+		public FlowTask process(WorkflowJob workflowJob,FlowTask flowTask,FlowTaskResult approvalResult) {
 			throw new UnsupportedOperationException(
 					String.format("No operation is supported when the flowTask[%s]'s status[%s] of flowJob[%s]",
-							flowTask.getId(), OVERRULE, flowJob.getId()));
+							flowTask.getId(), OVERRULE, workflowJob.getId()));
 		}
 	};
 
 	/** 挂起 **/
 	private TaskStatusMachine HANG_UP = new TaskStatusMachine() {
 		@Override
-		public FlowTask process(@NonNull FlowJob flowJob, @NonNull FlowTask flowTask,
-				@NonNull FlowTaskResult approvalResult) {
+		public FlowTask process(WorkflowJob workflowJob,FlowTask flowTask,FlowTaskResult approvalResult) {
 			TaskStatus next = approvalResult.getStatus();
 			if (TaskStatus.POOLING == next || TaskStatus.PENDING == next) {
 				flowTask.setStatus(next);
