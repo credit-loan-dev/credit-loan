@@ -26,7 +26,7 @@ public abstract class BaseTest{
 	protected static final Logger log = LoggerFactory.getLogger(BaseTest.class);
 	
 	static {
-		final TimeZone zone = TimeZone.getTimeZone("GMT+8 "); // 获取中国时区
+		final TimeZone zone = TimeZone.getTimeZone("GMT+8"); // 获取中国时区
 		TimeZone.setDefault(zone); // 设置时区
 	}
 	
