@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sixliu.creditloan.product.ProductManagerApi;
 import com.sixliu.creditloan.product.dto.ProductCreditDTO;
 import com.sixliu.creditloan.product.dto.ProductCreditSnapshotDTO;
 
@@ -19,7 +20,7 @@ import com.sixliu.creditloan.product.dto.ProductCreditSnapshotDTO;
  * @version:
  * @describe 产品服务-面向授信
  */
-@FeignClient("product-manager")
+@FeignClient(ProductManagerApi.SERVICE_NAME)
 @Validated
 public interface ProductForCreditLoanService {
 

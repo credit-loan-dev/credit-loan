@@ -15,6 +15,8 @@ public interface WorkflowJobDao {
 	WorkflowJob get(String id);
 	
 	int insert(WorkflowJob workflowJob);
+	
+	int updateLock(String id,String lock,int version);
 
 	int delete(String id);
 }

@@ -8,4 +8,5 @@ package com.sixliu.creditloan.product;
 */
 public interface ProductManagerApi {
 
+	String SERVICE_NAME="product-manager";
 }

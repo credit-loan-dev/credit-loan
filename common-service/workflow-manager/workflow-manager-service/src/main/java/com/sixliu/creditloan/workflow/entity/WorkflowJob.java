@@ -22,10 +22,12 @@ public class WorkflowJob extends BaseEntity{
 	/**流程作业名称**/
 	private String name;
 	
-	/**流程作业名称**/
+	/**流程作业id**/
 	private String modelId;
 	
 	/**流程作业状态**/
 	private JobStatus status;
+	
+	private String lock;
 
 }

@@ -4,9 +4,10 @@ import java.util.Date;
 
 import com.sixliu.creditloan.workflow.constant.JobStatus;
 import com.sixliu.creditloan.workflow.constant.TaskStatus;
-import com.sixliu.creditloan.workflow.dto.FlowJobModel;
 import com.sixliu.creditloan.workflow.dto.FlowTask;
 import com.sixliu.creditloan.workflow.entity.WorkflowJob;
+import com.sixliu.creditloan.workflow.entity.WorkflowJobModel;
+import com.sixliu.creditloan.workflow.entity.WorkflowTask;
 import com.sixliu.creditloan.workflow.entity.WorkflowTaskModel;
 
 /**
@@ -18,28 +19,27 @@ import com.sixliu.creditloan.workflow.entity.WorkflowTaskModel;
  */
 public class FlowUtils{
 	
-	public static WorkflowJob newFlowJob(FlowJobModel flowJobModel,String createUserId) {
-		WorkflowJob flowJob = new WorkflowJob();
-		flowJob.setCreateUserId(createUserId);
-		flowJob.setStatus(JobStatus.STARTED);
-		flowJob.setUpdateDate(new Date());
-		return flowJob;
+	public static WorkflowJob newWorkflowJob(WorkflowJobModel workflowJobModel,String createUserId) {
+		WorkflowJob workflowJob = new WorkflowJob();
+		workflowJob.setName(workflowJobModel.getName());
+		workflowJob.setModelId(workflowJobModel.getId());
+		workflowJob.setCreateUserId(createUserId);
+		workflowJob.setStatus(JobStatus.STARTED);
+		workflowJob.setUpdateDate(new Date());
+		return workflowJob;
 	}
 
-	public static FlowTask newFlowTask(WorkflowTaskModel workflowTaskModel, String flowJobId,
+	public static WorkflowTask newWorkflowTask(WorkflowTaskModel workflowTaskModel, String jobId,
 			String userId) {
-		FlowTask flowTask = new FlowTask();
-		flowTask.setFlowTaskModelId(workflowTaskModel.getId());
-		flowTask.setFlowJobId(flowJobId);
-		flowTask.setPhase(workflowTaskModel.getPhase());
-		flowTask.setStatus(TaskStatus.POOLING);
-		flowTask.setType(workflowTaskModel.getType());
-		flowTask.setWorker(workflowTaskModel.getWorker());
-		Date nowDate = new Date();
-		flowTask.setCreateDate(nowDate);
-		flowTask.setUpdateDate(nowDate);
-		flowTask.setCreateUserId(userId);
-		return flowTask;
+		WorkflowTask workflowTask = new WorkflowTask();
+		workflowTask.setJobId(jobId);
+		workflowTask.setModelId(workflowTaskModel.getId());
+		workflowTask.setPhase(workflowTaskModel.getPhase());
+		workflowTask.setStatus(TaskStatus.POOLING);
+		workflowTask.setType(workflowTaskModel.getType());
+		workflowTask.setWorker(workflowTaskModel.getWorker());
+		workflowTask.setCreateUserId(userId);
+		return workflowTask;
 	}
 	
 	public static FlowTask copyFlowTask(FlowTask flowTask,String userId) {

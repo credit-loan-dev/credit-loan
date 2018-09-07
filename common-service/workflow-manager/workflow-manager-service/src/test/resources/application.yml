@@ -38,4 +38,9 @@ mybatis:
   config-location: classpath:mybatis/mybatis-config.xml
   mapper-locations: classpath:mybatis/mapper/**/*.xml
   type-handlers-package: com.sixliu.creditloan.workflow.constant
+
+app:
+  autoProcessWorkerMangaer:
+    workerThreads:4
+    initialDelayIncFactor:1000
     

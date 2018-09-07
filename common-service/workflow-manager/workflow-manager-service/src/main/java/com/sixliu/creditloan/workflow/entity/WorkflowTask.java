@@ -42,11 +42,7 @@ public class WorkflowTask extends BaseEntity {
 
 	/** 流程作业任务所处状态 **/
 	private TaskStatus status;
-
-	/** 流程作业任务内部意见 **/
-	private String innerOpinion;
-
-	/** 流程作业任务外部意见 **/
-	private String outerOpinion;
-
+	
+	/** 流程作业任务为自动处理类型时 worker扫描任务间隔时间**/
+	private long checkInterval;
 }

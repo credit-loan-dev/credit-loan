@@ -6,6 +6,7 @@ package com.sixliu.creditloan.workflow;
 *@version:
 *@describe //TODO
 */
-public interface FlowManagerApi {
+public interface WorkflowManagerApi {
 
+	String SERVICE_NAME="workflow-manager";
 }

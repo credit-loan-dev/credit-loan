@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sixliu.creditloan.product.dto.ProductConfigPagedQueryDTO;
+import com.sixliu.creditloan.product.ProductManagerApi;
 import com.sixliu.creditloan.product.dto.PagedQueryResultDTO;
 import com.sixliu.creditloan.product.dto.ProductConfigDTO;
 
@@ -20,7 +21,7 @@ import com.sixliu.creditloan.product.dto.ProductConfigDTO;
 *@version:
 *@describe 产品服务-面向配置
 */
-@FeignClient("product-manager")
+@FeignClient(ProductManagerApi.SERVICE_NAME)
 @Validated
 public interface ProductForConfigService {
 	

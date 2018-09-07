@@ -12,13 +12,13 @@ import lombok.Data;
 *@describe //TODO
 */
 @Data
-public class FlowTaskResult {
+public class TaskProcessResult {
 
 	/**流程作业id**/
-	private String flowJobId;
+	private String jobId;
 	
 	/**流程作业任务id**/
-	private String flowTaskId;
+	private String taskId;
 	
 	/**流程作业任务审批用户**/
 	private String userId;

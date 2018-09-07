@@ -1,8 +1,7 @@
 package com.sixliu.creditloan.workflow.status;
 
-import com.sixliu.creditloan.workflow.dto.FlowTask;
-import com.sixliu.creditloan.workflow.dto.FlowTaskResult;
-import com.sixliu.creditloan.workflow.entity.WorkflowJob;
+import com.sixliu.creditloan.workflow.constant.TaskStatus;
+import com.sixliu.creditloan.workflow.dto.TaskProcessResult;
 
 /**
  * @author:MG01867
@@ -13,5 +12,13 @@ import com.sixliu.creditloan.workflow.entity.WorkflowJob;
  */
 public interface TaskStatusMachine {
 
-	FlowTask process(WorkflowJob workflowJob,FlowTask flowTask,FlowTaskResult approvalResult);
+	TaskStatus getTaskStatus();
+	
+	void process(TaskProcessResult taskProcessResult,CompleteCallback completeCallback);
+	
+	@FunctionalInterface
+	public interface CompleteCallback{
+		
+		void complete(String jobId);
+	}
 }

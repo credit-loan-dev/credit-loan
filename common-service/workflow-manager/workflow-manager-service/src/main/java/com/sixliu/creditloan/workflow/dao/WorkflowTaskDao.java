@@ -19,10 +19,16 @@ public interface WorkflowTaskDao {
 	int insert(WorkflowTask workflowTask);
 
 	WorkflowTask get(String id);
+	
+	WorkflowTask getByJobIdForPooling(String jobId);
 
 	List<WorkflowTask> listByRoleId(String roleId);
 	
 	List<WorkflowTask> listByRoleIdAndStatus(@Param("roleId") String roleId,@Param("status") TaskStatus status);
 
 	int update(WorkflowTask workflowTask);
+	
+	int updateOwnerUserIdAndStatus(String id,String ownerUserId,TaskStatus status,String updateUserid,int version);
+	
+	int updateStatus(String id,TaskStatus status,String updateUserid,int version);
 }
