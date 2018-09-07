@@ -28,6 +28,9 @@ public class WorkflowJob extends BaseEntity{
 	/**流程作业状态**/
 	private JobStatus status;
 	
-	private String lock;
-
+	/**保存锁着流程作业的服务url**/
+	private String lockUrl;
+	
+	/**保存锁着流程作业的服务服务启动uuid**/
+	private String lockUUID;
 }

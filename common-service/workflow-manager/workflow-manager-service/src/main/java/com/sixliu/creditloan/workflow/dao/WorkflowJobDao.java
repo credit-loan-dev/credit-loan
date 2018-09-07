@@ -1,5 +1,7 @@
 package com.sixliu.creditloan.workflow.dao;
 
+import java.util.List;
+
 import com.sixliu.creditloan.workflow.entity.WorkflowJob;
 
 
@@ -16,7 +18,11 @@ public interface WorkflowJobDao {
 	
 	int insert(WorkflowJob workflowJob);
 	
-	int updateLock(String id,String lock,int version);
+	List<WorkflowJob> listLockJob();
+	
+	int tryLock(String id,String lockUrl,String lockUUID,int version);
+	
+	int unlock(String id,int version);
 
 	int delete(String id);
 }

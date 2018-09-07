@@ -43,4 +43,6 @@ app:
   autoProcessWorkerMangaer:
     workerThreads:4
     initialDelayIncFactor:1000
+  heartbeatCheckLockJob:
+    heartbeatTime:1800000
     

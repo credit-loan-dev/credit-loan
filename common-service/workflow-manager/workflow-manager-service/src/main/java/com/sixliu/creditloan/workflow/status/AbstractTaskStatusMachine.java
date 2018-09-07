@@ -4,6 +4,7 @@ import javax.annotation.PostConstruct;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +18,7 @@ import com.sixliu.creditloan.workflow.dto.TaskProcessResult;
 import com.sixliu.creditloan.workflow.entity.WorkflowJob;
 import com.sixliu.creditloan.workflow.entity.WorkflowTask;
 import com.sixliu.creditloan.workflow.entity.WorkflowTaskOpinion;
+import com.sixliu.creditloan.workflow.service.WorkflowService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,6 +31,14 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public abstract class AbstractTaskStatusMachine implements TaskStatusMachine {
+
+	@Value("${app.autoProcessWorkerMangaer.initialDelayIncFactor}")
+	private String ip;
+
+	@Value("${app.autoProcessWorkerMangaer.initialDelayIncFactor}")
+	private int port;
+
+	private String url;
 
 	private TaskStatus taskStatus;
 
@@ -46,7 +56,7 @@ public abstract class AbstractTaskStatusMachine implements TaskStatusMachine {
 
 	@Autowired
 	private TaskStatusMachineFactory taskStatusMachineFactory;
-	
+
 	@Autowired
 	private TxTaskStatusMachine txTaskStatusMachine;
 
@@ -56,66 +66,71 @@ public abstract class AbstractTaskStatusMachine implements TaskStatusMachine {
 
 	@PostConstruct
 	public void init() {
+		this.url = ip + ":" + port + WorkflowService.PATH;
 		taskStatusMachineFactory.register(this);
 	}
 
 	@Override
-	public final void process(TaskProcessResult taskProcessResult,CompleteCallback completeCallback) {
+	public final void process(TaskProcessResult taskProcessResult, CompleteCallback completeCallback) {
 		txTaskStatusMachine.process(taskProcessResult);
 		completeCallback.complete(taskProcessResult.getJobId());
 	}
 
-	
 	@Component
-	public class TxTaskStatusMachine{
+	public class TxTaskStatusMachine {
 
 		@Transactional
 		public void process(TaskProcessResult taskProcessResult) {
 			WorkflowJob workflowJob = workflowJobDao.get(taskProcessResult.getJobId());
 			if (null == workflowJob) {
-				throw new IllegalArgumentException(String.format("This Job[%s] is non-existent", taskProcessResult.getJobId()));
+				throw new IllegalArgumentException(
+						String.format("This Job[%s] is non-existent", taskProcessResult.getJobId()));
 			}
 			if (JobStatus.STARTED != workflowJob.getStatus()) {
-				throw new UnsupportedOperationException(String.format("The job[%s] is ended", workflowJob.getId()));
+				throw new UnsupportedOperationException(
+						String.format("The job[%s] is ended[%s]", workflowJob.getId(), workflowJob.getStatus()));
 			}
-			if (null != workflowJob.getLock()) {
-
+			if (null != workflowJob.getLockUUID()) {
+				throw new IllegalArgumentException(String.format("The Job[%s] was be lock by target[%s]",
+						workflowJob.getLockUrl() + "/" + workflowJob.getLockUUID()));
 			}
-			int updateLock = workflowJobDao.updateLock(workflowJob.getId(), "lock", workflowJob.getVersion());
-			if (1 != updateLock) {
-
-			}
-			WorkflowTask workflowTask = workflowTaskDao.get(taskProcessResult.getTaskId());
-			try {
-				TaskStatus oldStatus = workflowTask.getStatus();
-				WorkflowTask nextWorkflowTask = doProcess(workflowJob, workflowTask, taskProcessResult);
-				TaskStatus newStatus = workflowTask.getStatus();
-				if (oldStatus != newStatus) {
-					workflowTaskDao.update(workflowTask);
+			int locked = workflowJobDao.tryLock(workflowJob.getId(), url, WorkflowService.UUID,
+					workflowJob.getVersion());
+			if (1 == locked) {
+				WorkflowTask workflowTask = workflowTaskDao.get(taskProcessResult.getTaskId());
+				try {
+					TaskStatus oldStatus = workflowTask.getStatus();
+					WorkflowTask nextWorkflowTask = doProcess(workflowJob, workflowTask, taskProcessResult);
+					TaskStatus newStatus = workflowTask.getStatus();
+					if (oldStatus != newStatus) {
+						workflowTaskDao.update(workflowTask);
+					}
+					if (StringUtils.isNotBlank(taskProcessResult.getInnerOpinion())
+							|| StringUtils.isNotBlank(taskProcessResult.getOuterOpinion())) {
+						WorkflowTaskOpinion workflowTaskOpinion = new WorkflowTaskOpinion();
+						workflowTaskOpinion.setJobId(workflowJob.getId());
+						workflowTaskOpinion.setTaskId(workflowTask.getId());
+						workflowTaskOpinion.setInnerOpinion(taskProcessResult.getInnerOpinion());
+						workflowTaskOpinion.setOuterOpinion(taskProcessResult.getOuterOpinion());
+						workflowTaskOpinion.setCreateUserId(taskProcessResult.getUserId());
+						workflowTaskOpinion.setUpdateUserId(taskProcessResult.getUserId());
+						getWorkflowTaskOpinionDao().insert(workflowTaskOpinion);
+					}
+					if (null != nextWorkflowTask) {
+						workflowTaskDao.insert(nextWorkflowTask);
+					}
+				} catch (Exception exception) {
+					log.error(String.format("The user[%s] process task[%s] of job[%s] err",
+							taskProcessResult.getUserId(), workflowTask.getId(), workflowJob.getId()), exception);
+				} finally {
+					workflowJobDao.unlock(workflowJob.getId(), workflowJob.getVersion() + 1);
 				}
-				if (StringUtils.isNotBlank(taskProcessResult.getInnerOpinion())
-						|| StringUtils.isNotBlank(taskProcessResult.getOuterOpinion())) {
-					WorkflowTaskOpinion workflowTaskOpinion = new WorkflowTaskOpinion();
-					workflowTaskOpinion.setJobId(workflowJob.getId());
-					workflowTaskOpinion.setTaskId(workflowTask.getId());
-					workflowTaskOpinion.setInnerOpinion(taskProcessResult.getInnerOpinion());
-					workflowTaskOpinion.setOuterOpinion(taskProcessResult.getOuterOpinion());
-					workflowTaskOpinion.setCreateUserId(taskProcessResult.getUserId());
-					workflowTaskOpinion.setUpdateUserId(taskProcessResult.getUserId());
-					getWorkflowTaskOpinionDao().insert(workflowTaskOpinion);
-				}
-				if (null != nextWorkflowTask) {
-					workflowTaskDao.insert(nextWorkflowTask);
-				}
-			} catch (Exception exception) {
-				log.error(String.format("The user[%s] process task[%s] of job[%s] err", taskProcessResult.getUserId(),
-						workflowTask.getId(), workflowJob.getId()), exception);
-			} finally {
-				workflowJobDao.updateLock(workflowJob.getId(), null, workflowJob.getVersion());
+			} else {
+				log.warn(String.format("Try to lock job[%s] failed", workflowJob.getId()));
 			}
 		}
 	}
-	
+
 	protected abstract WorkflowTask doProcess(WorkflowJob workflowJob, WorkflowTask workflowTask,
 			TaskProcessResult taskProcessResult);
 
