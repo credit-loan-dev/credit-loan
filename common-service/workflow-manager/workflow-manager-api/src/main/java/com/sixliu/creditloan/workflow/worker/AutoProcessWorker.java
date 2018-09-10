@@ -13,7 +13,7 @@ import com.sixliu.creditloan.workflow.dto.TaskProcessResult;
  * @describe 异步handler
  */
 @FunctionalInterface
-public interface AutoProcessWorker {
+public interface AutoProcessWorker{
 
 	/**
 	 * Worker名称:默认worker实现类名

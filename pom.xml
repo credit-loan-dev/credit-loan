@@ -24,6 +24,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
 		<maven-assembly-plugin.version>3.1.0</maven-assembly-plugin.version>
+		<maven-jar-plugin.version>3.1.0</maven-jar-plugin.version>
 		<docker-maven-plugin.version>0.26.1</docker-maven-plugin.version>
 		<lombok.version>1.18.2</lombok.version>
 		<!--java和代码源文件配置 -->
