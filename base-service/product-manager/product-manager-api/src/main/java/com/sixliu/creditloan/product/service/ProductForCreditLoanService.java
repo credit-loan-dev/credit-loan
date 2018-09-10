@@ -26,7 +26,7 @@ public interface ProductForCreditLoanService {
 
 	@RequestMapping(value = "/credit/getProduct", method = RequestMethod.POST)
 	@ResponseBody
-	ProductCreditDTO getProduct(
+	ProductCreditDTO getProductCreditConfig(
 			@NotBlank(message = "The product's Id must be non blank") @RequestParam(name = "productId") String productId);
 
 	@RequestMapping(value = "/credit/generateProductSnapshot", method = RequestMethod.POST)

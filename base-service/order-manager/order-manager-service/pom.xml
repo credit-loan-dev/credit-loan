@@ -25,12 +25,6 @@
 
 		<dependency>
 			<groupId>com.sixliu</groupId>
-			<artifactId>common-sdk</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.sixliu</groupId>
 			<artifactId>workflow-manager-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>

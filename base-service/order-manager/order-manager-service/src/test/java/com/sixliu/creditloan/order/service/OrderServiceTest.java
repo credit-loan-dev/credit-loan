@@ -25,7 +25,7 @@ public class OrderServiceTest extends BaseTest {
 
 	@Test
 	public void testApply() {
-		ProductCreditDTO productInnerDTO=productManagerService.get("c43d00de-9d29-11e8-9e01-005056986f0b");
+		ProductCreditDTO productInnerDTO=productManagerService.getProductCreditConfig("c43d00de-9d29-11e8-9e01-005056986f0b");
 		System.out.println(productInnerDTO);
 	}
 }

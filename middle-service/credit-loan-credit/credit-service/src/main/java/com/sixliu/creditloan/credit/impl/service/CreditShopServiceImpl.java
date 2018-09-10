@@ -38,7 +38,7 @@ public class CreditShopServiceImpl implements CreditShopService {
 	@Override
 	public String apply(CreditApplyDTO creditApplyDTO) {
 		creditApplyPreCheckManager.check(creditApplyDTO);
-		String productSnapshotId = productManagerClient.generateProductConfigSnapshot(creditApplyDTO.getProductId());
+		String productSnapshotId = productManagerClient.generateProductSnapshot(creditApplyDTO.getProductId());
 		String id = creditOrderIdGenerator.generator(creditApplyDTO.getProductId());
 		CreateCreditOrderDTO createCreditOrder = new CreateCreditOrderDTO();
 		createCreditOrder.setActivityId(id);

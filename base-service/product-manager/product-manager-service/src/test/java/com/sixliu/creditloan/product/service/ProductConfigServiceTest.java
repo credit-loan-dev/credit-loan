@@ -23,7 +23,7 @@ public class ProductConfigServiceTest extends BaseTest {
 
 	@Test
 	public void testInsert() {
-		ProductCreditDTO product=productForCreditService.getProduct("c43d00de-9d29-11e8-9e01-005056986f0b");
+		ProductCreditDTO product=productForCreditService.getProductCreditConfig("c43d00de-9d29-11e8-9e01-005056986f0b");
 		checkOk(product);
 	}
 

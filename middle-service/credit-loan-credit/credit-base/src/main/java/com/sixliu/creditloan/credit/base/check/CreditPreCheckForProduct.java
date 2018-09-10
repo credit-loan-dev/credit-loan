@@ -40,7 +40,7 @@ public class CreditPreCheckForProduct implements CreditApplyPreCheck {
 	
 	@Override
 	public void check(CreditApplyDTO creditApplyDTO) {
-		ProductCreditDTO productForCreditDTO = productConfigService.get(creditApplyDTO.getProductId());
+		ProductCreditDTO productForCreditDTO = productConfigService.getProductCreditConfig(creditApplyDTO.getProductId());
 		if (null == productForCreditDTO) {
 			throw new IllegalArgumentException(
 					String.format("The product[%s] is non-existent", creditApplyDTO.getProductId()));

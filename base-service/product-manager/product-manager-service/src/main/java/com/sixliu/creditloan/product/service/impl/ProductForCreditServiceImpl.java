@@ -1,5 +1,7 @@
 package com.sixliu.creditloan.product.service.impl;
 
+import javax.validation.constraints.NotBlank;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -10,6 +12,7 @@ import com.sixliu.creditloan.product.converter.ProductDTOConverter;
 import com.sixliu.creditloan.product.dao.ProductConfigDao;
 import com.sixliu.creditloan.product.dao.snapshot.ProductConfigSnapshotDao;
 import com.sixliu.creditloan.product.dto.ProductCreditDTO;
+import com.sixliu.creditloan.product.dto.ProductCreditSnapshotDTO;
 import com.sixliu.creditloan.product.entity.ProductConfig;
 import com.sixliu.creditloan.product.entity.snapshot.ProductConfigSnapshot;
 import com.sixliu.creditloan.product.exception.AppException;
@@ -34,7 +37,7 @@ public class ProductForCreditServiceImpl implements ProductForCreditLoanService{
 	private ProductConfigSnapshotDao productConfigSnapshotDao;
 	
 	@Override
-	public ProductCreditDTO getProduct(String id) {
+	public ProductCreditDTO getProductCreditConfig(String id) {
 		ProductConfig productConfig=productConfigDao.get(id);
 		return ProductDTOConverter.convert(productConfig);
 	}
@@ -52,5 +55,13 @@ public class ProductForCreditServiceImpl implements ProductForCreditLoanService{
 		productConfigSnapshot.setOriginalId(productConfig.getId());
 		productConfigSnapshotDao.insert(productConfigSnapshot);
 		return productConfigSnapshot.getId();
+	}
+
+
+	@Override
+	public ProductCreditSnapshotDTO getProductSnapshot(
+			@NotBlank(message = "The productSnapshot's Id must be non blank") String productSnapshotId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

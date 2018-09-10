@@ -12,7 +12,7 @@ import com.sixliu.creditloan.order.entity.CreditOrder;
 import com.sixliu.creditloan.order.service.OrderManagerService;
 import com.sixliu.creditloan.product.dto.ProductCreditDTO;
 import com.sixliu.creditloan.product.service.ProductForCreditLoanService;
-import com.sixliu.flow.service.FlowService;
+import com.sixliu.creditloan.workflow.service.WorkflowRuntimeService;
 
 /**
  * @author:MG01867
@@ -29,13 +29,12 @@ public class OrderManagerServiceImpl implements OrderManagerService {
 	@Autowired
 	private ProductForCreditLoanService productManagerClient;
 
-	private FlowService flowManager;
+	private WorkflowRuntimeService workflowRuntimeService;
 
 	@Override
 	public String createOrder(CreateCreditOrderDTO createCreditOrder) {
-		ProductCreditDTO product = productManagerClient.get(createCreditOrder.getProductId());
-		String flowJobId = flowManager.createFlowJob(product.getCode(),
-				createCreditOrder.getInputUserId());
+		ProductCreditDTO product = productManagerClient.getProductCreditConfig(createCreditOrder.getProductId());
+		String flowJobId = workflowRuntimeService.createJob(product.getId(),createCreditOrder.getInputUserId());
 		CreditOrder creditOrder = new CreditOrder();
 		creditOrder.setId(createCreditOrder.getId());
 		creditOrder.setCustomerId(createCreditOrder.getCustomerId());
