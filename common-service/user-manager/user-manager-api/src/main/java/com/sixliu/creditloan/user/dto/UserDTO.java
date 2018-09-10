@@ -1,4 +1,4 @@
-package com.sixliu.credit.user.dto;
+package com.sixliu.creditloan.user.dto;
 
 
 import lombok.Data;

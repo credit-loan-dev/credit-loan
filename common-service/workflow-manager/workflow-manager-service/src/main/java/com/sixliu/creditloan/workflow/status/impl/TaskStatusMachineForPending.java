@@ -20,7 +20,7 @@ import com.sixliu.creditloan.workflow.util.FlowUtils;
  * @version:
  * @describe 任务状态机：待处理
  */
-@Component
+@Component("PENDING")
 public class TaskStatusMachineForPending extends AbstractTaskStatusMachine {
 
 	public TaskStatusMachineForPending() {

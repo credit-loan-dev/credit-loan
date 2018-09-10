@@ -1,6 +1,5 @@
 package com.sixliu.creditloan.workflow.worker.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -17,7 +16,6 @@ import com.sixliu.creditloan.workflow.worker.AutoProcessWorker;
 @Component
 public class RemoteAutoProcessWorkerFactory {
 
-	@Autowired
 	private RestTemplate  restTemplate;
 	
 	public AutoProcessWorker getOrNew(AutoProcessWorkerConfig autoProcessWorkerConfig) {

@@ -4,13 +4,14 @@
 package com.sixliu.credit.user.web.filter;
 
 import com.sixliu.credit.common.codec.DesUtils;
-import com.sixliu.credit.rbac.filter.PermissionsAuthorizationFilter;
 import com.sixliu.credit.user.utils.http.ServletUtils;
 import com.sixliu.credit.user.utils.lang.ObjectUtils;
 import com.sixliu.credit.user.utils.lang.StringUtils;
 import com.sixliu.credit.user.utils.network.IpUtils;
 import com.sixliu.credit.user.web.authc.FormToken;
 import com.sixliu.credit.user.web.realm.AuthorizingRealm;
+import com.sixliu.creditloan.user.filter.PermissionsAuthorizationFilter;
+
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.IncorrectCredentialsException;

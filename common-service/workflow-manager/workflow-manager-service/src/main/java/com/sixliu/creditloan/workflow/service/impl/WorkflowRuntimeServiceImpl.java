@@ -7,7 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sixliu.credit.user.dto.UserDTO;
+import com.sixliu.creditloan.user.dto.UserDTO;
 import com.sixliu.creditloan.user.service.UserManagerService;
 import com.sixliu.creditloan.workflow.constant.JobStatus;
 import com.sixliu.creditloan.workflow.constant.TaskStatus;

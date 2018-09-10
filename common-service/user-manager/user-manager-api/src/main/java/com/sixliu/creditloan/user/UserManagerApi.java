@@ -1,4 +1,4 @@
-package com.sixliu.credit.rbac;
+package com.sixliu.creditloan.user;
 /**
 *@author:MG01867
 *@date:2018年9月6日

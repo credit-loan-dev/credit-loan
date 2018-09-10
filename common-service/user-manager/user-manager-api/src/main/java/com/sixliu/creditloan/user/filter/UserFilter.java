@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2013-Now http://jeesite.com All rights reserved.
  */
-package com.sixliu.credit.rbac.filter;
+package com.sixliu.creditloan.user.filter;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;

@@ -1,6 +1,5 @@
-package com.sixliu.credit.rbac.config;
+package com.sixliu.creditloan.user.config;
 
-import com.sixliu.credit.rbac.filter.WebShiroFilter;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.web.filter.mgt.FilterChainManager;
 import org.apache.shiro.web.filter.mgt.PathMatchingFilterChainResolver;
@@ -9,6 +8,8 @@ import org.apache.shiro.web.servlet.AbstractShiroFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanInitializationException;
+
+import com.sixliu.creditloan.user.filter.WebShiroFilter;
 
 public class ShiroFilterFactoryBean extends org.apache.shiro.spring.web.ShiroFilterFactoryBean {
     private static final transient Logger log = LoggerFactory.getLogger(org.apache.shiro.spring.web.ShiroFilterFactoryBean.class);

@@ -3,10 +3,12 @@ package com.sixliu.creditloan.user.service;
 import java.util.List;
 
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import com.sixliu.credit.user.dto.UserDTO;
+import com.sixliu.creditloan.user.dto.UserDTO;
 
 
 /**
@@ -17,6 +19,7 @@ import com.sixliu.credit.user.dto.UserDTO;
 *@describe 用户管理客户端接口
 */
 @FeignClient("user-manager")
+@Validated
 public interface UserManagerService {
 
 	/**
@@ -25,7 +28,7 @@ public interface UserManagerService {
 	 * @return
 	 */
 	@RequestMapping(value = "/user-manager/get", method = RequestMethod.POST)
-	UserDTO get(String userId);
+	UserDTO get(@RequestParam(name="userId") String userId);
 	
 	/**
 	 * 通过角色id查询该角色下的用户
@@ -33,9 +36,9 @@ public interface UserManagerService {
 	 * @return
 	 */
 	@RequestMapping(value = "/user-manager/listUserByRoleId", method = RequestMethod.POST)
-	List<UserDTO> listUserByRoleId(String roleId);
+	List<UserDTO> listUserByRoleId(@RequestParam(name="userId") String roleId);
 	
 	
 	@RequestMapping(value = "/user-manager/get", method = RequestMethod.POST)
-	UserDTO confirmAndgetUser(String userId,String subordinateRoleId);
+	UserDTO confirmAndgetUser(@RequestParam(name="userId") String userId,@RequestParam(name="subordinateRoleId") String subordinateRoleId);
 }

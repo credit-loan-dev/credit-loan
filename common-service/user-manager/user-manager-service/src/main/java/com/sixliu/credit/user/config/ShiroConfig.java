@@ -1,13 +1,14 @@
 package com.sixliu.credit.user.config;
 
 
-import com.sixliu.credit.rbac.config.FilterChainDefinitionMap;
-import com.sixliu.credit.rbac.filter.LogoutFilter;
-import com.sixliu.credit.rbac.filter.PermissionsAuthorizationFilter;
-import com.sixliu.credit.rbac.filter.RolesAuthorizationFilter;
-import com.sixliu.credit.rbac.filter.UserFilter;
 import com.sixliu.credit.user.web.filter.FormAuthenticationFilter;
 import com.sixliu.credit.user.web.realm.AuthorizingRealm;
+import com.sixliu.creditloan.user.config.FilterChainDefinitionMap;
+import com.sixliu.creditloan.user.filter.LogoutFilter;
+import com.sixliu.creditloan.user.filter.PermissionsAuthorizationFilter;
+import com.sixliu.creditloan.user.filter.RolesAuthorizationFilter;
+import com.sixliu.creditloan.user.filter.UserFilter;
+
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;

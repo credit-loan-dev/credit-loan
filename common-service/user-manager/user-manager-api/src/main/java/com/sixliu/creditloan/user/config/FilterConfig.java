@@ -1,4 +1,4 @@
-package com.sixliu.credit.rbac.config;
+package com.sixliu.creditloan.user.config;
 
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;

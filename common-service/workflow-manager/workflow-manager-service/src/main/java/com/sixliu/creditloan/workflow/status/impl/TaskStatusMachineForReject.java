@@ -15,7 +15,7 @@ import com.sixliu.creditloan.workflow.status.AbstractTaskStatusMachine;
 *@version:
 *@describe //TODO
 */
-@Component
+@Component("REJECT")
 public class TaskStatusMachineForReject extends AbstractTaskStatusMachine {
 
 	public TaskStatusMachineForReject() {

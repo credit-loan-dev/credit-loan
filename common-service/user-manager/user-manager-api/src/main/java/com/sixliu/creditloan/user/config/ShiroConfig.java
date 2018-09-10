@@ -1,7 +1,6 @@
-package com.sixliu.credit.rbac.config;
+package com.sixliu.creditloan.user.config;
 
 
-import com.sixliu.credit.rbac.filter.*;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
@@ -12,6 +11,8 @@ import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreato
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
+
+import com.sixliu.creditloan.user.filter.*;
 
 
 

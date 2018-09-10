@@ -33,7 +33,6 @@ public class HeartbeatCheckLockJob {
 	@Autowired
 	private WorkflowJobDao workflowJobDao;
 
-	@Autowired
 	private RestTemplate restTemplate;
 
 	private Thread thread;

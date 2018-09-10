@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import com.sixliu.credit.rbac.UserManagerApi;
+import com.sixliu.creditloan.user.UserManagerApi;
 import com.sixliu.creditloan.workflow.dao.BaseDao;
 
 

@@ -15,7 +15,7 @@ import com.sixliu.creditloan.workflow.status.AbstractTaskStatusMachine;
  * @version:
  * @describe 任务状态机：任务池
  */
-@Component
+@Component("POOLING")
 public class TaskStatusMachineForPooling extends AbstractTaskStatusMachine {
 
 	public TaskStatusMachineForPooling() {

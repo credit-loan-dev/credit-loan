@@ -1,8 +1,6 @@
-package com.sixliu.credit.rbac.interceptor;
+package com.sixliu.creditloan.user.interceptor;
 
 
-import com.sixliu.credit.rbac.DataScope;
-import com.sixliu.credit.rbac.JsqlpaserUtils;
 import net.sf.jsqlparser.parser.CCJSqlParserUtil;
 import net.sf.jsqlparser.statement.Statement;
 import net.sf.jsqlparser.statement.select.PlainSelect;
@@ -15,6 +13,9 @@ import org.apache.ibatis.plugin.*;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.util.CollectionUtils;
+
+import com.sixliu.creditloan.user.DataScope;
+import com.sixliu.creditloan.user.JsqlpaserUtils;
 
 import java.util.Properties;
 

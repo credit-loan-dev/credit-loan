@@ -41,7 +41,7 @@ public interface WorkflowRuntimeService {
 	 * @param userId 当前操作用户
 	 * @return 返回匹配到任务集
 	 */
-	@RequestMapping(value = "/runtime/listTask", method = RequestMethod.POST)
+	@RequestMapping(value = "/runtime/listTaskByUserId", method = RequestMethod.POST)
 	List<FlowTask> listTaskByUserId(String userId);
 
 	/**
@@ -51,7 +51,7 @@ public interface WorkflowRuntimeService {
 	 * @param status 任务状态
 	 * @return 返回匹配到任务集
 	 */
-	@RequestMapping(value = "/runtime/listTask", method = RequestMethod.POST)
+	@RequestMapping(value = "/runtime/listTaskByUserIdAndTaskStatus", method = RequestMethod.POST)
 	List<FlowTask> listTaskByUserIdAndTaskStatus(String userId, TaskStatus status);
 
 	/**

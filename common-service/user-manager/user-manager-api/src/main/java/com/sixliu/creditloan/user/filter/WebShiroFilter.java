@@ -1,4 +1,4 @@
-package com.sixliu.credit.rbac.filter;
+package com.sixliu.creditloan.user.filter;
 
 
 import org.apache.shiro.authz.AuthorizationException;

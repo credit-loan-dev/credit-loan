@@ -1,6 +1,8 @@
 package com.sixliu.creditloan.workflow.status.impl;
 
 
+import org.springframework.stereotype.Component;
+
 import com.sixliu.creditloan.workflow.constant.TaskStatus;
 import com.sixliu.creditloan.workflow.dto.TaskProcessResult;
 import com.sixliu.creditloan.workflow.entity.WorkflowJob;
@@ -14,6 +16,7 @@ import com.sixliu.creditloan.workflow.status.AbstractTaskStatusMachine;
 *@version:
 *@describe
 */
+@Component("TRANSFER")
 public class TaskStatusMachineForTransfer extends AbstractTaskStatusMachine {
 
 	public TaskStatusMachineForTransfer() {

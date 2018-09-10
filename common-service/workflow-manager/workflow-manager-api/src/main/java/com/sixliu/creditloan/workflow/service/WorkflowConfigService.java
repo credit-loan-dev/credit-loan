@@ -1,32 +1,44 @@
 package com.sixliu.creditloan.workflow.service;
 
+import java.util.List;
+
+import javax.validation.Valid;
+
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sixliu.creditloan.workflow.WorkflowManagerApi;
+import com.sixliu.creditloan.workflow.dto.AddWorkflowJobModelDTO;
+import com.sixliu.creditloan.workflow.dto.WorkflowTaskModelDTO;
 
 /**
-*@author:MG01867
-*@date:2018年9月6日
-*@E-mail:359852326@qq.com
-*@version:
-*@describe 流程配置服务
-*/
+ * @author:MG01867
+ * @date:2018年9月6日
+ * @E-mail:359852326@qq.com
+ * @version:
+ * @describe 流程配置服务
+ */
 @FeignClient(WorkflowManagerApi.SERVICE_NAME)
 @Validated
 public interface WorkflowConfigService {
 
-	/**
-	 * 创建流程作业
-	 * 
-	 * @param jobModelId 作业模型id
-	 * @param userId     当前操作用户
-	 * @return 返回创建好的作业id
-	 */
-	@RequestMapping(value = "/runtime/createJob", method = RequestMethod.POST)
+	@RequestMapping(value = "/config/saveWorkflowJobModel", method = RequestMethod.POST)
 	@ResponseBody
-	String createJob(String jobModelId, String userId);
+	String saveWorkflowJobModel(@Valid @RequestBody AddWorkflowJobModelDTO addWorkflowJobModel);
+
+	@RequestMapping(value = "/config/saveWorkflowTaskModel", method = RequestMethod.POST)
+	@ResponseBody
+	String saveWorkflowTaskModel(WorkflowTaskModelDTO workflowTaskModel);
+
+	@RequestMapping(value = "/config/listWorkflowJobModels", method = RequestMethod.POST)
+	@ResponseBody
+	List<AddWorkflowJobModelDTO> listWorkflowJobModels();
+
+	@RequestMapping(value = "/config/listWorkflowTaskModelsByJobId", method = RequestMethod.POST)
+	@ResponseBody
+	List<WorkflowTaskModelDTO> listWorkflowTaskModelsByJobId(String jobId);
 }

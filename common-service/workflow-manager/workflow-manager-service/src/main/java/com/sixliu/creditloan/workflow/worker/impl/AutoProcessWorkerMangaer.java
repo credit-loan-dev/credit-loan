@@ -6,6 +6,7 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,15 +68,16 @@ public class AutoProcessWorkerMangaer {
 
 	private AutoProcessWorkerConfigDao autoProcessWorkerConfigDao;
 
+	@PostConstruct
 	public void init() {
 		this.initialDelayHistory = new TreeSet<>();
 		this.workerThreadPool = new ScheduledThreadPoolExecutor(workerThreads, this::newWorkerThread);
-		List<AutoProcessWorkerConfig> autoProcessWorkerConfigs = autoProcessWorkerConfigDao.listAll();
-		for (AutoProcessWorkerConfig autoProcessWorkerConfig : autoProcessWorkerConfigs) {
-			long initialDelay = nextInitialDelay();
-			workerThreadPool.scheduleAtFixedRate(new AutoProcessWorkerProxy(autoProcessWorkerConfig), initialDelay,
-					autoProcessWorkerConfig.getCheckInterval(), TimeUnit.MILLISECONDS);
-		}
+//		List<AutoProcessWorkerConfig> autoProcessWorkerConfigs = autoProcessWorkerConfigDao.listAll();
+//		for (AutoProcessWorkerConfig autoProcessWorkerConfig : autoProcessWorkerConfigs) {
+//			long initialDelay = nextInitialDelay();
+//			workerThreadPool.scheduleAtFixedRate(new AutoProcessWorkerProxy(autoProcessWorkerConfig), initialDelay,
+//					autoProcessWorkerConfig.getCheckInterval(), TimeUnit.MILLISECONDS);
+//		}
 	}
 
 
