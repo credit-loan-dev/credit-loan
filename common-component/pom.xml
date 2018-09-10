@@ -14,7 +14,7 @@
 
 	<modules>
 		<module>common-sdk</module>
-		<module>flow-managers</module>
+		<module>flow-manager</module>
 	</modules>
 
 </project>

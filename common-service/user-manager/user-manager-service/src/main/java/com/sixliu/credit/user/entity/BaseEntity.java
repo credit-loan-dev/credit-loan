@@ -1,6 +1,7 @@
 package com.sixliu.credit.user.entity;
 
-import com.sixliu.credit.common.lang.ObjectUtils;
+
+import com.sixliu.credit.user.utils.lang.ObjectUtils;
 
 public class BaseEntity {
 

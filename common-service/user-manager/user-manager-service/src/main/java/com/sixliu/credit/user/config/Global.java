@@ -1,10 +1,10 @@
 package com.sixliu.credit.user.config;
 
 
-import com.sixliu.credit.common.codec.AesUtils;
-import com.sixliu.credit.common.collect.MapUtils;
-import com.sixliu.credit.common.io.PropertiesUtils;
-import com.sixliu.credit.common.lang.ObjectUtils;
+
+import com.sixliu.credit.user.utils.codec.AesUtils;
+import com.sixliu.credit.user.utils.collect.MapUtils;
+import com.sixliu.credit.user.utils.io.PropertiesUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

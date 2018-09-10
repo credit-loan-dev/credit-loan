@@ -1,8 +1,8 @@
 package com.sixliu.credit.user.web.realm;
 
-import com.sixliu.credit.common.collect.MapUtils;
-import com.sixliu.credit.common.lang.StringUtils;
 import com.sixliu.credit.user.entity.SysUser;
+import com.sixliu.credit.user.utils.collect.MapUtils;
+import com.sixliu.credit.user.utils.lang.StringUtils;
 
 import java.io.Serializable;
 import java.util.Map;

@@ -4,12 +4,11 @@
 package com.sixliu.credit.user.web.filter;
 
 import com.sixliu.credit.common.codec.DesUtils;
-import com.sixliu.credit.common.config.Global;
-import com.sixliu.credit.common.http.ServletUtils;
-import com.sixliu.credit.common.lang.ObjectUtils;
-import com.sixliu.credit.common.lang.StringUtils;
-import com.sixliu.credit.common.network.IpUtils;
 import com.sixliu.credit.rbac.filter.PermissionsAuthorizationFilter;
+import com.sixliu.credit.user.utils.http.ServletUtils;
+import com.sixliu.credit.user.utils.lang.ObjectUtils;
+import com.sixliu.credit.user.utils.lang.StringUtils;
+import com.sixliu.credit.user.utils.network.IpUtils;
 import com.sixliu.credit.user.web.authc.FormToken;
 import com.sixliu.credit.user.web.realm.AuthorizingRealm;
 import org.apache.shiro.authc.AuthenticationException;
@@ -82,7 +81,7 @@ public class FormAuthenticationFilter extends org.apache.shiro.web.filter.authc.
 			username = ObjectUtils.toString(request.getAttribute(getUsernameParam()), StringUtils.EMPTY);
 		}
 		// 登录用户名解密（解决登录用户名明文传输安全问题）
-		String secretKey = Global.getProperty("shiro.loginSubmit.secretKey");
+		String secretKey = null; //Global.getProperty("shiro.loginSubmit.secretKey");
 		if (StringUtils.isNotBlank(secretKey)){
 			username = DesUtils.decode(username, secretKey);
 			if (StringUtils.isBlank(username)){
@@ -109,7 +108,7 @@ public class FormAuthenticationFilter extends org.apache.shiro.web.filter.authc.
 			password = ObjectUtils.toString(request.getAttribute(getPasswordParam()), StringUtils.EMPTY);
 		}
 		// 登录密码解密（解决登录密码明文传输安全问题）
-		String secretKey = Global.getProperty("shiro.loginSubmit.secretKey");
+		String secretKey = null; //Global.getProperty("shiro.loginSubmit.secretKey");
 		if (StringUtils.isNotBlank(secretKey)){
 			password = DesUtils.decode(password, secretKey);
 			if (StringUtils.isBlank(password)){
@@ -148,7 +147,7 @@ public class FormAuthenticationFilter extends org.apache.shiro.web.filter.authc.
 			captcha = ObjectUtils.toString(request.getAttribute(DEFAULT_CAPTCHA_PARAM), StringUtils.EMPTY);
 		}
 		// 登录用户名解密（解决登录用户名明文传输安全问题）
-		String secretKey = Global.getProperty("shiro.loginSubmit.secretKey");
+		String secretKey = null; //Global.getProperty("shiro.loginSubmit.secretKey");
 		if (StringUtils.isNotBlank(secretKey)){
 			captcha = DesUtils.decode(captcha, secretKey);
 		}

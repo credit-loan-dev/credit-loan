@@ -58,12 +58,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.sixliu</groupId>
-			<artifactId>common-sdk</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-
-		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<scope>provided</scope>

@@ -3,9 +3,6 @@
  */
 package com.sixliu.credit.rbac.filter;
 
-import com.sixliu.credit.common.http.ServletUtils;
-import com.sixliu.credit.common.io.PropertiesUtils;
-import com.sixliu.credit.common.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.subject.Subject;
@@ -63,12 +60,12 @@ public class PermissionsAuthorizationFilter extends org.apache.shiro.web.filter.
 	 */
 	public static void redirectToDefaultPath(ServletRequest request, ServletResponse response) throws IOException {
 		// AJAX不支持Redirect改用Forward
-		String loginUrl = PropertiesUtils.getInstance().getProperty("shiro.defaultPath");
+		String loginUrl = "";//PropertiesUtils.getInstance().getProperty("shiro.defaultPath");
 		HttpServletRequest req = ((HttpServletRequest) request);
-		if (StringUtils.equals(req.getContextPath()+loginUrl, req.getRequestURI())){
-			loginUrl = PropertiesUtils.getInstance().getProperty("shiro.loginUrl");
-		}
-		if (ServletUtils.isAjaxRequest(req)) {
+//		if (StringUtils.equals(req.getContextPath()+loginUrl, req.getRequestURI())){
+//			loginUrl = PropertiesUtils.getInstance().getProperty("shiro.loginUrl");
+//		}
+		if (isAjaxRequest(req)) {
 			try {
 				request.getRequestDispatcher(loginUrl).forward(request, response);
 			} catch (ServletException e) {
@@ -78,5 +75,50 @@ public class PermissionsAuthorizationFilter extends org.apache.shiro.web.filter.
     		WebUtils.issueRedirect(request, response, loginUrl);
     	}
 	}
-	
+
+	public static boolean isAjaxRequest(HttpServletRequest request){
+
+		String accept = request.getHeader("accept");
+		if (accept != null && accept.indexOf("application/json") != -1){
+			return true;
+		}
+
+		String xRequestedWith = request.getHeader("X-Requested-With");
+		if (xRequestedWith != null && xRequestedWith.indexOf("XMLHttpRequest") != -1){
+			return true;
+		}
+
+		String uri = request.getRequestURI();
+		if (inStringIgnoreCase(uri, ".json", ".xml")){
+			return true;
+		}
+
+		String ajax = request.getParameter("__ajax");
+		if (inStringIgnoreCase(ajax, "json", "xml")){
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * 是否包含字符串
+	 * @param str 验证字符串
+	 * @param strs 字符串组
+	 * @return 包含返回true
+	 */
+	public static boolean inStringIgnoreCase(String str, String... strs){
+		if (str != null && strs != null){
+			for (String s : strs){
+				if (str.equalsIgnoreCase(trim(s))){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	public static String trim(String str) {
+		return str == null ? null : str.trim();
+	}
 }
