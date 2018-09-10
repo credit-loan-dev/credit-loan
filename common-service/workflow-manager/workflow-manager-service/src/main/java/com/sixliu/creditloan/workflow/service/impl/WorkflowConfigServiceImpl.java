@@ -14,4 +14,10 @@ import com.sixliu.creditloan.workflow.service.WorkflowConfigService;
 @RestController
 public class WorkflowConfigServiceImpl implements WorkflowConfigService{
 
+	@Override
+	public String createJob(String jobModelId, String userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
