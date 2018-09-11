@@ -26,10 +26,7 @@ public enum TaskStatus {
 
 	/** 待处理 **/
 	PENDING,
-
-	/** 正在处理 **/
-	DOING,
-
+	
 	/** 转移 **/
 	TRANSFER,
 
