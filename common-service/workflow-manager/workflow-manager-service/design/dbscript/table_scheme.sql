@@ -31,6 +31,21 @@ CREATE TABLE `workflow_task_model` (
   UNIQUE KEY `job_phase_UNIQUE` (`job_model_id`,`phase`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='流程任务模型表';
 
+CREATE TABLE `workflow_task_worker_model` (
+  `id` varchar(36) NOT NULL COMMENT '数据id:业务无关性',
+  `name` varchar(20) NOT NULL COMMENT '任务worker名称',
+  `task_id` varchar(36) NOT NULL COMMENT '流程任务id',
+  `check_interval` int(11) NOT NULL COMMENT '定时检查间隔',
+  `url` varchar(200) NOT NULL COMMENT '远程url',
+  `remarks` varchar(100) DEFAULT NULL COMMENT '数据备注',
+  `version` int(11) NOT NULL DEFAULT '0' COMMENT '数据版本',
+  `update_user_id` varchar(36) NOT NULL COMMENT '数据更新用户id',
+  `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '数据更新日期id',
+  `create_user_id` varchar(36) NOT NULL COMMENT '数据创建用户id',
+  `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '数据创建日期',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='流程任务worker模型表';
+
 CREATE TABLE `workflow_event_model` (
   `id` varchar(36) NOT NULL COMMENT '数据id:业务无关性',
   `task_id` varchar(20) NOT NULL COMMENT '流程任务模型id',
@@ -92,5 +107,21 @@ CREATE TABLE `workflow_task_opinion` (
   `create_user_id` varchar(36) NOT NULL COMMENT '数据创建用户id',
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '数据创建日期',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='流程任务意见表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='流程任务意见表';
+
+
+CREATE TABLE `workflow_task_worker` (
+  `id` varchar(36) NOT NULL COMMENT '数据id:业务无关性',
+  `name` varchar(20) NOT NULL COMMENT '任务worker名称',
+  `task_id` varchar(36) NOT NULL COMMENT '流程任务id',
+  `check_interval` int(11) NOT NULL COMMENT '定时检查间隔',
+  `url` varchar(200) NOT NULL COMMENT '远程url',
+  `remarks` varchar(100) DEFAULT NULL COMMENT '数据备注',
+  `version` int(11) NOT NULL DEFAULT '0' COMMENT '数据版本',
+  `update_user_id` varchar(36) NOT NULL COMMENT '数据更新用户id',
+  `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '数据更新日期id',
+  `create_user_id` varchar(36) NOT NULL COMMENT '数据创建用户id',
+  `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '数据创建日期',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='流程任务worker表';
 

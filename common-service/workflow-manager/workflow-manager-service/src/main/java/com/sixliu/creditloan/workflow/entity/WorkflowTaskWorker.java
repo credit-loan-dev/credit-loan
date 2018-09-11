@@ -5,19 +5,22 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
- * @author:MG01867
- * @date:2018年9月7日
- * @E-mail:359852326@qq.com
- * @version:
- * @describe //TODO
- */
+*@author:MG01867
+*@date:2018年9月11日
+*@E-mail:359852326@qq.com
+*@version:
+*@describe //TODO
+*/
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class AutoProcessWorkerConfig extends BaseEntity {
+public class WorkflowTaskWorker extends BaseEntity {
 
 	/** 自动处理worker名称 **/
 	private String name;
+	
+	/** 流程任务id **/
+	private String taskId;
 
 	/** 自动处理worker扫描任务间隔时间 **/
 	private long checkInterval;

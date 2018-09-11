@@ -3,7 +3,7 @@ package com.sixliu.creditloan.workflow.worker.impl;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import com.sixliu.creditloan.workflow.entity.AutoProcessWorkerConfig;
+import com.sixliu.creditloan.workflow.entity.WorkflowTaskWorker;
 import com.sixliu.creditloan.workflow.worker.AutoProcessWorker;
 
 /**
@@ -18,7 +18,7 @@ public class RemoteAutoProcessWorkerFactory {
 
 	private RestTemplate  restTemplate;
 	
-	public AutoProcessWorker getOrNew(AutoProcessWorkerConfig autoProcessWorkerConfig) {
-		return new RemoteAutoProcessWorker(restTemplate, autoProcessWorkerConfig);
+	public AutoProcessWorker getOrNew(WorkflowTaskWorker workflowTaskWorker) {
+		return new RemoteAutoProcessWorker(restTemplate, workflowTaskWorker);
 	}
 }

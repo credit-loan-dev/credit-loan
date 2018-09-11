@@ -4,7 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import com.sixliu.creditloan.workflow.dto.TaskProcessResult;
-import com.sixliu.creditloan.workflow.entity.AutoProcessWorkerConfig;
+import com.sixliu.creditloan.workflow.entity.WorkflowTaskWorker;
 import com.sixliu.creditloan.workflow.worker.AutoProcessWorker;
 
 /**
@@ -18,16 +18,16 @@ public class RemoteAutoProcessWorker implements AutoProcessWorker {
 
 	private RestTemplate restTemplate;
 
-	private AutoProcessWorkerConfig autoProcessWorkerConfig;
+	private WorkflowTaskWorker workflowTaskWorker;
 
-	public RemoteAutoProcessWorker(RestTemplate restTemplate, AutoProcessWorkerConfig autoProcessWorkerConfig) {
+	public RemoteAutoProcessWorker(RestTemplate restTemplate,WorkflowTaskWorker workflowTaskWorker) {
 		this.restTemplate = restTemplate;
-		this.autoProcessWorkerConfig = autoProcessWorkerConfig;
+		this.workflowTaskWorker = workflowTaskWorker;
 	}
 
 	@Override
 	public TaskProcessResult process(String taskId) {
-		ResponseEntity<TaskProcessResult> responseEntity = restTemplate.postForEntity(autoProcessWorkerConfig.getUrl(),
+		ResponseEntity<TaskProcessResult> responseEntity = restTemplate.postForEntity(workflowTaskWorker.getUrl(),
 				taskId, TaskProcessResult.class);
 		return responseEntity.getBody();
 	}
