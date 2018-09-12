@@ -1,5 +1,7 @@
 package com.sixliu.creditloan.workflow.dao;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -36,5 +38,11 @@ public class WorkflowJobDaoTest extends BaseTest{
 	public void testGet() {
 		WorkflowJob workflowJob=workflowJobDao.get("186c08fa-b1c8-11e8-9e01-005056986f0b");
 		checkOk(workflowJob);
+	}
+	
+	@Test
+	public void testListLockJobs() {
+		List<WorkflowJob> workflowJobs=workflowJobDao.listLockJobs();
+		checkOk(workflowJobs);
 	}
 }

@@ -23,15 +23,16 @@ public class FlowUtils{
 		WorkflowJob workflowJob = new WorkflowJob();
 		workflowJob.setName(workflowJobModel.getName());
 		workflowJob.setModelId(workflowJobModel.getId());
-		workflowJob.setCreateUserId(createUserId);
 		workflowJob.setStatus(JobStatus.STARTED);
-		workflowJob.setUpdateDate(new Date());
+		workflowJob.setCreateUserId(createUserId);
+		workflowJob.setUpdateUserId(createUserId);
 		return workflowJob;
 	}
 
 	public static WorkflowTask newWorkflowTask(WorkflowTaskModel workflowTaskModel, String jobId,
 			String userId) {
 		WorkflowTask workflowTask = new WorkflowTask();
+		workflowTask.setName(workflowTaskModel.getName());
 		workflowTask.setJobId(jobId);
 		workflowTask.setModelId(workflowTaskModel.getId());
 		workflowTask.setPhase(workflowTaskModel.getPhase());
@@ -39,6 +40,7 @@ public class FlowUtils{
 		workflowTask.setType(workflowTaskModel.getType());
 		workflowTask.setWorker(workflowTaskModel.getWorker());
 		workflowTask.setCreateUserId(userId);
+		workflowTask.setUpdateUserId(userId);
 		return workflowTask;
 	}
 	

@@ -1,5 +1,6 @@
 package com.sixliu.creditloan.workflow.worker.impl;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.TreeSet;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
@@ -21,6 +22,7 @@ import com.sixliu.creditloan.workflow.entity.WorkflowTask;
 import com.sixliu.creditloan.workflow.entity.WorkflowTaskWorker;
 import com.sixliu.creditloan.workflow.status.TaskStatusMachine;
 import com.sixliu.creditloan.workflow.status.TaskStatusMachineFactory;
+import com.sixliu.creditloan.workflow.status.TaskStatusMachine.CompleteCallback;
 import com.sixliu.creditloan.workflow.worker.AutoProcessWorker;
 
 import lombok.extern.slf4j.Slf4j;
@@ -42,7 +44,7 @@ public class AutoProcessWorkerMangaer {
 	private final static String WORKER_THREAD_NAME_PRE = "Auto-Process-";
 
 	/** 定时扫描任务-默认第一次扫描时间 **/
-	private final static long DEFAULT_FIRST_INITIAL_DELAY = 1000 * 60 * 5;
+	private final static long DEFAULT_FIRST_INITIAL_DELAY = 1000 * 5;
 
 	@Value("${app.autoProcessWorkerMangaer.workerThreads}")
 	private int workerThreads;
@@ -69,63 +71,33 @@ public class AutoProcessWorkerMangaer {
 	/** 定时扫描任务延迟时间历史集合,用于打散定时扫描任务的时间分布 **/
 	private TreeSet<Long> initialDelayHistory;
 
+	private CompleteCallback completeCallback;
+
 	@PostConstruct
 	public void init() {
 		this.initialDelayHistory = new TreeSet<>();
+		this.completeCallback = jobId -> noticeProcessNextTask(jobId);
 		this.workerThreadPool = new ScheduledThreadPoolExecutor(workerThreads, this::newWorkerThread);
 		List<WorkflowTaskWorker> workflowTaskWorkers = workflowTaskWorkerDao.listAll();
 		for (WorkflowTaskWorker workflowTaskWorker : workflowTaskWorkers) {
 			long initialDelay = nextInitialDelay();
-			workerThreadPool.scheduleAtFixedRate(new AutoProcessWorkerProxy(workflowTaskWorker), initialDelay,
+			workerThreadPool.scheduleAtFixedRate(new TimingScanAutoProcessWorkerProxy(workflowTaskWorker), initialDelay,
 					workflowTaskWorker.getCheckInterval(), TimeUnit.MILLISECONDS);
 		}
 	}
 
-	public void notice(String jobId) {
-		workerThreadPool.execute(new NoticeWokrer(jobId));
+	public void submitTaskProcessResult(TaskProcessResult taskProcessResult) {
+		TaskStatusMachine taskStatusMachine = taskStatusMachineFactory.get(taskProcessResult.getStatus());
+		taskStatusMachine.process(taskProcessResult, completeCallback);
 	}
 
-	class NoticeWokrer implements Runnable {
-
-		private String jobId;
-
-		public NoticeWokrer(String jobId) {
-			this.jobId = jobId;
-		}
-
-		@Override
-		public void run() {
-			WorkflowTask workflowTask = workflowTaskDao.getByJobIdForPooling(jobId);
-			if (null != workflowTask && TaskType.AUTO == workflowTask.getType()) {
-				WorkflowTaskWorker workflowTaskWorker = workflowTaskWorkerDao.getByTaskId(workflowTask.getId());
-				if (null == workflowTaskWorker) {
-					log.error(String.format("The WorkflowTask[%s] has not AutoProcessWorkerConfig",
-							workflowTask.getId()));
-					return;
-				}
-				AutoProcessWorker wutoProcessWorker = remoteAutoProcessWorkerFactory.getOrNew(workflowTaskWorker);
-				TaskProcessResult taskProcessResult = wutoProcessWorker.process(workflowTask.getId());
-				TaskStatusMachine taskStatusMachine = taskStatusMachineFactory.get(taskProcessResult.getStatus());
-				taskStatusMachine.process(taskProcessResult, jobId -> {
-					notice(jobId);
-				});
-			}
-		}
-
-	}
-
-	class AutoProcessWorkerProxy implements Runnable {
-
-		WorkflowTaskWorker workflowTaskWorker;
-
-		private AutoProcessWorkerProxy(WorkflowTaskWorker workflowTaskWorker) {
-			this.workflowTaskWorker = workflowTaskWorker;
-		}
-
-		@Override
-		public void run() {
-
-		}
+	/**
+	 * 根据jobid通知处理下个能处理的任务
+	 * 
+	 * @param jobId
+	 */
+	public void noticeProcessNextTask(String jobId) {
+		workerThreadPool.execute(new AutoProcessWorkerBroadcaster(jobId));
 	}
 
 	private long nextInitialDelay() {
@@ -144,6 +116,62 @@ public class AutoProcessWorkerMangaer {
 		newThread.setDaemon(false);
 		newThread.setName(newName);
 		return newThread;
+	}
+
+	public class TimingScanAutoProcessWorkerProxy implements Runnable {
+
+		private WorkflowTaskWorker workflowTaskWorker;
+
+		protected TimingScanAutoProcessWorkerProxy(WorkflowTaskWorker workflowTaskWorker) {
+			this.workflowTaskWorker = workflowTaskWorker;
+		}
+
+		public void process(WorkflowTask task) {
+			List<WorkflowTask> pendingTasks = null;
+			if (null == task) {
+				pendingTasks = workflowTaskDao.listForTimingScan(workflowTaskWorker.getTaskModelId(),
+						workflowTaskWorker.getTaskPhase());
+			} else {
+				pendingTasks = Arrays.asList(task);
+			}
+			for (WorkflowTask item : pendingTasks) {
+				AutoProcessWorker wutoProcessWorker = remoteAutoProcessWorkerFactory.getOrNew(workflowTaskWorker);
+				TaskProcessResult taskProcessResult = wutoProcessWorker.process(item.getId());
+				submitTaskProcessResult(taskProcessResult);
+			}
+			log.info("AutoProcessWorkerProxy");
+		}
+
+		@Override
+		public void run() {
+			process(null);
+		}
+	}
+
+	public class AutoProcessWorkerBroadcaster implements Runnable {
+
+		private String jobId;
+
+		protected AutoProcessWorkerBroadcaster(String jobId) {
+			this.jobId = jobId;
+		}
+
+		@Override
+		public void run() {
+			WorkflowTask workflowTask = workflowTaskDao.getByJobIdForPooling(jobId);
+			if (null != workflowTask && TaskType.AUTO == workflowTask.getType()) {
+				WorkflowTaskWorker workflowTaskWorker = workflowTaskWorkerDao.getByTaskId(workflowTask.getId());
+				if (null == workflowTaskWorker) {
+					log.error(String.format("The WorkflowTask[%s] has not AutoProcessWorkerConfig",
+							workflowTask.getId()));
+					return;
+				}
+				TimingScanAutoProcessWorkerProxy autoProcessWorkerProxy = new TimingScanAutoProcessWorkerProxy(
+						workflowTaskWorker);
+				autoProcessWorkerProxy.process(workflowTask);
+			}
+		}
+
 	}
 
 	@PreDestroy

@@ -25,6 +25,8 @@ public interface WorkflowTaskDao {
 	List<WorkflowTask> listByRoleId(String roleId);
 	
 	List<WorkflowTask> listByRoleIdAndStatus(@Param("roleId") String roleId,@Param("status") TaskStatus status);
+	
+	List<WorkflowTask> listForTimingScan(@Param("taskModelId") String taskModelId,@Param("phase") String phase);
 
 	int update(WorkflowTask workflowTask);
 	

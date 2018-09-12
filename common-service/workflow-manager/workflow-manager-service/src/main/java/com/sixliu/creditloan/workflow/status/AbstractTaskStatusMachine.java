@@ -4,7 +4,6 @@ import javax.annotation.PostConstruct;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 
 import com.sixliu.creditloan.workflow.component.TransactionalHelper;
 import com.sixliu.creditloan.workflow.constant.JobStatus;
@@ -31,14 +30,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public abstract class AbstractTaskStatusMachine implements TaskStatusMachine {
 
-	@Value("${spring.cloud.client.ip-address}")
-	private String ip;
-
-	@Value("${server.port}")
-	private int port;
-
-	private String url;
-
 	private TaskStatus taskStatus;
 
 	@Autowired
@@ -58,6 +49,9 @@ public abstract class AbstractTaskStatusMachine implements TaskStatusMachine {
 
 	@Autowired
 	private TransactionalHelper transactionalHelper;
+	
+	@Autowired
+	private WorkflowService workflowService;
 
 	public AbstractTaskStatusMachine(TaskStatus taskStatus) {
 		this.taskStatus = taskStatus;
@@ -65,7 +59,6 @@ public abstract class AbstractTaskStatusMachine implements TaskStatusMachine {
 
 	@PostConstruct
 	public void init() {
-		this.url = ip + ":" + port + WorkflowService.PATH;
 		taskStatusMachineFactory.register(this);
 	}
 
@@ -88,17 +81,16 @@ public abstract class AbstractTaskStatusMachine implements TaskStatusMachine {
 			throw new UnsupportedOperationException(
 					String.format("The job[%s] is ended[%s]", workflowJob.getId(), workflowJob.getStatus()));
 		}
-		if (null != workflowJob.getLockUUID()) {
-			throw new IllegalArgumentException(String.format("The Job[%s] was be lock by target[%s]",
-					workflowJob.getLockUrl() + "/" + workflowJob.getLockUUID()));
+		if (null != workflowJob.getLockUrl()) {
+			throw new IllegalArgumentException(
+					String.format("The Job[%s] was be lock by target[%s]", workflowJob.getLockUrl()));
 		}
-		int locked = workflowJobDao.tryLock(workflowJob.getId(), url, WorkflowService.UUID, workflowJob.getVersion());
+		int locked = workflowJobDao.tryLock(workflowJob.getId(),workflowService.getUrl(), workflowJob.getVersion());
 		if (1 == locked) {
 			WorkflowTask workflowTask = workflowTaskDao.get(taskProcessResult.getTaskId());
 			try {
 				TaskStatus oldStatus = workflowTask.getStatus();
-				WorkflowTask nextWorkflowTask =doProcess(workflowJob, workflowTask,
-						taskProcessResult);
+				WorkflowTask nextWorkflowTask = doProcess(workflowJob, workflowTask, taskProcessResult);
 				TaskStatus newStatus = workflowTask.getStatus();
 				if (oldStatus != newStatus) {
 					workflowTaskDao.update(workflowTask);

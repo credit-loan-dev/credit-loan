@@ -30,7 +30,4 @@ public class WorkflowJob extends BaseEntity{
 	
 	/**保存锁着流程作业的服务url**/
 	private String lockUrl;
-	
-	/**保存锁着流程作业的服务服务启动uuid**/
-	private String lockUUID;
 }

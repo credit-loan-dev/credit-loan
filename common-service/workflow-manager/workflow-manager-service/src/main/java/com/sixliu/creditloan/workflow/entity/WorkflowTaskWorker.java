@@ -19,8 +19,11 @@ public class WorkflowTaskWorker extends BaseEntity {
 	/** 自动处理worker名称 **/
 	private String name;
 	
+	/** 流程任务模型id **/
+	private String taskModelId;
+	
 	/** 流程任务id **/
-	private String taskId;
+	private String taskPhase;
 
 	/** 自动处理worker扫描任务间隔时间 **/
 	private long checkInterval;
