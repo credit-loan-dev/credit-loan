@@ -28,7 +28,7 @@ public class WorkflowTaskDaoTest extends BaseTest{
 	
 	@Test
 	public void testInsert() {
-		List<WorkflowTaskModel> workflowTaskModels=workflowTaskModelDao.listByJobModelId("a50d9f82-b1e9-11e8-8bec-000c29851249");
+		List<WorkflowTaskModel> workflowTaskModels=workflowTaskModelDao.listByJobModelId("940659f0-b1ca-11e8-9e01-005056986f0b");
 		for(WorkflowTaskModel workflowTaskModel:workflowTaskModels) {
 			WorkflowTask workflowTask=new WorkflowTask();
 			workflowTask.setJobId("f93c67ec-b1ea-11e8-8bec-000c29851249");

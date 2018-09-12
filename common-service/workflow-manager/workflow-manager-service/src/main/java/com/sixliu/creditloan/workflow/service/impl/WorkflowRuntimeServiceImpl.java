@@ -1,10 +1,13 @@
 package com.sixliu.creditloan.workflow.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sixliu.creditloan.user.dto.UserDTO;
@@ -22,8 +25,6 @@ import com.sixliu.creditloan.workflow.entity.WorkflowJobModel;
 import com.sixliu.creditloan.workflow.entity.WorkflowTask;
 import com.sixliu.creditloan.workflow.entity.WorkflowTaskModel;
 import com.sixliu.creditloan.workflow.service.WorkflowRuntimeService;
-import com.sixliu.creditloan.workflow.status.TaskStatusMachine;
-import com.sixliu.creditloan.workflow.status.TaskStatusMachineFactory;
 import com.sixliu.creditloan.workflow.util.FlowUtils;
 import com.sixliu.creditloan.workflow.worker.impl.AutoProcessWorkerMangaer;
 
@@ -38,7 +39,7 @@ import com.sixliu.creditloan.workflow.worker.impl.AutoProcessWorkerMangaer;
 public class WorkflowRuntimeServiceImpl implements WorkflowRuntimeService {
 
 	@Autowired
-	private UserManagerService userManagerService;
+	UserManagerService userManagerService;
 
 	@Autowired
 	private WorkflowJobModelDao workflowJobModelDao;
@@ -53,27 +54,23 @@ public class WorkflowRuntimeServiceImpl implements WorkflowRuntimeService {
 	private WorkflowTaskDao workflowTaskDao;
 
 	@Autowired
-	private TaskStatusMachineFactory taskStatusMachineFactory;
-
-	@Autowired
 	private AutoProcessWorkerMangaer autoProcessWorkerMangaer;
 
+	@Transactional
 	@Override
-	public String createJob(String workflowJobModelId,String userId) {
+	public String createJob(String workflowJobModelId, String userId) {
 		WorkflowJobModel workflowJobModel = workflowJobModelDao.get(workflowJobModelId);
 		if (null == workflowJobModel) {
 			throw new IllegalArgumentException(
 					String.format("The flowJobClass[%s] is non-existent", workflowJobModelId));
 		}
-		UserDTO user = userManagerService.get(userId);
+		UserDTO user = getAndCheckUser(userId);
 		if (null == user) {
-			throw new IllegalArgumentException(
-					String.format("The user[%s] is non-existent", userId));
+			throw new IllegalArgumentException(String.format("The user[%s] is non-existent", userId));
 		}
 		if (!StringUtils.equals(user.getRoleId(), workflowJobModel.getCreateRoleId())) {
-			throw new IllegalArgumentException(
-					String.format("The user[%s] create flowJob of flowJobClass[%s] Permission denied",
-							userId, workflowJobModelId));
+			throw new IllegalArgumentException(String.format(
+					"The user[%s] create flowJob of flowJobClass[%s] Permission denied", userId, workflowJobModelId));
 		}
 		WorkflowJob flowJob = FlowUtils.newWorkflowJob(workflowJobModel, user.getId());
 		workflowJobDao.insert(flowJob);
@@ -82,32 +79,36 @@ public class WorkflowRuntimeServiceImpl implements WorkflowRuntimeService {
 			throw new IllegalArgumentException(
 					String.format("The flowJobClass[%s] configure empty flowTaskModel", workflowJobModel.getId()));
 		}
-		WorkflowTask workflowTask = FlowUtils.newWorkflowTask(workflowTaskModel, flowJob.getId(),
-				user.getId());
+		WorkflowTask workflowTask = FlowUtils.newWorkflowTask(workflowTaskModel, flowJob.getId(), user.getId());
 		workflowTaskDao.insert(workflowTask);
 		return flowJob.getId();
 	}
 
 	@Override
-	public List<FlowTask> listTaskByUserId(String userId){
+	public List<FlowTask> listTaskByUserId(String userId) {
 		UserDTO user = getAndCheckUser(userId);
-		workflowTaskDao.listByRoleId(user.getRoleId());
-		return null;
-	}
-	
-	@Override
-	public List<FlowTask> listTaskByUserIdAndTaskStatus(String userId,TaskStatus status){
-		UserDTO user = getAndCheckUser(userId);
-		workflowTaskDao.listByRoleIdAndStatus(user.getRoleId(),status);
-		return null;
+		List<WorkflowTask> workflowTasks = workflowTaskDao.listByRoleId(user.getRoleId());
+		List<FlowTask> result = new ArrayList<>(workflowTasks.size());
+		for (WorkflowTask item : workflowTasks) {
+			FlowTask flowTask = new FlowTask();
+			BeanUtils.copyProperties(item, flowTask);
+			result.add(flowTask);
+		}
+		return result;
 	}
 
+	@Override
+	public List<FlowTask> listTaskByUserIdAndTaskStatus(String userId, TaskStatus status) {
+		UserDTO user = getAndCheckUser(userId);
+		workflowTaskDao.listByRoleIdAndStatus(user.getRoleId(), status);
+		return null;
+	}
 
 	@Override
 	public String autoClaimTask(String userId) {
 		UserDTO user = getAndCheckUser(userId);
 		WorkflowTask claimWorkflowTask = randomWorkflowTask(user.getId());
-		TaskProcessResult taskProcessResult=new TaskProcessResult();
+		TaskProcessResult taskProcessResult = new TaskProcessResult();
 		taskProcessResult.setJobId(claimWorkflowTask.getId());
 		taskProcessResult.setTaskId(claimWorkflowTask.getId());
 		taskProcessResult.setStatus(TaskStatus.PENDING);
@@ -115,14 +116,10 @@ public class WorkflowRuntimeServiceImpl implements WorkflowRuntimeService {
 		submitTaskProcessResult(taskProcessResult);
 		return claimWorkflowTask.getId();
 	}
-	
-	
+
 	@Override
-	public void submitTaskProcessResult(TaskProcessResult taskProcessResult){
-		TaskStatusMachine taskStatusMachine = taskStatusMachineFactory.get(taskProcessResult.getStatus());
-		taskStatusMachine.process(taskProcessResult,jobId->{
-			autoProcessWorkerMangaer.notice(jobId);
-		});
+	public void submitTaskProcessResult(TaskProcessResult taskProcessResult) {
+		autoProcessWorkerMangaer.submitTaskProcessResult(taskProcessResult);
 	}
 
 	@Override
@@ -132,22 +129,25 @@ public class WorkflowRuntimeServiceImpl implements WorkflowRuntimeService {
 			throw new IllegalArgumentException(String.format("This flowTask[%s] is non-existent", jobId));
 		}
 		if (!StringUtils.equals(userId, job.getCreateUserId())) {
-			throw new IllegalArgumentException(String
-					.format("The user[%s] cancelFlowJob flowJob[%s] Permission denied", userId, userId, jobId));
+			throw new IllegalArgumentException(
+					String.format("The user[%s] cancelFlowJob flowJob[%s] Permission denied", userId, userId, jobId));
 		}
 		job.setStatus(JobStatus.CANCEL_ENDED);
 		job.setUpdateDate(new Date());
 	}
-	
+
 	private WorkflowTask randomWorkflowTask(String userId) {
 		return null;
 	}
 
 	private UserDTO getAndCheckUser(String userId) {
-		UserDTO user = userManagerService.get(userId);
-		if (null == user) {
-			throw new IllegalArgumentException(String.format("The user[%s] is non-existent", userId));
-		}
+//		UserDTO user = userManagerService.get(userId);
+//		if (null == user) {
+//			throw new IllegalArgumentException(String.format("The user[%s] is non-existent", userId));
+//		}
+		UserDTO user = new UserDTO();
+		user.setId(userId);
+		user.setRoleId(userId);
 		return user;
 	}
 }

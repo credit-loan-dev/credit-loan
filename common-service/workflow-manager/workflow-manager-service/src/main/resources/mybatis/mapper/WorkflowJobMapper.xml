@@ -7,6 +7,7 @@
         <result column="name" property="name" jdbcType="VARCHAR" />
         <result column="model_id" property="modelId" jdbcType="VARCHAR" />
         <result column="status" property="status" jdbcType="VARCHAR" />
+        <result column="lock_url" property="lockUrl" jdbcType="VARCHAR" />
         <result column="remarks" property="remarks" jdbcType="VARCHAR" />
         <result column="version" property="version" jdbcType="INTEGER" />
         <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR" />
@@ -31,6 +32,7 @@
 	        `name`,
 	        model_id,
 	        `status`,
+	        lock_url,
 	        `remarks`,
 	        `version`,
 	        update_user_id,
@@ -59,6 +61,10 @@
     		   						)
     </sql>
 
+	<sql id="update_from_table">
+    	update workflow_job
+    </sql>
+    
     <sql id="delete_from_table">
     	delete from workflow_job
     </sql>
@@ -75,7 +81,27 @@
               select uuid()
     	</selectKey>
     	<include refid="insert_common_table"></include>
-	</insert> 
+	</insert>
+	
+	<select id="listLockJobs" resultMap="WorkflowJobResult">
+		<include refid="select_common_column"/>
+		<include refid="from_table"/>
+        where `lock_url` is not null
+    </select>
+    
+    <update id="tryLock">
+    	<include refid="update_from_table"/>
+    	set lock_url=#{lockUrl},version=#{version}+1
+    	where `id`=#{id}
+    	and   `version`=#{version}
+    </update>
+    
+    <update id="unlock">
+    	<include refid="update_from_table"/>
+    	set lock_url=null,version=#{version}+1
+    	where `id`=#{id}
+    	and   `version`=#{version}
+    </update>
 	
 	<delete id="delete">
 		<include refid="delete_from_table"/>

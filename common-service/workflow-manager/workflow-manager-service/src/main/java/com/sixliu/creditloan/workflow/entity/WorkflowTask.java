@@ -30,19 +30,19 @@ public class WorkflowTask extends BaseEntity {
 
 	/** 流程作业任务所处阶段 **/
 	private int phase;
+	
+	/** 流程作业任务所处状态 **/
+	private TaskStatus status;
 
 	/** 流程作业任务处理类型 **/
 	private TaskType type;
 
 	/** 流程作业任务处理worker或者流程作业任务所属角色 **/
+	private String roleId;
+	
+	/** 流程作业任务处理worker或者流程作业任务所属角色 **/
 	private String worker;
 
 	/** 流程作业任务所属用户 **/
 	private String ownerUserId;
-
-	/** 流程作业任务所处状态 **/
-	private TaskStatus status;
-	
-	/** 流程作业任务为自动处理类型时 worker扫描任务间隔时间**/
-	private long checkInterval;
 }

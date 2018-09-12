@@ -2,6 +2,8 @@ package com.sixliu.creditloan.workflow.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.sixliu.creditloan.workflow.entity.WorkflowJob;
 
 
@@ -18,11 +20,11 @@ public interface WorkflowJobDao {
 	
 	int insert(WorkflowJob workflowJob);
 	
-	List<WorkflowJob> listLockJob();
+	List<WorkflowJob> listLockJobs();
 	
-	int tryLock(String id,String lockUrl,String lockUUID,int version);
+	int tryLock(@Param("id")String id,@Param("lockUrl")String lockUrl,@Param("version")int version);
 	
-	int unlock(String id,int version);
+	int unlock(@Param("id")String id,@Param("version")int version);
 
 	int delete(String id);
 }

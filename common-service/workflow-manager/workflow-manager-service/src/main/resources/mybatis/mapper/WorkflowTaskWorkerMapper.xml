@@ -5,7 +5,8 @@
     <resultMap id="WorkflowTaskWorkerResult" type="com.sixliu.creditloan.workflow.entity.WorkflowTaskWorker" >
         <id column="id" property="id" jdbcType="VARCHAR" />
         <result column="name" property="name" jdbcType="VARCHAR" />
-        <result column="task_id" property="taskId" jdbcType="VARCHAR" />
+        <result column="task_model_id" property="modelId" jdbcType="VARCHAR" />
+        <result column="task_phase" property="taskPhase" jdbcType="VARCHAR" />
         <result column="check_interval" property="checkInterval" jdbcType="INTEGER" />
         <result column="url" property="url" jdbcType="VARCHAR" />
         <result column="remarks" property="remarks" jdbcType="VARCHAR" />
@@ -29,8 +30,9 @@
     <sql id="select_common_column">
     	select 
     		`id`,
-	        `name`,
-	        task_id,
+    		`name`,
+    		task_model_id,
+	        task_phase,
 	        check_interval,
 	        `url`,
 	        `remarks`,
@@ -45,7 +47,8 @@
     <sql id="insert_common_table">
     	insert into workflow_task_worker(`id`,
     								`name`,
-    								task_id,
+    								task_model_id,
+    								task_phase,
     								check_interval,
     								`url`,
     	 							`remarks`,
@@ -53,8 +56,9 @@
     	 							create_user_id
     	 							)
     	 					 values(#{id},
-    	 							#{name},
-    	 							#{taskId},
+    	 					 		#{name},
+    	 					 		#{taskModelId},
+    	 							#{taskPhase},
     	 							#{checkInterval},
     	 							#{url},
     		   						#{remarks},
