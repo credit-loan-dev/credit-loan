@@ -16,7 +16,7 @@ CREATE TABLE `workflow_job_model` (
 CREATE TABLE `workflow_task_model` (
   `id` varchar(36) NOT NULL COMMENT '数据id:业务无关性',
   `name` varchar(20) NOT NULL COMMENT '流程作业模型名称',
-  `job_model_id` varchar(36) NOT NULL COMMENT '流程作业模型id',
+  `job_id` varchar(36) NOT NULL COMMENT '流程作业模型id',
   `phase` int(11) NOT NULL COMMENT '流程阶段',
   `type` varchar(20) NOT NULL COMMENT '任务类型',
   `worker` varchar(100) NOT NULL COMMENT '任务工人,当类型为自动时，该字段表示java class.否则为处理角色',

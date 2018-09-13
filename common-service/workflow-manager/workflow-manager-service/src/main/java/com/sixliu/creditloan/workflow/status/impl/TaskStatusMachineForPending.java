@@ -34,7 +34,7 @@ public class TaskStatusMachineForPending extends AbstractTaskStatusMachine {
 		WorkflowTask nextWorkflowTask = null;
 		if (TaskStatus.PASS == next) {
 			WorkflowTaskModel nextWorkflowTaskModel = getWorkflowTaskModelDao()
-					.getByJobModelIdAndPhase(workflowJob.getModelId(), workflowTask.getPhase() + 1);
+					.getByJobIdAndPhase(workflowJob.getModelId(), workflowTask.getPhase() + 1);
 			if (null != nextWorkflowTaskModel) {
 				nextWorkflowTask = FlowUtils.newWorkflowTask(nextWorkflowTaskModel, workflowTask.getJobId(),
 						taskProcessResult.getUserId());
@@ -49,7 +49,7 @@ public class TaskStatusMachineForPending extends AbstractTaskStatusMachine {
 
 		} else if (TaskStatus.OVERRULE == next) {
 			WorkflowTaskModel overruleWorkflowTaskModel = getWorkflowTaskModelDao()
-					.getByJobModelIdAndPhase(workflowJob.getModelId(), taskProcessResult.getOverrulePhase());
+					.getByJobIdAndPhase(workflowJob.getModelId(), taskProcessResult.getOverrulePhase());
 			if (null == overruleWorkflowTaskModel) {
 				throw new IllegalArgumentException("the ");
 			}

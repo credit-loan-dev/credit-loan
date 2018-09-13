@@ -22,7 +22,7 @@ public class WorkflowTaskModel extends BaseEntity {
 	private String name;
 
 	/** 流程作业模型id **/
-	private String jobModelId;
+	private String jobId;
 
 	/** 流程作业任务所处阶段 **/
 	private Integer phase;
@@ -32,7 +32,4 @@ public class WorkflowTaskModel extends BaseEntity {
 
 	/** 流程作业任务处理worker **/
 	private String worker;
-	
-	/** 流程作业任务为自动处理类型时 worker扫描任务间隔时间**/
-	private long checkInterval;
 }

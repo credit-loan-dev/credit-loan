@@ -5,7 +5,7 @@
     <resultMap id="WorkflowTaskModelResult" type="com.sixliu.creditloan.workflow.entity.WorkflowTaskModel" >
         <id column="id" property="id" jdbcType="VARCHAR" />
         <result column="name" property="name" jdbcType="VARCHAR" />
-        <result column="job_model_id" property="jobModelId" jdbcType="VARCHAR" />
+        <result column="job_id" property="jobId" jdbcType="VARCHAR" />
         <result column="phase" property="phase" jdbcType="INTEGER" />
         <result column="type" property="type" jdbcType="VARCHAR" />
         <result column="worker" property="worker" jdbcType="VARCHAR" />
@@ -31,7 +31,7 @@
     	select 
     		`id`,
 	        `name`,
-	        job_model_id,
+	        job_id,
 	        `phase`,
 	        `type`,
 	        `worker`,
@@ -47,7 +47,7 @@
     <sql id="insert_common_table">
     	insert into workflow_task_model(`id`,
     								`name`,
-    								job_model_id,
+    								job_id,
     								`phase`,
     								`type`,
     								`worker`,
@@ -57,7 +57,7 @@
     	 							)
     	 					 values(#{id},
     	 							#{name},
-    	 							#{jobModelId},
+    	 							#{jobId},
     	 							#{phase},
     	 							#{type},
     	 							#{worker},
@@ -78,6 +78,13 @@
         and `id` =#{id}
     </select>
     
+    <select id="getByName" resultMap="WorkflowTaskModelResult">
+		<include refid="select_common_column"/>
+		<include refid="from_table"/>
+        where 1=1
+        and `name` =#{name}
+    </select>
+    
     <insert id="insert" parameterMap="WorkflowTaskModelParameter">
     	<selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
               select uuid()
@@ -85,18 +92,18 @@
     	<include refid="insert_common_table"></include>
 	</insert>
 	
-	<select id="listByJobModelId" resultMap="WorkflowTaskModelResult">
+	<select id="listByJobId" resultMap="WorkflowTaskModelResult">
 		<include refid="select_common_column"/>
 		<include refid="from_table"/>
         where 1=1
-        and `job_model_id` =#{jobModelId}
+        and `job_id` =#{jobId}
     </select>
     
-    <select id="getByJobModelIdAndPhase" resultMap="WorkflowTaskModelResult">
+    <select id="getByJobIdAndPhase" resultMap="WorkflowTaskModelResult">
 		<include refid="select_common_column"/>
 		<include refid="from_table"/>
         where 1=1
-        and `job_model_id` =#{jobModelId}
+        and `job_id` =#{jobId}
         and `phase` =#{phase}
     </select>
 	

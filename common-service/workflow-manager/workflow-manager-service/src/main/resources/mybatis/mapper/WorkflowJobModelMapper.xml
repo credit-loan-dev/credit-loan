@@ -66,6 +66,18 @@
         and `id` =#{id}
     </select>
     
+    <select id="getByName" resultMap="WorkflowJobModelResult">
+		<include refid="select_common_column"/>
+		<include refid="from_table"/>
+        where 1=1
+        and `name` =#{name}
+    </select>
+    
+    <select id="listAll" resultMap="WorkflowJobModelResult">
+		<include refid="select_common_column"/>
+		<include refid="from_table"/>
+    </select>
+    
     <insert id="insert" parameterMap="WorkflowJobModelParameter">
     	<selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
               select uuid()

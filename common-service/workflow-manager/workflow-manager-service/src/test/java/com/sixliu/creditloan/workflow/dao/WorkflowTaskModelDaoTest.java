@@ -24,7 +24,7 @@ public class WorkflowTaskModelDaoTest  extends BaseTest{
 		for(int i=0;i<5;i++) {
 			WorkflowTaskModel workflowTaskModel=new WorkflowTaskModel();
 			workflowTaskModel.setName("test"+i);
-			workflowTaskModel.setJobModelId("a50d9f82-b1e9-11e8-8bec-000c29851249");
+			workflowTaskModel.setJobId("a50d9f82-b1e9-11e8-8bec-000c29851249");
 			workflowTaskModel.setPhase(i);
 			workflowTaskModel.setType(TaskType.MANUAL);
 			workflowTaskModel.setWorker("sixliu");

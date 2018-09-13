@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sixliu.creditloan.workflow.WorkflowManagerApi;
-import com.sixliu.creditloan.workflow.dto.AddWorkflowJobModelDTO;
+import com.sixliu.creditloan.workflow.dto.WorkflowJobModelDTO;
 import com.sixliu.creditloan.workflow.dto.WorkflowTaskModelDTO;
 
 /**
@@ -26,17 +26,17 @@ import com.sixliu.creditloan.workflow.dto.WorkflowTaskModelDTO;
 @Validated
 public interface WorkflowConfigService {
 
-	@RequestMapping(value = "/config/saveWorkflowJobModel", method = RequestMethod.POST)
+	@RequestMapping(value = "/config/addWorkflowJobModel", method = RequestMethod.POST)
 	@ResponseBody
-	String saveWorkflowJobModel(@Valid @RequestBody AddWorkflowJobModelDTO addWorkflowJobModel);
+	String addWorkflowJobModel(@Valid @RequestBody WorkflowJobModelDTO addWorkflowJobModel);
 
 	@RequestMapping(value = "/config/saveWorkflowTaskModel", method = RequestMethod.POST)
 	@ResponseBody
-	String saveWorkflowTaskModel(WorkflowTaskModelDTO workflowTaskModel);
+	String addWorkflowTaskModel(WorkflowTaskModelDTO workflowTaskModel);
 
 	@RequestMapping(value = "/config/listWorkflowJobModels", method = RequestMethod.POST)
 	@ResponseBody
-	List<AddWorkflowJobModelDTO> listWorkflowJobModels();
+	List<WorkflowJobModelDTO> listWorkflowJobModels();
 
 	@RequestMapping(value = "/config/listWorkflowTaskModelsByJobId", method = RequestMethod.POST)
 	@ResponseBody

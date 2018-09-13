@@ -4,9 +4,9 @@ package com.sixliu.creditloan.workflow.exception;
 *@date:2018年8月23日
 *@E-mail:359852326@qq.com
 *@version:
-*@describe //TODO
+*@describe 应用异常
 */
-public class AppException extends RuntimeException {
+public abstract class AppException extends RuntimeException {
 
 
 	/**

@@ -1,5 +1,7 @@
 package com.sixliu.creditloan.workflow.dao;
 
+import java.util.List;
+
 import com.sixliu.creditloan.workflow.entity.WorkflowJobModel;
 
 /**
@@ -14,4 +16,8 @@ public interface WorkflowJobModelDao {
 	int insert(WorkflowJobModel workflowJobModel);
 
 	WorkflowJobModel get(String id);
+	
+	WorkflowJobModel getByName(String name);
+	
+	List<WorkflowJobModel> listAll();
 }

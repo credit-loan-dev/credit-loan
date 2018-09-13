@@ -74,7 +74,7 @@ public class WorkflowRuntimeServiceImpl implements WorkflowRuntimeService {
 		}
 		WorkflowJob flowJob = FlowUtils.newWorkflowJob(workflowJobModel, user.getId());
 		workflowJobDao.insert(flowJob);
-		WorkflowTaskModel workflowTaskModel = workflowTaskModelDao.getByJobModelIdAndPhase(workflowJobModel.getId(), 0);
+		WorkflowTaskModel workflowTaskModel = workflowTaskModelDao.getByJobIdAndPhase(workflowJobModel.getId(), 0);
 		if (null == workflowTaskModel) {
 			throw new IllegalArgumentException(
 					String.format("The flowJobClass[%s] configure empty flowTaskModel", workflowJobModel.getId()));

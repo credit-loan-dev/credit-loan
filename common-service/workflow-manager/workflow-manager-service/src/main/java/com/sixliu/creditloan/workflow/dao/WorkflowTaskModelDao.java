@@ -19,7 +19,9 @@ public interface WorkflowTaskModelDao {
 	
 	WorkflowTaskModel get(String id);
 	
-	List<WorkflowTaskModel> listByJobModelId(String jobModelId);
+	WorkflowTaskModel getByName(String name);
 	
-	WorkflowTaskModel getByJobModelIdAndPhase(@Param("jobModelId") String jobModelId,@Param("phase") int phase);
+	List<WorkflowTaskModel> listByJobId(String jobId);
+	
+	WorkflowTaskModel getByJobIdAndPhase(@Param("jobId") String jobId,@Param("phase") int phase);
 }
