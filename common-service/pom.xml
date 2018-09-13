@@ -17,5 +17,5 @@
     	<module>service-register</module>
     	<module>api-gateway</module>
     	<module>workflow-manager</module>
-  	</modules>
+  </modules>
 </project>
