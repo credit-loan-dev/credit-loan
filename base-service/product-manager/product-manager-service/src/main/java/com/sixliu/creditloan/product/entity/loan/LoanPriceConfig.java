@@ -2,6 +2,7 @@ package com.sixliu.creditloan.product.entity.loan;
 
 
 
+import com.sixliu.creditloan.product.constant.InterestCycle;
 import com.sixliu.creditloan.product.constant.LoanTermType;
 import com.sixliu.creditloan.product.constant.RepaymentStrategy;
 import com.sixliu.creditloan.product.entity.BaseEntity;
@@ -49,9 +50,16 @@ public class LoanPriceConfig extends BaseEntity {
 	/** 手续费率**/
 	private Double poundageRate;
 	
+	/** 计息周期**/
+	private InterestCycle interestCycle;
+	
 	//正常还款配置
 	/**正常利率**/
-	private Double interestRate;
+	private Double interestRateForDay;
+	
+	private Double interestRateForMonth;
+	
+	private Double interestRateForYear;
 	
 	//合作配置
 	/**开启合作**/
@@ -61,7 +69,11 @@ public class LoanPriceConfig extends BaseEntity {
 	private String partnerId;
 	
 	/**贴息利率**/
-	private Double partnerDiscountChargesRate;
+	private Double partnerDiscountChargesRateForDay;
+	
+	private Double partnerDiscountChargesRateForMonth;
+	
+	private Double partnerDiscountChargesRateForYear;
 	
 	//展期配置
 	/**开启展期**/
@@ -77,7 +89,11 @@ public class LoanPriceConfig extends BaseEntity {
 	private Integer loanExtensionMaxTerm;
 	
 	/**展期利率**/
-	private Double loanExtensionInterestRate;
+	private Double loanExtensionInterestRateForDay;
+	
+	private Double loanExtensionInterestRateForMonth;
+	
+	private Double loanExtensionInterestRateForYear;
 	
 	//逾期还款配置
 	/**开启逾期**/
@@ -93,7 +109,11 @@ public class LoanPriceConfig extends BaseEntity {
 	private Integer loanOverdueMaxTerm;
 	
 	/**逾期还款利率**/
-	private Double loanOverdueInterestRate;
+	private Double loanOverdueInterestRateForDay;
+	
+	private Double loanOverdueInterestRateForMonth;
+	
+	private Double loanOverdueInterestRateForYear;
 	
 	//提前还款配置
 	/**开启提前还款**/
