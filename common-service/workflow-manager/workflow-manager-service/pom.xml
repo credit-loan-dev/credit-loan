@@ -101,7 +101,7 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!--spring-boot和spring-cloud组件依赖 -->
+        <!--spring-boot和spring-cloud组件依赖 -->
 	</dependencies>
 
 	<build>
