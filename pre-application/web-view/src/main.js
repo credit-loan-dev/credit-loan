@@ -3,7 +3,8 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import store from './store'
+
+import store from './common'
 import iView from 'iview'
 import i18n from '@/locale'
 import config from '@/config'

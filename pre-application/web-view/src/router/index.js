@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import routes from './routers'
-import store from '@/store'
+import store from '@/common'
 import iView from 'iview'
 import { getToken, canTurnTo } from '@/libs/util'
 
