@@ -1,4 +1,4 @@
-import {login, logout} from '@/common/client/userAccess'
+import {login, logout} from '../client/userAccess'
 import {setToken, getToken} from '@/libs/util'
 
 export default {
@@ -30,6 +30,7 @@ export default {
   actions: {
     // 登录
     handleLogin({commit}, {userName, password}) {
+      alert(userName)
       return new Promise((resolve, reject) => {
         login({
           userName,

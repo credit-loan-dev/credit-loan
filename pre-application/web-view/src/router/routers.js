@@ -1,4 +1,4 @@
-import Main from '@/view/main'
+import Main from '../common/main/view/main'
 /**
  * iview-admin中meta除了原生参数外可配置的参数:
  * meta: {
@@ -17,7 +17,7 @@ export default [
       title: 'Login - 登录',
       hideInMenu: true
     },
-    component: () => import('@/common/view/login.vue')
+    component: () => import('../common/access/view/login.vue')
   },
   {
     path: '/',
@@ -37,7 +37,7 @@ export default [
           title: '首页',
           notCache: true
         },
-        component: () => import('@/view/single-page/home')
+        component: () => import('../common/home/view/home')
       }
     ]
   },
@@ -60,7 +60,7 @@ export default [
           icon: 'md-funnel',
           title: '配置管理'
         },
-        component: () => import('@/workflow_manager/view/config_list.vue')
+        component: () => import('../workflow_manager/view/config_list.vue')
       },{
         path: 'task-list',
         name: 'task-list',
@@ -68,7 +68,7 @@ export default [
           icon: 'md-funnel',
           title: '任务管理'
         },
-        component: () => import('@/workflow_manager/view/task_list.vue')
+        component: () => import('../workflow_manager/view/task_list.vue')
       }
     ]
   },
@@ -88,7 +88,7 @@ export default [
           icon: 'md-funnel',
           title: '产品目录'
         },
-        component: () => import('@/view/components/tables/tablesPro.vue')
+        component: () => import('../view/components/tables/tablesPro.vue')
       },
       {
         path: 'customRepaymentType',
@@ -97,7 +97,7 @@ export default [
           icon: 'md-funnel',
           title: '自定义还款方式'
         },
-        component: () => import('@/view/components/tables/customRepaymentType.vue')
+        component: () => import('../view/components/tables/customRepaymentType.vue')
       },
       {
         path: 'productApproveApply',
@@ -106,7 +106,7 @@ export default [
           icon: 'md-funnel',
           title: '产品准入申请'
         },
-        component: () => import('@/view/components/tables/productApproveApply.vue')
+        component: () => import('../view/components/tables/productApproveApply.vue')
       },
       {
         path: 'productAlterApply',
@@ -115,7 +115,7 @@ export default [
           icon: 'md-funnel',
           title: '产品调整申请'
         },
-        component: () => import('@/view/components/tables/productAlterApply.vue')
+        component: () => import('../view/components/tables/productAlterApply.vue')
       }
     ]
   },
@@ -134,7 +134,7 @@ export default [
           icon: 'md-flower',
           title: '动态路由'
         },
-        component: () => import('@/view/argu-page/params.vue')
+        component: () => import('../view/argu-page/params.vue')
       },
       {
         path: 'query',
@@ -143,7 +143,7 @@ export default [
           icon: 'md-flower',
           title: '带参路由'
         },
-        component: () => import('@/view/argu-page/query.vue')
+        component: () => import('../view/argu-page/query.vue')
       }
     ]
   },
@@ -153,7 +153,7 @@ export default [
     meta: {
       hideInMenu: true
     },
-    component: () => import('@/view/error-page/401.vue')
+    component: () => import('../common/err/view/401.vue')
   },
   {
     path: '/500',
@@ -161,7 +161,7 @@ export default [
     meta: {
       hideInMenu: true
     },
-    component: () => import('@/view/error-page/500.vue')
+    component: () => import('../common/err/view/500.vue')
   },
   {
     path: '*',
@@ -169,6 +169,6 @@ export default [
     meta: {
       hideInMenu: true
     },
-    component: () => import('@/view/error-page/404.vue')
+    component: () => import('../common/err/view/404.vue')
   }
 ]

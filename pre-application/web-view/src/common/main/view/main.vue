@@ -33,16 +33,16 @@
   </Layout>
 </template>
 <script>
-import SideMenu from './components/side-menu'
-import HeaderBar from './components/header-bar'
-import TagsNav from './components/tags-nav'
-import User from './components/user'
-import Fullscreen from './components/fullscreen'
-import Language from './components/language'
+import SideMenu from '../components/side-menu/index'
+import HeaderBar from '../components/header-bar/index'
+import TagsNav from '../components/tags-nav/index'
+import User from '../components/user/index'
+import Fullscreen from '../components/fullscreen/index'
+import Language from '../components/language/index'
 import { mapMutations, mapActions } from 'vuex'
 import { getNewTagList, getNextRoute, routeEqual } from '@/libs/util'
-import minLogo from '@/assets/images/logo-min.jpg'
-import maxLogo from '@/assets/images/logo.jpg'
+import minLogo from '../../../common/access/assets/images/logo-min.jpg'
+import maxLogo from '../../../common/access/assets/images/logo.jpg'
 import './main.less'
 export default {
   name: 'Main',

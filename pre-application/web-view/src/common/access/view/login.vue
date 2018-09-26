@@ -28,9 +28,8 @@
         'handleLogin',
         'getUserInfo'
       ]),
-      handleSubmit({userName, password}) {
-        alert(userName)
-        this.handleLogin({userName, password}).then(res => {
+      handleSubmit({userName, passWord}) {
+        this.handleLogin({userName, passWord}).then(res => {
           this.getUserInfo().then(res => {
             this.$router.push({
               name: 'home'
@@ -41,5 +40,6 @@
     }
   }
 </script>
+
 <style>
 </style>
