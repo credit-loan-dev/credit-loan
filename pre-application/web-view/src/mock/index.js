@@ -6,6 +6,10 @@ import {
   getchildProductLimitConfigInfo,getloanPriceConfigDataList
 } from './data'
 
+import {
+  pagedQueryWorkflowJob
+} from './workflow_manager/workflow_manager_model'
+
 // 登录相关和获取用户信息
 Mock.mock(/\/login/, login)
 Mock.mock(/\/get_info/, getUserInfo)
@@ -20,6 +24,6 @@ Mock.mock(/\/getchildProductCreditConfigInfo\/getAll/, getchildProductCreditConf
 Mock.mock(/\/getchildProductLoanConfigInfo\/getAll/, getchildProductLoanConfigInfo)
 Mock.mock(/\/getchildProductLimitConfigInfo\/getAll/, getchildProductLimitConfigInfo)
 Mock.mock(/\/getloanPriceConfigDataList\/getAll/, getloanPriceConfigDataList)
-
+Mock.mock(/\/model\/pagedQueryWorkflowJob/, pagedQueryWorkflowJob)
 
 export default Mock
