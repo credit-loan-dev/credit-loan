@@ -20,7 +20,7 @@
 
 	<properties>
 		<!--java和代码源文件配置 -->
-		<java.version>10</java.version>
+		<java.version>11</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
 		<maven-assembly-plugin.version>3.1.0</maven-assembly-plugin.version>
