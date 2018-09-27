@@ -56,7 +56,7 @@ export const getCustomRepaymentType = req => {
   let paramObj = getParams(req.url)
   console.log(paramObj)
   let tableData = []
-  doCustomTimes(paramObj.rowNums, () => {
+  doCustomTimes(paramObj.rowNums, () => {getProTableData
     tableData.push(Mock.mock({
       repaymentTypeCode: '@string(10,10)',
       repaymentTypeName: '@name',
