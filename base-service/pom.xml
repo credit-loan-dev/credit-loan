@@ -15,7 +15,6 @@
 		<module>account-manager</module>
 		<module>customer-manager</module>
 		<module>product-manager</module>
-		<module>order-manager</module>
 		<module>fund-manager</module>
 		<module>risk-manager</module>
 	</modules>

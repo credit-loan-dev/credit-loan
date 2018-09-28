@@ -27,7 +27,7 @@ public class RemoteAutoProcessWorker implements AutoProcessWorker {
 
 	@Override
 	public TaskProcessResult process(String taskId) {
-		ResponseEntity<TaskProcessResult> responseEntity = restTemplate.postForEntity(workflowTaskWorker.getUrl(),
+		ResponseEntity<TaskProcessResult> responseEntity = restTemplate.postForEntity(workflowTaskWorker.getPath(),
 				taskId, TaskProcessResult.class);
 		return responseEntity.getBody();
 	}

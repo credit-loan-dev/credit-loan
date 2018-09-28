@@ -2,6 +2,7 @@ package com.sixliu.creditloan.workflow.dao;
 
 import java.util.List;
 
+import com.sixliu.creditloan.workflow.constant.WorkerType;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -32,6 +33,8 @@ public class WorkflowTaskWorkerDaoTest extends BaseTest{
 		workflowTaskWorker.setTaskModelId(workflowTaskModel.getId());
 		workflowTaskWorker.setTaskPhase(workflowTaskWorker.getTaskPhase());
 		workflowTaskWorker.setCheckInterval(1000*60*5);
+		workflowTaskWorker.setType(WorkerType.LOCAL_CLASS);
+		workflowTaskWorker.setPath("path");
 		workflowTaskWorker.setRemarks("remarks");
 		workflowTaskWorker.setCreateUserId("sixliu");
 		workflowTaskWorker.setUpdateUserId("sixliu");

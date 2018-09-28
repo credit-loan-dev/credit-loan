@@ -14,13 +14,13 @@ import com.sixliu.creditloan.workflow.WorkflowManagerApi;
  * @email: 359852326@qq.com
  * @date: 2018年9月7日 下午8:18:45
  * @version V1.0
- * @Description:
+ * @description:
  */
 @FeignClient(WorkflowManagerApi.SERVICE_NAME)
 @Validated
 public interface WorkflowService {
 
-	final static String URL_PRE = "check";
+	String URL_PRE = "check";
 
 	@RequestMapping(value = "/"+URL_PRE + "/{uuid}", method = RequestMethod.GET)
 	@ResponseBody

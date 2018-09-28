@@ -33,13 +33,13 @@
 
 		<dependency>
 			<groupId>com.sixliu</groupId>
-			<artifactId>product-manager-api</artifactId>
+			<artifactId>workflow-manager-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.sixliu</groupId>
-			<artifactId>order-manager-api</artifactId>
+			<artifactId>product-manager-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
@@ -53,18 +53,6 @@
 			<groupId>com.sixliu</groupId>
 			<artifactId>credit-api</artifactId>
 			<version>${project.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.sixliu</groupId>
-			<artifactId>credit-base</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
@@ -137,7 +125,7 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-sleuth</artifactId>
 		</dependency>
-	</dependencies>
+    </dependencies>
 
 	<build>
 		<finalName>${project.name}-${project.version}</finalName>

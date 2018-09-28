@@ -7,8 +7,8 @@ import com.sixliu.creditloan.workflow.WorkflowManagerApi;
 
 /**
 *@author:MG01867
-*@date:2018年9月6日
-*@E-mail:359852326@qq.com
+*@date: 2018年9月6日
+*@email:359852326@qq.com
 *@version:
 *@describe //TODO
 */
