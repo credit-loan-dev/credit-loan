@@ -43,174 +43,32 @@ export default [
       }
     ]
   },
-  /*{
-    path: '/components',
-    name: 'components',
-    meta: {
-      icon: 'logo-buffer',
-      title: '组件'
-    },
-    component: Main,
-    children: [
-      {
-        path: 'count_to_page',
-        name: 'count_to_page',
-        meta: {
-          icon: 'md-trending-up',
-          title: '数字渐变'
-        },
-        component: () => import('@/view/components/count-to/count-to.vue')
-      },
-      {
-        path: 'tables_page',
-        name: 'tables_page',
-        meta: {
-          icon: 'md-grid',
-          title: '多功能表格'
-        },
-        component: () => import('@/view/components/tables/tables.vue')
-      },
-      {
-        path: 'split_pane_page',
-        name: 'split_pane_page',
-        meta: {
-          icon: 'md-pause',
-          title: '分割窗口'
-        },
-        component: () => import('@/view/components/split-pane/split-pane.vue')
-      },
-      {
-        path: 'markdown_page',
-        name: 'markdown_page',
-        meta: {
-          icon: 'logo-markdown',
-          title: 'Markdown编辑器'
-        },
-        component: () => import('@/view/components/markdown/markdown.vue')
-      },
-      {
-        path: 'editor_page',
-        name: 'editor_page',
-        meta: {
-          icon: 'ios-create',
-          title: '富文本编辑器'
-        },
-        component: () => import('@/view/components/editor/editor.vue')
-      },
-      {
-        path: 'icons_page',
-        name: 'icons_page',
-        meta: {
-          icon: '_bear',
-          title: '自定义图标'
-        },
-        component: () => import('@/view/components/icons/icons.vue')
-      }
-    ]
-  },
-  {
-    path: '/update',
-    name: 'update',
-    meta: {
-      icon: 'md-cloud-upload',
-      title: '数据上传'
-    },
-    component: Main,
-    children: [
-      {
-        path: 'update_table_page',
-        name: 'update_table_page',
-        meta: {
-          icon: 'ios-document',
-          title: '上传Csv'
-        },
-        component: () => import('@/view/update/update-table.vue')
-      },
-      {
-        path: 'update_paste_page',
-        name: 'update_paste_page',
-        meta: {
-          icon: 'md-clipboard',
-          title: '粘贴表格数据'
-        },
-        component: () => import('@/view/update/update-paste.vue')
-      }
-    ]
-  },
-  {
-    path: '/excel',
-    name: 'excel',
-    meta: {
-      icon: 'ios-stats',
-      title: 'EXCEL导入导出'
-    },
-    component: Main,
-    children: [
-      {
-        path: 'upload-excel',
-        name: 'upload-excel',
-        meta: {
-          icon: 'md-add',
-          title: '导入EXCEL'
-        },
-        component: () => import('@/view/excel/upload-excel.vue')
-      },
-      {
-        path: 'export-excel',
-        name: 'export-excel',
-        meta: {
-          icon: 'md-download',
-          title: '导出EXCEL'
-        },
-        component: () => import('@/view/excel/export-excel.vue')
-      }
-    ]
-  },
-  {
-    path: '/tools_methods',
-    name: 'tools_methods',
-    meta: {
-      hide: true
-    },
-    component: Main,
-    children: [
-      {
-        path: 'tools_methods_page',
-        name: 'tools_methods_page',
-        meta: {
-          icon: 'ios-hammer',
-          title: '工具方法'
-        },
-        component: () => import('@/view/tools-methods/tools-methods.vue')
-      }
-    ]
-  },
-  {
-    path: '/directive',
-    name: 'directive',
-    meta: {
-      hide: true
-    },
-    component: Main,
-    children: [
-      {
-        path: 'directive_page',
-        name: 'directive_page',
-        meta: {
-          icon: 'ios-navigate',
-          title: '指令'
-        },
-        component: () => import('@/view/directive/directive.vue')
-      }
-    ]
-  },*/
-
   /**
    * 这里开始是开始的代码
    */
   {
-    path: '/multilevel',
-    name: 'multilevel',
+    path: '/workflowManager',
+    name: 'workflowManager',
+    meta: {
+      icon: 'md-menu',
+      title: '流程管理'
+    },
+    component: Main,
+    children: [
+      {
+        path: 'jobModeList',
+        name: 'jobModeList',
+        meta: {
+          icon: 'md-funnel',
+          title: '流程配置'
+        },
+        component: () => import('@/view/workflow_manager/jobModelList.vue')
+      }
+    ]
+  },
+  {
+    path: '/productManager',
+    name: 'productManager',
     meta: {
       icon: 'md-menu',
       title: '产品管理'
@@ -218,45 +76,14 @@ export default [
     component: Main,
     children: [
       {
-        path: 'productSummary',
-        name: 'productSummary',
+        path: 'productSummaryList',
+        name: 'productSummaryList',
         meta: {
           icon: 'md-funnel',
           title: '产品目录'
         },
-        component: () => import('@/view/components/tables/tablesPro.vue')
+        component: () => import('@/view/product_manager/productSummaryList.vue')
       },
-      {
-        path: 'customRepaymentType',
-        name: 'customRepaymentType',
-        meta: {
-          icon: 'md-funnel',
-          title: '自定义还款方式'
-        },
-        component: () => import('@/view/components/tables/customRepaymentType.vue')
-      },
-      /*{
-        path: 'level_2_2',
-        name: 'level_2_2',
-        meta: {
-          access: ['super_admin'],
-          icon: 'md-funnel',
-          showAlways: true,
-          title: '自定义还款方式'
-        },
-        component: parentView,
-        children: [
-          {
-            path: 'level_2_2_1',
-            name: 'level_2_2_1',
-            meta: {
-              icon: 'md-funnel',
-              title: '三级'
-            },
-            component: () => import('@/view/multilevel/level-2-2/level-3-1.vue')
-          }
-        ]
-      },*/
       {
         path: 'productApproveApply',
         name: 'productApproveApply',
@@ -264,7 +91,7 @@ export default [
           icon: 'md-funnel',
           title: '产品准入申请'
         },
-        component: () => import('@/view/components/tables/productApproveApply.vue')
+        component: () => import('@/view/product_manager/productAccessApplyList.vue')
       },
       {
         path: 'productAlterApply',
@@ -273,44 +100,8 @@ export default [
           icon: 'md-funnel',
           title: '产品调整申请'
         },
-        component: () => import('@/view/components/tables/productAlterApply.vue')
-      },
-      {
-        path: 'productApprovePrimary',
-        name: 'productApprovePrimary',
-        meta: {
-          icon: 'md-funnel',
-          title: '产品准入初审'
-        },
-        component: () => import('@/view/components/tables/productApproveApply.vue')
-      },
-      {
-        path: 'productApproveAdvanced',
-        name: 'productApproveAdvanced',
-        meta: {
-          icon: 'md-funnel',
-          title: '产品准入复审'
-        },
-        component: () => import('@/view/components/tables/productApproveApply.vue')
-      },
-      {
-        path: 'productAlterPrimary',
-        name: 'productAlterPrimary',
-        meta: {
-          icon: 'md-funnel',
-          title: '产品调整初审'
-        },
-        component: () => import('@/view/components/tables/productApproveApply.vue')
-      },
-      {
-        path: 'productAlterAdvanced',
-        name: 'productAlterAdvanced',
-        meta: {
-          icon: 'md-funnel',
-          title: '产品调整复审'
-        },
-        component: () => import('@/view/components/tables/productApproveApply.vue')
-      },
+        component: () => import('@/view/product_manager/productAlterApplyList.vue')
+      }
     ]
   },
   {

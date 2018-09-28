@@ -7,8 +7,8 @@ import {
 } from './data'
 
 import {
-  pagedQueryWorkflowJob
-} from './workflow_manager/workflow_manager_model'
+  listWorkflowJobModels
+} from './workflow_manager/workflowConfigService'
 
 // 登录相关和获取用户信息
 Mock.mock(/\/login/, login)
@@ -24,6 +24,8 @@ Mock.mock(/\/getchildProductCreditConfigInfo\/getAll/, getchildProductCreditConf
 Mock.mock(/\/getchildProductLoanConfigInfo\/getAll/, getchildProductLoanConfigInfo)
 Mock.mock(/\/getchildProductLimitConfigInfo\/getAll/, getchildProductLimitConfigInfo)
 Mock.mock(/\/getloanPriceConfigDataList\/getAll/, getloanPriceConfigDataList)
-Mock.mock(/\/model\/pagedQueryWorkflowJob/, pagedQueryWorkflowJob)
+Mock.mock(/\/workflow_manager\/config\/listWorkflowJobModels/, listWorkflowJobModels)
+
+
 
 export default Mock
