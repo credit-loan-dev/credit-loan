@@ -1,28 +1,27 @@
-package com.sixliu.creditloan.credit;
+package com.sixliu.user;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.cloud.client.SpringCloudApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import com.sixliu.creditloan.credit.base.CreditBase;
-import com.sixliu.creditloan.creditlimit.CreditlimitManagerApi;
-import com.sixliu.creditloan.customer.CustomerManagerApi;
-import com.sixliu.creditloan.product.ProductManagerApi;
+import com.sixliu.user.dao.BaseDao;
+import com.sixliu.user.service.UserManagerService;
 
 /**
  * @author:MG01867
  * @date:2018年6月15日
  * @E-mail:359852326@qq.com
  * @version:
- * @describe 启动类
+ * @describe 程序启动入口类
  */
 @SpringCloudApplication
-@ComponentScan(basePackageClasses = { StartUp.class, CreditBase.class })
-@EnableFeignClients(basePackageClasses = { CreditlimitManagerApi.class, CustomerManagerApi.class,
-		ProductManagerApi.class})
+@EnableFeignClients(basePackageClasses = { UserManagerService.class})
+@EnableTransactionManagement 
+@MapperScan(basePackageClasses=BaseDao.class)
 public class StartUp implements WebMvcConfigurer {
 
 	public static void main(String[] args) {

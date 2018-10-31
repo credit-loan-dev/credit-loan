@@ -10,8 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sixliu.creditloan.user.dto.UserDTO;
-import com.sixliu.creditloan.user.service.UserManagerService;
+
 import com.sixliu.creditloan.workflow.constant.JobStatus;
 import com.sixliu.creditloan.workflow.constant.TaskStatus;
 import com.sixliu.creditloan.workflow.dao.WorkflowJobDao;
@@ -27,6 +26,8 @@ import com.sixliu.creditloan.workflow.entity.WorkflowTaskModel;
 import com.sixliu.creditloan.workflow.service.WorkflowRuntimeService;
 import com.sixliu.creditloan.workflow.util.FlowUtils;
 import com.sixliu.creditloan.workflow.worker.impl.AutoProcessWorkerMangaer;
+import com.sixliu.user.dto.UserDTO;
+import com.sixliu.user.service.UserManagerService;
 
 /**
  * @author:MG01867

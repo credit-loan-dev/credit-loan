@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 import com.sixliu.creditloan.credit.dto.CreditApplyDTO;
 import com.sixliu.creditloan.creditlimit.service.CreditlimitManagerClient;
 import com.sixliu.creditloan.customer.service.CustomerManagerService;
-import com.sixliu.creditloan.order.service.OrderManagerService;
 import com.sixliu.creditloan.product.service.ProductForCreditLoanService;
 
 /**
@@ -32,9 +31,6 @@ public class CreditApplyPreCheckManager implements CreditApplyPreCheck {
 
 	@Autowired
 	private CreditlimitManagerClient creditlimitManagerClient;
-
-	@Autowired
-	private OrderManagerService orderManagerService;
 
 	private Map<String, List<CreditApplyPreCheck>> creditApplyPreCheckCache = new HashMap<>();
 	
@@ -59,7 +55,7 @@ public class CreditApplyPreCheckManager implements CreditApplyPreCheck {
 				if(null==creditApplyPreChecks) {
 					creditApplyPreChecks=new ArrayList<>();
 					creditApplyPreChecks.add(new CreditPreCheckForCustomer(customerManagerService, creditlimitManagerClient));
-					creditApplyPreChecks.add(new CreditPreCheckForProduct(productConfigService, creditlimitManagerClient, orderManagerService));
+					//creditApplyPreChecks.add(new CreditPreCheckForProduct(productConfigService, creditlimitManagerClient, null));
 					creditApplyPreCheckCache.put(productId, creditApplyPreChecks);
 				}
 			}
