@@ -20,7 +20,7 @@
 
 	<properties>
 		<!--java和代码源文件配置 -->
-		<java.version>11</java.version>
+		<java.version>10</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
 		<maven-assembly-plugin.version>3.1.0</maven-assembly-plugin.version>
@@ -35,7 +35,7 @@
 		<!--日志框架依赖配置 -->
 
 		<!--jdk 模块化支持 -->
-		<jaxb-api.version>2.3.0</jaxb-api.version>
+		<jaxb-api.version>2.3.1</jaxb-api.version>
 		<jaxb-core.version>2.3.0.1</jaxb-core.version>
 		<jaxb-impl.version>2.3.0.1</jaxb-impl.version>
 		<jaxb-runtime.version>2.3.0.1</jaxb-runtime.version>
@@ -44,17 +44,18 @@
 		<!--jdk 模块化支持 -->
 
 		<!--基础开放工具包配置 -->
-		<servlet-api.version>4.0.1</servlet-api.version>
 		<javax.servlet-api.version>4.0.1</javax.servlet-api.version>
 		<commons-lang3.version>3.8</commons-lang3.version>
 		<commons-codec.version>1.11</commons-codec.version>
 		<commons-io.version>2.6</commons-io.version>
 		<commons-beanutils>1.9.3</commons-beanutils>
-		<guava.version>26.0-jre</guava.version>
+		<guava.version>27.0-jre</guava.version>
 		<shiro.version>1.4.0</shiro.version>
 		<dozer.version>5.5.1</dozer.version>
 		<dom4j.version>1.6.1</dom4j.version>
 		<fst.version>2.56</fst.version>
+		<curator-framework.version>4.0.1</curator-framework.version>
+		<curator-recipes.version>4.0.1</curator-recipes.version>
 		<!--基础开放工具包配置 -->
 
 		<!--orm和数据库驱动配置 -->
@@ -64,9 +65,8 @@
 		<!--orm和数据库驱动配置 -->
 
 		<!--spring boot和spring cloud配置 -->
-		<spring-boot-dependencies.version>2.0.4.RELEASE</spring-boot-dependencies.version>
+		<spring-boot-dependencies.version>2.1.0.RELEASE</spring-boot-dependencies.version>
 		<spring-cloud-dependencies.version>Finchley.SR1</spring-cloud-dependencies.version>
-		<spring-cloud-gateway-dependencies.version>2.0.1.RELEASE</spring-cloud-gateway-dependencies.version>
 		<!--spring boot和spring cloud配置 -->
 	</properties>
 
@@ -250,7 +250,7 @@
 			<dependency>
 				<groupId>javax.servlet</groupId>
 				<artifactId>javax.servlet-api</artifactId>
-				<version>${servlet-api.version}</version>
+				<version>${javax.servlet-api.version}</version>
 			</dependency>
 
 			<dependency>
@@ -269,6 +269,24 @@
 				<groupId>dom4j</groupId>
 				<artifactId>dom4j</artifactId>
 				<version>${dom4j.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.curator</groupId>
+				<artifactId>curator-framework</artifactId>
+				<exclusions>
+					<exclusion>
+						<groupId>io.netty</groupId>
+						<artifactId>netty</artifactId>
+					</exclusion>
+				</exclusions>
+				<version>${curator-framework.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.curator</groupId>
+				<artifactId>curator-recipes</artifactId>
+				<version>${curator-recipes.version}</version>
 			</dependency>
 			<!--基础开放工具依赖 -->
 
@@ -305,14 +323,6 @@
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-dependencies</artifactId>
 				<version>${spring-cloud-dependencies.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-gateway-dependencies</artifactId>
-				<version>${spring-cloud-gateway-dependencies.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -358,7 +368,7 @@
 				<enabled>true</enabled>
 			</snapshots>
 		</repository>
-		
+
 		<repository>
 			<id>nexus-aliyun</id>
 			<name>Nexus aliyun</name>

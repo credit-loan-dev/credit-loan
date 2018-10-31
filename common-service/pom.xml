@@ -15,7 +15,6 @@
 		<module>payment-manager</module>
 		<module>notice-manager</module>
     	<module>service-register</module>
-    	<module>api-gateway</module>
     	<module>workflow-manager</module>
   </modules>
 </project>
