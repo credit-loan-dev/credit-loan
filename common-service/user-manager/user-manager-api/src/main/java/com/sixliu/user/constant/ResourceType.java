@@ -14,5 +14,7 @@ public enum ResourceType {
 	/**接口类型资源**/
 	FUNCTION, 
 	/**菜单类型资源**/
-	MENU;
+	MENU,
+	/**应用类型资源**/
+	APP;
 }

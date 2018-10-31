@@ -21,10 +21,10 @@ public abstract class BaseEntity {
 	private String remarks;
 	
 	/**数据版本:INT(11)**/
-	private Integer version;
+	private int version;
 	
-	/**数据所有者id:VARCHAR(36)**/
-	private String ownerId;
+	/**删除标志:INT(1)**/
+	private int delete;
 	
 	/**数据更新用户id:VARCHAR(36)**/
 	private String updateUserId;

@@ -5,12 +5,12 @@ import java.util.Date;
 import lombok.Data;
 
 /**
-*@author:MG01867
-*@date:2018年9月6日
-*@E-mail:359852326@qq.com
-*@version:
-*@describe //TODO
-*/
+ * @author:MG01867
+ * @date:2018年6月15日
+ * @E-mail:359852326@qq.com
+ * @version:
+ * @describe 基础po
+ */
 @Data
 public abstract class BaseEntity {
 
@@ -21,7 +21,7 @@ public abstract class BaseEntity {
 	private String remarks;
 	
 	/**数据版本:INT(11)**/
-	private Integer version;
+	private int version;
 	
 	/**删除标志:INT(1)**/
 	private int delete;
