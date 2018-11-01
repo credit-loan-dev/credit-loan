@@ -1,4 +1,4 @@
-package com.sixliu.user.entity;
+package com.sixliu.user.repository.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -16,7 +16,7 @@ import lombok.ToString;
 @ToString(callSuper = true)
 public class UserEntity extends BaseEntity{
 
-	/**用户名**/
+	/**用户名VARCHAR(40)**/
 	private String name;
 	
 	/**用户昵称**/

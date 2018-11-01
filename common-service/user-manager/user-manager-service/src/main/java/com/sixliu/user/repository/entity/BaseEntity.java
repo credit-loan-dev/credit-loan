@@ -1,4 +1,4 @@
-package com.sixliu.user.entity;
+package com.sixliu.user.repository.entity;
 
 import java.util.Date;
 
@@ -17,14 +17,11 @@ public abstract class BaseEntity {
 	/**数据id业务无关性:VARCHAR(36)**/
 	private String id;
 	
-	/**数据备注:VARCHAR(100)**/
-	private String remarks;
-	
 	/**数据版本:INT(11)**/
 	private int version;
 	
 	/**删除标志:INT(1)**/
-	private int delete;
+	private boolean deleted;
 	
 	/**数据更新用户id:VARCHAR(36)**/
 	private String updateUserId;

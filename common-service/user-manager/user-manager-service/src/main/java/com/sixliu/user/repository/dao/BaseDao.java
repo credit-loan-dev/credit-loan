@@ -1,4 +1,6 @@
-package com.sixliu.user.dao;
+package com.sixliu.user.repository.dao;
+
+import com.sixliu.user.repository.entity.BaseEntity;
 
 /**
  * @author:MG01867
@@ -7,7 +9,7 @@ package com.sixliu.user.dao;
  * @version:
  * @describe 数据访问基础接口
  */
-public interface BaseDao<T> {
+public interface BaseDao<T extends BaseEntity> {
 
 	/**
 	 * 根据id获取数据
@@ -36,8 +38,10 @@ public interface BaseDao<T> {
 	/**
 	 * 根据实体id删除数据
 	 * 
-	 * @param id 数据id
+	 * @param id           数据id
+	 * @param version      数据版本
+	 * @param updateUserId 用戶id
 	 * @return 返回影响行数
 	 */
-	int delete(String id);
+	int delete(String id, int version, String updateUserId);
 }

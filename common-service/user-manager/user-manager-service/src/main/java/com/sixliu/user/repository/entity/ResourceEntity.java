@@ -1,4 +1,4 @@
-package com.sixliu.user.entity;
+package com.sixliu.user.repository.entity;
 
 import com.sixliu.user.constant.ResourceType;
 

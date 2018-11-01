@@ -1,6 +1,6 @@
-package com.sixliu.user.dao;
+package com.sixliu.user.repository.dao;
 
-import com.sixliu.user.entity.UserEntity;
+import com.sixliu.user.repository.entity.UserEntity;
 
 /**
 *@author:MG01867

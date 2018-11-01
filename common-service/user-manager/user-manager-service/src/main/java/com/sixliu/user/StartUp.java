@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import com.sixliu.user.dao.BaseDao;
+import com.sixliu.user.repository.dao.BaseDao;
 import com.sixliu.user.service.UserManagerService;
 
 /**
