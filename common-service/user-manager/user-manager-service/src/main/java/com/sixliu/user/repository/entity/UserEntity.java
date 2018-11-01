@@ -24,10 +24,4 @@ public class UserEntity extends BaseEntity{
 	
 	/**密码**/
 	private String password;
-	
-	/**手机号码**/
-	private String mobileNo;
-	
-	/**邮箱地址**/
-	private String email;
 }

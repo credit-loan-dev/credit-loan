@@ -27,11 +27,15 @@ public class UserDaoTest extends BaseTest{
 		user.setName("sixliu5945");
 		user.setPassword("37dzsk9n5w");
 		user.setNickname("sixliu");
-		user.setMobileNo("1856665542");
-		user.setEmail("359852326@qq.com");
 		user.setCreateUserId("sixliu");
 		user.setUpdateUserId("sixliu");
 		int count=userDao.add(user);
 		checkOk(count);
+	}
+	
+	@Test
+	public void testGet() {
+		UserEntity user=userDao.get("98d3c392dda211e89e01005056986f0b");
+		checkOk(user);
 	}
 }

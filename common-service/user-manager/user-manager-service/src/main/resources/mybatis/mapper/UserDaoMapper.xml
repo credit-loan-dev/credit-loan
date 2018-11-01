@@ -10,7 +10,7 @@
         <result column="mobile_no"               property="mobileNo"        jdbcType="VARCHAR" />
         <result column="email"                   property="email"           jdbcType="VARCHAR" />      
         <result column="version"                 property="version"         jdbcType="INTEGER" />
-        <result column="is_deleted"               property="deleted"        jdbcType="INTEGER" />
+        <result column="is_deleted"              property="deleted"        jdbcType="INTEGER" />
         <result column="update_user_id"          property="updateUserId"    jdbcType="VARCHAR" />
         <result column="update_date"             property="updateDate"      jdbcType="TIMESTAMP" />
         <result column="create_user_id"          property="createUserId"    jdbcType="VARCHAR" />
@@ -24,7 +24,7 @@
     
     <!-- 查询通用列 -->
     <sql id="select_common_column">
-    	select `id`,`name`, nickname,`password`,mobile_no,email,`version`,update_user_id,update_date,create_user_id,create_date
+    	select `id`,`name`, nickname,`password`,mobile_no,email,`version`,is_deleted,update_user_id,update_date,create_user_id,create_date
     </sql>
     
 	<select id="get" resultMap="EntityResult">
