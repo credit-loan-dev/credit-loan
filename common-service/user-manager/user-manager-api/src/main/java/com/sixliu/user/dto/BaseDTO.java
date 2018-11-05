@@ -9,8 +9,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sixliu.user.constant.FormatPatternsForDateTime;
 import com.sixliu.user.validation.AddValidationGroup;
+import com.sixliu.user.validation.CurrentUserValidation;
 import com.sixliu.user.validation.UpdateValidationGroup;
-import com.sixliu.user.validation.UserValidation;
 
 import lombok.Data;
 
@@ -19,7 +19,7 @@ import lombok.Data;
  * @date:2018年11月5日
  * @email:359852326@qq.com
  * @version:
- * @describe //TODO
+ * @describe 基础dto
  */
 @Data
 public abstract class BaseDTO {
@@ -32,7 +32,7 @@ public abstract class BaseDTO {
 	private int version;
 
 	/** 数据更新用户 **/
-	@UserValidation(message = "The updateUserId is illegal", groups = { UpdateValidationGroup.class })
+	@CurrentUserValidation(message = "The updateUserId is illegal", groups = { UpdateValidationGroup.class })
 	private String updateUserId;
 
 	/** 数据更新日期 **/
@@ -41,7 +41,7 @@ public abstract class BaseDTO {
 	private Date updateDate;
 
 	/** 数据创建用户 **/
-	@UserValidation(message = "The createUser is illegal", groups = { AddValidationGroup.class })
+	@CurrentUserValidation(message = "The createUser is illegal", groups = { AddValidationGroup.class })
 	private String createUserId;
 
 	/** 数据创建日期 **/
