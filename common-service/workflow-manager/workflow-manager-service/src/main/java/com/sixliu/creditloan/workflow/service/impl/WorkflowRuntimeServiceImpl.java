@@ -27,7 +27,7 @@ import com.sixliu.creditloan.workflow.service.WorkflowRuntimeService;
 import com.sixliu.creditloan.workflow.util.FlowUtils;
 import com.sixliu.creditloan.workflow.worker.impl.AutoProcessWorkerMangaer;
 import com.sixliu.user.dto.UserDTO;
-import com.sixliu.user.service.UserManagerService;
+import com.sixliu.user.service.UserService;
 
 /**
  * @author:MG01867
@@ -40,7 +40,7 @@ import com.sixliu.user.service.UserManagerService;
 public class WorkflowRuntimeServiceImpl implements WorkflowRuntimeService {
 
 	@Autowired
-	UserManagerService userManagerService;
+	UserService userManagerService;
 
 	@Autowired
 	private WorkflowJobModelDao workflowJobModelDao;

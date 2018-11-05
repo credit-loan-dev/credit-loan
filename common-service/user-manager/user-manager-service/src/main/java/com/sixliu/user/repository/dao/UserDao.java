@@ -11,5 +11,5 @@ import com.sixliu.user.repository.entity.UserEntity;
 */
 public interface UserDao extends BaseDao<UserEntity>{
 
-	
+	UserEntity getByName(String name);
 }

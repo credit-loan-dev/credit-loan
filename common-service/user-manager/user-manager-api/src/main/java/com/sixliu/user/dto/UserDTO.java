@@ -1,7 +1,14 @@
 package com.sixliu.user.dto;
 
 
+
+import javax.validation.constraints.NotBlank;
+
+import com.sixliu.user.validation.AddValidationGroup;
+
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
 *@author:MG01867
@@ -11,11 +18,19 @@ import lombok.Data;
 *@describe //TODO
 */
 @Data
-public class UserDTO {
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
+public class UserDTO extends BaseDTO{
 
-	/**用户id**/
-	private String id;
+	/**用户名**/
+	@NotBlank(message = "The user's name must be not blank",groups= {AddValidationGroup.class})
+	private String name;
 	
-	/**用户角色id**/
-	private String roleId;
+	/**用户昵称**/
+	@NotBlank(message = "The user's nickname must be not blank",groups= {AddValidationGroup.class})
+	private String nickname;
+	
+	/**密码**/
+	@NotBlank(message = "The user's password must be not blank",groups= {AddValidationGroup.class})
+	private String password;
 }

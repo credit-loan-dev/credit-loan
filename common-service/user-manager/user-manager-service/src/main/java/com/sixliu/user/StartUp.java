@@ -3,13 +3,11 @@ package com.sixliu.user;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.cloud.client.SpringCloudApplication;
-import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.sixliu.user.repository.dao.BaseDao;
-import com.sixliu.user.service.UserManagerService;
 
 /**
  * @author:MG01867
@@ -19,7 +17,7 @@ import com.sixliu.user.service.UserManagerService;
  * @describe 程序启动入口类
  */
 @SpringCloudApplication
-@EnableFeignClients(basePackageClasses = { UserManagerService.class})
+//@EnableFeignClients(basePackageClasses = { UserService.class})
 @EnableTransactionManagement 
 @MapperScan(basePackageClasses=BaseDao.class)
 public class StartUp implements WebMvcConfigurer {

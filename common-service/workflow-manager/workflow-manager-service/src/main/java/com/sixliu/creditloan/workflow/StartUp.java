@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.sixliu.creditloan.workflow.dao.BaseDao;
-import com.sixliu.user.service.UserManagerService;
+import com.sixliu.user.service.UserService;
 
 
 /**
@@ -20,7 +20,7 @@ import com.sixliu.user.service.UserManagerService;
  * @describe 服务启动类
  */
 @SpringCloudApplication
-@EnableFeignClients(basePackageClasses = { UserManagerService.class})
+@EnableFeignClients(basePackageClasses = { UserService.class})
 @EnableTransactionManagement 
 @MapperScan(basePackageClasses=BaseDao.class)
 public class StartUp implements WebMvcConfigurer {
