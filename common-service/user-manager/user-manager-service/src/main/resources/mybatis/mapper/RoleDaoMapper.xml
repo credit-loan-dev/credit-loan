@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sixliu.user.repository.dao.RoleDao" >
+
+    <resultMap id="EntityResult" type="com.sixliu.user.repository.entity.RoleEntity" >
+        <id column="id"                          property="id"              jdbcType="VARCHAR" />
+        <result column="name"                    property="name"            jdbcType="VARCHAR" />
+        <result column="depth"                   property="depth"           jdbcType="INTEGER" />
+        <result column="parent_id"               property="parentId"        jdbcType="VARCHAR" /> 
+        <result column="version"                 property="version"         jdbcType="INTEGER" />
+        <result column="is_deleted"              property="deleted"         jdbcType="INTEGER" />
+        <result column="update_user_id"          property="updateUserId"    jdbcType="VARCHAR" />
+        <result column="update_date"             property="updateDate"      jdbcType="TIMESTAMP" />
+        <result column="create_user_id"          property="createUserId"    jdbcType="VARCHAR" />
+        <result column="create_date"             property="createDate"      jdbcType="TIMESTAMP" />
+    </resultMap>
+    
+    <parameterMap id="EntityParameter" type="com.sixliu.user.repository.entity.RoleEntity"/>
+    
+    <!-- 表名-->
+    <sql id="table_name">role</sql>
+    
+    <!-- 查询通用列 -->
+    <sql id="select_common_column">
+    	select `id`,`name`,`depth`,parent_id,`version`,is_deleted,update_user_id,update_date,create_user_id,create_date
+    </sql>
+    
+	<select id="get" resultMap="EntityResult">
+		<include refid="select_common_column"/>
+		from 
+		<include refid="table_name"/>
+        where `id`=#{id}
+        and is_deleted=0
+    </select>
+    
+    <select id="getByName" resultMap="EntityResult">
+		<include refid="select_common_column"/>
+		from 
+		<include refid="table_name"/>
+        where `name`=#{name}
+        and is_deleted=0
+    </select>
+    
+    <insert id="add" parameterMap="EntityParameter">
+    	<selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
+              select replace(uuid(),'-','')
+    	</selectKey>
+    	insert into 
+    	<include refid="table_name"/>
+    	       (`id`,`name`,`depth`,parent_id,update_user_id,create_user_id)
+    	 values(#{id},#{name},#{depth},#{parentId},#{updateUserId},#{createUserId})
+	</insert>
+	
+	<update id="update" parameterMap="EntityParameter">
+		update 
+		<include refid="table_name"/>
+		set `name`=#{name},        `depth`=#{depth},                 parent_id=#{parentId},                  
+		     `version`=version+1,  update_user_id=#{createUserId}
+		where `id`=#{id} 
+		and   `version`=#{version}
+		and   is_deleted=0 
+	</update>
+	
+	<update id="delete">
+		update 
+		<include refid="table_name"/>
+		set is_deleted=1,update_user_id=#{createUserId}
+		where `id`=#{id} 
+		and   `version`=#{version}
+		and   is_deleted=0 
+	</update>
+</mapper>

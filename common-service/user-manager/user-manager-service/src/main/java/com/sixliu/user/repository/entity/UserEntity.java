@@ -14,7 +14,7 @@ import lombok.ToString;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class UserEntity extends BaseEntity{
+public class UserEntity extends AuditBaseEntity{
 
 	/**用户名VARCHAR(40)**/
 	private String name;

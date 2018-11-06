@@ -14,10 +14,13 @@ import lombok.ToString;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class RoleEntity extends BaseEntity {
+public class RoleEntity extends AuditBaseEntity {
 
 	/** 资源名称 **/
 	private String name;
+	
+	/** 层级深度 **/
+	private int depth;
 
 	/** 父资源id **/
 	private String parentId;

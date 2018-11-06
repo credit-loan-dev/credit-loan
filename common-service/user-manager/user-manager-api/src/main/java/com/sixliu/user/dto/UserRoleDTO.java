@@ -2,6 +2,8 @@ package com.sixliu.user.dto;
 
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
 *@author:MG01867
@@ -11,11 +13,13 @@ import lombok.Data;
 *@describe //TODO
 */
 @Data
-public class UserRoleDTO {
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
+public class UserRoleDTO extends BaseDTO{
 
 	/**用户id**/
-	private String id;
+	private String userId;
 	
-	/**用户角色id**/
+	/**角色id**/
 	private String roleId;
 }

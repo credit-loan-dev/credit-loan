@@ -11,16 +11,25 @@ import lombok.ToString;
 *@date:2018年10月31日
 *@email:359852326@qq.com
 *@version:
-*@describe 
+*@describe 资源实体类
 */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class ResourceEntity extends BaseEntity{
+public class ResourceEntity extends AuditBaseEntity{
 
 	/**资源名称**/
 	private String name;
 	
 	/**资源类型**/
 	private ResourceType type;
+	
+	/**资源路径**/
+	private String path;
+	
+	/** 层级深度 **/
+	private int depth;
+	
+	/**父资源id**/
+	private String parentId;
 }

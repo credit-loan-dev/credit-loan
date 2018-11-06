@@ -16,7 +16,7 @@ import lombok.ToString;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class SecurityBindingEntity extends BaseEntity {
+public class SecurityBindingEntity extends AuditBaseEntity {
 
 	/**类型**/
 	private SecurityBindingType type;

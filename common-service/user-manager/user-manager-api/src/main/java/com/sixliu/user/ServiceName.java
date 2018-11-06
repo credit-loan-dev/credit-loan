@@ -9,5 +9,5 @@ package com.sixliu.user;
  */
 public interface ServiceName {
 
-	String SERVICE_NAME = "user-manager";
+	String SERVICE_NAME = "app-manager";
 }
