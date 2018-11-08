@@ -3,16 +3,15 @@
 <mapper namespace="com.sixliu.creditloan.workflow.dao.WorkflowEventModelDao" >
 
     <resultMap id="WorkflowEventModelResult" type="com.sixliu.creditloan.workflow.entity.WorkflowEventModel" >
-        <id column="id" property="id" jdbcType="VARCHAR" />
-        <result column="task_id" property="taskId" jdbcType="VARCHAR" />
-        <result column="type" property="type" jdbcType="VARCHAR" />
-        <result column="execute_script" property="executeScript" jdbcType="VARCHAR" />
-        <result column="remarks" property="remarks" jdbcType="VARCHAR" />
-        <result column="version" property="version" jdbcType="INTEGER" />
-        <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR" />
-        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
-        <result column="create_user_id" property="createUserId" jdbcType="VARCHAR" />
-        <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+        <id column="id"                    property="id"              jdbcType="VARCHAR" />
+        <result column="task_id"           property="taskId"          jdbcType="VARCHAR" />
+        <result column="type"              property="type"            jdbcType="VARCHAR" />
+        <result column="execute_script"    property="executeScript"   jdbcType="VARCHAR" />
+        <result column="version"           property="version"         jdbcType="INTEGER" />
+        <result column="update_user_id"    property="updateUserId"    jdbcType="VARCHAR" />
+        <result column="update_date"       property="updateDate"      jdbcType="TIMESTAMP" />
+        <result column="create_user_id"    property="createUserId"    jdbcType="VARCHAR" />
+        <result column="create_date"       property="createDate"      jdbcType="TIMESTAMP" />
     </resultMap>
     
     <parameterMap id="WorkflowEventModelParameter" type="com.sixliu.creditloan.workflow.entity.WorkflowEventModel"/>
@@ -31,7 +30,6 @@
 	        task_id,
 	        `type`,
 	        execute_script,
-	        `remarks`,
 	        `version`,
 	        update_user_id,
 	        update_date,
@@ -45,7 +43,6 @@
     								task_id,
     								`type`,
     								execute_script,
-    	 							`remarks`,
     	 							update_user_id,
     	 							create_user_id
     	 							)
@@ -53,7 +50,6 @@
     	 							#{taskId},
     	 							#{type},
     	 							#{executeScript},
-    		   						#{remarks},
     		   						#{updateUserId},
     		   						#{createUserId}
     		   						)

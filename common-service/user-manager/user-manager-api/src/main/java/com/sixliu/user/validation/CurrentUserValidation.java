@@ -24,13 +24,13 @@ import com.sixliu.user.service.UserService;
  * @version:
  * @describe //TODO
  */
-@Target({ ElementType.FIELD, ElementType.METHOD })
+@Target({ ElementType.FIELD,ElementType.PARAMETER, ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = CurrentUserValidation.Checker.class)
 @Documented
 public @interface CurrentUserValidation {
 
-	String message() default "";
+	String message() default "The current user is illegal";
 
 	Class<?>[] groups() default {};
 

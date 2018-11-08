@@ -1,6 +1,7 @@
 package com.sixliu.creditloan.workflow.entity;
 
-import com.sixliu.creditloan.workflow.constant.WorkerType;
+import com.sixliu.workflow.constant.WorkerType;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -15,7 +16,7 @@ import lombok.ToString;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class WorkflowTaskWorker extends BaseEntity {
+public class WorkflowTaskWorker extends AuditBaseEntity {
 
 	/** 自动处理worker名称 **/
 	private String name;

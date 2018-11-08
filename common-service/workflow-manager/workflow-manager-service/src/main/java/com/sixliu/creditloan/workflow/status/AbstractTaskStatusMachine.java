@@ -6,17 +6,17 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sixliu.creditloan.workflow.component.TransactionalHelper;
-import com.sixliu.creditloan.workflow.constant.JobStatus;
-import com.sixliu.creditloan.workflow.constant.TaskStatus;
 import com.sixliu.creditloan.workflow.dao.WorkflowJobDao;
 import com.sixliu.creditloan.workflow.dao.WorkflowTaskDao;
 import com.sixliu.creditloan.workflow.dao.WorkflowTaskModelDao;
 import com.sixliu.creditloan.workflow.dao.WorkflowTaskOpinionDao;
-import com.sixliu.creditloan.workflow.dto.TaskProcessResult;
 import com.sixliu.creditloan.workflow.entity.WorkflowJob;
 import com.sixliu.creditloan.workflow.entity.WorkflowTask;
 import com.sixliu.creditloan.workflow.entity.WorkflowTaskOpinion;
-import com.sixliu.creditloan.workflow.service.WorkflowService;
+import com.sixliu.workflow.constant.JobStatus;
+import com.sixliu.workflow.constant.TaskStatus;
+import com.sixliu.workflow.dto.TaskProcessResult;
+import com.sixliu.workflow.service.WorkflowService;
 
 import lombok.extern.slf4j.Slf4j;
 

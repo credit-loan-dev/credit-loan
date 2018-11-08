@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import com.sixliu.creditloan.workflow.entity.WorkflowTaskWorker;
-import com.sixliu.creditloan.workflow.worker.AutoProcessWorker;
+import com.sixliu.workflow.worker.AutoProcessWorker;
 
 /**
 *@author:MG01867

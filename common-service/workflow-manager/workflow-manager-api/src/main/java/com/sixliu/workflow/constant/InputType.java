@@ -1,4 +1,4 @@
-package com.sixliu.creditloan.workflow.constant;
+package com.sixliu.workflow.constant;
 
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
@@ -14,39 +14,36 @@ import org.apache.ibatis.type.MappedTypes;
 
 /**
  * @author:MG01867
- * @date:2018年7月6日
+ * @date:2018年7月23日
  * @E-mail:359852326@qq.com
  * @version:
- * @describe 流程作业任务状态
+ * @describe //TODO
  */
-public enum TaskStatus {
+public enum InputType {
 
-	/** 待认领 **/
-	POOLING,
+	/** 字符串 **/
+	STRING,
 
-	/** 待处理 **/
-	PENDING,
-	
-	/** 转移 **/
-	TRANSFER,
+	/** 文本 **/
+	TEXT,
 
-	/** 通过 **/
-	PASS,
+	/** 电话号码 **/
+	PHONE_NUM,
 
-	/** 拒绝 **/
-	REJECT,
+	/** 邮箱地址 **/
+	EMAIL,
 
-	/** 驳回 **/
-	OVERRULE,
+	/** 数字 **/
+	NUM,
 
-	/** 挂起 **/
-	HANG_UP;
+	/** 非负数 **/
+	NON_NEGATIVE;
 
 	private final static Set<String> names;
 
 	static {
-		names = new HashSet<>(TaskStatus.values().length);
-		for (TaskStatus item : TaskStatus.values()) {
+		names = new HashSet<>(InputType.values().length);
+		for (InputType item : InputType.values()) {
 			names.add(item.name());
 		}
 	}
@@ -55,30 +52,30 @@ public enum TaskStatus {
 		return names.contains(value);
 	}
 
-	@MappedTypes(value = TaskStatus.class)
+	@MappedTypes(value = InputType.class)
 	@MappedJdbcTypes(value = { JdbcType.VARCHAR, JdbcType.CHAR })
-	public static class TaskStatusHandler extends BaseTypeHandler<TaskStatus> {
+	public static class TaskStatusHandler extends BaseTypeHandler<InputType> {
 
 		@Override
-		public void setNonNullParameter(PreparedStatement ps, int i, TaskStatus parameter, JdbcType jdbcType)
+		public void setNonNullParameter(PreparedStatement ps, int i, InputType parameter, JdbcType jdbcType)
 				throws SQLException {
 			ps.setString(i, parameter.name());
 		}
 
 		@Override
-		public TaskStatus getNullableResult(ResultSet rs, String columnName) throws SQLException {
+		public InputType getNullableResult(ResultSet rs, String columnName) throws SQLException {
 			String value = rs.getString(columnName);
 			return valueOf(value);
 		}
 
 		@Override
-		public TaskStatus getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
+		public InputType getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
 			String value = rs.getString(columnIndex);
 			return valueOf(value);
 		}
 
 		@Override
-		public TaskStatus getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
+		public InputType getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
 			String value = cs.getString(columnIndex);
 			return valueOf(value);
 		}

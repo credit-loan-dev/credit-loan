@@ -4,8 +4,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sixliu.creditloan.workflow.BaseTest;
-import com.sixliu.creditloan.workflow.constant.TaskType;
 import com.sixliu.creditloan.workflow.entity.WorkflowTaskModel;
+import com.sixliu.workflow.constant.TaskType;
 
 /**
 *@author:MG01867
@@ -28,7 +28,6 @@ public class WorkflowTaskModelDaoTest  extends BaseTest{
 			workflowTaskModel.setPhase(i);
 			workflowTaskModel.setType(TaskType.MANUAL);
 			workflowTaskModel.setWorker("sixliu");
-			workflowTaskModel.setRemarks("remarks");
 			workflowTaskModel.setCreateUserId("sixliu");
 			workflowTaskModel.setUpdateUserId("sixliu");
 			workflowTaskModelDao.insert(workflowTaskModel);

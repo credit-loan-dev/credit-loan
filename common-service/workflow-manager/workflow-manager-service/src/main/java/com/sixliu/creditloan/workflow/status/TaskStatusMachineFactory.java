@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Objects;
 import org.springframework.stereotype.Component;
 
-import com.sixliu.creditloan.workflow.constant.TaskStatus;
+import com.sixliu.workflow.constant.TaskStatus;
 
 /**
  * @author:MG01867

@@ -3,18 +3,17 @@
 <mapper namespace="com.sixliu.creditloan.workflow.dao.WorkflowTaskModelDao" >
 
     <resultMap id="WorkflowTaskModelResult" type="com.sixliu.creditloan.workflow.entity.WorkflowTaskModel" >
-        <id column="id" property="id" jdbcType="VARCHAR" />
-        <result column="name" property="name" jdbcType="VARCHAR" />
-        <result column="job_id" property="jobId" jdbcType="VARCHAR" />
-        <result column="phase" property="phase" jdbcType="INTEGER" />
-        <result column="type" property="type" jdbcType="VARCHAR" />
-        <result column="worker" property="worker" jdbcType="VARCHAR" />
-        <result column="remarks" property="remarks" jdbcType="VARCHAR" />
-        <result column="version" property="version" jdbcType="INTEGER" />
-        <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR" />
-        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
-        <result column="create_user_id" property="createUserId" jdbcType="VARCHAR" />
-        <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+        <id column="id"                    property="id"              jdbcType="VARCHAR" />
+        <result column="name"              property="name"            jdbcType="VARCHAR" />
+        <result column="job_id"            property="jobId"           jdbcType="VARCHAR" />
+        <result column="phase"             property="phase"           jdbcType="INTEGER" />
+        <result column="type"              property="type"            jdbcType="VARCHAR" />
+        <result column="worker"            property="worker"          jdbcType="VARCHAR" />
+        <result column="version"           property="version"         jdbcType="INTEGER" />
+        <result column="update_user_id"    property="updateUserId"    jdbcType="VARCHAR" />
+        <result column="update_date"       property="updateDate"      jdbcType="TIMESTAMP" />
+        <result column="create_user_id"    property="createUserId"    jdbcType="VARCHAR" />
+        <result column="create_date"       property="createDate"      jdbcType="TIMESTAMP" />
     </resultMap>
     
     <parameterMap id="WorkflowTaskModelParameter" type="com.sixliu.creditloan.workflow.entity.WorkflowTaskModel"/>

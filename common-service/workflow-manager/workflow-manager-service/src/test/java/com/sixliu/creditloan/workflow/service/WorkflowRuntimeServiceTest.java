@@ -6,7 +6,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sixliu.creditloan.workflow.BaseTest;
-import com.sixliu.creditloan.workflow.dto.FlowTask;
+import com.sixliu.workflow.dto.FlowTask;
+import com.sixliu.workflow.service.WorkflowRuntimeService;
 
 /**
 *@author:MG01867
@@ -23,7 +24,7 @@ public class WorkflowRuntimeServiceTest extends BaseTest {
 	
 	@Test
 	public void testCreateJob(){
-		String jobId=workflowRuntimeService.createJob("940659f0-b1ca-11e8-9e01-005056986f0b", "sixliu");
+		String jobId=workflowRuntimeService.createJob(null);
 		checkOk(jobId);
 	}
 	

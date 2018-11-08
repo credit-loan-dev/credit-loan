@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.sixliu.creditloan.workflow.constant.TaskStatus;
 import com.sixliu.creditloan.workflow.entity.WorkflowTask;
+import com.sixliu.workflow.constant.TaskStatus;
 
 /**
  * @author:MG01867

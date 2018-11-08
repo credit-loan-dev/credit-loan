@@ -23,7 +23,6 @@ public class WorkflowJobModelDaoTest extends BaseTest{
 		WorkflowJobModel workflowJobModel=new WorkflowJobModel();
 		workflowJobModel.setName("test");
 		workflowJobModel.setCreateRoleId("sixliu");
-		workflowJobModel.setRemarks("remarks");
 		workflowJobModel.setCreateUserId("sixliu");
 		workflowJobModel.setUpdateUserId("sixliu");
 		int result=workflowJobModelDao.insert(workflowJobModel);

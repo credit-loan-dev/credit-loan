@@ -30,7 +30,6 @@ public class WorkflowTaskOpinionDaoTest extends BaseTest{
 		workflowTaskOpinion.setTaskId(workflowTask.getId());
 		workflowTaskOpinion.setInnerOpinion("工作信息作假");
 		workflowTaskOpinion.setOuterOpinion("综合评分过低");
-		workflowTaskOpinion.setRemarks("remarks");
 		workflowTaskOpinion.setCreateUserId("sixliu");
 		workflowTaskOpinion.setUpdateUserId("sixliu");
 		workflowTaskOpinionDao.insert(workflowTaskOpinion);

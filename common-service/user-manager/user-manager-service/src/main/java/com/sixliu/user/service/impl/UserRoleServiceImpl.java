@@ -26,4 +26,10 @@ public class UserRoleServiceImpl implements UserRoleService{
 		return null;
 	}
 
+	@Override
+	public UserRoleDTO getByUserId(String userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -6,9 +6,9 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sixliu.creditloan.workflow.BaseTest;
-import com.sixliu.creditloan.workflow.constant.TaskStatus;
 import com.sixliu.creditloan.workflow.entity.WorkflowTask;
 import com.sixliu.creditloan.workflow.entity.WorkflowTaskModel;
+import com.sixliu.workflow.constant.TaskStatus;
 
 /**    
  * @author: sixliu
@@ -39,7 +39,6 @@ public class WorkflowTaskDaoTest extends BaseTest{
 			workflowTask.setWorker(workflowTaskModel.getWorker());
 			workflowTask.setStatus(TaskStatus.POOLING);
 			workflowTask.setWorker("sixliu");
-			workflowTask.setRemarks("remarks");
 			workflowTask.setCreateUserId("sixliu");
 			workflowTask.setUpdateUserId("sixliu");
 			workflowTaskDao.insert(workflowTask);

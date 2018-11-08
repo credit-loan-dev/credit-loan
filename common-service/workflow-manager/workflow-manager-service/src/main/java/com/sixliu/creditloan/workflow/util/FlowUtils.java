@@ -2,13 +2,13 @@ package com.sixliu.creditloan.workflow.util;
 
 import java.util.Date;
 
-import com.sixliu.creditloan.workflow.constant.JobStatus;
-import com.sixliu.creditloan.workflow.constant.TaskStatus;
-import com.sixliu.creditloan.workflow.dto.FlowTask;
 import com.sixliu.creditloan.workflow.entity.WorkflowJob;
 import com.sixliu.creditloan.workflow.entity.WorkflowJobModel;
 import com.sixliu.creditloan.workflow.entity.WorkflowTask;
 import com.sixliu.creditloan.workflow.entity.WorkflowTaskModel;
+import com.sixliu.workflow.constant.JobStatus;
+import com.sixliu.workflow.constant.TaskStatus;
+import com.sixliu.workflow.dto.FlowTask;
 
 /**
  * @author:MG01867

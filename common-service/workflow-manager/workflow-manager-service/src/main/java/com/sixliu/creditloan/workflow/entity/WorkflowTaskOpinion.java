@@ -14,7 +14,7 @@ import lombok.ToString;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class WorkflowTaskOpinion extends BaseEntity {
+public class WorkflowTaskOpinion extends AuditBaseEntity {
 	
 	/**流程作业id**/
 	private String jobId;

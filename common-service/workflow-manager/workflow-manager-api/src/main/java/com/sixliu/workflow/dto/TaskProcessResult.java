@@ -1,6 +1,6 @@
-package com.sixliu.creditloan.workflow.dto;
+package com.sixliu.workflow.dto;
 
-import com.sixliu.creditloan.workflow.constant.TaskStatus;
+import com.sixliu.workflow.constant.TaskStatus;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package com.sixliu.creditloan.workflow.service;
+package com.sixliu.workflow.service;
 
 import java.util.List;
 
@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.sixliu.creditloan.workflow.WorkflowManagerApi;
-import com.sixliu.creditloan.workflow.dto.WorkflowJobModelDTO;
-import com.sixliu.creditloan.workflow.dto.WorkflowTaskModelDTO;
+import com.sixliu.workflow.WorkflowManagerApi;
+import com.sixliu.workflow.dto.WorkflowJobModelDTO;
+import com.sixliu.workflow.dto.WorkflowTaskModelDTO;
 
 /**
  * @author:MG01867

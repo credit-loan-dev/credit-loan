@@ -10,24 +10,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RestController;
 
-
-import com.sixliu.creditloan.workflow.constant.JobStatus;
-import com.sixliu.creditloan.workflow.constant.TaskStatus;
 import com.sixliu.creditloan.workflow.dao.WorkflowJobDao;
 import com.sixliu.creditloan.workflow.dao.WorkflowJobModelDao;
 import com.sixliu.creditloan.workflow.dao.WorkflowTaskDao;
 import com.sixliu.creditloan.workflow.dao.WorkflowTaskModelDao;
-import com.sixliu.creditloan.workflow.dto.FlowTask;
-import com.sixliu.creditloan.workflow.dto.TaskProcessResult;
 import com.sixliu.creditloan.workflow.entity.WorkflowJob;
 import com.sixliu.creditloan.workflow.entity.WorkflowJobModel;
 import com.sixliu.creditloan.workflow.entity.WorkflowTask;
 import com.sixliu.creditloan.workflow.entity.WorkflowTaskModel;
-import com.sixliu.creditloan.workflow.service.WorkflowRuntimeService;
 import com.sixliu.creditloan.workflow.util.FlowUtils;
 import com.sixliu.creditloan.workflow.worker.impl.AutoProcessWorkerMangaer;
-import com.sixliu.user.dto.UserDTO;
-import com.sixliu.user.service.UserService;
+import com.sixliu.user.dto.UserRoleDTO;
+import com.sixliu.user.service.UserRoleService;
+import com.sixliu.workflow.constant.JobStatus;
+import com.sixliu.workflow.constant.TaskStatus;
+import com.sixliu.workflow.dto.CreateJobDTO;
+import com.sixliu.workflow.dto.FlowTask;
+import com.sixliu.workflow.dto.TaskProcessResult;
+import com.sixliu.workflow.service.WorkflowRuntimeService;
 
 /**
  * @author:MG01867
@@ -40,7 +40,7 @@ import com.sixliu.user.service.UserService;
 public class WorkflowRuntimeServiceImpl implements WorkflowRuntimeService {
 
 	@Autowired
-	UserService userManagerService;
+	private UserRoleService userRoleService;
 
 	@Autowired
 	private WorkflowJobModelDao workflowJobModelDao;
@@ -59,19 +59,17 @@ public class WorkflowRuntimeServiceImpl implements WorkflowRuntimeService {
 
 	@Transactional
 	@Override
-	public String createJob(String workflowJobModelId, String userId) {
-		WorkflowJobModel workflowJobModel = workflowJobModelDao.get(workflowJobModelId);
+	public String createJob(CreateJobDTO createJobDTO) {
+		WorkflowJobModel workflowJobModel = workflowJobModelDao.get(createJobDTO.getModelId());
 		if (null == workflowJobModel) {
 			throw new IllegalArgumentException(
-					String.format("The flowJobClass[%s] is non-existent", workflowJobModelId));
+					String.format("The flowJobClass[%s] is non-existent", createJobDTO.getModelId()));
 		}
-		UserDTO user = getAndCheckUser(userId);
-		if (null == user) {
-			throw new IllegalArgumentException(String.format("The user[%s] is non-existent", userId));
-		}
+		UserRoleDTO user = userRoleService.getByUserId(createJobDTO.getCreateUserId());
 		if (!StringUtils.equals(user.getRoleId(), workflowJobModel.getCreateRoleId())) {
-			throw new IllegalArgumentException(String.format(
-					"The user[%s] create flowJob of flowJobClass[%s] Permission denied", userId, workflowJobModelId));
+			throw new IllegalArgumentException(
+					String.format("The user[%s] create flowJob of flowJobClass[%s] Permission denied", user.getUserId(),
+							createJobDTO.getModelId()));
 		}
 		WorkflowJob flowJob = FlowUtils.newWorkflowJob(workflowJobModel, user.getId());
 		workflowJobDao.insert(flowJob);
@@ -87,7 +85,7 @@ public class WorkflowRuntimeServiceImpl implements WorkflowRuntimeService {
 
 	@Override
 	public List<FlowTask> listTaskByUserId(String userId) {
-		UserDTO user = getAndCheckUser(userId);
+		UserRoleDTO user = getAndCheckUser(userId);
 		List<WorkflowTask> workflowTasks = workflowTaskDao.listByRoleId(user.getRoleId());
 		List<FlowTask> result = new ArrayList<>(workflowTasks.size());
 		for (WorkflowTask item : workflowTasks) {
@@ -100,14 +98,14 @@ public class WorkflowRuntimeServiceImpl implements WorkflowRuntimeService {
 
 	@Override
 	public List<FlowTask> listTaskByUserIdAndTaskStatus(String userId, TaskStatus status) {
-		UserDTO user = getAndCheckUser(userId);
+		UserRoleDTO user = getAndCheckUser(userId);
 		workflowTaskDao.listByRoleIdAndStatus(user.getRoleId(), status);
 		return null;
 	}
 
 	@Override
 	public String autoClaimTask(String userId) {
-		UserDTO user = getAndCheckUser(userId);
+		UserRoleDTO user = getAndCheckUser(userId);
 		WorkflowTask claimWorkflowTask = randomWorkflowTask(user.getId());
 		TaskProcessResult taskProcessResult = new TaskProcessResult();
 		taskProcessResult.setJobId(claimWorkflowTask.getId());
@@ -141,13 +139,13 @@ public class WorkflowRuntimeServiceImpl implements WorkflowRuntimeService {
 		return null;
 	}
 
-	private UserDTO getAndCheckUser(String userId) {
+	private UserRoleDTO getAndCheckUser(String userId) {
 //		UserDTO user = userManagerService.get(userId);
 //		if (null == user) {
 //			throw new IllegalArgumentException(String.format("The user[%s] is non-existent", userId));
 //		}
-		UserDTO user = new UserDTO();
-		user.setId(userId);
+		UserRoleDTO user = new UserRoleDTO();
+		user.setUserId(userId);
 		user.setRoleId(userId);
 		return user;
 	}

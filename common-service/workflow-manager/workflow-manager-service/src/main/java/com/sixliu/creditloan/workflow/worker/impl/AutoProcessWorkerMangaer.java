@@ -14,16 +14,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import com.sixliu.creditloan.workflow.constant.TaskType;
 import com.sixliu.creditloan.workflow.dao.WorkflowTaskDao;
 import com.sixliu.creditloan.workflow.dao.WorkflowTaskWorkerDao;
-import com.sixliu.creditloan.workflow.dto.TaskProcessResult;
 import com.sixliu.creditloan.workflow.entity.WorkflowTask;
 import com.sixliu.creditloan.workflow.entity.WorkflowTaskWorker;
 import com.sixliu.creditloan.workflow.status.TaskStatusMachine;
 import com.sixliu.creditloan.workflow.status.TaskStatusMachineFactory;
 import com.sixliu.creditloan.workflow.status.TaskStatusMachine.CompleteCallback;
-import com.sixliu.creditloan.workflow.worker.AutoProcessWorker;
+import com.sixliu.workflow.constant.TaskType;
+import com.sixliu.workflow.dto.TaskProcessResult;
+import com.sixliu.workflow.worker.AutoProcessWorker;
 
 import lombok.extern.slf4j.Slf4j;
 

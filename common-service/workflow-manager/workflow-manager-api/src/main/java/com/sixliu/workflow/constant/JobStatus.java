@@ -1,4 +1,4 @@
-package com.sixliu.creditloan.workflow.constant;
+package com.sixliu.workflow.constant;
 
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
@@ -23,10 +23,13 @@ public enum JobStatus {
 
 	/**开始**/
 	STARTED,
+	
 	/**通过结束**/
 	PASS_ENDED,
+	
 	/**拒绝结束**/
 	REJECT_ENDED,
+	
 	/**取消结束**/
 	CANCEL_ENDED;
 	

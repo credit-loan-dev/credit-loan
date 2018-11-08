@@ -1,4 +1,4 @@
-package com.sixliu.creditloan.workflow.validation;
+package com.sixliu.workflow.validation;
 /**
 *@author:MG01867
 *@date:2018年9月10日

@@ -30,4 +30,7 @@ public interface UserRoleService {
 	 */
 	@RequestMapping(value = "/listByRoleId", method = RequestMethod.POST)
 	List<UserRoleDTO> listByRoleId(@RequestParam(name="roleId") String roleId);
+	
+	@RequestMapping(value = "/getByUserId", method = RequestMethod.POST)
+	UserRoleDTO getByUserId(@RequestParam(name="userId") String userId);
 }

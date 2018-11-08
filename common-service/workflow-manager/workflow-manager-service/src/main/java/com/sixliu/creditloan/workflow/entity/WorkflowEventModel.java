@@ -1,6 +1,7 @@
 package com.sixliu.creditloan.workflow.entity;
 
-import com.sixliu.creditloan.workflow.constant.EventType;
+import com.sixliu.workflow.constant.ScriptType;
+import com.sixliu.workflow.constant.TaskEventType;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -16,14 +17,17 @@ import lombok.ToString;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class WorkflowEventModel extends BaseEntity {
+public class WorkflowEventModel extends AuditBaseEntity {
 	
 	/**流程任务模型id**/
 	private String taskId;
 	
 	/**事件类型**/
-	private EventType type;
+	private TaskEventType type;
 	
 	/**事件执行脚本**/
-	private String executeScript;
+	private ScriptType scriptType;
+	
+	/**事件执行脚本**/
+	private String script;
 }

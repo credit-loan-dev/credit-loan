@@ -1,4 +1,4 @@
-package com.sixliu.creditloan.workflow.constant;
+package com.sixliu.workflow.constant;
 
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;

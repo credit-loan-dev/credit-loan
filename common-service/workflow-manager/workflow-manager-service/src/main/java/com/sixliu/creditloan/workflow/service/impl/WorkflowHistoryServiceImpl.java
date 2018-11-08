@@ -2,7 +2,7 @@ package com.sixliu.creditloan.workflow.service.impl;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sixliu.creditloan.workflow.service.WorkflowHistoryService;
+import com.sixliu.workflow.service.WorkflowHistoryService;
 
 /**
 *@author:MG01867

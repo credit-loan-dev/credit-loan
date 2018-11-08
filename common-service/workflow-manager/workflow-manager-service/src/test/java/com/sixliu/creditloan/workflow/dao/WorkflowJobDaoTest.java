@@ -6,8 +6,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sixliu.creditloan.workflow.BaseTest;
-import com.sixliu.creditloan.workflow.constant.JobStatus;
 import com.sixliu.creditloan.workflow.entity.WorkflowJob;
+import com.sixliu.workflow.constant.JobStatus;
 
 /**
 *@author:MG01867
@@ -27,7 +27,6 @@ public class WorkflowJobDaoTest extends BaseTest{
 		workflowJob.setName("test");
 		workflowJob.setModelId("workflowJobModelId");
 		workflowJob.setStatus(JobStatus.STARTED);
-		workflowJob.setRemarks("remarks");
 		workflowJob.setCreateUserId("sixliu");
 		workflowJob.setUpdateUserId("sixliu");
 		int result=workflowJobDao.insert(workflowJob);

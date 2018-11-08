@@ -14,7 +14,7 @@ import lombok.ToString;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class WorkflowJobModel extends BaseEntity {
+public class WorkflowJobModel extends AuditBaseEntity {
 	
 	/** 流程作业模型名称 **/
 	private String name;

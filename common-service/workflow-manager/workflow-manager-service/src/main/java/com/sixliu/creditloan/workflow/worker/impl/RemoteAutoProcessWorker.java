@@ -3,9 +3,9 @@ package com.sixliu.creditloan.workflow.worker.impl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-import com.sixliu.creditloan.workflow.dto.TaskProcessResult;
 import com.sixliu.creditloan.workflow.entity.WorkflowTaskWorker;
-import com.sixliu.creditloan.workflow.worker.AutoProcessWorker;
+import com.sixliu.workflow.dto.TaskProcessResult;
+import com.sixliu.workflow.worker.AutoProcessWorker;
 
 /**
  * @author:MG01867

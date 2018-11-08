@@ -1,4 +1,4 @@
-package com.sixliu.creditloan.workflow.dto;
+package com.sixliu.workflow.dto;
 
 import javax.validation.constraints.NotBlank;
 

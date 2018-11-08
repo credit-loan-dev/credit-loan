@@ -1,9 +1,9 @@
-package com.sixliu.creditloan.workflow.worker;
+package com.sixliu.workflow.worker;
 
 import java.util.List;
 
-import com.sixliu.creditloan.workflow.dto.FlowTask;
-import com.sixliu.creditloan.workflow.dto.TaskProcessResult;
+import com.sixliu.workflow.dto.FlowTask;
+import com.sixliu.workflow.dto.TaskProcessResult;
 
 /**
  * @author:MG01867

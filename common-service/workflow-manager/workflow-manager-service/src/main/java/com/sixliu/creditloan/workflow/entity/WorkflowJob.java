@@ -1,7 +1,7 @@
 package com.sixliu.creditloan.workflow.entity;
 
 
-import com.sixliu.creditloan.workflow.constant.JobStatus;
+import com.sixliu.workflow.constant.JobStatus;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -17,7 +17,7 @@ import lombok.ToString;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class WorkflowJob extends BaseEntity{
+public class WorkflowJob extends AuditBaseEntity{
 
 	/**流程作业名称**/
 	private String name;
@@ -27,6 +27,12 @@ public class WorkflowJob extends BaseEntity{
 	
 	/**流程作业状态**/
 	private JobStatus status;
+	
+	/**当前流程任务id**/
+	private String currentTaskId;
+	
+	/**流程作业id**/
+	private String currentPhase;
 	
 	/**保存锁着流程作业的服务url**/
 	private String lockUrl;

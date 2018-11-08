@@ -1,8 +1,8 @@
-package com.sixliu.creditloan.workflow.dto;
+package com.sixliu.workflow.dto;
 
 import java.util.Date;
 
-import com.sixliu.creditloan.workflow.constant.TaskType;
+import com.sixliu.workflow.constant.TaskType;
 
 import lombok.Data;
 

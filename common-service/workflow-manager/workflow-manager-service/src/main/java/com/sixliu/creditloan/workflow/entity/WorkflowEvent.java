@@ -1,6 +1,6 @@
 package com.sixliu.creditloan.workflow.entity;
 
-import com.sixliu.creditloan.workflow.constant.EventType;
+import com.sixliu.workflow.constant.TaskEventType;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -22,7 +22,7 @@ public class WorkflowEvent extends BaseEntity {
 	private String taskId;
 	
 	/**事件类型**/
-	private EventType type;
+	private TaskEventType type;
 	
 	/**事件执行脚本**/
 	private String executeScript;

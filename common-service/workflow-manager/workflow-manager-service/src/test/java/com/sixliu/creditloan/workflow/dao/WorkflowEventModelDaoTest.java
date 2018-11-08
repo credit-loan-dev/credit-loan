@@ -6,8 +6,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sixliu.creditloan.workflow.BaseTest;
-import com.sixliu.creditloan.workflow.constant.EventType;
 import com.sixliu.creditloan.workflow.entity.WorkflowEventModel;
+import com.sixliu.workflow.constant.TaskEventType;
 
 /**    
  * @author: sixliu
@@ -25,9 +25,8 @@ public class WorkflowEventModelDaoTest extends BaseTest{
 	public void testInsert() {
 		WorkflowEventModel workflowEventModel=new WorkflowEventModel();
 		workflowEventModel.setTaskId("c885bca1-b1e9-11e8-8bec-000c29851249");
-		workflowEventModel.setType(EventType.TASK_CREATED);
-		workflowEventModel.setExecuteScript("send msg");
-		workflowEventModel.setRemarks("remarks");
+		workflowEventModel.setType(TaskEventType.CREATED);
+		workflowEventModel.setScript("send msg");
 		workflowEventModel.setCreateUserId("sixliu");
 		workflowEventModel.setUpdateUserId("sixliu");
 		int result=workflowEventModelDao.insert(workflowEventModel);

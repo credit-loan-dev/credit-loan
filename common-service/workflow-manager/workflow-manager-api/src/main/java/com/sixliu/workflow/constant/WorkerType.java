@@ -1,4 +1,4 @@
-package com.sixliu.creditloan.workflow.constant;
+package com.sixliu.workflow.constant;
 
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;

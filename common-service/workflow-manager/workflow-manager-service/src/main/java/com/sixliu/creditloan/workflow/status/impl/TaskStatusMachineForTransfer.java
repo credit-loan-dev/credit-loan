@@ -3,11 +3,11 @@ package com.sixliu.creditloan.workflow.status.impl;
 
 import org.springframework.stereotype.Component;
 
-import com.sixliu.creditloan.workflow.constant.TaskStatus;
-import com.sixliu.creditloan.workflow.dto.TaskProcessResult;
 import com.sixliu.creditloan.workflow.entity.WorkflowJob;
 import com.sixliu.creditloan.workflow.entity.WorkflowTask;
 import com.sixliu.creditloan.workflow.status.AbstractTaskStatusMachine;
+import com.sixliu.workflow.constant.TaskStatus;
+import com.sixliu.workflow.dto.TaskProcessResult;
 
 /**
 *@author:MG01867

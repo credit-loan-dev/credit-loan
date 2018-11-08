@@ -1,9 +1,9 @@
-package com.sixliu.creditloan.workflow.service;
+package com.sixliu.workflow.service;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.validation.annotation.Validated;
 
-import com.sixliu.creditloan.workflow.WorkflowManagerApi;
+import com.sixliu.workflow.WorkflowManagerApi;
 
 /**
 *@author:MG01867

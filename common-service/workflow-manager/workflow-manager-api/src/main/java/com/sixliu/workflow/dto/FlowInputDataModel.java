@@ -1,7 +1,7 @@
-package com.sixliu.creditloan.workflow.dto;
+package com.sixliu.workflow.dto;
 
 
-import com.sixliu.creditloan.workflow.constant.InputType;
+import com.sixliu.workflow.constant.InputType;
 
 import lombok.Data;
 

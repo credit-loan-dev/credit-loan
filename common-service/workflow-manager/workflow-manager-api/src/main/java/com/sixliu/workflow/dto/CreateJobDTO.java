@@ -1,8 +1,11 @@
-package com.sixliu.creditloan.workflow.dto;
+package com.sixliu.workflow.dto;
 
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
+
+import com.sixliu.user.validation.CurrentUserValidation;
+
 import java.util.Map;
 
 /**
@@ -18,7 +21,7 @@ public class CreateJobDTO {
     @NotBlank
     private String modelId;
 
-    @NotBlank
+    @CurrentUserValidation
     private String createUserId;
 
     private Map<String, Object> extensionParameterMap;

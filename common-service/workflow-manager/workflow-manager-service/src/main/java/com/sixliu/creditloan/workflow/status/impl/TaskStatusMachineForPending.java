@@ -4,14 +4,14 @@ import java.util.Date;
 
 import org.springframework.stereotype.Component;
 
-import com.sixliu.creditloan.workflow.constant.JobStatus;
-import com.sixliu.creditloan.workflow.constant.TaskStatus;
-import com.sixliu.creditloan.workflow.dto.TaskProcessResult;
 import com.sixliu.creditloan.workflow.entity.WorkflowJob;
 import com.sixliu.creditloan.workflow.entity.WorkflowTask;
 import com.sixliu.creditloan.workflow.entity.WorkflowTaskModel;
 import com.sixliu.creditloan.workflow.status.AbstractTaskStatusMachine;
 import com.sixliu.creditloan.workflow.util.FlowUtils;
+import com.sixliu.workflow.constant.JobStatus;
+import com.sixliu.workflow.constant.TaskStatus;
+import com.sixliu.workflow.dto.TaskProcessResult;
 
 /**
  * @author:MG01867

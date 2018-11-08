@@ -1,4 +1,4 @@
-package com.sixliu.creditloan.workflow.constant;
+package com.sixliu.workflow.constant;
 
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
@@ -17,33 +17,33 @@ import org.apache.ibatis.type.MappedTypes;
  * @email: 359852326@qq.com
  * @date: 2018年8月20日 下午7:52:16
  * @version V1.0
- * @Description:工作流程事件
+ * @Description:流程任务事件类型,监听事件的listener都是独立运行
  */
-public enum EventType {
+public enum TaskEventType {
 
-	/**流程任务创建 **/
-	TASK_CREATED,
+	/** 流程任务创建 **/
+	CREATED,
 
-	/**流程审批通过**/
-	TASK_PASSED,
+	/** 流程审批通过 **/
+	PASSED,
 
-	/**流程任务拒绝**/
-	TASK_REJECTED,
-	
-	/**流程任务驳回**/
-	TASK_OVERRULED,
-	
-	/**流程任务转移**/
-	TASK_TRANSFERRED,
+	/** 流程任务拒绝 **/
+	REJECTED,
 
-	/**流程任务取消**/
-	TASK_CANCELED;
-	
+	/** 流程任务驳回 **/
+	OVERRULED,
+
+	/** 流程任务转移 **/
+	TRANSFERRED,
+
+	/** 流程任务取消 **/
+	CANCELED;
+
 	private final static Set<String> names;
 
 	static {
-		names = new HashSet<>(EventType.values().length);
-		for (EventType item : EventType.values()) {
+		names = new HashSet<>(TaskEventType.values().length);
+		for (TaskEventType item : TaskEventType.values()) {
 			names.add(item.name());
 		}
 	}
@@ -52,30 +52,30 @@ public enum EventType {
 		return names.contains(value);
 	}
 
-	@MappedTypes(value = EventType.class)
+	@MappedTypes(value = TaskEventType.class)
 	@MappedJdbcTypes(value = { JdbcType.VARCHAR, JdbcType.CHAR })
-	public static class TaskStatusHandler extends BaseTypeHandler<EventType> {
+	public static class TaskStatusHandler extends BaseTypeHandler<TaskEventType> {
 
 		@Override
-		public void setNonNullParameter(PreparedStatement ps, int i, EventType parameter, JdbcType jdbcType)
+		public void setNonNullParameter(PreparedStatement ps, int i, TaskEventType parameter, JdbcType jdbcType)
 				throws SQLException {
 			ps.setString(i, parameter.name());
 		}
 
 		@Override
-		public EventType getNullableResult(ResultSet rs, String columnName) throws SQLException {
+		public TaskEventType getNullableResult(ResultSet rs, String columnName) throws SQLException {
 			String value = rs.getString(columnName);
 			return valueOf(value);
 		}
 
 		@Override
-		public EventType getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
+		public TaskEventType getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
 			String value = rs.getString(columnIndex);
 			return valueOf(value);
 		}
 
 		@Override
-		public EventType getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
+		public TaskEventType getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
 			String value = cs.getString(columnIndex);
 			return valueOf(value);
 		}

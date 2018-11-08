@@ -1,4 +1,4 @@
-package com.sixliu.creditloan.workflow.service;
+package com.sixliu.workflow.service;
 
 import java.util.List;
 
@@ -8,10 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.sixliu.creditloan.workflow.WorkflowManagerApi;
-import com.sixliu.creditloan.workflow.constant.TaskStatus;
-import com.sixliu.creditloan.workflow.dto.FlowTask;
-import com.sixliu.creditloan.workflow.dto.TaskProcessResult;
+import com.sixliu.user.validation.CurrentUserValidation;
+import com.sixliu.workflow.WorkflowManagerApi;
+import com.sixliu.workflow.constant.TaskStatus;
+import com.sixliu.workflow.dto.CreateJobDTO;
+import com.sixliu.workflow.dto.FlowTask;
+import com.sixliu.workflow.dto.TaskProcessResult;
 
 /**
  * @author:MG01867
@@ -22,18 +24,18 @@ import com.sixliu.creditloan.workflow.dto.TaskProcessResult;
  */
 @FeignClient(WorkflowManagerApi.SERVICE_NAME)
 @Validated
+@RequestMapping("/runtime")
 public interface WorkflowRuntimeService {
 
     /**
      * 创建流程作业
      *
-     * @param jobModelId 作业模型id
-     * @param userId     当前操作用户
+     * @param createJobDTO 
      * @return 返回创建好的作业id
      */
-    @RequestMapping(value = "/runtime/createJob", method = RequestMethod.POST)
+    @RequestMapping(value = "/createJob", method = RequestMethod.POST)
     @ResponseBody
-    String createJob(String jobModelId, String userId);
+    String createJob(CreateJobDTO createJobDTO);
 
     /**
      * 根据操作用户获取他的任务集
@@ -41,8 +43,8 @@ public interface WorkflowRuntimeService {
      * @param userId 当前操作用户
      * @return 返回匹配到任务集
      */
-    @RequestMapping(value = "/runtime/listTaskByUserId", method = RequestMethod.POST)
-    List<FlowTask> listTaskByUserId(String userId);
+    @RequestMapping(value = "/listTaskByUserId", method = RequestMethod.POST)
+    List<FlowTask> listTaskByUserId(@CurrentUserValidation String userId);
 
     /**
      * 根据操作用户和任务状态获取他的任务集
@@ -51,8 +53,8 @@ public interface WorkflowRuntimeService {
      * @param status 任务状态
      * @return 返回匹配到任务集
      */
-    @RequestMapping(value = "/runtime/listTaskByUserIdAndTaskStatus", method = RequestMethod.POST)
-    List<FlowTask> listTaskByUserIdAndTaskStatus(String userId, TaskStatus status);
+    @RequestMapping(value = "/listTaskByUserIdAndTaskStatus", method = RequestMethod.POST)
+    List<FlowTask> listTaskByUserIdAndTaskStatus(@CurrentUserValidation String userId, TaskStatus status);
 
     /**
      * 根据操作用户自动认领可以处理的任务
@@ -60,15 +62,15 @@ public interface WorkflowRuntimeService {
      * @param userId 当前操作用户
      * @return 已领取的任务id
      */
-    @RequestMapping(value = "/runtime/autoClaimTask", method = RequestMethod.POST)
-    String autoClaimTask(String userId);
+    @RequestMapping(value = "/autoClaimTask", method = RequestMethod.POST)
+    String autoClaimTask(@CurrentUserValidation String userId);
 
     /**
      * 提交任务处理结果
      *
      * @param taskProcessResult 任务处理结果
      */
-    @RequestMapping(value = "/runtime/submitTaskProcessResult", method = RequestMethod.POST)
+    @RequestMapping(value = "/submitTaskProcessResult", method = RequestMethod.POST)
     void submitTaskProcessResult(TaskProcessResult taskProcessResult);
 
     /**
@@ -77,6 +79,6 @@ public interface WorkflowRuntimeService {
      * @param flowJobId 作业id
      * @param userId    当前操作用户
      */
-    @RequestMapping(value = "/runtime/cancelJob", method = RequestMethod.POST)
-    void cancelJob(String flowJobId, String userId);
+    @RequestMapping(value = "/cancelJob", method = RequestMethod.POST)
+    void cancelJob(String flowJobId,@CurrentUserValidation String userId);
 }

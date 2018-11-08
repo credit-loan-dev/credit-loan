@@ -3,17 +3,19 @@
 <mapper namespace="com.sixliu.creditloan.workflow.dao.WorkflowJobDao" >
 
     <resultMap id="WorkflowJobResult" type="com.sixliu.creditloan.workflow.entity.WorkflowJob" >
-        <id column="id" property="id" jdbcType="VARCHAR" />
-        <result column="name" property="name" jdbcType="VARCHAR" />
-        <result column="model_id" property="modelId" jdbcType="VARCHAR" />
-        <result column="status" property="status" jdbcType="VARCHAR" />
-        <result column="lock_url" property="lockUrl" jdbcType="VARCHAR" />
-        <result column="remarks" property="remarks" jdbcType="VARCHAR" />
-        <result column="version" property="version" jdbcType="INTEGER" />
-        <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR" />
-        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
-        <result column="create_user_id" property="createUserId" jdbcType="VARCHAR" />
-        <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+        <id column="id"                    property="id"              jdbcType="VARCHAR" />
+        <result column="name"              property="name"            jdbcType="VARCHAR" />
+        <result column="model_id"          property="modelId"         jdbcType="VARCHAR" />
+        <result column="status"            property="status"          jdbcType="VARCHAR" />
+        <result column="model_id"          property="modelId"         jdbcType="VARCHAR" />
+        <result column="current_task_id"   property="currentTaskId"   jdbcType="VARCHAR" />
+        <result column="current_phase"     property="currentPhase"    jdbcType="VARCHAR" />
+        <result column="lock_url"          property="lockUrl"        jdbcType="VARCHAR" />
+        <result column="version"           property="version"         jdbcType="INTEGER" />
+        <result column="update_user_id"    property="updateUserId"    jdbcType="VARCHAR" />
+        <result column="update_date"       property="updateDate"      jdbcType="TIMESTAMP" />
+        <result column="create_user_id"    property="createUserId"    jdbcType="VARCHAR" />
+        <result column="create_date"       property="createDate"      jdbcType="TIMESTAMP" />
     </resultMap>
     
     <parameterMap id="WorkflowJobParameter" type="com.sixliu.creditloan.workflow.entity.WorkflowJob"/>
@@ -32,8 +34,9 @@
 	        `name`,
 	        model_id,
 	        `status`,
+	        current_task_id,
+	        current_phase,
 	        lock_url,
-	        `remarks`,
 	        `version`,
 	        update_user_id,
 	        update_date,
@@ -47,7 +50,8 @@
     								`name`,
     								model_id,
     								`status`,
-    	 							`remarks`,
+    								current_task_id,
+	        						current_phase,
     	 							update_user_id,
     	 							create_user_id
     	 							)
@@ -55,7 +59,8 @@
     	 							#{name},
     	 							#{modelId},
     	 							#{status},
-    		   						#{remarks},
+    	 							#{currentTaskId},
+    	 							#{currentPhase},
     		   						#{updateUserId},
     		   						#{createUserId}
     		   						)
