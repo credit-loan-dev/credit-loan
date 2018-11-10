@@ -3,6 +3,7 @@ package com.sixliu.user;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.cloud.client.SpringCloudApplication;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -18,6 +19,7 @@ import com.sixliu.user.repository.dao.BaseDao;
  */
 @SpringCloudApplication
 //@EnableFeignClients(basePackageClasses = { UserService.class})
+@EnableAuthorizationServer
 @EnableTransactionManagement 
 @MapperScan(basePackageClasses=BaseDao.class)
 public class StartUp implements WebMvcConfigurer {

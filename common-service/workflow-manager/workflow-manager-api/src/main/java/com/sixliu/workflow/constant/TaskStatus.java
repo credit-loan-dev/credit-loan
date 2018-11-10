@@ -38,6 +38,9 @@ public enum TaskStatus {
 
 	/** 驳回 **/
 	OVERRULE,
+	
+	/** 异常 **/
+	ERROR,
 
 	/** 挂起 **/
 	HANG_UP;
