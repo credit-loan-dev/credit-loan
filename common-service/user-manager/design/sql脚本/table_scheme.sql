@@ -75,3 +75,23 @@ CREATE TABLE `user_role` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_role_uk1` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4 COMMENT='用户角色表';
+
+CREATE TABLE `app` (
+  `id` varchar(32) NOT NULL,
+  `code` varchar(40) NOT NULL COMMENT '应用code',
+  `secret` varchar(200) NOT NULL COMMENT '秘钥',
+  `redirect_url` varchar(200) NOT NULL COMMENT '重定向url',
+  `authorized_grant_types` varchar(200) NOT NULL COMMENT '授权类型组(;分割)',
+  `scopes` varchar(200) NOT NULL COMMENT '授权访问范围组(;分割)',
+  `access_token_validity_seconds` int(11) NOT NULL DEFAULT '0' COMMENT 'access_token_validity_seconds',
+  `refresh_token_validity_seconds` int(11) NOT NULL DEFAULT '0' COMMENT 'refresh_token_validity_seconds',
+  `describe` varchar(200) NOT NULL COMMENT '用于描述',
+  `version` int(11) NOT NULL DEFAULT '0' COMMENT '数据版本',
+  `is_deleted` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否删除',
+  `update_user_id` varchar(32) NOT NULL COMMENT '数据更新用户id',
+  `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '数据更新日期',
+  `create_user_id` varchar(32) NOT NULL COMMENT '数据创建用户id',
+  `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '数据创建日期',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `app_uk1` (`code`)
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4 COMMENT='应用表';
