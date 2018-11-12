@@ -3,6 +3,9 @@ package com.sixliu.user.service.impl;
 import javax.validation.ValidationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sixliu.user.dto.UserDTO;
@@ -19,7 +22,7 @@ import com.sixliu.user.util.Convertor;
  * @describe //TODO
  */
 @RestController
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService,UserDetailsService{
 
 	@Autowired
 	private UserDao userDao;
@@ -40,5 +43,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserDTO get(String userId) {
 		return Convertor.convert(userDao.get(userId), () -> new UserDTO());
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		return null;
 	}
 }

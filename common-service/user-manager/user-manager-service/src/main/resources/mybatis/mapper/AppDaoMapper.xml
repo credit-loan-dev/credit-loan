@@ -7,7 +7,7 @@
         <result column="code"                            property="code"                         jdbcType="VARCHAR" />
         <result column="secret"                          property="secret"                       jdbcType="VARCHAR" />
         <result column="redirect_url"                    property="redirectUrl"                  jdbcType="VARCHAR" />
-        <result column="authorizedGrant_types"           property="authorizedGrantTypes"         jdbcType="VARCHAR" />
+        <result column="authorized_grant_types"          property="authorizedGrantTypes"         jdbcType="VARCHAR" />
         <result column="scopes"                          property="scopes"                       jdbcType="VARCHAR" />
         <result column="access_token_validity_seconds"   property="accessTokenValiditySeconds"   jdbcType="INTEGER" />
         <result column="refresh_token_validity_seconds"  property="refreshTokenValiditySeconds"  jdbcType="INTEGER" />
@@ -27,9 +27,19 @@
     
     <!-- 查询通用列 -->
     <sql id="select_common_column">
-    	select `id`,`code`,`secret`,redirect_url,authorizedGrant_types,
-    	        scopes,access_token_validity_seconds,refresh_token_validity_seconds,describe,
-    	       `version`,update_user_id,update_date,create_user_id,create_date
+    	select `id`,
+    			`code`,
+    			`secret`,
+    			redirect_url,
+    			authorized_grant_types,
+    	        scopes,access_token_validity_seconds,
+    	        refresh_token_validity_seconds,
+    	        `describe`,
+    	        `version`,
+    	        update_user_id,
+    	        update_date,
+    	        create_user_id,
+    	        create_date
     </sql>
     
 	<select id="get" resultMap="EntityResult">
@@ -40,13 +50,20 @@
         and is_deleted=0
     </select>
     
+    <select id="listAll" resultMap="EntityResult">
+		<include refid="select_common_column"/>
+		from 
+		<include refid="table_name"/>
+        where is_deleted=0
+    </select>
+    
     <insert id="add" parameterMap="EntityParameter">
     	<selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
               select replace(uuid(),'-','')
     	</selectKey>
     	insert into 
     	<include refid="table_name"/>
-    	       (`id`,`code`,`secret`,redirect_url,authorizedGrant_types,scopes,
+    	       (`id`,`code`,`secret`,redirect_url,authorized_grant_types,scopes,
     	       access_token_validity_seconds,refresh_token_validity_seconds,`describe`,
     	       update_user_id,create_user_id)
     	 values(#{id},#{code},#{secret},#{redirectUrl},#{authorizedGrantTypes},#{scopes},

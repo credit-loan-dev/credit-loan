@@ -22,8 +22,8 @@ public class AppDaoTest extends BaseTest{
 	@Test
 	public void testAdd() {
 		AppEntity app=new AppEntity();
-		app.setCode("code");
-		app.setSecret("secret");
+		app.setCode("app");
+		app.setSecret("app_secret");
 		app.setRedirectUrl("url");
 		app.setScopes("scopes");
 		app.setAuthorizedGrantTypes("authorization_code;refresh_token");
