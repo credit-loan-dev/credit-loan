@@ -1,5 +1,9 @@
 package com.sixliu.user.repository.dao;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.sixliu.user.repository.entity.ResourceEntity;
 
 /**
@@ -11,5 +15,5 @@ import com.sixliu.user.repository.entity.ResourceEntity;
 */
 public interface ResourceDao extends BaseDao<ResourceEntity>{
 
-
+	List<ResourceEntity> listByAppId(@Param("appId") String appId);
 }

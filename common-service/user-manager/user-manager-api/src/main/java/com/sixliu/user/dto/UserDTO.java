@@ -4,6 +4,7 @@ package com.sixliu.user.dto;
 
 import javax.validation.constraints.NotBlank;
 
+import com.sixliu.user.constant.UserStatus;
 import com.sixliu.user.validation.AddValidationGroup;
 
 import lombok.Data;
@@ -25,6 +26,8 @@ public class UserDTO extends BaseDTO{
 	/**用户名**/
 	@NotBlank(message = "The user's name must be not blank",groups= {AddValidationGroup.class})
 	private String name;
+	
+	private UserStatus status;
 	
 	/**用户昵称**/
 	@NotBlank(message = "The user's nickname must be not blank",groups= {AddValidationGroup.class})

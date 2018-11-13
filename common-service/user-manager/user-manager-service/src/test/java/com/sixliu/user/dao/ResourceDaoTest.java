@@ -1,5 +1,7 @@
 package com.sixliu.user.dao;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -37,6 +39,12 @@ public class ResourceDaoTest extends BaseTest{
 	public void testGet() {
 		ResourceEntity resource=resourceDao.get("b85e7251e18a11e89e01005056986f0b");
 		checkOk(resource);
+	}
+	
+	@Test
+	public void testListByAppId() {
+		List<ResourceEntity> resources=resourceDao.listByAppId("18ded2a1e65311e89e01005056986f0b");
+		checkOk(resources);
 	}
 
 }

@@ -4,19 +4,32 @@ package com.sixliu.credit.account.common;
 *@date:2018年7月12日
 *@E-mail:359852326@qq.com
 *@version:
-*@describe //TODO
+*@describe 账户类型
 */
-public class AccountType {
+public enum AccountType {
 
-	/**储蓄账户**/
-	public static final int SAVINGS=1;
+	/**内部借记**/
+	INTERNAL_DEBIT,
 	
-	/**贷款账户**/
-	public static final int LOAN=2;
+	/**内部贷记**/
+	INTERNAL_LOAN,
 	
-	/**信用类共享账户**/
-	public static final int CREDIT_SHARE=3;
+	/**内部信用共享**/
+	INTERNAL_CREDIT_SHARE,
 	
-	/**信用类交易账户**/
-	public static final int CREDIT_TRANSACTION=4;
+	/**内部信用交易**/
+	INTERNAL_CREDIT_TRANSACTION,
+	
+	/**外部借记**/
+	EXTERNAL_DEBIT,
+	
+	/**外部贷记**/
+	EXTERNAL_LOAN,
+	
+	/**外部信用共享**/
+	EXTERNAL_CREDIT_SHARE,
+	
+	/**贷记信用交易**/
+	EXTERNAL_CREDIT_TRANSACTION,
+
 }

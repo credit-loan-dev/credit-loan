@@ -2,10 +2,13 @@ package com.sixliu.credit.account.entity;
 
 import java.util.Date;
 
-import com.sixliu.credit.common.entity.BaseEntity;
+import com.sixliu.credit.account.common.AccountStatus;
+import com.sixliu.credit.account.common.AccountType;
+import com.sixliu.credit.account.common.CurrencyType;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
  * @author:MG01867
@@ -15,20 +18,24 @@ import lombok.EqualsAndHashCode;
  * @describe //TODO
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
-public class Account extends BaseEntity {
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
+public class Account extends AuditBaseEntity {
 
+	/** 账户编码 **/
+	private String code;
+	
 	/** 账户类型 **/
-	private Integer type;
+	private AccountType type;
 	
 	/** 账户状态 **/
-	private Integer status;
+	private AccountStatus status;
 	
 	/** 交易密码 **/
 	private String transactPassword;
 
 	/** 货币类型 **/
-	private Integer currencyType;
+	private CurrencyType currencyType;
 	
 	/** 授信金额 **/
 	private Double creditAmount;

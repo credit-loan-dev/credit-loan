@@ -1,7 +1,5 @@
 package com.sixliu.credit.account.dto;
 
-import com.sixliu.credit.common.dto.BaseWriteDTO;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -14,8 +12,8 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class TransactionResultDTO extends BaseWriteDTO {
-	
+public class TransactionResultDTO {
+
 	private String transferId;
 	private boolean result;
 	private String notice;

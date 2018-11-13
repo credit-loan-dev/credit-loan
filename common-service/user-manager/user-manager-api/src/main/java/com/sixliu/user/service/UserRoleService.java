@@ -23,14 +23,12 @@ import com.sixliu.user.dto.UserRoleDTO;
 @RequestMapping("/user_role")
 public interface UserRoleService {
 
-	/**
-	 * 通过角色id查询该角色下的用户
-	 * @param roleId
-	 * @return
-	 */
+	@RequestMapping(value = "/getByUserId", method = RequestMethod.POST)
+	UserRoleDTO getByUserIdAndRoleId(@RequestParam(name="userId") String userId,@RequestParam(name="roleId") String roleId);
+	
 	@RequestMapping(value = "/listByRoleId", method = RequestMethod.POST)
 	List<UserRoleDTO> listByRoleId(@RequestParam(name="roleId") String roleId);
 	
 	@RequestMapping(value = "/getByUserId", method = RequestMethod.POST)
-	UserRoleDTO getByUserId(@RequestParam(name="userId") String userId);
+	List<UserRoleDTO> listByUserId(@RequestParam(name="userId") String userId);
 }

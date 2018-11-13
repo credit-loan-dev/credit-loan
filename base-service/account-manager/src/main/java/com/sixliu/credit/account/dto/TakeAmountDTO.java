@@ -1,6 +1,5 @@
 package com.sixliu.credit.account.dto;
 
-import com.sixliu.credit.common.dto.BaseWriteDTO;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -14,7 +13,7 @@ import lombok.EqualsAndHashCode;
 */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class TakeAmountDTO extends BaseWriteDTO{
+public class TakeAmountDTO{
 
 	/**取款账户id**/
 	private String accountId;

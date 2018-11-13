@@ -28,12 +28,10 @@ public interface UserService {
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	String add(@Validated(value = { AddValidationGroup.class }) @RequestBody UserDTO user);
 
-	/**
-	 * 通过用户id 获取用户
-	 * 
-	 * @param id
-	 * @return
-	 */
 	@RequestMapping(value = "/get", method = RequestMethod.GET)
 	UserDTO get(@NotBlank(message = "The user's id must be not blank") @RequestParam(name = "id") String id);
+
+	@RequestMapping(value = "/getByName", method = RequestMethod.GET)
+	UserDTO getByName(
+			@NotBlank(message = "The user's name must be not blank") @RequestParam(name = "name") String name);
 }

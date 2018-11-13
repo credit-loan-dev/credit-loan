@@ -35,6 +35,8 @@ public class AppEntity extends AuditBaseEntity {
 	/** 授权访问范围;分割 **/
 	private String scopes;
 
+	private boolean autoApprove;
+	
 	private int accessTokenValiditySeconds;
 
 	private int refreshTokenValiditySeconds;

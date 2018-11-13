@@ -65,11 +65,12 @@ public class WorkflowRuntimeServiceImpl implements WorkflowRuntimeService {
 			throw new IllegalArgumentException(
 					String.format("The flowJobClass[%s] is non-existent", createJobDTO.getModelId()));
 		}
-		UserRoleDTO user = userRoleService.getByUserId(createJobDTO.getCreateUserId());
-		if (!StringUtils.equals(user.getRoleId(), workflowJobModel.getCreateRoleId())) {
+		UserRoleDTO user = userRoleService.getByUserIdAndRoleId(createJobDTO.getCreateUserId(),
+				workflowJobModel.getCreateRoleId());
+		if (null == user) {
 			throw new IllegalArgumentException(
-					String.format("The user[%s] create flowJob of flowJobClass[%s] Permission denied", user.getUserId(),
-							createJobDTO.getModelId()));
+					String.format("The user[%s] create flowJob of flowJobClass[%s] Permission denied",
+							createJobDTO.getCreateUserId(), createJobDTO.getModelId()));
 		}
 		WorkflowJob flowJob = FlowUtils.newWorkflowJob(workflowJobModel, user.getId());
 		workflowJobDao.insert(flowJob);

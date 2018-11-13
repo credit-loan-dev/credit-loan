@@ -1,7 +1,5 @@
 package com.sixliu.credit.account.entity;
 
-import com.sixliu.credit.common.entity.BaseEntity;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

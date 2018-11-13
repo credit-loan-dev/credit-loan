@@ -4,6 +4,7 @@
 
     <resultMap id="EntityResult" type="com.sixliu.user.repository.entity.ResourceEntity" >
         <id column="id"                          property="id"              jdbcType="VARCHAR" />
+        <result column="app_id"                  property="appId"            jdbcType="VARCHAR" />
         <result column="name"                    property="name"            jdbcType="VARCHAR" />
         <result column="type"                    property="type"            jdbcType="VARCHAR" />
         <result column="path"                    property="path"            jdbcType="VARCHAR" />
@@ -24,15 +25,34 @@
     
     <!-- 查询通用列 -->
     <sql id="select_common_column">
-    	select `id`,`name`,`type`,`path`,`depth`,parent_id,`version`,is_deleted,update_user_id,update_date,create_user_id,create_date
+    	select `id`,
+    		   `app_id`,
+    		   `name`,
+    		   `type`,
+    		   `path`,
+    		   `depth`,
+    		   parent_id,
+    		   `version`,
+    		   update_user_id,
+    		   update_date,
+    		   create_user_id,
+    		   create_date
     </sql>
     
 	<select id="get" resultMap="EntityResult">
 		<include refid="select_common_column"/>
 		from 
 		<include refid="table_name"/>
-        where `id`=#{id}
-        and is_deleted=0
+        where is_deleted=0
+        and `id`=#{id}
+    </select>
+    
+    <select id="listByAppId" resultMap="EntityResult">
+		<include refid="select_common_column"/>
+		from 
+		<include refid="table_name"/>
+        where is_deleted=0
+        and `app_id`=#{appId}
     </select>
     
     <insert id="add" parameterMap="EntityParameter">
@@ -41,8 +61,24 @@
     	</selectKey>
     	insert into 
     	<include refid="table_name"/>
-    	       (`id`,`name`,`type`,`path`,`depth`,parent_id,update_user_id,create_user_id)
-    	 values(#{id},#{name},#{type},#{path},#{depth},#{parentId},#{updateUserId},#{createUserId})
+    	       (`id`,
+    	        app_id,
+    	        `name`,
+    	        `type`,
+    	        `path`,
+    	        `depth`,
+    	        parent_id,
+    	        update_user_id,
+    	        create_user_id)
+    	 values(#{id},
+    	        #{appId},
+    	        #{name},
+    	        #{type},
+    	        #{path},
+    	        #{depth},
+    	        #{parentId},
+    	        #{updateUserId},
+    	        #{createUserId})
 	</insert>
 	
 	<update id="update" parameterMap="EntityParameter">

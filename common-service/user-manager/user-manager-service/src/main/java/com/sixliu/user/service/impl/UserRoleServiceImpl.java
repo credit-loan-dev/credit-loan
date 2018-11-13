@@ -3,6 +3,7 @@ package com.sixliu.user.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.sixliu.user.dto.UserRoleDTO;
 import com.sixliu.user.repository.dao.UserRoleDao;
@@ -15,6 +16,7 @@ import com.sixliu.user.service.UserRoleService;
 *@version:
 *@describe //TODO
 */
+@RestController
 public class UserRoleServiceImpl implements UserRoleService{
 
 	@Autowired
@@ -27,7 +29,13 @@ public class UserRoleServiceImpl implements UserRoleService{
 	}
 
 	@Override
-	public UserRoleDTO getByUserId(String userId) {
+	public List<UserRoleDTO> listByUserId(String userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public UserRoleDTO getByUserIdAndRoleId(String userId, String roleId) {
 		// TODO Auto-generated method stub
 		return null;
 	}

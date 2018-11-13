@@ -1,7 +1,5 @@
 package com.sixliu.credit.account.entity;
 
-import com.sixliu.credit.common.entity.BaseEntity;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -21,11 +19,14 @@ public class TransactionLog extends BaseEntity {
 	private String TransactionId;
 	
 	/** 账户id **/
-	private String accountId;
+	private String fromAccountId;
+	
+	/** 账户id **/
+	private String toAccountId;
 
 	/** 交易金额 **/
 	private Double amount;
 
 	/** 是否回溯:1是，0否 **/
-	private int backdata;
+	private boolean backdata;
 }

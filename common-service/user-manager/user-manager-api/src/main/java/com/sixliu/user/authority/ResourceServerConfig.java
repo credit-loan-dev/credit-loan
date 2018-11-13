@@ -1,4 +1,4 @@
-package com.sixliu.user.config;
+package com.sixliu.user.authority;
 
 import java.io.IOException;
 
@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
+import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.web.AuthenticationEntryPoint;
 
 /**
@@ -23,6 +24,11 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 @Configuration
 @EnableResourceServer
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
+	
+	@Override
+	public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
+		
+	}
 	
 	@Override
 	public void configure(HttpSecurity http) throws Exception {

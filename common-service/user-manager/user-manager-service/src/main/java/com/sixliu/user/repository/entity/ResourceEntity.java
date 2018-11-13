@@ -18,6 +18,9 @@ import lombok.ToString;
 @ToString(callSuper = true)
 public class ResourceEntity extends AuditBaseEntity{
 
+	/**应用名称**/
+	private String appId;
+	
 	/**资源名称**/
 	private String name;
 	
