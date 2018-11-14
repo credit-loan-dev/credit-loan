@@ -1,5 +1,7 @@
 package com.sixliu.user.authority;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.context.annotation.Bean;
@@ -45,8 +47,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.requestMatchers().antMatchers("**/login.html", "/login", "/oauth/authorize").and().authorizeRequests()
-				.anyRequest().authenticated().and().formLogin().permitAll();
+//		http.requestMatchers().antMatchers("**/login.html", "/login", "/oauth/authorize");
+//		http.authorizeRequests().anyRequest().authenticated();
+//		http.formLogin().permitAll();
+//		http.csrf().disable().anonymous().disable();
+//		http.exceptionHandling().authenticationEntryPoint((req, res, auth) -> {
+//			res.setHeader("WWW-Authenticate", "Bearer realm=\"webrealm\"");
+//			res.sendError(HttpServletResponse.SC_UNAUTHORIZED, auth.getMessage());
+//		});
+//		http.httpBasic();
+		http.antMatcher("/**").authorizeRequests().antMatchers("/", "/login**").permitAll().anyRequest()
+				.authenticated();
+		http.requestMatchers().antMatchers("/login", "/oauth/authorize").and().authorizeRequests().anyRequest()
+				.authenticated().and().formLogin().permitAll();
+
 	}
 
 	@Override

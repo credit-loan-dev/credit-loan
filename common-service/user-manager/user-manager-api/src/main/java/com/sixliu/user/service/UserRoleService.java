@@ -23,12 +23,12 @@ import com.sixliu.user.dto.UserRoleDTO;
 @RequestMapping("/user_role")
 public interface UserRoleService {
 
-	@RequestMapping(value = "/getByUserId", method = RequestMethod.POST)
+	@RequestMapping(value = "/getByUserIdAndRoleId", method = RequestMethod.POST)
 	UserRoleDTO getByUserIdAndRoleId(@RequestParam(name="userId") String userId,@RequestParam(name="roleId") String roleId);
 	
 	@RequestMapping(value = "/listByRoleId", method = RequestMethod.POST)
 	List<UserRoleDTO> listByRoleId(@RequestParam(name="roleId") String roleId);
 	
-	@RequestMapping(value = "/getByUserId", method = RequestMethod.POST)
+	@RequestMapping(value = "/listByUserId", method = RequestMethod.POST)
 	List<UserRoleDTO> listByUserId(@RequestParam(name="userId") String userId);
 }
