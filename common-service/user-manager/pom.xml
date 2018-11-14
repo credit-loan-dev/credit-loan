@@ -15,5 +15,6 @@
     	<module>user-manager-api</module>
 		<module>user-manager-service</module>
     <module>user-manager-web</module>
+    <module>user-authorization-service</module>
   </modules>
 </project>

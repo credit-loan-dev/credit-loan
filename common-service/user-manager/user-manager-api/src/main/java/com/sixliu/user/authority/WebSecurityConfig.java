@@ -20,7 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  * @date:2018年11月12日
  * @email:359852326@qq.com
  * @version:
- * @describe //TODO
+ * @describe TODO
  */
 @Configuration
 @EnableOAuth2Sso
@@ -47,24 +47,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-//		http.requestMatchers().antMatchers("**/login.html", "/login", "/oauth/authorize");
-//		http.authorizeRequests().anyRequest().authenticated();
-//		http.formLogin().permitAll();
-//		http.csrf().disable().anonymous().disable();
-//		http.exceptionHandling().authenticationEntryPoint((req, res, auth) -> {
-//			res.setHeader("WWW-Authenticate", "Bearer realm=\"webrealm\"");
-//			res.sendError(HttpServletResponse.SC_UNAUTHORIZED, auth.getMessage());
-//		});
-//		http.httpBasic();
-		http.antMatcher("/**").authorizeRequests().antMatchers("/", "/login**").permitAll().anyRequest()
-				.authenticated();
-		http.requestMatchers().antMatchers("/login", "/oauth/authorize").and().authorizeRequests().anyRequest()
-				.authenticated().and().formLogin().permitAll();
-
+		http.requestMatchers().antMatchers("/login", "/logout", "/oauth/authorize", "/oauth/confirm_access").and()
+				.authorizeRequests()
+				.anyRequest().authenticated().and().formLogin().loginPage("/html/login.html").failureUrl("/html/login.html?error")
+				.permitAll().and().logout().logoutUrl("/logout").invalidateHttpSession(true).clearAuthentication(true);
+		http.exceptionHandling().authenticationEntryPoint((req, res, auth) -> {
+			res.setHeader("WWW-Authenticate", "Bearer realm=\"webrealm\"");
+			res.sendError(HttpServletResponse.SC_UNAUTHORIZED, auth.getMessage());
+		});
 	}
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("**/*.html", "/js/**", "/css/**", "/images/**", "/druid/**", "/favor.ioc");
+		web.ignoring().antMatchers("/html/**","/js/**", "/css/**", "/images/**", "/druid/**", "/favor.ioc");
 	}
 }
